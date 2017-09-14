@@ -8,9 +8,10 @@ import javax.ws.rs.core.MediaType;
 @Path("/useless")
 public class UselessResource {
 	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String checkingIfUseless() {
-		return "i am useless";
+	@Produces(MediaType.APPLICATION_JSON)
+	public UselessDto checkingIfUseless() {
+		UselessDto uselessDto = new UselessDto();
+		return uselessDto;
 	}
 
 }

@@ -21,3 +21,4 @@ Thumbs.db
 **/src/main/frontend-resources
 **/src/main/generated-www
 dependency-reduced-pom.xml
+**/bin

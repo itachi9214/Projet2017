@@ -9,6 +9,7 @@
 		<artifactId>billing</artifactId>
 		<properties>
 				<java.version>1.8</java.version>
+				<jersey.version>2.26</jersey.version>
 		</properties>
 		<build>
 				<plugins>
@@ -22,4 +23,16 @@
 						</plugin>
 				</plugins>
 		</build>
+		<dependencies>
+				<dependency>
+						<groupId>org.glassfish.jersey.containers</groupId>
+						<artifactId>jersey-container-jetty-servlet</artifactId>
+						<version>${jersey.version}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.glassfish.jersey.inject</groupId>
+						<artifactId>jersey-hk2</artifactId>
+						<version>${jersey.version}</version>
+				</dependency>
+		</dependencies>
 </project>

@@ -41,4 +41,5 @@ public class CrmSpringApplication {
             "aide@qualitelogicielle.ca"))
         .title("FactureMoi CRM API").description("FactureMoi CRM API").version("1.0").build();
   }
+
 }

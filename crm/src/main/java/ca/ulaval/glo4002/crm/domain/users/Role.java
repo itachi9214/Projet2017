@@ -22,4 +22,5 @@ public class Role {
   public String getName() {
     return name;
   }
+
 }

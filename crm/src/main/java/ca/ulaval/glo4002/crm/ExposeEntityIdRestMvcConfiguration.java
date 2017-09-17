@@ -16,4 +16,5 @@ public class ExposeEntityIdRestMvcConfiguration extends RepositoryRestConfigurer
   public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
     config.exposeIdsFor(Client.class, User.class, Role.class, Product.class);
   }
+
 }

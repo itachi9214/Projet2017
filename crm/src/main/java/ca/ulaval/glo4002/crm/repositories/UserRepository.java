@@ -7,5 +7,5 @@ import ca.ulaval.glo4002.crm.domain.users.User;
 
 @RepositoryRestResource
 public interface UserRepository extends Repository<User, Integer> {
-    User findOne(Integer id);
+  User findOne(Integer id);
 }

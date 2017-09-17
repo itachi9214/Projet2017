@@ -7,5 +7,5 @@ import ca.ulaval.glo4002.crm.domain.products.Product;
 
 @RepositoryRestResource
 public interface ProductRepository extends Repository<Product, Integer> {
-    Product findOne(Integer id);
+  Product findOne(Integer id);
 }

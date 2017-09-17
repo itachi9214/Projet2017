@@ -13,55 +13,55 @@ import javax.persistence.Id;
 @Entity
 public class Client {
 
-    @Id
-    @GeneratedValue
-    private Integer id;
+  @Id
+  @GeneratedValue
+  private Integer id;
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    private ClientCategory category;
+  @Column
+  @Enumerated(EnumType.STRING)
+  private ClientCategory category;
 
-    @Column
-    private Instant creationDate;
+  @Column
+  private Instant creationDate;
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    private DueTerm defaultTerm;
+  @Column
+  @Enumerated(EnumType.STRING)
+  private DueTerm defaultTerm;
 
-    @Column
-    private String fullName;
+  @Column
+  private String fullName;
 
-    @Column
-    private String email;
+  @Column
+  private String email;
 
-    @Embedded
-    private ClientAddress address;
+  @Embedded
+  private ClientAddress address;
 
-    public Integer getId() {
-        return id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public ClientCategory getCategory() {
-        return category;
-    }
+  public ClientCategory getCategory() {
+    return category;
+  }
 
-    public Instant getCreationDate() {
-        return creationDate;
-    }
+  public Instant getCreationDate() {
+    return creationDate;
+  }
 
-    public DueTerm getDefaultTerm() {
-        return defaultTerm;
-    }
+  public DueTerm getDefaultTerm() {
+    return defaultTerm;
+  }
 
-    public String getFullName() {
-        return fullName;
-    }
+  public String getFullName() {
+    return fullName;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public ClientAddress getAddress() {
-        return address;
-    }
+  public ClientAddress getAddress() {
+    return address;
+  }
 }

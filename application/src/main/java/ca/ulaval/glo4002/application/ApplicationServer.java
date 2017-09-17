@@ -11,14 +11,13 @@ import ca.ulaval.glo4002.crm.CrmServer;
 
 public class ApplicationServer implements Runnable {
 
-	private String[] args = { "" };
 	private static final int PORT = 8282;
 
 	public static void main(String[] args) throws Exception {
-		new ApplicationServer().run();
+		new ApplicationServer(args).run();
 	}
 
-	public ApplicationServer() {
+	public ApplicationServer(String[] args) {
 		Thread crm = new Thread(new CrmServer(args));
 		Thread billing = new Thread(new BillingServer());
 		billing.start();

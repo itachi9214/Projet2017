@@ -20,34 +20,25 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@Import({SpringDataRestConfiguration.class})
-@EntityScan(
-        basePackageClasses = {CrmSpringApplication.class, Jsr310JpaConverters.class}
-)
+@Import({ SpringDataRestConfiguration.class })
+@EntityScan(basePackageClasses = { CrmSpringApplication.class, Jsr310JpaConverters.class })
 @EnableSwagger2
 public class CrmSpringApplication {
 
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(documentedPaths())
-                .build()
-                .apiInfo(getApiInfo());
-    }
+  @Bean
+  public Docket api() {
+    return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
+        .paths(documentedPaths()).build().apiInfo(getApiInfo());
+  }
 
-    private Predicate<String> documentedPaths() {
-        return Predicates.not(PathSelectors.regex("/(error|profile).*"));
-    }
+  private Predicate<String> documentedPaths() {
+    return Predicates.not(PathSelectors.regex("/(error|profile).*"));
+  }
 
-    private ApiInfo getApiInfo() {
-        return new ApiInfoBuilder()
-                .contact(new Contact("The GLO-4002 team", "http://projet2017.qualitelogicielle.ca",
-                        "aide@qualitelogicielle.ca"))
-                .title("FactureMoi CRM API")
-                .description("FactureMoi CRM API")
-                .version("1.0")
-                .build();
-    }
+  private ApiInfo getApiInfo() {
+    return new ApiInfoBuilder()
+        .contact(new Contact("The GLO-4002 team", "http://projet2017.qualitelogicielle.ca",
+            "aide@qualitelogicielle.ca"))
+        .title("FactureMoi CRM API").description("FactureMoi CRM API").version("1.0").build();
+  }
 }

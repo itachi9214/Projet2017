@@ -7,11 +7,11 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/useless")
 public class UselessResource {
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public UselessDto checkingIfUseless() {
-		UselessDto uselessDto = new UselessDto();
-		return uselessDto;
-	}
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public UselessDto checkingIfUseless() {
+    UselessDto uselessDto = new UselessDto();
+    return uselessDto;
+  }
 
 }

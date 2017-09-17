@@ -10,25 +10,25 @@ import javax.persistence.Id;
 @Entity
 public class Product {
 
-    @Id
-    @GeneratedValue
-    private Integer id;
+  @Id
+  @GeneratedValue
+  private Integer id;
 
-    @Column
-    private String name;
+  @Column
+  private String name;
 
-    @Column
-    private BigDecimal unitPrice;
+  @Column
+  private BigDecimal unitPrice;
 
-    public Integer getId() {
-        return id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
+  public BigDecimal getUnitPrice() {
+    return unitPrice;
+  }
 }

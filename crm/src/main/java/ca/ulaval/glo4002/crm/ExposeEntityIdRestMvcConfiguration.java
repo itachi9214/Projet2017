@@ -12,8 +12,8 @@ import ca.ulaval.glo4002.crm.domain.users.User;
 @Component
 public class ExposeEntityIdRestMvcConfiguration extends RepositoryRestConfigurerAdapter {
 
-    @Override
-    public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-        config.exposeIdsFor(Client.class, User.class, Role.class, Product.class);
-    }
+  @Override
+  public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+    config.exposeIdsFor(Client.class, User.class, Role.class, Product.class);
+  }
 }

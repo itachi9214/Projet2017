@@ -6,52 +6,52 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ClientAddress {
 
-    @Column
-    private String city;
+  @Column
+  private String city;
 
-    @Column
-    private String country;
+  @Column
+  private String country;
 
-    @Column
-    private String number;
+  @Column
+  private String number;
 
-    @Column
-    private String postalCode;
+  @Column
+  private String postalCode;
 
-    @Column
-    private String province;
+  @Column
+  private String province;
 
-    @Column
-    private String street;
+  @Column
+  private String street;
 
-    @Column
-    private String unit;
+  @Column
+  private String unit;
 
-    public String getCity() {
-        return city;
-    }
+  public String getCity() {
+    return city;
+  }
 
-    public String getCountry() {
-        return country;
-    }
+  public String getCountry() {
+    return country;
+  }
 
-    public String getNumber() {
-        return number;
-    }
+  public String getNumber() {
+    return number;
+  }
 
-    public String getPostalCode() {
-        return postalCode;
-    }
+  public String getPostalCode() {
+    return postalCode;
+  }
 
-    public String getProvince() {
-        return province;
-    }
+  public String getProvince() {
+    return province;
+  }
 
-    public String getStreet() {
-        return street;
-    }
+  public String getStreet() {
+    return street;
+  }
 
-    public String getUnit() {
-        return unit;
-    }
+  public String getUnit() {
+    return unit;
+  }
 }

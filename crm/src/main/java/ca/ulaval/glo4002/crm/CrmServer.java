@@ -3,6 +3,7 @@ package ca.ulaval.glo4002.crm;
 import org.springframework.boot.SpringApplication;
 
 public class CrmServer implements Runnable {
+
   private String[] args;
 
   public static void main(String[] args) throws Exception {
@@ -17,4 +18,5 @@ public class CrmServer implements Runnable {
   public void run() {
     SpringApplication.run(CrmSpringApplication.class, args);
   }
+
 }

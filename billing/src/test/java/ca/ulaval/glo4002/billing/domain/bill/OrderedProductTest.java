@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OrderedProductTest {
+
   private int productId = 1;
   private float productPrice = 100.00f;
   private String productNote;
@@ -24,6 +25,6 @@ public class OrderedProductTest {
   public void WhencalculeProductThenReturnPrice() {
     float result = orderedProduct.calculateProduct();
     assertTrue(200.0 == result);
-
   }
+
 }

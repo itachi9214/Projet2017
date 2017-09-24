@@ -5,6 +5,7 @@ import java.util.List;
 import ca.ulaval.glo4002.billing.domain.DueTerm;
 
 public class Bill {
+
   int billNumber;
   DueTerm dueTerm;
   int clientNumber;
@@ -13,7 +14,7 @@ public class Bill {
 
   public float calculateBill() {
     for (OrderedProduct product : products) {
-      billTotal = product.calculateProduct();
+      billTotal += product.calculateProduct();
     }
     return billTotal;
   }

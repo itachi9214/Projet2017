@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import ca.ulaval.glo4002.billing.domain.DueTerm;
-import ca.ulaval.glo4002.billing.domain.OrderedProduct;
+import ca.ulaval.glo4002.billing.domain.bill.OrderedProduct;
 
 public class RequestBillDto {
 

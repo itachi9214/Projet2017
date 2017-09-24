@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.billing.domain;
 
-import ca.ulaval.glo4002.billing.api.dto.RequestBillDto;
+import ca.ulaval.glo4002.billing.domain.bill.Bill;
 
 public interface BillRepository {
 
-  public void createBill(RequestBillDto bill);
+  public void createBill(Bill bill);
 
 }

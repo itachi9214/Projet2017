@@ -1,17 +1,19 @@
 package ca.ulaval.glo4002.billing.api.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import ca.ulaval.glo4002.billing.domain.DueTerm;
+import ca.ulaval.glo4002.billing.domain.OrderedProduct;
 
 public class RequestBillDto {
 
   private Long cliendId;
   private Date creationDate;
   private DueTerm dueTerm;
-  private OrderedProduct[] items;
+  private List<OrderedProduct> items;
 
-  public Long getCliendId() {
+  public Long getClientId() {
     return cliendId;
   }
 
@@ -35,11 +37,11 @@ public class RequestBillDto {
     this.dueTerm = dueTerm;
   }
 
-  public OrderedProduct[] getItems() {
+  public List<OrderedProduct> getItems() {
     return items;
   }
 
-  public void setItems(OrderedProduct[] items) {
+  public void setItems(List<OrderedProduct> items) {
     this.items = items;
   }
 

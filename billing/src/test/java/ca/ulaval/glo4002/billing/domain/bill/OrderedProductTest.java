@@ -22,7 +22,7 @@ public class OrderedProductTest {
   }
 
   @Test
-  public void WhencalculeProductThenReturnPrice() {
+  public void whenCalculateProductThenReturnPrice() {
     float result = orderedProduct.calculateProduct();
     assertTrue(200.0 == result);
   }

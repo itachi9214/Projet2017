@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.billing.domain.bill;
 
 public class OrderedProduct {
+
   private int productId;
   private float productPrice;
   private String productNote;
@@ -15,9 +16,7 @@ public class OrderedProduct {
   }
 
   public float calculateProduct() {
-
     return productPrice * orderedProductQuantity;
-
   }
 
 }

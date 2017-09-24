@@ -13,7 +13,7 @@ public class RequestBillDto {
   private DueTerm dueTerm;
   private List<OrderedProduct> items;
 
-  public Long getCliendId() {
+  public Long getClientId() {
     return cliendId;
   }
 

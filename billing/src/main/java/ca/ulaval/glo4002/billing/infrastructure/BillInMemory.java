@@ -7,6 +7,7 @@ import ca.ulaval.glo4002.billing.api.dto.RequestBillDto;
 import ca.ulaval.glo4002.billing.domain.BillRepository;
 
 public class BillInMemory implements BillRepository {
+
   private Map<Long, RequestBillDto> bills = new HashMap<>();
 
   @Override

@@ -12,6 +12,6 @@ public interface BillingResource {
 
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  void save(RequestBillDto requestBillDto);
+  void createBill(RequestBillDto requestBillDto);
 
 }

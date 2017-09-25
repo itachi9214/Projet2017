@@ -61,8 +61,9 @@ public class Bill {
   }
 
   public BigDecimal calculateBill() {
+    billTotal = new BigDecimal(0);
     for (OrderedProduct product : items) {
-      billTotal.add(product.calculateProduct());
+      billTotal = billTotal.add(product.calculateProduct());
     }
     return billTotal;
   }

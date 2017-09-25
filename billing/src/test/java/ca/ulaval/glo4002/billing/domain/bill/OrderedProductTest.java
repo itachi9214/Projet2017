@@ -9,23 +9,21 @@ import org.junit.Test;
 
 public class OrderedProductTest {
 
-  private int productId = 1;
-  private float productPrice = 100.00f;
-  private String productNote;
-  private int orderedProductQuantity = 2;
-  OrderedProduct orderedProduct;
+  private static final int productId = 1;
+  private static final float productPrice = 100.00f;
+  private static final String productNote = "product's description";
+  private static final int orderedProductQuantity = 2;
+  private OrderedProduct orderedProduct;
 
   @Before
   public void setUp() {
-
     orderedProduct = new OrderedProduct(productId, productPrice, productNote,
         orderedProductQuantity);
   }
 
   @Test
-  public void whenCalculateProductThenReturnPrice() {
-    BigDecimal result = orderedProduct.calculateProduct();
-    assertEquals(new BigDecimal(200), result);
+  public void whenCalculateProductThenReturnCorrectResult() {
+    assertEquals(new BigDecimal(200), orderedProduct.calculateProduct());
   }
 
 }

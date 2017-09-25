@@ -23,8 +23,7 @@ public class OrderedProductTest {
 
   @Test
   public void whenCalculateProductThenReturnCorrectResult() {
-    BigDecimal result = orderedProduct.calculateProduct();
-    assertEquals(new BigDecimal(200), result);
+    assertEquals(new BigDecimal(200), orderedProduct.calculateProduct());
   }
 
 }

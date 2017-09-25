@@ -41,8 +41,7 @@ public class BillTest {
 
   @Test
   public void whenCalculateBillThenReturnCorrectResult() {
-    BigDecimal result = bill.calculateBill();
-    assertEquals(new BigDecimal(150), result);
+    assertEquals(new BigDecimal(150), bill.calculateBill());
   }
 
 }

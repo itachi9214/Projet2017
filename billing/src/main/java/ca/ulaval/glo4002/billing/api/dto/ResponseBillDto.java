@@ -43,4 +43,8 @@ public class ResponseBillDto {
     this.url = url;
   }
 
+  public ResponseBillDto() {
+    total = new BigDecimal(0);
+  }
+
 }

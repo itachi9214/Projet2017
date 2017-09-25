@@ -6,6 +6,11 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
+import ca.ulaval.glo4002.billing.api.BillingResource;
+import ca.ulaval.glo4002.billing.domain.BillAssembler;
+import ca.ulaval.glo4002.billing.domain.BillService;
+import ca.ulaval.glo4002.billing.infrastructure.BillInMemory;
+
 public class BillingServer implements Runnable {
 
   private static final int PORT = 8181;
@@ -16,6 +21,9 @@ public class BillingServer implements Runnable {
 
   @Override
   public void run() {
+    BillService billService = new BillService(new BillAssembler(), new BillInMemory());
+    new BillingResource(billService);
+
     Server server = new Server(PORT);
     ServletContextHandler contextHandler = new ServletContextHandler(server, "/");
     ResourceConfig packageConfig = new ResourceConfig().packages("ca.ulaval.glo4002.billing");

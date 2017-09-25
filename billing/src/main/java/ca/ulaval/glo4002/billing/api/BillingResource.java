@@ -11,7 +11,7 @@ import ca.ulaval.glo4002.billing.api.dto.RequestBillDto;
 import ca.ulaval.glo4002.billing.domain.BillService;
 
 @Path("/bills")
-public class BillingResource {
+public class BillingResource implements BillingRessourceInterface {
 
   private BillService billService;
 

@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.billing.domain;
 
+import ca.ulaval.glo4002.billing.api.dto.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.RequestBillDto;
 import ca.ulaval.glo4002.billing.api.dto.ResponseBillDto;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
@@ -26,6 +27,11 @@ public class BillService {
     billRepository.createBill(bill);
     return billAssembler.create(bill);
 
+  }
+
+  public ClientDto searchClient(Long clientId) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

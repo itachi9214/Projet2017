@@ -8,7 +8,7 @@ public class ClientDto {
 
   private Integer clientNumber;
   private Instant creationDate;
-  private DueTerm defaultTerm;
+  private DueTerm defaultDueTerm;
   private String fullName;
 
   public Integer getId() {
@@ -35,12 +35,12 @@ public class ClientDto {
     this.fullName = fullName;
   }
 
-  public DueTerm getDefaultTerm() {
-    return defaultTerm;
+  public DueTerm getDefaultDueTerm() {
+    return defaultDueTerm;
   }
 
-  public void setDefaultTerm(DueTerm defaultTerm) {
-    this.defaultTerm = defaultTerm;
+  public void setDefaultTerm(DueTerm defaultDueTerm) {
+    this.defaultDueTerm = defaultDueTerm;
   }
 
 }

@@ -6,16 +6,16 @@ import ca.ulaval.glo4002.billing.domain.DueTerm;
 
 public class ClientDto {
 
-  private Integer clientNumber;
+  private Long clientNumber;
   private Instant creationDate;
   private DueTerm defaultDueTerm;
   private String fullName;
 
-  public Integer getId() {
+  public Long getId() {
     return clientNumber;
   }
 
-  public void setId(Integer clientNumber) {
+  public void setId(Long clientNumber) {
     this.clientNumber = clientNumber;
   }
 

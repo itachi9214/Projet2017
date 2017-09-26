@@ -16,6 +16,7 @@ public class BillService {
   public BillService() {
     billAssembler = new BillAssembler();
     billRepository = new BillInMemory();
+    crmHttpClient = new CrmHttpClient();
   }
 
   public BillService(BillAssembler billAssembler, BillRepository billRepository) {

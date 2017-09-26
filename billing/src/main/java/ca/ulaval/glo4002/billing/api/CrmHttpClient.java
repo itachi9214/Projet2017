@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.billing.api;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -14,6 +15,7 @@ public class CrmHttpClient extends HttpClient {
   private static final int HTTP_STATUS_NOT_FOUND = 404;
   private static final String MESSAGE_NOT_FOUND = "client not found";
 
+  @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public ClientDto getClientDtoFromCrm(Long clientNumber) {
     String url = LOCALHOST + CLIENTS + clientNumber;

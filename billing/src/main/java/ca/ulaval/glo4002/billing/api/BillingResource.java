@@ -34,6 +34,7 @@ public class BillingResource implements BillingRessourceInterface {
   public Response createBill(RequestBillDto requestBillDto) throws URISyntaxException {
     try {
       ClientDto clientDto = billService.getClientByIdInCrm(requestBillDto.getClientId());
+      
 
       return Response.status(Response.Status.CREATED).entity(billService.createBill(requestBillDto))
           .build();

@@ -9,14 +9,14 @@ import ca.ulaval.glo4002.billing.exception.NotFoundClientException;
 
 public class CrmHttpClient extends HttpClient {
 
-  private static final String LOCALHOST = "http://localhost:";
+  private static final String LOCALHOST = "http://localhost:8080";
   private static final String CLIENTS = "/clients/";
   private static final int HTTP_STATUS_NOT_FOUND = 404;
-  private static final String MESSAGE_NOT_FOUND = "Passenger not found";
+  private static final String MESSAGE_NOT_FOUND = "client not found";
 
   @Consumes(MediaType.APPLICATION_JSON)
   public ClientDto getClientDtoFromCrm(Long clientNumber) {
-    String url = LOCALHOST + "8080" + CLIENTS + clientNumber;
+    String url = LOCALHOST + CLIENTS + clientNumber;
     Response response = callUrlWithGetMethod(url);
 
     if (response.getStatus() == HTTP_STATUS_NOT_FOUND)

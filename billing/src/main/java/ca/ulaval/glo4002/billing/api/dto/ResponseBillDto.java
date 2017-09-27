@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.billing.api.dto;
 
 import java.math.BigDecimal;
 
-import ca.ulaval.glo4002.billing.domain.DueTerm;
+import ca.ulaval.glo4002.billing.domain.bill.DueTerm;
 
 public class ResponseBillDto {
 
@@ -10,6 +10,10 @@ public class ResponseBillDto {
   private BigDecimal total;
   private DueTerm dueTerm;
   private String url;
+
+  public ResponseBillDto() {
+    total = new BigDecimal(0);
+  }
 
   public Long getBillNumber() {
     return billNumber;

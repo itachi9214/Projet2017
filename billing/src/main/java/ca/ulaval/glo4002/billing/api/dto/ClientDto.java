@@ -2,20 +2,23 @@ package ca.ulaval.glo4002.billing.api.dto;
 
 import java.time.Instant;
 
-import ca.ulaval.glo4002.billing.domain.DueTerm;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import ca.ulaval.glo4002.billing.domain.bill.DueTerm;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ClientDto {
 
-  private Integer clientNumber;
+  private Long clientNumber;
   private Instant creationDate;
-  private DueTerm defaultTerm;
+  private DueTerm defaultDueTerm;
   private String fullName;
 
-  public Integer getId() {
+  public Long getId() {
     return clientNumber;
   }
 
-  public void setId(Integer clientNumber) {
+  public void setId(Long clientNumber) {
     this.clientNumber = clientNumber;
   }
 
@@ -35,12 +38,12 @@ public class ClientDto {
     this.fullName = fullName;
   }
 
-  public DueTerm getDefaultTerm() {
-    return defaultTerm;
+  public DueTerm getDefaultDueTerm() {
+    return defaultDueTerm;
   }
 
-  public void setDefaultTerm(DueTerm defaultTerm) {
-    this.defaultTerm = defaultTerm;
+  public void setDefaultTerm(DueTerm defaultDueTerm) {
+    this.defaultDueTerm = defaultDueTerm;
   }
 
 }

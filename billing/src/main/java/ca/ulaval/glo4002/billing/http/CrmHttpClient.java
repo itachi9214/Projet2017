@@ -12,12 +12,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
+import ca.ulaval.glo4002.billing.api.dto.ClientDto;
+import ca.ulaval.glo4002.billing.api.dto.ProductDto;
 
 public class CrmHttpClient extends HttpClient {
 
   private static final String LOCALHOST = "http://localhost:8080";
   private static final String CLIENTS = "/clients/";
+  private static final String PRODUCTS = "/products/";
   private static final int HTTP_STATUS_NOT_FOUND = 404;
   private static final String MESSAGE_NOT_FOUND = "client not found";
 
@@ -44,6 +46,31 @@ public class CrmHttpClient extends HttpClient {
 
     response.close();
     return clientDto;
+  }
+
+  @Override
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
+  public ProductDto getProductDto(Integer productId) {
+    ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+    mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+    String url = LOCALHOST + PRODUCTS + productId;
+    Response response = callUrlWithGetMethod(url);
+
+    if (response.getStatus() == HTTP_STATUS_NOT_FOUND) {
+      throw new NotFoundProductException(MESSAGE_NOT_FOUND);
+    }
+
+    ProductDto productDto = null;
+    try {
+      productDto = mapper.readValue(response.readEntity(JsonParser.class), ProductDto.class);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    response.close();
+    return productDto;
   }
 
 }

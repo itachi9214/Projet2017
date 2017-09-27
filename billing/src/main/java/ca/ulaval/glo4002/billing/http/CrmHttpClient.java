@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.api;
+package ca.ulaval.glo4002.billing.http;
 
 import java.io.IOException;
 
@@ -13,7 +13,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import ca.ulaval.glo4002.billing.api.dto.ClientDto;
-import ca.ulaval.glo4002.billing.exception.NotFoundClientException;
 
 public class CrmHttpClient extends HttpClient {
 
@@ -22,9 +21,10 @@ public class CrmHttpClient extends HttpClient {
   private static final int HTTP_STATUS_NOT_FOUND = 404;
   private static final String MESSAGE_NOT_FOUND = "client not found";
 
+  @Override
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public ClientDto getClientDtoFromCrm(Long clientNumber) {
+  public ClientDto getClientDto(Long clientNumber) {
     ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 

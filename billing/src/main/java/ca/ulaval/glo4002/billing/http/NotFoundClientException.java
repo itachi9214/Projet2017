@@ -1,4 +1,6 @@
-package ca.ulaval.glo4002.billing.exception;
+package ca.ulaval.glo4002.billing.http;
+
+import ca.ulaval.glo4002.billing.domain.bill.BillingException;
 
 public class NotFoundClientException extends BillingException {
 
@@ -10,4 +12,5 @@ public class NotFoundClientException extends BillingException {
   public NotFoundClientException(String message) {
     super(message);
   }
+
 }

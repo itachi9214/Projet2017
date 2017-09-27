@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.exception;
+package ca.ulaval.glo4002.billing.domain.bill;
 
 public class BillingException extends RuntimeException {
 
@@ -10,4 +10,5 @@ public class BillingException extends RuntimeException {
   public BillingException(String message) {
     super(message);
   }
+
 }

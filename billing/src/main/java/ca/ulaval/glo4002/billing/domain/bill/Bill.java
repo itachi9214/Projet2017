@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.ulaval.glo4002.billing.domain.DueTerm;
-
 public class Bill {
 
   private Long billNumber;

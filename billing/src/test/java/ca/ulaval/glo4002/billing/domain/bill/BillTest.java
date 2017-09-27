@@ -11,8 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4002.billing.api.dto.RequestBillDto;
-import ca.ulaval.glo4002.billing.domain.BillAssembler;
-import ca.ulaval.glo4002.billing.domain.DueTerm;
 
 public class BillTest {
 

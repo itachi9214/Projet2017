@@ -9,8 +9,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import ca.ulaval.glo4002.billing.api.dto.RequestBillDto;
-import ca.ulaval.glo4002.billing.domain.BillService;
-import ca.ulaval.glo4002.billing.exception.NotFoundClientException;
+import ca.ulaval.glo4002.billing.http.NotFoundClientException;
+import ca.ulaval.glo4002.billing.service.BillService;
 
 @Path("/bills")
 public class BillingResource implements BillingRessourceInterface {

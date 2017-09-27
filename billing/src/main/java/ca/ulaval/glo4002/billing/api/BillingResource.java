@@ -37,7 +37,7 @@ public class BillingResource {
 
       return Response.status(Response.Status.CREATED).entity(billService.createBill(requestBillDto))
           .build();
-    } catch (NotFoundProductException ex) {
+    } catch (NotFoundProductException exception) {
       return Response.status(Status.BAD_REQUEST).build();
     }
   }

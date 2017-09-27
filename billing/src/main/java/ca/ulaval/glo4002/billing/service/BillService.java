@@ -44,7 +44,6 @@ public class BillService {
   public ProductDto getProductByInCrm(Integer productId) {
     ProductDto productDto = httpClient.getProductDto(productId);
     return productDto;
-
   }
 
 }

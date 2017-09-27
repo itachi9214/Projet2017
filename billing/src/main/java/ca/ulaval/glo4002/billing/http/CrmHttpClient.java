@@ -21,7 +21,8 @@ public class CrmHttpClient extends HttpClient {
   private static final String CLIENTS = "/clients/";
   private static final String PRODUCTS = "/products/";
   private static final int HTTP_STATUS_NOT_FOUND = 404;
-  private static final String MESSAGE_NOT_FOUND = "client not found";
+  private static final String MESSAGE_CLIENT_NOT_FOUND = "client not found";
+  private static final String MESSAGE_PRODUCT_NOT_FOUND = "product not found";
 
   @Override
   @Produces(MediaType.APPLICATION_JSON)
@@ -34,14 +35,14 @@ public class CrmHttpClient extends HttpClient {
     Response response = callUrlWithGetMethod(url);
 
     if (response.getStatus() == HTTP_STATUS_NOT_FOUND) {
-      throw new NotFoundClientException(MESSAGE_NOT_FOUND);
+      throw new NotFoundClientException(MESSAGE_CLIENT_NOT_FOUND);
     }
 
     ClientDto clientDto = null;
     try {
       clientDto = mapper.readValue(response.readEntity(JsonParser.class), ClientDto.class);
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (IOException exception) {
+      exception.printStackTrace();
     }
 
     response.close();
@@ -59,7 +60,7 @@ public class CrmHttpClient extends HttpClient {
     Response response = callUrlWithGetMethod(url);
 
     if (response.getStatus() == HTTP_STATUS_NOT_FOUND) {
-      throw new NotFoundProductException(MESSAGE_NOT_FOUND);
+      throw new NotFoundProductException(MESSAGE_PRODUCT_NOT_FOUND);
     }
 
     ProductDto productDto = null;

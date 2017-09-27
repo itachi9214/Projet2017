@@ -3,8 +3,8 @@ package ca.ulaval.glo4002.billing.infrastructure;
 import java.util.HashMap;
 import java.util.Map;
 
-import ca.ulaval.glo4002.billing.domain.BillRepository;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
+import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
 
 public class BillInMemory implements BillRepository {
 

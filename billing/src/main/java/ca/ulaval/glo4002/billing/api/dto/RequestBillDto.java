@@ -3,7 +3,7 @@ package ca.ulaval.glo4002.billing.api.dto;
 import java.util.Date;
 import java.util.List;
 
-import ca.ulaval.glo4002.billing.domain.DueTerm;
+import ca.ulaval.glo4002.billing.domain.bill.DueTerm;
 import ca.ulaval.glo4002.billing.domain.bill.OrderedProduct;
 
 public class RequestBillDto {

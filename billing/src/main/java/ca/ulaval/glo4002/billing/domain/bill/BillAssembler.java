@@ -1,10 +1,9 @@
-package ca.ulaval.glo4002.billing.domain;
+package ca.ulaval.glo4002.billing.domain.bill;
 
 import java.util.UUID;
 
 import ca.ulaval.glo4002.billing.api.dto.RequestBillDto;
 import ca.ulaval.glo4002.billing.api.dto.ResponseBillDto;
-import ca.ulaval.glo4002.billing.domain.bill.Bill;
 
 public class BillAssembler {
 

@@ -31,8 +31,9 @@ public class CrmHttpClient extends HttpClient {
     String url = LOCALHOST + CLIENTS + clientNumber;
     Response response = callUrlWithGetMethod(url);
 
-    if (response.getStatus() == HTTP_STATUS_NOT_FOUND)
+    if (response.getStatus() == HTTP_STATUS_NOT_FOUND) {
       throw new NotFoundClientException(MESSAGE_NOT_FOUND);
+    }
 
     ClientDto clientDto = null;
     try {

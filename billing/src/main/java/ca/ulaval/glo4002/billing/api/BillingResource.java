@@ -1,7 +1,5 @@
 package ca.ulaval.glo4002.billing.api;
 
-import java.net.URISyntaxException;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -10,7 +8,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import ca.ulaval.glo4002.billing.api.dto.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.RequestBillDto;
 import ca.ulaval.glo4002.billing.domain.BillService;
 import ca.ulaval.glo4002.billing.exception.NotFoundClientException;
@@ -31,18 +28,15 @@ public class BillingResource implements BillingRessourceInterface {
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response createBill(RequestBillDto requestBillDto) throws URISyntaxException {
+  public Response createBill(RequestBillDto requestBillDto) {
     try {
-      ClientDto clientDto = billService.getClientByIdInCrm(requestBillDto.getClientId());
-      
+      billService.getClientByIdInCrm(requestBillDto.getClientId());
 
       return Response.status(Response.Status.CREATED).entity(billService.createBill(requestBillDto))
           .build();
     } catch (NotFoundClientException ex) {
       return Response.status(Status.BAD_REQUEST).build();
-
     }
-
   }
 
 }

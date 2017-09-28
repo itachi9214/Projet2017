@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.domain.bill;
+package ca.ulaval.glo4002.billing.infrastructure;
 
 import static org.mockito.Mockito.verify;
 
@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.infrastructure.BillInMemory;
+import ca.ulaval.glo4002.billing.domain.bill.Bill;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BillInMemoryTest {

@@ -52,6 +52,7 @@ public class OrderedProduct {
     this.quantity = quantity;
   }
 
+  // TODO Renommer la methode a calculateTotalPrice
   public BigDecimal calculateProduct() {
     return new BigDecimal(price * quantity);
   }

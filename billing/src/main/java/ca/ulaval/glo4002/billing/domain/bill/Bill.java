@@ -18,6 +18,14 @@ public class Bill {
     billTotal = new BigDecimal(0);
   }
 
+  public Bill(OrderedProduct firstProduct, OrderedProduct secondProduct) {
+    super();
+    billTotal = new BigDecimal(0);
+    items = new ArrayList<>();
+    items.add(firstProduct);
+    items.add(secondProduct);
+  }
+
   public DueTerm getDueTerm() {
     return dueTerm;
   }

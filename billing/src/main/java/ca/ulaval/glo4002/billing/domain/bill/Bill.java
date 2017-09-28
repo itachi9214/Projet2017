@@ -11,6 +11,7 @@ public class Bill {
   private Long clientId;
   private List<OrderedProduct> items;
   private BigDecimal billTotal;
+  private OrderedProduct firstProduct, secondProduct;
 
   public Bill() {
     super();

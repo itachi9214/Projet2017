@@ -29,11 +29,9 @@ public class BillService {
   }
 
   public ResponseBillDto createBill(RequestBillDto requestBillDto) {
-
     Bill bill = billAssembler.create(requestBillDto);
     billRepository.createBill(bill);
     return billAssembler.create(bill);
-
   }
 
   public ClientDto getClientByIdInCrm(Long clientId) {
@@ -41,7 +39,7 @@ public class BillService {
     return clientDto;
   }
 
-  public ProductDto getProductByInCrm(Integer productId) {
+  public ProductDto getProductByIdInCrm(Integer productId) {
     ProductDto productDto = httpClient.getProductDto(productId);
     return productDto;
   }

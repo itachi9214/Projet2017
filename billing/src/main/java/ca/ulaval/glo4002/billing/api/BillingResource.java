@@ -10,7 +10,8 @@ import javax.ws.rs.core.Response.Status;
 
 import ca.ulaval.glo4002.billing.api.dto.RequestBillDto;
 import ca.ulaval.glo4002.billing.domain.bill.OrderedProduct;
-import ca.ulaval.glo4002.billing.http.NotFoundProductException;
+import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
+import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 import ca.ulaval.glo4002.billing.service.BillService;
 
 @Path("/bills")
@@ -32,14 +33,19 @@ public class BillingResource {
   public Response createBill(RequestBillDto requestBillDto) {
     try {
       billService.getClientByIdInCrm(requestBillDto.getClientId());
-      for (OrderedProduct item : requestBillDto.getItems())
-        billService.getProductByInCrm(item.getProductId());
+      for (OrderedProduct item : requestBillDto.getItems()) {
+        billService.getProductByIdInCrm(item.getProductId());
+      }
 
       return Response.status(Response.Status.CREATED).entity(billService.createBill(requestBillDto))
           .build();
-    } catch (NotFoundProductException exception) {
+    } catch (ProductNotFoundException exception) {
       return Response.status(Status.BAD_REQUEST).build();
+    } catch (ClientNotFoundException exeption) {
+      return Response.status(Status.BAD_REQUEST).build();
+
     }
+
   }
 
 }

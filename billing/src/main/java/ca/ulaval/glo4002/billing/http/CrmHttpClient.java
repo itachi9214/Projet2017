@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +21,6 @@ public class CrmHttpClient extends HttpClient {
   private static final String LOCALHOST = "http://localhost:8080";
   private static final String CLIENTS = "/clients/";
   private static final String PRODUCTS = "/products/";
-  private static final int HTTP_STATUS_NOT_FOUND = 404;
   private static final String MESSAGE_CLIENT_NOT_FOUND = "client not found";
   private static final String MESSAGE_PRODUCT_NOT_FOUND = "product not found";
 
@@ -34,8 +34,8 @@ public class CrmHttpClient extends HttpClient {
     String url = LOCALHOST + CLIENTS + clientNumber;
     Response response = callUrlWithGetMethod(url);
 
-    if (response.getStatus() == HTTP_STATUS_NOT_FOUND) {
-      throw new NotFoundClientException(MESSAGE_CLIENT_NOT_FOUND);
+    if (Status.fromStatusCode(response.getStatus()).equals(Status.NOT_FOUND)) {
+      throw new ClientNotFoundException(MESSAGE_CLIENT_NOT_FOUND);
     }
 
     ClientDto clientDto = null;
@@ -59,8 +59,8 @@ public class CrmHttpClient extends HttpClient {
     String url = LOCALHOST + PRODUCTS + productId;
     Response response = callUrlWithGetMethod(url);
 
-    if (response.getStatus() == HTTP_STATUS_NOT_FOUND) {
-      throw new NotFoundProductException(MESSAGE_PRODUCT_NOT_FOUND);
+    if (Status.fromStatusCode(response.getStatus()).equals(Status.NOT_FOUND)) {
+      throw new ProductNotFoundException(MESSAGE_PRODUCT_NOT_FOUND);
     }
 
     ProductDto productDto = null;

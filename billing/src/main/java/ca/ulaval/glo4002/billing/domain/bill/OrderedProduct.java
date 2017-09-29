@@ -52,7 +52,7 @@ public class OrderedProduct {
     this.quantity = quantity;
   }
 
-  public BigDecimal calculateProduct() {
+  public BigDecimal calculateTotalPrice() {
     return new BigDecimal(price * quantity);
   }
 

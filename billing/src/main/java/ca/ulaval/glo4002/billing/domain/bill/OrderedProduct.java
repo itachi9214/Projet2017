@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class OrderedProduct {
 
-  private Integer productId;
+  private int productId;
   private float price;
   private String note;
   private int quantity;
@@ -20,11 +20,11 @@ public class OrderedProduct {
     this.quantity = quantity;
   }
 
-  public Integer getProductId() {
+  public int getProductId() {
     return productId;
   }
 
-  public void setProductId(Integer productId) {
+  public void setProductId(int productId) {
     this.productId = productId;
   }
 
@@ -54,7 +54,6 @@ public class OrderedProduct {
 
   public BigDecimal calculateTotalPrice() {
     return new BigDecimal(price * quantity);
-
   }
 
 }

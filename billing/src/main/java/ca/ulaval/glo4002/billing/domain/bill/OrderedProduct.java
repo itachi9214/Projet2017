@@ -54,6 +54,7 @@ public class OrderedProduct {
 
   public BigDecimal calculateTotalPrice() {
     return new BigDecimal(price * quantity);
+
   }
 
 }

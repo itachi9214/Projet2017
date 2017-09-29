@@ -69,6 +69,7 @@ public class Bill {
       billTotal = billTotal.add(product.calculateTotalPrice());
     }
     return billTotal;
+
   }
 
 }

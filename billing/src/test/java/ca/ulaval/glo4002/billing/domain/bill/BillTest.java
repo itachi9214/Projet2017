@@ -4,6 +4,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +16,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class BillTest {
 
-  private static final int priceFirstProduct = 10;
-  private static final int priceSecondProduct = 20;
+  private static final float priceFirstProduct = 10;
+  private static final float priceSecondProduct = 20;
   public Bill bill;
 
   @Mock
@@ -26,19 +28,20 @@ public class BillTest {
 
   @Before
   public void setUp() {
-    bill = new Bill(firstProduct, secondProduct);
+    List<OrderedProduct> items = new ArrayList<>();
+    items.add(firstProduct);
+    items.add(secondProduct);
+    bill = new Bill(items);
   }
 
   @Test
   public void whenCalculateBillThenCalculateTotalPrice() {
-    when(firstProduct.calculateProduct()).thenReturn(new BigDecimal(priceFirstProduct));
-    when(secondProduct.calculateProduct()).thenReturn(new BigDecimal(priceSecondProduct));
+    when(firstProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceFirstProduct));
+    when(secondProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceSecondProduct));
 
     bill.calculateBill();
 
-    verify(firstProduct).calculateProduct();
-    verify(secondProduct).calculateProduct();
-
+    verify(firstProduct).calculateTotalPrice();
   }
 
 }

@@ -18,12 +18,10 @@ public class Bill {
     billTotal = new BigDecimal(0);
   }
 
-  public Bill(OrderedProduct firstProduct, OrderedProduct secondProduct) {
+  public Bill(List<OrderedProduct> items) {
     super();
     billTotal = new BigDecimal(0);
-    items = new ArrayList<>();
-    items.add(firstProduct);
-    items.add(secondProduct);
+    this.items = items;
   }
 
   public DueTerm getDueTerm() {
@@ -69,7 +67,7 @@ public class Bill {
   public BigDecimal calculateBill() {
     billTotal = new BigDecimal(0);
     for (OrderedProduct product : items) {
-      billTotal = billTotal.add(product.calculateProduct());
+      billTotal = billTotal.add(product.calculateTotalPrice());
     }
     return billTotal;
   }

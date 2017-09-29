@@ -2,34 +2,37 @@ package ca.ulaval.glo4002.billing.api.dto.product;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductDto {
 
-  private Integer productId;
-  private String productName;
-  private BigDecimal productUnitPrice;
+  private Integer id;
+  private String name;
+  private BigDecimal unitPrice;
 
-  public Integer getProductId() {
-    return productId;
+  public Integer getId() {
+    return id;
   }
 
-  public void setProductId(Integer productId) {
-    this.productId = productId;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
-  public String getProductName() {
-    return productName;
+  public String getName() {
+    return name;
   }
 
-  public void setProductName(String productName) {
-    this.productName = productName;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public BigDecimal getProductUnitPrice() {
-    return productUnitPrice;
+  public BigDecimal getUnitPrice() {
+    return unitPrice;
   }
 
-  public void setProductUnitPrice(BigDecimal productUnitPrice) {
-    this.productUnitPrice = productUnitPrice;
+  public void setUnitPrice(BigDecimal unitPrice) {
+    this.unitPrice = unitPrice;
   }
 
 }

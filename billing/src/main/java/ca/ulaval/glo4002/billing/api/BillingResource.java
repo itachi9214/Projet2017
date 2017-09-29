@@ -43,7 +43,6 @@ public class BillingResource {
       return Response.status(Status.BAD_REQUEST).build();
     } catch (ClientNotFoundException exeption) {
       return Response.status(Status.BAD_REQUEST).build();
-
     }
 
   }

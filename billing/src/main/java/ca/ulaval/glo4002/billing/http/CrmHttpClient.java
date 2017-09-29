@@ -23,6 +23,13 @@ public class CrmHttpClient extends HttpClient {
   private static final String PRODUCTS = "/products/";
   private static final String MESSAGE_CLIENT_NOT_FOUND = "client not found";
   private static final String MESSAGE_PRODUCT_NOT_FOUND = "product not found";
+  private ObjectMapper mapper;
+
+  public CrmHttpClient() {
+    super();
+    mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+    mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+  }
 
   @Override
   @Produces(MediaType.APPLICATION_JSON)
@@ -53,9 +60,6 @@ public class CrmHttpClient extends HttpClient {
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public ProductDto getProductDto(Integer productId) {
-    ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-
     String url = LOCALHOST + PRODUCTS + productId;
     Response response = callUrlWithGetMethod(url);
 

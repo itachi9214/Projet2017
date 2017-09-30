@@ -15,7 +15,6 @@ public class BillAssembler {
   }
 
   public Bill create(RequestBillDto requestBillDto) {
-
     Bill bill = new Bill(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE,
         requestBillDto.getDueTerm(), requestBillDto.getClientId(), requestBillDto.getItems());
     bill.setBillNumber(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);

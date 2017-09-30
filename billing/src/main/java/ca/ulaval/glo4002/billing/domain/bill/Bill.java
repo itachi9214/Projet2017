@@ -13,6 +13,7 @@ public class Bill {
 
   public Bill(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
 
+    super();
     this.billNumber = billNumber;
     this.dueTerm = dueTerm;
     this.clientId = clientId;

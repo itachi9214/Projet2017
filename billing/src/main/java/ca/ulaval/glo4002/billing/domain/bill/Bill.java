@@ -1,7 +1,6 @@
 package ca.ulaval.glo4002.billing.domain.bill;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Bill {
@@ -11,16 +10,17 @@ public class Bill {
   private Long clientId;
   private List<OrderedProduct> items;
   private BigDecimal billTotal;
-  private OrderedProduct firstProduct, secondProduct;
 
-  public Bill() {
-    super();
-    items = new ArrayList<>();
-    billTotal = new BigDecimal(0);
+  public Bill(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
+
+    this.billNumber = billNumber;
+    this.dueTerm = dueTerm;
+    this.clientId = clientId;
+    this.items = items;
+
   }
 
   public Bill(List<OrderedProduct> items) {
-    super();
     billTotal = new BigDecimal(0);
     this.items = items;
   }

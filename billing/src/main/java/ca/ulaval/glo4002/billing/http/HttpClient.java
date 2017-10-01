@@ -7,6 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
+import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 
 public abstract class HttpClient {
 
@@ -17,5 +18,7 @@ public abstract class HttpClient {
   }
 
   public abstract ClientDto getClientDto(Long clientNumber);
+
+  public abstract ProductDto getProductDto(Integer productId);
 
 }

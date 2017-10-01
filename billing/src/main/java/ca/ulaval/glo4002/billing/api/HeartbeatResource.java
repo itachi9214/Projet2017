@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 import ca.ulaval.glo4002.billing.api.dto.HeartbeatDto;
 
 @Path("/heartbeat")
-public class HeartbeatResource implements HeartbeatResourceInterface {
+public class HeartbeatResource {
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)

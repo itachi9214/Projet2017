@@ -8,18 +8,16 @@ import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
 public class SubmissionAssembler {
 
   public ResponseSubmissionDto create(Submission submission) {
-    ResponseSubmissionDto responseSubmissionDto = new ResponseSubmissionDto(
-        submission.getBillNumber(), submission.getSubmissionTotal(), submission.getDueTerm(),
-        "/bills/" + submission.getBillNumber());
+    ResponseSubmissionDto responseSubmissionDto = new ResponseSubmissionDto(submission.getBillNumber(), submission.getTotalPrice(),
+        submission.getDueTerm(), "/bills/" + submission.getBillNumber());
     return responseSubmissionDto;
   }
 
   public Submission create(RequestSubmissionDto requestSubmissionDto) {
-    Submission bill = new Submission(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE,
-        requestSubmissionDto.getDueTerm(), requestSubmissionDto.getClientId(),
-        requestSubmissionDto.getItems());
-    bill.calculatePrice();
-    return bill;
+    Submission submission = new Submission(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE,
+        requestSubmissionDto.getDueTerm(), requestSubmissionDto.getClientId(), requestSubmissionDto.getItems());
+    submission.calculatePrice();
+    return submission;
   }
 
 }

@@ -6,7 +6,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import ca.ulaval.glo4002.billing.api.dto.ClientDto;
+import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 
 public abstract class HttpClient {
 

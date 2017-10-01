@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.api.dto;
+package ca.ulaval.glo4002.billing.api.dto.bill;
 
 import java.util.Date;
 import java.util.List;

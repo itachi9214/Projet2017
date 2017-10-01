@@ -13,8 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import ca.ulaval.glo4002.billing.api.dto.ClientDto;
-import ca.ulaval.glo4002.billing.api.dto.ProductDto;
+import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
+import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 
 public class CrmHttpClient extends HttpClient {
 

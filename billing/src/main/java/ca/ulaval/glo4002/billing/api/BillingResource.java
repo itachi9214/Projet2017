@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import ca.ulaval.glo4002.billing.api.dto.RequestBillDto;
+import ca.ulaval.glo4002.billing.api.dto.bill.RequestBillDto;
 import ca.ulaval.glo4002.billing.domain.bill.OrderedProduct;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;

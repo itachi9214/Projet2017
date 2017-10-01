@@ -47,11 +47,11 @@ public class Submission {
     this.items = items;
   }
 
-  public BigDecimal getBillTotal() {
+  public BigDecimal getSubmissionTotal() {
     return billTotal;
   }
 
-  public void setBillTotal(BigDecimal billTotal) {
+  public void setSubmissionTotal(BigDecimal billTotal) {
     this.billTotal = billTotal;
   }
 

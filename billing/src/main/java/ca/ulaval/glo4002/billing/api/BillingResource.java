@@ -19,6 +19,10 @@ public class BillingResource {
 
   private SubmissionService submissionService;
 
+  public BillingResource() {
+    submissionService = new SubmissionService();
+  }
+
   public BillingResource(SubmissionService submissionService) {
     this.submissionService = submissionService;
   }

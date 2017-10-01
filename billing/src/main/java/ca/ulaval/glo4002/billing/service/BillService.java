@@ -28,11 +28,9 @@ public class BillService {
   }
 
   public ResponseBillDto createBill(RequestBillDto requestBillDto) {
-
     Bill bill = billAssembler.create(requestBillDto);
     billRepository.createBill(bill);
     return billAssembler.create(bill);
-
   }
 
   public ClientDto getClientByIdInCrm(Long clientId) {

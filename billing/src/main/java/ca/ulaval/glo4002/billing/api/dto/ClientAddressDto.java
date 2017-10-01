@@ -1,7 +1,6 @@
 package ca.ulaval.glo4002.billing.api.dto;
 
 public class ClientAddressDto {
-
   private String city;
   private String country;
   private String number;

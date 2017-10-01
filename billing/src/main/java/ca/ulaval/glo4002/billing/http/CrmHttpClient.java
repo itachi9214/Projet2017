@@ -35,9 +35,6 @@ public class CrmHttpClient extends HttpClient {
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public ClientDto getClientDto(Long clientNumber) {
-    ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-
     String url = LOCALHOST + CLIENTS + clientNumber;
     Response response = callUrlWithGetMethod(url);
 

@@ -13,7 +13,7 @@ import ca.ulaval.glo4002.billing.http.NotFoundClientException;
 import ca.ulaval.glo4002.billing.service.BillService;
 
 @Path("/bills")
-public class BillingResource implements BillingRessourceInterface {
+public class BillingResource {
 
   private BillService billService;
 

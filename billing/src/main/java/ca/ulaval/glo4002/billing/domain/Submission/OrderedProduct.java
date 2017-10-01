@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.domain.bill;
+package ca.ulaval.glo4002.billing.domain.Submission;
 
 import java.math.BigDecimal;
 

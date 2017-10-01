@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.domain.bill;
+package ca.ulaval.glo4002.billing.domain.Submission;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -13,12 +13,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4002.billing.domain.Submission.Submission;
+import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
+
 @RunWith(MockitoJUnitRunner.class)
-public class BillTest {
+public class SubmissionTest {
 
   private static final float priceFirstProduct = 10;
   private static final float priceSecondProduct = 20;
-  public Bill bill;
+  public Submission submission;
 
   @Mock
   public OrderedProduct firstProduct;
@@ -31,15 +34,15 @@ public class BillTest {
     List<OrderedProduct> items = new ArrayList<>();
     items.add(firstProduct);
     items.add(secondProduct);
-    bill = new Bill(items);
+    submission = new Submission(items);
   }
 
   @Test
-  public void whenCalculateBillThenCalculateTotalPrice() {
+  public void whenCalculateSubmissionThenCalculateTotalPrice() {
     when(firstProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceFirstProduct));
     when(secondProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceSecondProduct));
 
-    assertEquals(bill.calculateBill(), new BigDecimal(30));
+    assertEquals(submission.calculatePrice(), new BigDecimal(30));
   }
 
 }

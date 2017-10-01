@@ -1,10 +1,10 @@
-package ca.ulaval.glo4002.billing.api.dto;
+package ca.ulaval.glo4002.billing.api.dto.client;
 
 import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import ca.ulaval.glo4002.billing.domain.bill.DueTerm;
+import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClientDto {

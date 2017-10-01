@@ -1,15 +1,22 @@
-package ca.ulaval.glo4002.billing.api.dto;
+package ca.ulaval.glo4002.billing.api.dto.submission;
 
 import java.math.BigDecimal;
 
-import ca.ulaval.glo4002.billing.domain.DueTerm;
+import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
 
-public class ResponseBillDto {
+public class ResponseSubmissionDto {
 
   private Long billNumber;
   private BigDecimal total;
   private DueTerm dueTerm;
   private String url;
+
+  public ResponseSubmissionDto(Long billNumber, BigDecimal total, DueTerm dueTerm, String url) {
+    this.billNumber = billNumber;
+    this.total = total;
+    this.dueTerm = dueTerm;
+    this.url = url;
+  }
 
   public Long getBillNumber() {
     return billNumber;

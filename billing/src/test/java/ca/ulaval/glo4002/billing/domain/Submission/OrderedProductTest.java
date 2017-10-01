@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.domain.bill;
+package ca.ulaval.glo4002.billing.domain.Submission;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
 
 public class OrderedProductTest {
 

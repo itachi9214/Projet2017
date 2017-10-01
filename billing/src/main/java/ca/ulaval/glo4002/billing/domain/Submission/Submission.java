@@ -1,9 +1,9 @@
-package ca.ulaval.glo4002.billing.domain.bill;
+package ca.ulaval.glo4002.billing.domain.Submission;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Bill {
+public class Submission {
 
   private Long billNumber;
   private DueTerm dueTerm;
@@ -11,7 +11,7 @@ public class Bill {
   private List<OrderedProduct> items;
   private BigDecimal billTotal;
 
-  public Bill(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
+  public Submission(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
     super();
     this.billNumber = billNumber;
     this.dueTerm = dueTerm;
@@ -19,7 +19,7 @@ public class Bill {
     this.items = items;
   }
 
-  public Bill(List<OrderedProduct> items) {
+  public Submission(List<OrderedProduct> items) {
     this.items = items;
   }
 
@@ -63,7 +63,7 @@ public class Bill {
     this.billNumber = billNumber;
   }
 
-  public BigDecimal calculateBill() {
+  public BigDecimal calculatePrice() {
     billTotal = new BigDecimal(0);
     for (OrderedProduct product : items) {
       billTotal = billTotal.add(product.calculateTotalPrice());

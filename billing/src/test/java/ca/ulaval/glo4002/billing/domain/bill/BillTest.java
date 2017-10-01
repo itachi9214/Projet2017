@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.billing.domain.bill;
 
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -39,9 +39,7 @@ public class BillTest {
     when(firstProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceFirstProduct));
     when(secondProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceSecondProduct));
 
-    bill.calculateBill();
-
-    verify(firstProduct).calculateTotalPrice();
+    assertEquals(bill.calculateBill(), new BigDecimal(30));
   }
 
 }

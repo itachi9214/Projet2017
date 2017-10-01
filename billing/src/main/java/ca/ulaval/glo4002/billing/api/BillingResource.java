@@ -8,36 +8,36 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import ca.ulaval.glo4002.billing.api.dto.bill.RequestBillDto;
-import ca.ulaval.glo4002.billing.domain.bill.OrderedProduct;
+import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
+import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
-import ca.ulaval.glo4002.billing.service.BillService;
+import ca.ulaval.glo4002.billing.service.SubmissionService;
 
 @Path("/bills")
 public class BillingResource {
 
-  private BillService billService;
+  private SubmissionService billService;
 
   public BillingResource() {
-    billService = new BillService();
+    billService = new SubmissionService();
   }
 
-  public BillingResource(BillService billService) {
+  public BillingResource(SubmissionService billService) {
     this.billService = billService;
   }
 
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response createBill(RequestBillDto requestBillDto) {
+  public Response createBill(RequestSubmissionDto requestBillDto) {
     try {
       billService.getClientByIdInCrm(requestBillDto.getClientId());
       for (OrderedProduct item : requestBillDto.getItems()) {
         billService.getProductByIdInCrm(item.getProductId());
       }
 
-      return Response.status(Response.Status.CREATED).entity(billService.createBill(requestBillDto))
+      return Response.status(Response.Status.CREATED).entity(billService.createSubmission(requestBillDto))
           .build();
     } catch (ProductNotFoundException exception) {
       return Response.status(Status.BAD_REQUEST).build();

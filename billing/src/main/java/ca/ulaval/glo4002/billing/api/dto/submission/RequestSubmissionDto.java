@@ -1,19 +1,19 @@
-package ca.ulaval.glo4002.billing.api.dto.bill;
+package ca.ulaval.glo4002.billing.api.dto.submission;
 
 import java.util.Date;
 import java.util.List;
 
-import ca.ulaval.glo4002.billing.domain.bill.DueTerm;
-import ca.ulaval.glo4002.billing.domain.bill.OrderedProduct;
+import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
+import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
 
-public class RequestBillDto {
+public class RequestSubmissionDto {
 
   private Long clientId;
   private Date creationDate;
   private DueTerm dueTerm;
   private List<OrderedProduct> items;
 
-  public RequestBillDto() {
+  public RequestSubmissionDto() {
     super();
   }
 

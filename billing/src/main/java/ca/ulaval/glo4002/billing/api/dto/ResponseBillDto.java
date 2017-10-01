@@ -11,8 +11,12 @@ public class ResponseBillDto {
   private DueTerm dueTerm;
   private String url;
 
-  public ResponseBillDto() {
-    total = new BigDecimal(0);
+  public ResponseBillDto(Long billNumber, BigDecimal total, DueTerm dueTerm, String url) {
+
+    this.billNumber = billNumber;
+    this.total = total;
+    this.dueTerm = dueTerm;
+    this.url = url;
   }
 
   public Long getBillNumber() {

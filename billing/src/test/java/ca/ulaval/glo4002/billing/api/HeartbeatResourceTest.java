@@ -8,7 +8,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.glassfish.jersey.test.TestProperties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -21,10 +20,6 @@ public class HeartbeatResourceTest extends JerseyTest {
 
   @Override
   public Application configure() {
-    enable(TestProperties.LOG_TRAFFIC);
-    enable(TestProperties.DUMP_ENTITY);
-    set(TestProperties.CONTAINER_PORT, 8181);
-
     MockitoAnnotations.initMocks(this);
 
     return new ResourceConfig().register(new HeartbeatResource());

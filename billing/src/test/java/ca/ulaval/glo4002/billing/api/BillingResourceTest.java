@@ -16,7 +16,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.glassfish.jersey.test.TestProperties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -54,10 +53,6 @@ public class BillingResourceTest extends JerseyTest {
 
   @Override
   public Application configure() {
-    enable(TestProperties.LOG_TRAFFIC);
-    enable(TestProperties.DUMP_ENTITY);
-    set(TestProperties.CONTAINER_PORT, 8181);
-
     MockitoAnnotations.initMocks(this);
     willThrow(new ClientNotFoundException()).given(submissionService)
         .getClientByIdInCrm(NON_EXISTING_CLIENT);
@@ -73,7 +68,6 @@ public class BillingResourceTest extends JerseyTest {
   public void givenExistingClientAndProductWhenCreateBillThenResponseStatusIsCreated() {
     List<OrderedProduct> items = new ArrayList<>();
     items.add(new OrderedProduct(EXISTING_PRODUCT, A_PRICE, A_NOTE, A_QUANTITY));
-
     RequestSubmissionDto requestSubmissionDto = new RequestSubmissionDto(EXISTING_CLIENT,
         new Date(), DueTerm.DAYS30, items);
     Entity<RequestSubmissionDto> requestEntity = Entity.entity(requestSubmissionDto,

@@ -17,6 +17,15 @@ public class RequestSubmissionDto {
     super();
   }
 
+  public RequestSubmissionDto(Long clientId, Date creationDate, DueTerm dueTerm,
+      List<OrderedProduct> items) {
+    super();
+    this.clientId = clientId;
+    this.creationDate = creationDate;
+    this.dueTerm = dueTerm;
+    this.items = items;
+  }
+
   public Long getClientId() {
     return clientId;
   }

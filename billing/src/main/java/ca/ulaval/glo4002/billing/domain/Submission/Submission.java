@@ -2,6 +2,7 @@ package ca.ulaval.glo4002.billing.domain.Submission;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 public class Submission {
 
@@ -11,12 +12,20 @@ public class Submission {
   private List<OrderedProduct> items;
   private BigDecimal totalPrice;
 
+  public Submission() {
+  }
+
   public Submission(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
     super();
     this.billNumber = billNumber;
     this.dueTerm = dueTerm;
     this.clientId = clientId;
     this.items = items;
+  }
+
+  public Submission(DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
+    this(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE, dueTerm, clientId, items);
+
   }
 
   public Submission(List<OrderedProduct> items) {

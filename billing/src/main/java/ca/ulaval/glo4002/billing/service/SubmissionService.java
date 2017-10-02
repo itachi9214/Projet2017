@@ -23,15 +23,16 @@ public class SubmissionService {
     httpClient = new CrmHttpClient();
   }
 
-  public SubmissionService(SubmissionAssembler submissionAssembler, SubmissionRepository submissionRepository) {
+  public SubmissionService(SubmissionAssembler submissionAssembler,
+      SubmissionRepository submissionRepository) {
     this.submissionAssembler = submissionAssembler;
     this.submissionRepository = submissionRepository;
   }
 
   public ResponseSubmissionDto createSubmission(RequestSubmissionDto requestSubmissionDto) {
-    Submission submission = submissionAssembler.create(requestSubmissionDto);
+    Submission submission = submissionAssembler.createSubmission(requestSubmissionDto);
     submissionRepository.createSubmission(submission);
-    return submissionAssembler.create(submission);
+    return submissionAssembler.createResponseSubmissionDto(submission);
   }
 
   public ClientDto getClientByIdInCrm(Long clientId) {

@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Submission {
 
-  private Long billNumber;
-  private DueTerm dueTerm;
-  private Long clientId;
-  private List<OrderedProduct> items;
-  private BigDecimal totalPrice;
+  protected Long billNumber;
+  protected DueTerm dueTerm;
+  protected Long clientId;
+  protected List<OrderedProduct> items;
+  protected BigDecimal totalPrice;
 
   public Submission(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
     super();

@@ -11,12 +11,6 @@ public class Bill extends Submission {
 
   public Bill(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
     super(billNumber, dueTerm, clientId, items);
-    // TODO Auto-generated constructor stub
-  }
-
-  public Bill(List<OrderedProduct> items) {
-    super(items);
-    // TODO Auto-generated constructor stub
   }
 
   @SuppressWarnings("deprecation")

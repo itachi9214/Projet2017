@@ -17,28 +17,28 @@ import ca.ulaval.glo4002.billing.service.SubmissionService;
 @Path("/bills")
 public class BillingResource {
 
-  private SubmissionService billService;
+  private SubmissionService submissionService;
 
   public BillingResource() {
-    billService = new SubmissionService();
+    submissionService = new SubmissionService();
   }
 
-  public BillingResource(SubmissionService billService) {
-    this.billService = billService;
+  public BillingResource(SubmissionService submissionService) {
+    this.submissionService = submissionService;
   }
 
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response createBill(RequestSubmissionDto requestBillDto) {
+  public Response createSubmission(RequestSubmissionDto requestSubmissionDto) {
     try {
-      billService.getClientByIdInCrm(requestBillDto.getClientId());
-      for (OrderedProduct item : requestBillDto.getItems()) {
-        billService.getProductByIdInCrm(item.getProductId());
+      submissionService.getClientByIdInCrm(requestSubmissionDto.getClientId());
+      for (OrderedProduct item : requestSubmissionDto.getItems()) {
+        submissionService.getProductByIdInCrm(item.getProductId());
       }
 
-      return Response.status(Response.Status.CREATED).entity(billService.createSubmission(requestBillDto))
-          .build();
+      return Response.status(Response.Status.CREATED)
+          .entity(submissionService.createSubmission(requestSubmissionDto)).build();
     } catch (ProductNotFoundException exception) {
       return Response.status(Status.BAD_REQUEST).build();
     } catch (ClientNotFoundException exeption) {

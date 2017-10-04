@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Submission {
 
-  private Long billNumber;
-  private DueTerm dueTerm;
-  private Long clientId;
-  private List<OrderedProduct> items;
-  private BigDecimal billTotal;
+  protected Long billNumber;
+  protected DueTerm dueTerm;
+  protected Long clientId;
+  protected List<OrderedProduct> items;
+  protected BigDecimal totalPrice;
 
   public Submission(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
     super();
@@ -47,12 +47,12 @@ public class Submission {
     this.items = items;
   }
 
-  public BigDecimal getBillTotal() {
-    return billTotal;
+  public BigDecimal getTotalPrice() {
+    return totalPrice;
   }
 
-  public void setBillTotal(BigDecimal billTotal) {
-    this.billTotal = billTotal;
+  public void setTotalPrice(BigDecimal totalPrice) {
+    this.totalPrice = totalPrice;
   }
 
   public Long getBillNumber() {
@@ -64,11 +64,11 @@ public class Submission {
   }
 
   public BigDecimal calculatePrice() {
-    billTotal = new BigDecimal(0);
+    totalPrice = new BigDecimal(0);
     for (OrderedProduct product : items) {
-      billTotal = billTotal.add(product.calculateTotalPrice());
+      totalPrice = totalPrice.add(product.calculateTotalPrice());
     }
-    return billTotal;
+    return totalPrice;
   }
 
 }

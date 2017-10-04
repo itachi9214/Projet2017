@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.domain.bill;
+package ca.ulaval.glo4002.billing.domain.Submission;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
@@ -14,16 +14,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
-import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
-import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
-import ca.ulaval.glo4002.billing.domain.Submission.Submission;
-import ca.ulaval.glo4002.billing.domain.Submission.SubmissionAssembler;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionAssemblerTest {
-  private static final Long SOUBMISSION_NUMBER = 100L;
-  private static final DueTerm IMMEDIAT = DueTerm.IMMEDIATE;
-  private static final BigDecimal SOUBMISSION_TOTAL = new BigDecimal(0);
+
+  private static final Long SUBMISSION_NUMBER = 100L;
+  private static final DueTerm IMMEDIATE = DueTerm.IMMEDIATE;
+  private static final BigDecimal SUBMISSION_TOTAL = new BigDecimal(0);
   private static final Long CLIENT_ID = 105L;
 
   @Mock
@@ -32,8 +29,8 @@ public class SubmissionAssemblerTest {
   private RequestSubmissionDto requestSubmissionDto;
   @Mock
   private OrderedProduct orderedProduct;
-  private List<OrderedProduct> items;
 
+  private List<OrderedProduct> items;
   private SubmissionAssembler submissionAssembler;
 
   @Before
@@ -43,21 +40,21 @@ public class SubmissionAssemblerTest {
 
   @Test
   public void givenSubmissionAssemblerWhenCreateResponseSubmissionDtoThenShouldBeTheSame() {
-    given(submission.getBillNumber()).willReturn(SOUBMISSION_NUMBER);
-    given(submission.getDueTerm()).willReturn(IMMEDIAT);
-    given(submission.getTotalPrice()).willReturn(SOUBMISSION_TOTAL);
+    given(submission.getBillNumber()).willReturn(SUBMISSION_NUMBER);
+    given(submission.getDueTerm()).willReturn(IMMEDIATE);
+    given(submission.getTotalPrice()).willReturn(SUBMISSION_TOTAL);
 
     ResponseSubmissionDto dto = submissionAssembler.createResponseSubmissionDto(submission);
 
-    assertTrue(dto.getBillNumber() == SOUBMISSION_NUMBER);
-    assertTrue(dto.getDueTerm() == IMMEDIAT);
-    assertTrue(dto.getTotal() == SOUBMISSION_TOTAL);
+    assertTrue(dto.getBillNumber() == SUBMISSION_NUMBER);
+    assertTrue(dto.getDueTerm() == IMMEDIATE);
+    assertTrue(dto.getTotal() == SUBMISSION_TOTAL);
   }
 
   @Test
   public void givenSubmissiAssemblerWhenCreatSubmissionThenShouldBeTheSame() {
     requestSubmissionDto.setClientId(CLIENT_ID);
-    requestSubmissionDto.setDueTerm(IMMEDIAT);
+    requestSubmissionDto.setDueTerm(IMMEDIATE);
     requestSubmissionDto.setItems(items);
 
     Submission submissionTest = submissionAssembler.createSubmission(requestSubmissionDto);

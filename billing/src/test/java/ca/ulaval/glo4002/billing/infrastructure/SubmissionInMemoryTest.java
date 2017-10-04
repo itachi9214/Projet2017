@@ -38,7 +38,7 @@ public class SubmissionInMemoryTest {
   }
 
   @Test(expected = SubmissionNotFoundException.class)
-  public void withNotExistingSubmissionNumberWhenGetSubmissionBySubmissionNUmberThenThrowException() {
+  public void givenNotExistingSubmissionNumberWhenGetSubmissionBySubmissionNUmberThenThrowException() {
     submissionInMemory.getSubmissionById(NOT_EXISTING_SUBMISSION_NUMBER);
   }
 

@@ -19,7 +19,7 @@ public class SubmissionInMemory implements SubmissionRepository {
   @Override
   public Submission getSubmissionById(Long submissionNumber) {
     if (submissions.isEmpty() || !submissions.containsKey(submissionNumber)) {
-      throw new NotFoundSubmissionException(MESSAGE_ERROR_SUBMISSION);
+      throw new SubmissionNotFoundException(MESSAGE_ERROR_SUBMISSION);
     }
     return submissions.get(submissionNumber);
   }

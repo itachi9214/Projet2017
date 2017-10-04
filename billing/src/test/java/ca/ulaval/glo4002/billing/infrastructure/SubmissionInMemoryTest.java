@@ -14,7 +14,7 @@ import ca.ulaval.glo4002.billing.domain.Submission.Submission;
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionInMemoryTest {
 
-  private final static Long SUBMISSION_NUMBER = 100L;
+  private final static Long EXISTING_SUBMISSION_NUMBER = 100L;
   private final static Long NOT_EXISTING_SUBMISSION_NUMBER = 200L;
 
   private SubmissionInMemory submissionInMemory;
@@ -25,20 +25,20 @@ public class SubmissionInMemoryTest {
   @Before
   public void setUp() {
     submissionInMemory = new SubmissionInMemory();
-    when(submissionMock.getBillNumber()).thenReturn(SUBMISSION_NUMBER);
+    when(submissionMock.getBillNumber()).thenReturn(EXISTING_SUBMISSION_NUMBER);
   }
 
   @Test
-  public void givenSubmissionNumberWhenGetSubmissionThenReturnSubmission() {
+  public void givenExistingSubmissionNumberWhenCreateSubmissionAndGetSubmissionByIdThenReturnSubmission() {
     submissionInMemory.createSubmission(submissionMock);
 
-    Submission submission = submissionInMemory.getSubmissionById(SUBMISSION_NUMBER);
+    Submission submission = submissionInMemory.getSubmissionById(EXISTING_SUBMISSION_NUMBER);
 
     assertEquals(submission, submissionMock);
   }
 
-  @Test(expected = NotFoundSubmissionException.class)
-  public void withWrongSubmissionNumberWhenGetSubmissionThenThrowException() {
+  @Test(expected = SubmissionNotFoundException.class)
+  public void withNotExistingSubmissionNumberWhenGetSubmissionBySubmissionNUmberThenThrowException() {
     submissionInMemory.getSubmissionById(NOT_EXISTING_SUBMISSION_NUMBER);
   }
 

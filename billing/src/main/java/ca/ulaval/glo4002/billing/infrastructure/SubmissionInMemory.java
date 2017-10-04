@@ -17,11 +17,11 @@ public class SubmissionInMemory implements SubmissionRepository {
   }
 
   @Override
-  public Submission getSubmissionById(Long submissionNumber) {
+  public boolean getSubmissionById(Long submissionNumber) {
     if (submissions.isEmpty() || !submissions.containsKey(submissionNumber)) {
-      throw new SubmissionNotFoundException(MESSAGE_ERROR_SUBMISSION);
+      return false;
     }
-    return submissions.get(submissionNumber);
+    return true;
   }
 
 }

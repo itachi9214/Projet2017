@@ -52,7 +52,6 @@ public class SubmissionAssemblerTest {
     assertTrue(dto.getBillNumber() == SOUBMISSION_NUMBER);
     assertTrue(dto.getDueTerm() == IMMEDIAT);
     assertTrue(dto.getTotal() == SOUBMISSION_TOTAL);
-
   }
 
   @Test
@@ -64,7 +63,6 @@ public class SubmissionAssemblerTest {
     Submission submissionTest = submissionAssembler.createSubmission(requestSubmissionDto);
 
     assertTrue(submissionTest instanceof Submission);
-
   }
 
 }

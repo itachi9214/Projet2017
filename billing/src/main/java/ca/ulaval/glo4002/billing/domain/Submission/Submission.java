@@ -25,7 +25,6 @@ public class Submission {
 
   public Submission(DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
     this(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE, dueTerm, clientId, items);
-
   }
 
   public Submission(List<OrderedProduct> items) {

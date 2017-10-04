@@ -30,7 +30,7 @@ public class BillingResource {
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response createBill(RequestSubmissionDto requestSubmissionDto) {
+  public Response createSubmission(RequestSubmissionDto requestSubmissionDto) {
     try {
       submissionService.getClientByIdInCrm(requestSubmissionDto.getClientId());
       for (OrderedProduct item : requestSubmissionDto.getItems()) {

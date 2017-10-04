@@ -13,21 +13,18 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.domain.Submission.Submission;
-import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
-
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionTest {
 
   private static final float priceFirstProduct = 10;
   private static final float priceSecondProduct = 20;
-  public Submission submission;
+  private Submission submission;
 
   @Mock
-  public OrderedProduct firstProduct;
+  private OrderedProduct firstProduct;
 
   @Mock
-  public OrderedProduct secondProduct;
+  private OrderedProduct secondProduct;
 
   @Before
   public void setUp() {

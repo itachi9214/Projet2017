@@ -42,18 +42,18 @@ public class BillingResourceTest extends JerseyTest {
   private static final String A_NOTE = "note";
   private static final int A_QUANTITY = 2;
 
+  private ClientDto clientDto;
+  private ProductDto productDto;
+
   @Mock
   private SubmissionService submissionService;
-
-  @Mock
-  private ClientDto clientDto;
-
-  @Mock
-  private ProductDto productDto;
 
   @Override
   public Application configure() {
     MockitoAnnotations.initMocks(this);
+    clientDto = new ClientDto();
+    productDto = new ProductDto();
+
     willThrow(new ClientNotFoundException()).given(submissionService)
         .getClientByIdInCrm(NON_EXISTING_CLIENT);
     willReturn(clientDto).given(submissionService).getClientByIdInCrm(EXISTING_CLIENT);

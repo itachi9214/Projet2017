@@ -12,6 +12,14 @@ public class BillDto {
   private DueTerm dueTerm;
   private String url;
 
+  public BillDto(Long id, Date effectiveDate, Date expectedPayment, DueTerm dueTerm, String url) {
+    this.id = id;
+    this.effectiveDate = effectiveDate;
+    this.expectedPayment = expectedPayment;
+    this.dueTerm = dueTerm;
+    this.url = url;
+  }
+
   public Long getId() {
     return id;
   }

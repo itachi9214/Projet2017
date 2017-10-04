@@ -8,7 +8,6 @@ import ca.ulaval.glo4002.billing.domain.Submission.SubmissionRepository;
 
 public class SubmissionInMemory implements SubmissionRepository {
 
-  private static final String MESSAGE_ERROR_SUBMISSION = "Error : submission not found";
   private Map<Long, Submission> submissions = new HashMap<>();
 
   @Override

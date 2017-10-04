@@ -6,11 +6,40 @@ import java.util.List;
 public class Bill extends Submission {
 
   private Date effectiveDate;
-  @SuppressWarnings("unused")
   private Date expectedPaiement;
 
   public Bill(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
     super(billNumber, dueTerm, clientId, items);
+  }
+
+  public Bill(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items,
+      Date effectiveDate, Date expectedPaiement) {
+    super(billNumber, dueTerm, clientId, items);
+    this.effectiveDate = effectiveDate;
+    this.expectedPaiement = expectedPaiement;
+  }
+
+  public Bill(Long billNumber, Date effectiveDate, Date expectedPaiement, DueTerm dueTerm) {
+    this.billNumber = billNumber;
+    this.effectiveDate = effectiveDate;
+    this.expectedPaiement = expectedPaiement;
+    this.dueTerm = dueTerm;
+  }
+
+  public Date getEffectiveDate() {
+    return effectiveDate;
+  }
+
+  public void setEffectiveDate(Date effectiveDate) {
+    this.effectiveDate = effectiveDate;
+  }
+
+  public Date getExpectedPaiement() {
+    return expectedPaiement;
+  }
+
+  public void setExpectedPaiement(Date expectedPaiement) {
+    this.expectedPaiement = expectedPaiement;
   }
 
   @SuppressWarnings("deprecation")

@@ -14,8 +14,8 @@ import ca.ulaval.glo4002.billing.domain.Submission.Submission;
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionInMemoryTest {
 
-  private final static Long EXISTING_SUBMISSION_NUMBER = 100L;
-  private final static Long NOT_EXISTING_SUBMISSION_NUMBER = 200L;
+  private static final Long EXISTING_SUBMISSION_NUMBER = 100L;
+  private static final Long NOT_EXISTING_SUBMISSION_NUMBER = 200L;
 
   private SubmissionInMemory submissionInMemory;
 

@@ -1,18 +1,19 @@
 package ca.ulaval.glo4002.billing.api.dto.bill;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
 
 public class BillDto {
 
   private Long id;
-  private Date effectiveDate;
-  private Date expectedPayment;
+  private LocalDate effectiveDate;
+  private LocalDate expectedPayment;
   private DueTerm dueTerm;
   private String url;
 
-  public BillDto(Long id, Date effectiveDate, Date expectedPayment, DueTerm dueTerm, String url) {
+  public BillDto(Long id, LocalDate effectiveDate, LocalDate expectedPayment, DueTerm dueTerm,
+      String url) {
     this.id = id;
     this.effectiveDate = effectiveDate;
     this.expectedPayment = expectedPayment;
@@ -28,19 +29,19 @@ public class BillDto {
     this.id = id;
   }
 
-  public Date getEffectiveDate() {
+  public LocalDate getEffectiveDate() {
     return effectiveDate;
   }
 
-  public void setEffectiveDate(Date effectiveDate) {
+  public void setEffectiveDate(LocalDate effectiveDate) {
     this.effectiveDate = effectiveDate;
   }
 
-  public Date getExpectedPayment() {
+  public LocalDate getExpectedPayment() {
     return expectedPayment;
   }
 
-  public void setExpectedPayment(Date expectedPayment) {
+  public void setExpectedPayment(LocalDate expectedPayment) {
     this.expectedPayment = expectedPayment;
   }
 

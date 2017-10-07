@@ -35,6 +35,10 @@ public class Submission {
     this.items = items;
   }
 
+  public Submission(DueTerm dueTerm) {
+    this.dueTerm = dueTerm;
+  }
+
   public DueTerm getDueTerm() {
     return dueTerm;
   }

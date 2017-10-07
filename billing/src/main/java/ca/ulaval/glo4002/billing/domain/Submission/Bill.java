@@ -14,10 +14,18 @@ public class Bill extends Submission {
     this.expectedPaiement = calculateExpectedPaiementDate();
   }
 
+  public Bill(Long billNumber) {
+    super(billNumber);
+  }
+
   public Bill(DueTerm dueTerm) {
     super(dueTerm);
     this.effectiveDate = LocalDate.now();
     this.expectedPaiement = calculateExpectedPaiementDate();
+  }
+
+  public LocalDate getEffectiveDate() {
+    return effectiveDate;
   }
 
   public LocalDate calculateExpectedPaiementDate() {

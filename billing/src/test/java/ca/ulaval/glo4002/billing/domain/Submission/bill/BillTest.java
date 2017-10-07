@@ -16,28 +16,28 @@ public class BillTest {
 
   @Before
   public void setUp() {
-    effectiveDate = LocalDate.of(2017, 2, 10);
+    effectiveDate = LocalDate.now();
   }
 
   @Test
   public void givenDueTermWhenImmediateThenCalculateExpectedPaiementDate() {
-    Bill bill = new Bill(effectiveDate, DueTerm.IMMEDIATE);
+    Bill bill = new Bill(DueTerm.IMMEDIATE);
 
-    assertEquals(bill.calculateExpectedPaiementDate(), LocalDate.of(2017, 2, 10));
+    assertEquals(bill.calculateExpectedPaiementDate(), LocalDate.now());
   }
 
   @Test
   public void givenDueTermWhenOneMonthThenCalculateExpectedPaiementDate() {
-    Bill bill = new Bill(effectiveDate, DueTerm.DAYS30);
+    Bill bill = new Bill(DueTerm.DAYS30);
 
-    assertEquals(bill.calculateExpectedPaiementDate(), LocalDate.of(2017, 3, 10));
+    assertEquals(bill.calculateExpectedPaiementDate(), LocalDate.now().plusMonths(1));
   }
 
   @Test
   public void givenDueTermWhenThreeMonthThenCalculateExpectedPaiementDate() {
-    Bill bill = new Bill(effectiveDate, DueTerm.DAYS90);
+    Bill bill = new Bill(DueTerm.DAYS90);
 
-    assertEquals(bill.calculateExpectedPaiementDate(), LocalDate.of(2017, 5, 10));
+    assertEquals(bill.calculateExpectedPaiementDate(), LocalDate.now().plusMonths(3));
   }
 
 }

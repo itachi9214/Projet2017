@@ -8,15 +8,16 @@ public class Bill extends Submission {
   private LocalDate effectiveDate;
   private LocalDate expectedPaiement;
 
-  public Bill(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items,
-      LocalDate effectiveDate) {
+  public Bill(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
     super(billNumber, dueTerm, clientId, items);
-    this.effectiveDate = effectiveDate;
+    this.effectiveDate = LocalDate.now();
+    this.expectedPaiement = calculateExpectedPaiementDate();
   }
 
-  public Bill(LocalDate effectiveDate, DueTerm dueTerm) {
+  public Bill(DueTerm dueTerm) {
     super(dueTerm);
-    this.effectiveDate = effectiveDate;
+    this.effectiveDate = LocalDate.now();
+    this.expectedPaiement = calculateExpectedPaiementDate();
   }
 
   public LocalDate calculateExpectedPaiementDate() {

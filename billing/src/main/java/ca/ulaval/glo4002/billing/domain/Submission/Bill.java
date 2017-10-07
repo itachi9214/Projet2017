@@ -12,6 +12,10 @@ public class Bill extends Submission {
     super(billNumber, dueTerm, clientId, items);
   }
 
+  public Bill(Long billNumber) {
+    super(billNumber);
+  }
+
   public Bill(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items,
       Date effectiveDate, Date expectedPaiement) {
     super(billNumber, dueTerm, clientId, items);

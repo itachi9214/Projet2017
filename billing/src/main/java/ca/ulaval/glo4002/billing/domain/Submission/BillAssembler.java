@@ -1,18 +1,19 @@
 package ca.ulaval.glo4002.billing.domain.Submission;
 
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
+import ca.ulaval.glo4002.billing.api.dto.bill.RequestBillDto;
 
 public class BillAssembler {
 
-  public BillDto assebleBill(Bill bill) {
-    BillDto billDto = new BillDto(bill.billNumber, bill.getEffectiveDate(),
+  public BillDto assembleBill(Bill bill, Submission submission) {
+    BillDto billDto = new BillDto(submission.billNumber, bill.getEffectiveDate(),
         bill.getExpectedPaiement(), bill.dueTerm, "/bills/" + bill.billNumber);
     return billDto;
   }
 
-  public Bill desassembleBill(BillFactory billFactory, BillDto billDto) {
-    return billFactory.create(billDto.getId(), billDto.getEffectiveDate(),
-        billDto.getExpectedPayment(), billDto.getDueTerm());
+  public Bill disassembleBill(RequestBillDto billDto) {
+    Bill bill = new Bill(billDto.getBillNumber());
+    return bill;
   }
 
 }

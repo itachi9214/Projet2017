@@ -15,6 +15,10 @@ public class Submission {
   public Submission() {
   }
 
+  public Submission(Long billNumber) {
+    this.billNumber = billNumber;
+  }
+
   public Submission(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items) {
     super();
     this.billNumber = billNumber;

@@ -13,9 +13,9 @@ public class ProductNotFoundExceptionMapper implements ExceptionMapper<ProductNo
 
   @Override
   public Response toResponse(ProductNotFoundException productNotFoundException) {
-    ProductErrorDto productErrorDto = new ProductErrorDto("Product", "Product Not Found",
-        "Product");
-    return Response.status(Status.NOT_FOUND).entity(productErrorDto)
+    ProductErrorDto productErrorDto = new ProductErrorDto("not found",
+        "product " + productNotFoundException.getProductId() + " not found", "product");
+    return Response.status(Status.BAD_REQUEST).entity(productErrorDto)
         .type(MediaType.APPLICATION_JSON).build();
   }
 

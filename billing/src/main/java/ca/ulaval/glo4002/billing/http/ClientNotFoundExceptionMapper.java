@@ -13,9 +13,10 @@ public class ClientNotFoundExceptionMapper implements ExceptionMapper<ClientNotF
 
   @Override
   public Response toResponse(ClientNotFoundException clientNotFoundException) {
-    ClientErrorDto clientErrorDto = new ClientErrorDto("Client", "Client Not Found", "CLient");
-    return Response.status(Status.NOT_FOUND).entity(clientErrorDto).type(MediaType.APPLICATION_JSON)
-        .build();
+    ClientErrorDto clientErrorDto = new ClientErrorDto("not found",
+        "client " + clientNotFoundException.getClientId() + " not found", "client");
+    return Response.status(Status.BAD_REQUEST).entity(clientErrorDto)
+        .type(MediaType.APPLICATION_JSON).build();
   }
 
 }

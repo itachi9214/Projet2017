@@ -57,10 +57,10 @@ public class BillingResourceTest extends JerseyTest {
     clientDto = new ClientDto();
     productDto = new ProductDto();
 
-    willThrow(new ClientNotFoundException()).given(submissionService)
+    willThrow(new ClientNotFoundException(NON_EXISTING_CLIENT)).given(submissionService)
         .getClientByIdInCrm(NON_EXISTING_CLIENT);
     willReturn(clientDto).given(submissionService).getClientByIdInCrm(EXISTING_CLIENT);
-    willThrow(new ProductNotFoundException()).given(submissionService)
+    willThrow(new ProductNotFoundException(NON_EXISTING_PRODUCT)).given(submissionService)
         .getProductByIdInCrm(NON_EXISTING_PRODUCT);
     willReturn(productDto).given(submissionService).getProductByIdInCrm(EXISTING_PRODUCT);
 

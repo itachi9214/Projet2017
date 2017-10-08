@@ -9,7 +9,6 @@ import javax.ws.rs.core.Response;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
-import ca.ulaval.glo4002.billing.domain.Submission.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundExceptionMapper;
@@ -21,21 +20,23 @@ import ca.ulaval.glo4002.billing.service.SubmissionService;
 public class BillingResource {
 
   private SubmissionService submissionService;
+  private ClientNotFoundExceptionMapper clientNotFoundExceptionMapper;
+  private ProductNotFoundExceptionMapper productNotFoundExceptionMapper;
 
   public BillingResource() {
-    submissionService = new SubmissionService();
+    this(new SubmissionService());
   }
 
   public BillingResource(SubmissionService submissionService) {
     this.submissionService = submissionService;
+    clientNotFoundExceptionMapper = new ClientNotFoundExceptionMapper();
+    productNotFoundExceptionMapper = new ProductNotFoundExceptionMapper();
   }
 
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response createSubmission(RequestSubmissionDto requestSubmissionDto,
-      ClientNotFoundExceptionMapper clientNotFoundExceptionMapper,
-      ProductNotFoundExceptionMapper productNotFoundExceptionMapper) {
+  public Response createSubmission(RequestSubmissionDto requestSubmissionDto) {
     try {
       ClientDto clientDto = submissionService
           .getClientByIdInCrm(requestSubmissionDto.getClientId());
@@ -48,13 +49,12 @@ public class BillingResource {
 
       return Response.status(Response.Status.CREATED)
           .entity(submissionService.createSubmission(requestSubmissionDto)).build();
-      
+
     } catch (ProductNotFoundException productNotFoundException) {
       return productNotFoundExceptionMapper.toResponse(productNotFoundException);
-      
     } catch (ClientNotFoundException clientNotFoundException) {
-      return clientNotFoundExceptionMapper.toResponse(clientNotFoundException)
+      return clientNotFoundExceptionMapper.toResponse(clientNotFoundException);
     }
   }
-  
+
 }

@@ -13,7 +13,8 @@ public class OrderedProduct {
     super();
   }
 
-  public OrderedProduct(int productId, float price, String note, int quantity) {
+  public OrderedProduct(int productId, float price, String note, int quantity)
+      throws NegativeParameterException {
     this.productId = productId;
     this.price = price;
     this.note = note;
@@ -48,7 +49,7 @@ public class OrderedProduct {
     return quantity;
   }
 
-  public void setQuantity(int quantity) {
+  public void setQuantity(int quantity) throws NegativeParameterException {
     this.quantity = quantity;
   }
 

@@ -2,13 +2,12 @@ package ca.ulaval.glo4002.billing.domain.Submission;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 public class Submission {
 
   private static final String NEGATIVE_TOTAL_EXCEPTION_MESSAGE = "Total price cannot be negative.";
   private static final int MINIMUM_TOTAL_PRICE = 0;
-  protected Long billNumber;
+  protected Id billNumber;
   protected DueTerm dueTerm;
   protected Long clientId;
   protected List<OrderedProduct> items;
@@ -17,11 +16,11 @@ public class Submission {
   public Submission() {
   }
 
-  public Submission(Long billNumber) {
+  public Submission(Id billNumber) {
     this.billNumber = billNumber;
   }
 
-  public Submission(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
+  public Submission(Id billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
       throws NegativeParameterException {
     super();
     this.billNumber = billNumber;
@@ -29,11 +28,6 @@ public class Submission {
     this.clientId = clientId;
     this.items = items;
     this.calculatePrice();
-  }
-
-  public Submission(DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
-      throws NegativeParameterException {
-    this(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE, dueTerm, clientId, items);
   }
 
   public Submission(List<OrderedProduct> items) {
@@ -76,11 +70,11 @@ public class Submission {
     this.totalPrice = totalPrice;
   }
 
-  public Long getBillNumber() {
+  public Id getBillNumber() {
     return billNumber;
   }
 
-  public void setBillNumber(Long billNumber) {
+  public void setBillNumber(Id billNumber) {
     this.billNumber = billNumber;
   }
 

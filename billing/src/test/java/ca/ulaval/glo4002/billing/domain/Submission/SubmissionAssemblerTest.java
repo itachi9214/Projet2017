@@ -24,6 +24,8 @@ public class SubmissionAssemblerTest {
   private static final Long CLIENT_ID = 105L;
 
   @Mock
+  private Id id;
+  @Mock
   private Submission submission;
   @Mock
   private RequestSubmissionDto requestSubmissionDto;
@@ -35,12 +37,14 @@ public class SubmissionAssemblerTest {
 
   @Before
   public void setUp() {
+    given(id.getNumber()).willReturn(SUBMISSION_NUMBER);
+
     submissionAssembler = new SubmissionAssembler();
   }
 
   @Test
   public void givenSubmissionAssemblerWhenCreateResponseSubmissionDtoThenShouldBeTheSame() {
-    given(submission.getBillNumber()).willReturn(SUBMISSION_NUMBER);
+    given(submission.getBillNumber()).willReturn(id);
     given(submission.getDueTerm()).willReturn(IMMEDIATE);
     given(submission.getTotalPrice()).willReturn(SUBMISSION_TOTAL);
 
@@ -52,7 +56,7 @@ public class SubmissionAssemblerTest {
   }
 
   @Test
-  public void givenSubmissiAssemblerWhenCreatSubmissionThenShouldBeTheSame()
+  public void givenSubmissionAssemblerWhenCreateSubmissionThenShouldBeTheSame()
       throws NegativeParameterException {
     requestSubmissionDto.setClientId(CLIENT_ID);
     requestSubmissionDto.setDueTerm(IMMEDIATE);

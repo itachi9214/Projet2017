@@ -8,14 +8,14 @@ public class Bill extends Submission {
   private LocalDate effectiveDate;
   private LocalDate expectedPaiement;
 
-  public Bill(Long billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
+  public Bill(Id billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
       throws NegativeParameterException {
     super(billNumber, dueTerm, clientId, items);
     this.effectiveDate = LocalDate.now();
     this.expectedPaiement = calculateExpectedPaiementDate();
   }
 
-  public Bill(Long billNumber) {
+  public Bill(Id billNumber) {
     super(billNumber);
   }
 

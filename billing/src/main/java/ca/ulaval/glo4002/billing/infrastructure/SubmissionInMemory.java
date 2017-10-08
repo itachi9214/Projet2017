@@ -3,13 +3,13 @@ package ca.ulaval.glo4002.billing.infrastructure;
 import java.util.HashMap;
 import java.util.Map;
 
-import ca.ulaval.glo4002.billing.api.dto.bill.RequestBillDto;
+import ca.ulaval.glo4002.billing.domain.Submission.Id;
 import ca.ulaval.glo4002.billing.domain.Submission.Submission;
 import ca.ulaval.glo4002.billing.domain.Submission.SubmissionRepository;
 
 public class SubmissionInMemory implements SubmissionRepository {
 
-  private Map<Long, Submission> submissions = new HashMap<>();
+  private Map<Id, Submission> submissions = new HashMap<>();
 
   @Override
   public void createSubmission(Submission submission) {
@@ -17,7 +17,7 @@ public class SubmissionInMemory implements SubmissionRepository {
   }
 
   @Override
-  public boolean getSubmissionById(Long submissionNumber) {
+  public boolean getSubmissionById(Id submissionNumber) {
     if (submissions.isEmpty() || !submissions.containsKey(submissionNumber)) {
       return false;
     }
@@ -25,8 +25,8 @@ public class SubmissionInMemory implements SubmissionRepository {
   }
 
   @Override
-  public Submission findSubmission(RequestBillDto requestBillDto) {
-    return submissions.get(requestBillDto.getBillNumber());
+  public Submission findSubmission(Id submissionNumber) {
+    return submissions.get(submissionNumber);
   }
 
 }

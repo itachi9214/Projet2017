@@ -10,9 +10,9 @@ import org.junit.Test;
 
 public class ProductNotFoundExceptionMapperTest {
 
+  private static final int ID_PRODUCT = 1;
   private ProductNotFoundExceptionMapper productNotFoundExceptionMapper;
   private ProductNotFoundException productNotFoundException;
-  private static final int ID_PRODUCT = 1;
 
   @Before
   public void setUp() {

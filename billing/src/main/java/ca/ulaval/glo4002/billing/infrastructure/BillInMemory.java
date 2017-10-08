@@ -5,13 +5,14 @@ import java.util.Map;
 
 import ca.ulaval.glo4002.billing.domain.Submission.Bill;
 import ca.ulaval.glo4002.billing.domain.Submission.BillRepository;
+import ca.ulaval.glo4002.billing.domain.Submission.Id;
 
 public class BillInMemory implements BillRepository {
 
-  private Map<Long, Bill> bills = new HashMap<>();
+  private Map<Id, Bill> bills = new HashMap<>();
   SubmissionInMemory submissionInMemory = new SubmissionInMemory();
 
-  public BillInMemory(Map<Long, Bill> bills) {
+  public BillInMemory(Map<Id, Bill> bills) {
     this.bills = bills;
   }
 

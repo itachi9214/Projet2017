@@ -5,12 +5,19 @@ import ca.ulaval.glo4002.billing.domain.Submission.BillingException;
 public class ClientNotFoundException extends BillingException {
 
   private static final long serialVersionUID = 1L;
+  private Long clientId;
 
-  public ClientNotFoundException() {
+  public ClientNotFoundException(Long clientId) {
+    this.clientId = clientId;
   }
 
-  public ClientNotFoundException(String message) {
+  public ClientNotFoundException(String message, Long clientId) {
     super(message);
+    this.clientId = clientId;
+  }
+
+  public Long getClientId() {
+    return clientId;
   }
 
 }

@@ -6,27 +6,31 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
-import ca.ulaval.glo4002.billing.domain.Submission.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
+import ca.ulaval.glo4002.billing.http.ClientNotFoundExceptionMapper;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
+import ca.ulaval.glo4002.billing.http.ProductNotFoundExceptionMapper;
 import ca.ulaval.glo4002.billing.service.SubmissionService;
 
 @Path("/bills")
 public class BillingResource {
 
   private SubmissionService submissionService;
+  private ClientNotFoundExceptionMapper clientNotFoundExceptionMapper;
+  private ProductNotFoundExceptionMapper productNotFoundExceptionMapper;
 
   public BillingResource() {
-    submissionService = new SubmissionService();
+    this(new SubmissionService());
   }
 
   public BillingResource(SubmissionService submissionService) {
     this.submissionService = submissionService;
+    clientNotFoundExceptionMapper = new ClientNotFoundExceptionMapper();
+    productNotFoundExceptionMapper = new ProductNotFoundExceptionMapper();
   }
 
   @POST
@@ -45,12 +49,11 @@ public class BillingResource {
 
       return Response.status(Response.Status.CREATED)
           .entity(submissionService.createSubmission(requestSubmissionDto)).build();
-    } catch (ProductNotFoundException exception) {
-      return Response.status(Status.BAD_REQUEST).entity(exception.getMessage()).build();
-    } catch (ClientNotFoundException exception) {
-      return Response.status(Status.BAD_REQUEST).entity(exception.getMessage()).build();
-    } catch (NegativeParameterException exception) {
-      return Response.status(Status.BAD_REQUEST).entity(exception.getMessage()).build();
+
+    } catch (ProductNotFoundException productNotFoundException) {
+      return productNotFoundExceptionMapper.toResponse(productNotFoundException);
+    } catch (ClientNotFoundException clientNotFoundException) {
+      return clientNotFoundExceptionMapper.toResponse(clientNotFoundException);
     }
   }
 

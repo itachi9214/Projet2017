@@ -39,7 +39,7 @@ public class CrmHttpClient extends HttpClient {
     Response response = callUrlWithGetMethod(url);
 
     if (Status.fromStatusCode(response.getStatus()).equals(Status.NOT_FOUND)) {
-      throw new ClientNotFoundException(MESSAGE_CLIENT_NOT_FOUND);
+      throw new ClientNotFoundException(MESSAGE_CLIENT_NOT_FOUND, clientNumber);
     }
 
     ClientDto clientDto = null;
@@ -61,7 +61,7 @@ public class CrmHttpClient extends HttpClient {
     Response response = callUrlWithGetMethod(url);
 
     if (Status.fromStatusCode(response.getStatus()).equals(Status.NOT_FOUND)) {
-      throw new ProductNotFoundException(MESSAGE_PRODUCT_NOT_FOUND);
+      throw new ProductNotFoundException(MESSAGE_PRODUCT_NOT_FOUND, productId);
     }
 
     ProductDto productDto = null;

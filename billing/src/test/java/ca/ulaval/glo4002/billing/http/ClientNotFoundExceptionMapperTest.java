@@ -9,14 +9,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ClientNotFoundExceptionMapperTest {
-  ClientNotFoundException clientNotFoundException;
-  ClientNotFoundExceptionMapper clientNotFoundExceptionMapper;
-  private static long idClient = 1;
+
+  private ClientNotFoundException clientNotFoundException;
+  private ClientNotFoundExceptionMapper clientNotFoundExceptionMapper;
+  private static final long ID_CLIENT = 1L;
 
   @Before
   public void setUp() {
     clientNotFoundExceptionMapper = new ClientNotFoundExceptionMapper();
-    clientNotFoundException = new ClientNotFoundException(idClient);
+    clientNotFoundException = new ClientNotFoundException(ID_CLIENT);
   }
 
   @Test

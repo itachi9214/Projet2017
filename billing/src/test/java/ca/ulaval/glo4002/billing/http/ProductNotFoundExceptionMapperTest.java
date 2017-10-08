@@ -9,14 +9,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ProductNotFoundExceptionMapperTest {
-  ProductNotFoundExceptionMapper productNotFoundExceptionMapper;
-  ProductNotFoundException productNotFoundException;
-  private static int idProduct = 1;
+
+  private ProductNotFoundExceptionMapper productNotFoundExceptionMapper;
+  private ProductNotFoundException productNotFoundException;
+  private static final int ID_PRODUCT = 1;
 
   @Before
   public void setUp() {
     productNotFoundExceptionMapper = new ProductNotFoundExceptionMapper();
-    productNotFoundException = new ProductNotFoundException(idProduct);
+    productNotFoundException = new ProductNotFoundException(ID_PRODUCT);
   }
 
   @Test

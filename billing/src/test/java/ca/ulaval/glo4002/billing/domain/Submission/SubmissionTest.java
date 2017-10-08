@@ -18,6 +18,7 @@ public class SubmissionTest {
 
   private static final float priceFirstProduct = 10;
   private static final float priceSecondProduct = 20;
+  private static final float negativePriceSecondProduct = -20;
   private Submission submission;
 
   @Mock
@@ -35,11 +36,21 @@ public class SubmissionTest {
   }
 
   @Test
-  public void whenCalculateSubmissionThenCalculateTotalPrice() {
+  public void whenCalculatePriceThenPriceIsCorrect() throws NegativeParameterException {
     when(firstProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceFirstProduct));
     when(secondProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceSecondProduct));
 
     assertEquals(submission.calculatePrice(), new BigDecimal(30));
+  }
+
+  @Test(expected = NegativeParameterException.class)
+  public void givenNegativeTotalWhenCalculatePriceThenThrowException()
+      throws NegativeParameterException {
+    when(firstProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceFirstProduct));
+    when(secondProduct.calculateTotalPrice())
+        .thenReturn(new BigDecimal(negativePriceSecondProduct));
+
+    submission.calculatePrice();
   }
 
 }

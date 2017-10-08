@@ -52,7 +52,8 @@ public class SubmissionAssemblerTest {
   }
 
   @Test
-  public void givenSubmissiAssemblerWhenCreatSubmissionThenShouldBeTheSame() {
+  public void givenSubmissiAssemblerWhenCreatSubmissionThenShouldBeTheSame()
+      throws NegativeParameterException {
     requestSubmissionDto.setClientId(CLIENT_ID);
     requestSubmissionDto.setDueTerm(IMMEDIATE);
     requestSubmissionDto.setItems(items);

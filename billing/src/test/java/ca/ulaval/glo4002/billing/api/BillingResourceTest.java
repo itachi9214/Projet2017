@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -26,6 +27,7 @@ import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
+import ca.ulaval.glo4002.billing.domain.Submission.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
@@ -34,6 +36,7 @@ import ca.ulaval.glo4002.billing.service.SubmissionService;
 @RunWith(MockitoJUnitRunner.class)
 public class BillingResourceTest extends JerseyTest {
 
+  private static final int A_NEGATIVE_QUANTITY = -3;
   private static final Long EXISTING_CLIENT = 2L;
   private static final Long NON_EXISTING_CLIENT = -6L;
   private static final int NON_EXISTING_PRODUCT = -4;
@@ -65,7 +68,8 @@ public class BillingResourceTest extends JerseyTest {
   }
 
   @Test
-  public void givenExistingClientAndProductWhenCreateBillThenResponseStatusIsCreated() {
+  public void givenExistingClientAndProductWhenCreateBillThenResponseStatusIsCreated()
+      throws NegativeParameterException {
     List<OrderedProduct> items = new ArrayList<>();
     items.add(new OrderedProduct(EXISTING_PRODUCT, A_PRICE, A_NOTE, A_QUANTITY));
     RequestSubmissionDto requestSubmissionDto = new RequestSubmissionDto(EXISTING_CLIENT,
@@ -92,13 +96,33 @@ public class BillingResourceTest extends JerseyTest {
   }
 
   @Test
-  public void givenNonExistingProductWhenCreateBillThenResponseStatusIsBadRequest() {
+  public void givenNonExistingProductWhenCreateBillThenResponseStatusIsBadRequest()
+      throws NegativeParameterException {
     List<OrderedProduct> items = new ArrayList<>();
     items.add(new OrderedProduct(NON_EXISTING_PRODUCT, A_PRICE, A_NOTE, A_QUANTITY));
     RequestSubmissionDto requestSubmissionDto = new RequestSubmissionDto(EXISTING_CLIENT,
         new Date(), DueTerm.DAYS30, items);
     Entity<RequestSubmissionDto> requestEntity = Entity.entity(requestSubmissionDto,
         MediaType.APPLICATION_JSON);
+
+    Response response = target("/bills").request(MediaType.APPLICATION_JSON).post(requestEntity,
+        Response.class);
+
+    assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+  }
+
+  @Ignore
+  @Test
+  public void givenProductWithNegativeQuantityWhenCreateBillThenResponseStatusIsBadRequest()
+      throws NegativeParameterException {
+    List<OrderedProduct> items = new ArrayList<>();
+    items.add(new OrderedProduct(EXISTING_PRODUCT, A_PRICE, A_NOTE, A_NEGATIVE_QUANTITY));
+    RequestSubmissionDto requestSubmissionDto = new RequestSubmissionDto(EXISTING_CLIENT,
+        new Date(), DueTerm.DAYS30, items);
+    Entity<RequestSubmissionDto> requestEntity = Entity.entity(requestSubmissionDto,
+        MediaType.APPLICATION_JSON);
+    willThrow(new NegativeParameterException()).given(submissionService)
+        .createSubmission(requestSubmissionDto);
 
     Response response = target("/bills").request(MediaType.APPLICATION_JSON).post(requestEntity,
         Response.class);

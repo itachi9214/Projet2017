@@ -8,7 +8,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
+import ca.ulaval.glo4002.billing.domain.Submission.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
@@ -32,17 +34,23 @@ public class BillingResource {
   @Consumes(MediaType.APPLICATION_JSON)
   public Response createSubmission(RequestSubmissionDto requestSubmissionDto) {
     try {
-      submissionService.getClientByIdInCrm(requestSubmissionDto.getClientId());
+      ClientDto clientDto = submissionService
+          .getClientByIdInCrm(requestSubmissionDto.getClientId());
       for (OrderedProduct item : requestSubmissionDto.getItems()) {
         submissionService.getProductByIdInCrm(item.getProductId());
       }
 
+      submissionService.setDueTermToDefaultIfNeeded(requestSubmissionDto,
+          clientDto.getDefaultDueTerm());
+
       return Response.status(Response.Status.CREATED)
           .entity(submissionService.createSubmission(requestSubmissionDto)).build();
     } catch (ProductNotFoundException exception) {
-      return Response.status(Status.BAD_REQUEST).build();
-    } catch (ClientNotFoundException exeption) {
-      return Response.status(Status.BAD_REQUEST).build();
+      return Response.status(Status.BAD_REQUEST).entity(exception.getMessage()).build();
+    } catch (ClientNotFoundException exception) {
+      return Response.status(Status.BAD_REQUEST).entity(exception.getMessage()).build();
+    } catch (NegativeParameterException exception) {
+      return Response.status(Status.BAD_REQUEST).entity(exception.getMessage()).build();
     }
   }
 

@@ -12,10 +12,10 @@ public class SubmissionAssembler {
     return responseSubmissionDto;
   }
 
-  public Submission createSubmission(RequestSubmissionDto requestSubmissionDto) {
+  public Submission createSubmission(RequestSubmissionDto requestSubmissionDto)
+      throws NegativeParameterException {
     Submission submission = new Submission(requestSubmissionDto.getDueTerm(),
         requestSubmissionDto.getClientId(), requestSubmissionDto.getItems());
-    submission.calculatePrice();
     return submission;
   }
 

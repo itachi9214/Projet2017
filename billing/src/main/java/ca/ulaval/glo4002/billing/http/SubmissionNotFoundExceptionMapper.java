@@ -7,7 +7,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import ca.ulaval.glo4002.billing.api.dto.submission.EmptyBodyErrorDto;
-import ca.ulaval.glo4002.billing.infrastructure.SubmissionNotFoundException;
+import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionNotFoundException;
 
 @Provider
 public class SubmissionNotFoundExceptionMapper

@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Submission {
 
-  private static final String NEGATIVE_TOTAL_EXCEPTION_MESSAGE = "Total price cannot be negative.";
   private static final int MINIMUM_TOTAL_PRICE = 0;
   protected Id billNumber;
   protected DueTerm dueTerm;
@@ -91,7 +90,7 @@ public class Submission {
 
   private void verifyTotalPriceIsNotNegative() throws NegativeParameterException {
     if (totalPrice.floatValue() < MINIMUM_TOTAL_PRICE) {
-      throw new NegativeParameterException(NEGATIVE_TOTAL_EXCEPTION_MESSAGE);
+      throw new NegativeParameterException("Submission total price");
     }
   }
 

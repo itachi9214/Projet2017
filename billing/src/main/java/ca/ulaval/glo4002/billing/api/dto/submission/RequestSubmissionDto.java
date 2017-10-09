@@ -3,6 +3,9 @@ package ca.ulaval.glo4002.billing.api.dto.submission;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
 import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
 
@@ -13,12 +16,11 @@ public class RequestSubmissionDto {
   private DueTerm dueTerm;
   private List<OrderedProduct> items;
 
-  public RequestSubmissionDto() {
-    super();
-  }
-
-  public RequestSubmissionDto(Long clientId, Date creationDate, DueTerm dueTerm,
-      List<OrderedProduct> items) {
+  @JsonCreator
+  public RequestSubmissionDto(@JsonProperty(value = "clientId", required = true) Long clientId,
+      @JsonProperty(value = "creationDate", required = true) Date creationDate,
+      @JsonProperty(value = "dueTerm", required = false) DueTerm dueTerm,
+      @JsonProperty(value = "items", required = true) List<OrderedProduct> items) {
     super();
     this.clientId = clientId;
     this.creationDate = creationDate;

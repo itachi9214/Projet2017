@@ -7,6 +7,9 @@ import java.math.BigDecimal;
 import org.junit.Before;
 import org.junit.Test;
 
+import ca.ulaval.glo4002.billing.domain.Submission.NegativeParameterException;
+import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
+
 public class OrderedProductTest {
 
   private static final int negativeQuantity = -3;

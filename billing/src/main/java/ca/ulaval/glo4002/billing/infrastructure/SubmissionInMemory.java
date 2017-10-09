@@ -11,6 +11,13 @@ public class SubmissionInMemory implements SubmissionRepository {
 
   private Map<Id, Submission> submissions = new HashMap<>();
 
+  public SubmissionInMemory() {
+  }
+
+  public SubmissionInMemory(Map<Id, Submission> submissions) {
+    this.submissions = submissions;
+  }
+
   @Override
   public void createSubmission(Submission submission) {
     submissions.put(submission.getBillNumber(), submission);
@@ -18,7 +25,7 @@ public class SubmissionInMemory implements SubmissionRepository {
 
   @Override
   public Submission findSubmissionById(Id submissionNumber) {
-    if (!submissions.containsKey(submissionNumber) || submissions.isEmpty()) {
+    if (!submissions.containsKey(submissionNumber)) {
       throw new SubmissionNotFoundException();
     }
     return submissions.get(submissionNumber);

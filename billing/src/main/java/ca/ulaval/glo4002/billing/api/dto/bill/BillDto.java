@@ -27,11 +27,11 @@ public class BillDto {
     this.id = id;
   }
 
-  public String getEffectiveString() {
+  public String getEffectiveDate() {
     return effectiveDate;
   }
 
-  public void setEffectiveString(String effectiveDate) {
+  public void setEffectiveDate(String effectiveDate) {
     this.effectiveDate = effectiveDate;
   }
 

@@ -19,13 +19,13 @@ public class BillService {
       SubmissionRepository submissionRepository) {
     this.billRepository = billRepository;
     this.billAssembler = billAssembler;
-    this.idFactory = new IdFactory();
     this.submissionRepository = submissionRepository;
+    this.idFactory = new IdFactory();
   }
 
   public BillDto createBill(long billNumber) {
     Submission submission = submissionRepository
-        .findSubmission(idFactory.createIdFromNumber(billNumber));
+        .findSubmissionById(idFactory.createIdFromNumber(billNumber));
     Bill bill = new Bill(submission.getBillNumber(), submission.getDueTerm(),
         submission.getClientId(), submission.getItems());
     billRepository.createBill(bill);

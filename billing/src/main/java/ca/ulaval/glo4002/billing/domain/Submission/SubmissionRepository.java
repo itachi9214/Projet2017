@@ -4,6 +4,6 @@ public interface SubmissionRepository {
 
   public void createSubmission(Submission submission);
 
-  public Submission findSubmission(Id submissionNumber);
+  public Submission findSubmissionById(Id submissionNumber);
 
 }

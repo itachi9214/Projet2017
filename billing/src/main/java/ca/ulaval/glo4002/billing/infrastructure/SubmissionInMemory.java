@@ -17,10 +17,10 @@ public class SubmissionInMemory implements SubmissionRepository {
   }
 
   @Override
-  public Submission findSubmission(Id submissionNumber) {
-	  if (!submissions.containsKey(submissionNumber) || submissions.isEmpty()) {
-		  throw new SubmissionNotFoundException();
-	  }
+  public Submission findSubmissionById(Id submissionNumber) {
+    if (!submissions.containsKey(submissionNumber) || submissions.isEmpty()) {
+      throw new SubmissionNotFoundException();
+    }
     return submissions.get(submissionNumber);
   }
 

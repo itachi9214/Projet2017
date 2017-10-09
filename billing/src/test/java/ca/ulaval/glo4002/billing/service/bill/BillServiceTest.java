@@ -16,13 +16,16 @@ import ca.ulaval.glo4002.billing.domain.id.Id;
 import ca.ulaval.glo4002.billing.domain.id.IdFactory;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
-import ca.ulaval.glo4002.billing.service.bill.BillService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BillServiceTest {
 
   private static final long BILL_NUMBER = 10l;
   private static final DueTerm IMMEDIATE = DueTerm.IMMEDIATE;
+
+  private BillService billService;
+  private Id id;
+
   @Mock
   Submission submission;
   @Mock
@@ -35,9 +38,6 @@ public class BillServiceTest {
   BillAssembler billAssembler;
   @Mock
   SubmissionRepository submissionRepository;
-
-  private BillService billService;
-  private Id id;
 
   @Before
   public void setUp() {
@@ -59,4 +59,5 @@ public class BillServiceTest {
     verify(billRepository).createBill(bill);
     verify(billAssembler).assembleBill(bill);
   }
+
 }

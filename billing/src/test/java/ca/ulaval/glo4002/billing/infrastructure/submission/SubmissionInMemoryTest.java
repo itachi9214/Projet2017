@@ -15,13 +15,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4002.billing.domain.id.Id;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
-import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionInMemory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionInMemoryTest {
 
   private static final Id EXISTING_SUBMISSION_NUMBER = new Id(100L);
   private static final Id NOT_EXISTING_SUBMISSION_NUMBER = new Id(200L);
+
   private SubmissionRepository submissionInMemory;
   private Map<Id, Submission> submissions;
 

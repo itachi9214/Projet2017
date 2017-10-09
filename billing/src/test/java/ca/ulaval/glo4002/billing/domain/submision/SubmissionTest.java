@@ -13,19 +13,17 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.domain.submision.Submission;
-
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionTest {
 
-  private static final float priceFirstProduct = 10;
-  private static final float priceSecondProduct = 20;
-  private static final float negativePriceSecondProduct = -20;
+  private static final float PRICE_FIRTS_PRODUCT = 10;
+  private static final float PRICE_SECOND_PRODUCT = 20;
+  private static final float NEGATIVE_PRICE_SECOND_PRODUCT = -20;
+
   private Submission submission;
 
   @Mock
   private OrderedProduct firstProduct;
-
   @Mock
   private OrderedProduct secondProduct;
 
@@ -39,8 +37,8 @@ public class SubmissionTest {
 
   @Test
   public void whenCalculatePriceThenPriceIsCorrect() throws NegativeParameterException {
-    when(firstProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceFirstProduct));
-    when(secondProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceSecondProduct));
+    when(firstProduct.calculateTotalPrice()).thenReturn(new BigDecimal(PRICE_FIRTS_PRODUCT));
+    when(secondProduct.calculateTotalPrice()).thenReturn(new BigDecimal(PRICE_SECOND_PRODUCT));
 
     assertEquals(submission.calculatePrice(), new BigDecimal(30));
   }
@@ -48,9 +46,9 @@ public class SubmissionTest {
   @Test(expected = NegativeParameterException.class)
   public void givenNegativeTotalWhenCalculatePriceThenThrowException()
       throws NegativeParameterException {
-    when(firstProduct.calculateTotalPrice()).thenReturn(new BigDecimal(priceFirstProduct));
+    when(firstProduct.calculateTotalPrice()).thenReturn(new BigDecimal(PRICE_FIRTS_PRODUCT));
     when(secondProduct.calculateTotalPrice())
-        .thenReturn(new BigDecimal(negativePriceSecondProduct));
+        .thenReturn(new BigDecimal(NEGATIVE_PRICE_SECOND_PRODUCT));
 
     submission.calculatePrice();
   }

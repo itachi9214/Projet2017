@@ -21,7 +21,6 @@ import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 import ca.ulaval.glo4002.billing.http.HttpClient;
-import ca.ulaval.glo4002.billing.service.submission.SubmissionService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionServiceTest {
@@ -31,6 +30,9 @@ public class SubmissionServiceTest {
   private static final int NEGATIVE_ITEM_QUANTITY = -6;
   private static final Long CLIENT_ID = 10L;
   private static final Integer PRODUCT_ID = 20;
+
+  private RequestSubmissionDto requestSubmissionDto;
+  private SubmissionService submissionService;
 
   @Mock
   Submission submission;
@@ -42,9 +44,6 @@ public class SubmissionServiceTest {
   HttpClient httpClient;
   @Mock
   OrderedProduct item;
-
-  private RequestSubmissionDto requestSubmissionDto;
-  private SubmissionService submissionService;
 
   @Before
   public void setUp() {

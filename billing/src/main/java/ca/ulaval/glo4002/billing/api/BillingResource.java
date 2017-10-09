@@ -18,6 +18,7 @@ import ca.ulaval.glo4002.billing.http.ClientNotFoundExceptionMapper;
 import ca.ulaval.glo4002.billing.http.NegativeParameterExceptionMapper;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundExceptionMapper;
+import ca.ulaval.glo4002.billing.http.SubmissionNotFoundExceptionMapper;
 import ca.ulaval.glo4002.billing.infrastructure.BillAlreadyExistsException;
 import ca.ulaval.glo4002.billing.infrastructure.SubmissionNotFoundException;
 import ca.ulaval.glo4002.billing.service.BillService;
@@ -32,6 +33,7 @@ public class BillingResource {
   private ProductNotFoundExceptionMapper productNotFoundExceptionMapper;
   private NegativeParameterExceptionMapper negativeParameterExceptionMapper;
   private BillAlreadyExistsExceptionMapper billAlreadyExistsExceptionMapper;
+  private SubmissionNotFoundExceptionMapper submissionNotFoundExceptionMapper;
 
   public BillingResource(SubmissionService submissionService, BillService billService) {
     this.submissionService = submissionService;
@@ -40,6 +42,7 @@ public class BillingResource {
     productNotFoundExceptionMapper = new ProductNotFoundExceptionMapper();
     negativeParameterExceptionMapper = new NegativeParameterExceptionMapper();
     billAlreadyExistsExceptionMapper = new BillAlreadyExistsExceptionMapper();
+    submissionNotFoundExceptionMapper = new SubmissionNotFoundExceptionMapper();
   }
 
   @POST
@@ -75,7 +78,7 @@ public class BillingResource {
     try {
       return Response.status(Response.Status.CREATED).entity(billService.createBill(id)).build();
     } catch (SubmissionNotFoundException submissionNotFoundException) {
-      return Response.status(Response.Status.NOT_FOUND).build();
+      return submissionNotFoundExceptionMapper.toResponse(submissionNotFoundException);
     } catch (BillAlreadyExistsException billAlreadyExistsException) {
       return billAlreadyExistsExceptionMapper.toResponse(billAlreadyExistsException);
     }

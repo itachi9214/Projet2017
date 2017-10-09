@@ -27,20 +27,18 @@ public class Id {
     return number.toString();
   }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Id) {
-			return ((Id) obj).getNumber().equals(this.number);
-		}else {
-			return false;
-		}
-	}
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Id) {
+      return ((Id) obj).getNumber().equals(this.number);
+    } else {
+      return false;
+    }
+  }
 
-	@Override
-	public int hashCode() {
-		return Long.hashCode(this.number);
-	}
-	
-	
-  
+  @Override
+  public int hashCode() {
+    return Long.hashCode(this.number);
+  }
+
 }

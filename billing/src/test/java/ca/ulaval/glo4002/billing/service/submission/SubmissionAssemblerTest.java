@@ -19,7 +19,6 @@ import ca.ulaval.glo4002.billing.domain.id.Id;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
-import ca.ulaval.glo4002.billing.service.submission.SubmissionAssembler;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionAssemblerTest {
@@ -29,6 +28,9 @@ public class SubmissionAssemblerTest {
   private static final BigDecimal SUBMISSION_TOTAL = new BigDecimal(0);
   private static final Long CLIENT_ID = 105L;
 
+  private List<OrderedProduct> items;
+  private SubmissionAssembler submissionAssembler;
+
   @Mock
   private Id id;
   @Mock
@@ -37,9 +39,6 @@ public class SubmissionAssemblerTest {
   private RequestSubmissionDto requestSubmissionDto;
   @Mock
   private OrderedProduct orderedProduct;
-
-  private List<OrderedProduct> items;
-  private SubmissionAssembler submissionAssembler;
 
   @Before
   public void setUp() {

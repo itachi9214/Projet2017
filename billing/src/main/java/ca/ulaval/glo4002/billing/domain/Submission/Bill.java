@@ -28,8 +28,16 @@ public class Bill extends Submission {
   public LocalDate getEffectiveDate() {
     return effectiveDate;
   }
+  
+  public LocalDate getExpectedPaiement() {
+	return expectedPaiement;
+}
 
-  public LocalDate calculateExpectedPaiementDate() {
+public void setExpectedPaiement(LocalDate expectedPaiement) {
+	this.expectedPaiement = expectedPaiement;
+}
+
+public LocalDate calculateExpectedPaiementDate() {
     expectedPaiement = effectiveDate;
     if (dueTerm.equals(DueTerm.IMMEDIATE)) {
       expectedPaiement = effectiveDate;

@@ -31,6 +31,7 @@ import ca.ulaval.glo4002.billing.domain.Submission.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
+import ca.ulaval.glo4002.billing.service.BillService;
 import ca.ulaval.glo4002.billing.service.SubmissionService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -50,6 +51,9 @@ public class BillingResourceTest extends JerseyTest {
 
   @Mock
   private SubmissionService submissionService;
+  
+  @Mock
+  private BillService billService;
 
   @Override
   public Application configure() {
@@ -64,7 +68,7 @@ public class BillingResourceTest extends JerseyTest {
         .getProductByIdInCrm(NON_EXISTING_PRODUCT);
     willReturn(productDto).given(submissionService).getProductByIdInCrm(EXISTING_PRODUCT);
 
-    return new ResourceConfig().register(new BillingResource(submissionService));
+    return new ResourceConfig().register(new BillingResource(submissionService,billService));
   }
 
   @Test

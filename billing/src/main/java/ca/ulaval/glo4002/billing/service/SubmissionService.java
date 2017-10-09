@@ -31,6 +31,7 @@ public class SubmissionService {
       SubmissionRepository submissionRepository) {
     this.submissionAssembler = submissionAssembler;
     this.submissionRepository = submissionRepository;
+    httpClient = new CrmHttpClient();
   }
 
   public ResponseSubmissionDto createSubmission(RequestSubmissionDto requestSubmissionDto)

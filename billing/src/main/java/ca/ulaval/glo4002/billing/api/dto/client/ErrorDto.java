@@ -1,12 +1,12 @@
 package ca.ulaval.glo4002.billing.api.dto.client;
 
-public class ClientErrorDto {
+public class ErrorDto {
 
   private String error;
   private String description;
   private String entity;
 
-  public ClientErrorDto(String error, String description, String entity) {
+  public ErrorDto(String error, String description, String entity) {
     super();
     this.error = error;
     this.description = description;

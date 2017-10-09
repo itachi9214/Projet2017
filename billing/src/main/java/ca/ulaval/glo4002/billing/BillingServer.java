@@ -6,6 +6,16 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
+import ca.ulaval.glo4002.billing.api.BillingResource;
+import ca.ulaval.glo4002.billing.domain.Submission.BillAssembler;
+import ca.ulaval.glo4002.billing.domain.Submission.BillRepository;
+import ca.ulaval.glo4002.billing.domain.Submission.SubmissionAssembler;
+import ca.ulaval.glo4002.billing.domain.Submission.SubmissionRepository;
+import ca.ulaval.glo4002.billing.infrastructure.BillInMemory;
+import ca.ulaval.glo4002.billing.infrastructure.SubmissionInMemory;
+import ca.ulaval.glo4002.billing.service.BillService;
+import ca.ulaval.glo4002.billing.service.SubmissionService;
+
 public class BillingServer implements Runnable {
 
   private static final int PORT = 8181;
@@ -16,9 +26,16 @@ public class BillingServer implements Runnable {
 
   @Override
   public void run() {
+	SubmissionAssembler submissionAssembler = new SubmissionAssembler();
+	SubmissionRepository submissionRepository = new SubmissionInMemory();
+	BillRepository billRepository = new BillInMemory();
+	BillAssembler billAssembler = new BillAssembler();
+	SubmissionService submissionService = new SubmissionService(submissionAssembler,submissionRepository);
+	BillService billService = new BillService(billRepository, billAssembler, submissionRepository);
+	BillingResource billingResource = new BillingResource(submissionService,billService);
     Server server = new Server(PORT);
     ServletContextHandler contextHandler = new ServletContextHandler(server, "/");
-    ResourceConfig packageConfig = new ResourceConfig().packages("ca.ulaval.glo4002.billing");
+    ResourceConfig packageConfig = new ResourceConfig().packages("ca.ulaval.glo4002.billing").register(billingResource);
     ServletContainer container = new ServletContainer(packageConfig);
     ServletHolder servletHolder = new ServletHolder(container);
 

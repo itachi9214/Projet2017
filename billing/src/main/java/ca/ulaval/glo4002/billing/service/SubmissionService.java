@@ -57,7 +57,7 @@ public class SubmissionService {
       throws NegativeParameterException {
     for (OrderedProduct product : requestSubmissionDto.getItems()) {
       if (product.getQuantity() < MINIMUM_PRODUCT_QUANTITY) {
-        throw new NegativeParameterException();
+        throw new NegativeParameterException("Product quantity");
       }
     }
   }

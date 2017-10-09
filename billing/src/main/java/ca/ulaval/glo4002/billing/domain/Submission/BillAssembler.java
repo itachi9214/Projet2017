@@ -11,9 +11,9 @@ public class BillAssembler {
 
   public BillDto assembleBill(Bill bill) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:MM:ss.SSS'Z'");
-    BillDto billDto = new BillDto(bill.billNumber.getNumber(),
+    BillDto billDto = new BillDto(bill.getBillNumber().getNumber(),
         bill.getEffectiveDate().format(formatter), bill.getExpectedPaiement().format(formatter),
-        bill.getDueTerm(), "/bills/" + bill.billNumber.getNumber());
+        bill.getDueTerm(), "/bills/" + bill.getBillNumber().getNumber());
     return billDto;
   }
 

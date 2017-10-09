@@ -3,7 +3,8 @@ package ca.ulaval.glo4002.billing.domain.Submission;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,8 @@ public class BillAssemblerTest {
   private static final DueTerm IMMEDIATE = DueTerm.IMMEDIATE;
   private static final String URL_FROM_SUBMISSION_NUMBER = "/bills/" + SUBMISSION_NUMBER;
   private BillAssembler billAssembler;
-  private LocalDate date;
+  private LocalDateTime date;
+  private DateTimeFormatter formatter;
 
   @Mock
   private Id id;
@@ -29,8 +31,9 @@ public class BillAssemblerTest {
 
   @Before
   public void setUp() {
+    formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:MM:ss.SSS'Z'");
     given(id.getNumber()).willReturn(SUBMISSION_NUMBER);
-    date = LocalDate.now();
+    date = LocalDateTime.now();
     billAssembler = new BillAssembler();
   }
 
@@ -39,14 +42,14 @@ public class BillAssemblerTest {
     given(bill.getBillNumber()).willReturn(id);
     given(bill.getDueTerm()).willReturn(IMMEDIATE);
     given(bill.getEffectiveDate()).willReturn(date);
-    given(bill.calculateExpectedPaiementDate()).willReturn(date);
+    given(bill.getExpectedPaiement()).willReturn(date);
 
-    BillDto dto = billAssembler.assembleBill(bill, id);
+    BillDto dto = billAssembler.assembleBill(bill);
 
     assertTrue(dto.getId().equals(SUBMISSION_NUMBER));
     assertTrue(dto.getDueTerm().equals(IMMEDIATE));
-    assertTrue(dto.getEffectiveDate().equals(date));
-    assertTrue(dto.getExpectedPayment().equals(date));
+    assertTrue(dto.getEffectiveDate().equals(date.format(formatter).toString()));
+    assertTrue(dto.getExpectedPayment().equals(date.format(formatter).toString()));
     assertTrue(dto.getUrl().equals(URL_FROM_SUBMISSION_NUMBER));
   }
 

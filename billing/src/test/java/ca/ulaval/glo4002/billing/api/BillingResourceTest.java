@@ -51,7 +51,7 @@ public class BillingResourceTest extends JerseyTest {
 
   @Mock
   private SubmissionService submissionService;
-  
+
   @Mock
   private BillService billService;
 
@@ -68,11 +68,11 @@ public class BillingResourceTest extends JerseyTest {
         .getProductByIdInCrm(NON_EXISTING_PRODUCT);
     willReturn(productDto).given(submissionService).getProductByIdInCrm(EXISTING_PRODUCT);
 
-    return new ResourceConfig().register(new BillingResource(submissionService,billService));
+    return new ResourceConfig().register(new BillingResource(submissionService, billService));
   }
 
   @Test
-  public void givenExistingClientAndProductWhenCreateBillThenResponseStatusIsCreated()
+  public void givenExistingClientAndProductWhenCreateSubmissionThenResponseStatusIsCreated()
       throws NegativeParameterException {
     List<OrderedProduct> items = new ArrayList<>();
     items.add(new OrderedProduct(EXISTING_PRODUCT, A_PRICE, A_NOTE, A_QUANTITY));
@@ -87,7 +87,7 @@ public class BillingResourceTest extends JerseyTest {
   }
 
   @Test
-  public void givenNonExistingClientWhenCreateBillThenResponseStatusIsBadRequest() {
+  public void givenNonExistingClientWhenCreateSubmissionThenResponseStatusIsBadRequest() {
     RequestSubmissionDto requestSubmissionDto = new RequestSubmissionDto(NON_EXISTING_CLIENT,
         new Date(), DueTerm.DAYS30, new ArrayList<>());
     Entity<RequestSubmissionDto> requestEntity = Entity.entity(requestSubmissionDto,
@@ -100,7 +100,7 @@ public class BillingResourceTest extends JerseyTest {
   }
 
   @Test
-  public void givenNonExistingProductWhenCreateBillThenResponseStatusIsBadRequest()
+  public void givenNonExistingProductWhenCreateSubmissionThenResponseStatusIsBadRequest()
       throws NegativeParameterException {
     List<OrderedProduct> items = new ArrayList<>();
     items.add(new OrderedProduct(NON_EXISTING_PRODUCT, A_PRICE, A_NOTE, A_QUANTITY));
@@ -117,7 +117,7 @@ public class BillingResourceTest extends JerseyTest {
 
   @Ignore
   @Test
-  public void givenProductWithNegativeQuantityWhenCreateBillThenResponseStatusIsBadRequest()
+  public void givenProductWithNegativeQuantityWhenCreateSubmissionThenResponseStatusIsBadRequest()
       throws NegativeParameterException {
     List<OrderedProduct> items = new ArrayList<>();
     items.add(new OrderedProduct(EXISTING_PRODUCT, A_PRICE, A_NOTE, A_NEGATIVE_QUANTITY));
@@ -125,7 +125,7 @@ public class BillingResourceTest extends JerseyTest {
         new Date(), DueTerm.DAYS30, items);
     Entity<RequestSubmissionDto> requestEntity = Entity.entity(requestSubmissionDto,
         MediaType.APPLICATION_JSON);
-    willThrow(new NegativeParameterException()).given(submissionService)
+    willThrow(new NegativeParameterException("Product quantity")).given(submissionService)
         .createSubmission(requestSubmissionDto);
 
     Response response = target("/bills").request(MediaType.APPLICATION_JSON).post(requestEntity,

@@ -10,10 +10,12 @@ import javax.ws.rs.core.Response;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
+import ca.ulaval.glo4002.billing.domain.Submission.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
 import ca.ulaval.glo4002.billing.http.BillAlreadyExistsExceptionMapper;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundExceptionMapper;
+import ca.ulaval.glo4002.billing.http.NegativeParameterExceptionMapper;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundExceptionMapper;
 import ca.ulaval.glo4002.billing.infrastructure.BillAlreadyExistsException;
@@ -28,6 +30,7 @@ public class BillingResource {
   private BillService billService;
   private ClientNotFoundExceptionMapper clientNotFoundExceptionMapper;
   private ProductNotFoundExceptionMapper productNotFoundExceptionMapper;
+  private NegativeParameterExceptionMapper negativeParameterExceptionMapper;
   private BillAlreadyExistsExceptionMapper billAlreadyExistsExceptionMapper;
 
   public BillingResource(SubmissionService submissionService, BillService billService) {
@@ -35,6 +38,7 @@ public class BillingResource {
     this.billService = billService;
     clientNotFoundExceptionMapper = new ClientNotFoundExceptionMapper();
     productNotFoundExceptionMapper = new ProductNotFoundExceptionMapper();
+    negativeParameterExceptionMapper = new NegativeParameterExceptionMapper();
     billAlreadyExistsExceptionMapper = new BillAlreadyExistsExceptionMapper();
   }
 
@@ -58,6 +62,8 @@ public class BillingResource {
       return productNotFoundExceptionMapper.toResponse(productNotFoundException);
     } catch (ClientNotFoundException clientNotFoundException) {
       return clientNotFoundExceptionMapper.toResponse(clientNotFoundException);
+    } catch (NegativeParameterException negativeParameterException) {
+      return negativeParameterExceptionMapper.toResponse(negativeParameterException);
     }
   }
 

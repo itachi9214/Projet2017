@@ -9,7 +9,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
-import ca.ulaval.glo4002.billing.api.dto.client.ErrorDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
 import ca.ulaval.glo4002.billing.http.BillAlreadyExistsExceptionMapper;
@@ -62,20 +61,19 @@ public class BillingResource {
       return clientNotFoundExceptionMapper.toResponse(clientNotFoundException);
     }
   }
-  
+
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/{id}")
   public Response createBill(@PathParam("id") long id) {
-	  try {
-		return Response.status(Response.Status.CREATED).
-				entity(billService.createBill(id)).build();  
-	  }catch(SubmissionNotFoundException submissionNotFoundException) {
-		  return Response.status(Response.Status.NOT_FOUND).build();
-	  } catch(BillAlreadyExistsException billAlreadyExistsException) {
-		  return billAlreadyExistsExceptionMapper.toResponse(billAlreadyExistsException);
-	  }
+    try {
+      return Response.status(Response.Status.CREATED).entity(billService.createBill(id)).build();
+    } catch (SubmissionNotFoundException submissionNotFoundException) {
+      return Response.status(Response.Status.NOT_FOUND).build();
+    } catch (BillAlreadyExistsException billAlreadyExistsException) {
+      return billAlreadyExistsExceptionMapper.toResponse(billAlreadyExistsException);
+    }
   }
 
 }

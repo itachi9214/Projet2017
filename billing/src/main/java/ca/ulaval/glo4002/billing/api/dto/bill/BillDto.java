@@ -5,7 +5,7 @@ import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
 public class BillDto {
 
   private Long id;
-  private String effectiveString;
+  private String effectiveDate;
   private String expectedPayment;
   private DueTerm dueTerm;
   private String url;
@@ -13,7 +13,7 @@ public class BillDto {
   public BillDto(Long id, String effectiveString, String expectedPayment, DueTerm dueTerm,
       String url) {
     this.id = id;
-    this.effectiveString = effectiveString;
+    this.effectiveDate = effectiveString;
     this.expectedPayment = expectedPayment;
     this.dueTerm = dueTerm;
     this.url = url;
@@ -28,11 +28,11 @@ public class BillDto {
   }
 
   public String getEffectiveString() {
-    return effectiveString;
+    return effectiveDate;
   }
 
-  public void setEffectiveString(String effectiveString) {
-    this.effectiveString = effectiveString;
+  public void setEffectiveString(String effectiveDate) {
+    this.effectiveDate = effectiveDate;
   }
 
   public String getExpectedPayment() {

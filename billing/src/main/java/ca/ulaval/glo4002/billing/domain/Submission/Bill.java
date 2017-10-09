@@ -1,17 +1,17 @@
 package ca.ulaval.glo4002.billing.domain.Submission;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Bill extends Submission {
 
-  private LocalDate effectiveDate;
-  private LocalDate expectedPaiement;
+  private LocalDateTime effectiveDate;
+  private LocalDateTime expectedPaiement;
 
   public Bill(Id billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
       throws NegativeParameterException {
     super(billNumber, dueTerm, clientId, items);
-    this.effectiveDate = LocalDate.now();
+    this.effectiveDate = LocalDateTime.now();
     this.expectedPaiement = calculateExpectedPaiementDate();
   }
 
@@ -21,23 +21,23 @@ public class Bill extends Submission {
 
   public Bill(DueTerm dueTerm) {
     super(dueTerm);
-    this.effectiveDate = LocalDate.now();
+    this.effectiveDate = LocalDateTime.now();
     this.expectedPaiement = calculateExpectedPaiementDate();
   }
 
-  public LocalDate getEffectiveDate() {
+  public LocalDateTime getEffectiveDate() {
     return effectiveDate;
   }
-  
-  public LocalDate getExpectedPaiement() {
-	return expectedPaiement;
-}
 
-public void setExpectedPaiement(LocalDate expectedPaiement) {
-	this.expectedPaiement = expectedPaiement;
-}
+  public LocalDateTime getExpectedPaiement() {
+    return expectedPaiement;
+  }
 
-public LocalDate calculateExpectedPaiementDate() {
+  public void setExpectedPaiement(LocalDateTime expectedPaiement) {
+    this.expectedPaiement = expectedPaiement;
+  }
+
+  public LocalDateTime calculateExpectedPaiementDate() {
     expectedPaiement = effectiveDate;
     if (dueTerm.equals(DueTerm.IMMEDIATE)) {
       expectedPaiement = effectiveDate;

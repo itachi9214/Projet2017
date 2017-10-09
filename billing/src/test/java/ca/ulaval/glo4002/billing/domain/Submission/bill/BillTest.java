@@ -1,8 +1,8 @@
 package ca.ulaval.glo4002.billing.domain.Submission.bill;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,32 +12,32 @@ import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
 
 public class BillTest {
 
-  LocalDate effectiveDate;
+  LocalDateTime effectiveDate;
 
   @Before
   public void setUp() {
-    effectiveDate = LocalDate.now();
+    effectiveDate = LocalDateTime.now();
   }
 
   @Test
   public void givenDueTermWhenImmediateThenCalculateExpectedPaiementDate() {
     Bill bill = new Bill(DueTerm.IMMEDIATE);
 
-    assertEquals(bill.calculateExpectedPaiementDate(), LocalDate.now());
+    assertEquals(bill.calculateExpectedPaiementDate(), LocalDateTime.now());
   }
 
   @Test
   public void givenDueTermWhenOneMonthThenCalculateExpectedPaiementDate() {
     Bill bill = new Bill(DueTerm.DAYS30);
 
-    assertEquals(bill.calculateExpectedPaiementDate(), LocalDate.now().plusMonths(1));
+    assertEquals(bill.calculateExpectedPaiementDate(), LocalDateTime.now().plusMonths(1));
   }
 
   @Test
   public void givenDueTermWhenThreeMonthThenCalculateExpectedPaiementDate() {
     Bill bill = new Bill(DueTerm.DAYS90);
 
-    assertEquals(bill.calculateExpectedPaiementDate(), LocalDate.now().plusMonths(3));
+    assertEquals(bill.calculateExpectedPaiementDate(), LocalDateTime.now().plusMonths(3));
   }
 
 }

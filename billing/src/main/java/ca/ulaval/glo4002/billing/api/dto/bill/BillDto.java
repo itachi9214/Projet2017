@@ -10,10 +10,10 @@ public class BillDto {
   private DueTerm dueTerm;
   private String url;
 
-  public BillDto(Long id, String effectiveString, String expectedPayment, DueTerm dueTerm,
+  public BillDto(Long id, String effectiveDate, String expectedPayment, DueTerm dueTerm,
       String url) {
     this.id = id;
-    this.effectiveDate = effectiveString;
+    this.effectiveDate = effectiveDate;
     this.expectedPayment = expectedPayment;
     this.dueTerm = dueTerm;
     this.url = url;

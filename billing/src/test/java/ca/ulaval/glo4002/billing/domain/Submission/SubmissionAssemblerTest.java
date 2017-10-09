@@ -14,6 +14,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
+import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
+import ca.ulaval.glo4002.billing.domain.Submission.Id;
+import ca.ulaval.glo4002.billing.domain.Submission.NegativeParameterException;
+import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
+import ca.ulaval.glo4002.billing.domain.Submission.Submission;
+import ca.ulaval.glo4002.billing.domain.Submission.SubmissionAssembler;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionAssemblerTest {

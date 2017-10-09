@@ -14,6 +14,17 @@ public class ClientDto {
   private DueTerm defaultDueTerm;
   private String fullName;
 
+  public ClientDto() {
+  }
+
+  public ClientDto(Long clientNumber, Instant creationDate, DueTerm defaultDueTerm,
+      String fullName) {
+    this.clientNumber = clientNumber;
+    this.creationDate = creationDate;
+    this.defaultDueTerm = defaultDueTerm;
+    this.fullName = fullName;
+  }
+
   public Long getId() {
     return clientNumber;
   }

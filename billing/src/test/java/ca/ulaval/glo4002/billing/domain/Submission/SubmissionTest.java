@@ -13,6 +13,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4002.billing.domain.Submission.NegativeParameterException;
+import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
+import ca.ulaval.glo4002.billing.domain.Submission.Submission;
+
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionTest {
 

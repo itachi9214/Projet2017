@@ -7,7 +7,7 @@ public class Id {
   private Long number;
 
   public Id() {
-    generateUniqueNumber();
+    generateAndSetUniqueNumber();
   }
 
   public Id(Long number) {
@@ -18,7 +18,7 @@ public class Id {
     return number;
   }
 
-  private void generateUniqueNumber() {
+  private void generateAndSetUniqueNumber() {
     this.number = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
   }
 

@@ -11,7 +11,7 @@
   <artifactId>application</artifactId>
 
   <dependencies>
-  
+
     <dependency>
       <groupId>ca.ulaval.glo4002</groupId>
       <artifactId>crm</artifactId>

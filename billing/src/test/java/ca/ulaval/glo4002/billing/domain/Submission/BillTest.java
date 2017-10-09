@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.domain.Submission.bill;
+package ca.ulaval.glo4002.billing.domain.Submission;
 
 import static org.junit.Assert.assertEquals;
 

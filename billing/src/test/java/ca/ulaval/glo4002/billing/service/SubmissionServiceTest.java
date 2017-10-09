@@ -5,6 +5,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -47,10 +48,10 @@ public class SubmissionServiceTest {
 
   @Before
   public void setUp() {
-    requestSubmissionDto = new RequestSubmissionDto();
     List<OrderedProduct> items = new ArrayList<>();
     items.add(item);
-    requestSubmissionDto.setItems(items);
+    requestSubmissionDto = new RequestSubmissionDto(CLIENT_ID, new Date(), DueTerm.DAYS30, items);
+
     submissionService = new SubmissionService(submissionAssembler, submissionRepository);
   }
 

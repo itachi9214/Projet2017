@@ -54,7 +54,6 @@ public class BillingResource {
 
       return Response.status(Response.Status.CREATED)
           .entity(submissionService.createSubmission(requestSubmissionDto)).build();
-
     } catch (ProductNotFoundException productNotFoundException) {
       return productNotFoundExceptionMapper.toResponse(productNotFoundException);
     } catch (ClientNotFoundException clientNotFoundException) {

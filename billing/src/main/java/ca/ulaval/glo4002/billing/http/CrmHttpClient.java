@@ -8,7 +8,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -21,8 +20,6 @@ public class CrmHttpClient extends HttpClient {
   private static final String LOCALHOST = "http://localhost:8080";
   private static final String CLIENTS = "/clients/";
   private static final String PRODUCTS = "/products/";
-  private static final String MESSAGE_CLIENT_NOT_FOUND = "client not found";
-  private static final String MESSAGE_PRODUCT_NOT_FOUND = "product not found";
   private ObjectMapper mapper;
 
   public CrmHttpClient() {
@@ -34,22 +31,22 @@ public class CrmHttpClient extends HttpClient {
   @Override
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public ClientDto getClientDto(Long clientNumber) {
+  public ClientDto getClientDto(Long clientNumber) throws ClientNotFoundException {
     String url = LOCALHOST + CLIENTS + clientNumber;
     Response response = callUrlWithGetMethod(url);
 
     if (Status.fromStatusCode(response.getStatus()).equals(Status.NOT_FOUND)) {
-      throw new ClientNotFoundException(MESSAGE_CLIENT_NOT_FOUND, clientNumber);
+      throw new ClientNotFoundException(clientNumber);
     }
 
     ClientDto clientDto = null;
     try {
-      clientDto = mapper.readValue(response.readEntity(JsonParser.class), ClientDto.class);
+      clientDto = mapper.readValue(response.readEntity(String.class), ClientDto.class);
     } catch (IOException exception) {
       exception.printStackTrace();
+    } finally {
+      response.close();
     }
-
-    response.close();
     return clientDto;
   }
 
@@ -61,17 +58,17 @@ public class CrmHttpClient extends HttpClient {
     Response response = callUrlWithGetMethod(url);
 
     if (Status.fromStatusCode(response.getStatus()).equals(Status.NOT_FOUND)) {
-      throw new ProductNotFoundException(MESSAGE_PRODUCT_NOT_FOUND, productId);
+      throw new ProductNotFoundException(productId);
     }
 
     ProductDto productDto = null;
     try {
-      productDto = mapper.readValue(response.readEntity(JsonParser.class), ProductDto.class);
+      productDto = mapper.readValue(response.readEntity(String.class), ProductDto.class);
     } catch (IOException e) {
       e.printStackTrace();
+    } finally {
+      response.close();
     }
-
-    response.close();
     return productDto;
   }
 

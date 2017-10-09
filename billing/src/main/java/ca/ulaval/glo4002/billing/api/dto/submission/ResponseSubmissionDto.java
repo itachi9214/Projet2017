@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.billing.api.dto.submission;
 
 import java.math.BigDecimal;
 
-import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
+import ca.ulaval.glo4002.billing.domain.DueTerm;
 
 public class ResponseSubmissionDto {
 

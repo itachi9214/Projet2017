@@ -6,15 +6,15 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-import ca.ulaval.glo4002.billing.api.BillingResource;
-import ca.ulaval.glo4002.billing.domain.Submission.BillAssembler;
-import ca.ulaval.glo4002.billing.domain.Submission.BillRepository;
-import ca.ulaval.glo4002.billing.domain.Submission.SubmissionAssembler;
-import ca.ulaval.glo4002.billing.domain.Submission.SubmissionRepository;
-import ca.ulaval.glo4002.billing.infrastructure.BillInMemory;
-import ca.ulaval.glo4002.billing.infrastructure.SubmissionInMemory;
-import ca.ulaval.glo4002.billing.service.BillService;
-import ca.ulaval.glo4002.billing.service.SubmissionService;
+import ca.ulaval.glo4002.billing.api.ressource.BillingResource;
+import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
+import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
+import ca.ulaval.glo4002.billing.infrastructure.bill.BillInMemory;
+import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionInMemory;
+import ca.ulaval.glo4002.billing.service.bill.BillAssembler;
+import ca.ulaval.glo4002.billing.service.bill.BillService;
+import ca.ulaval.glo4002.billing.service.submission.SubmissionAssembler;
+import ca.ulaval.glo4002.billing.service.submission.SubmissionService;
 
 public class BillingServer implements Runnable {
 

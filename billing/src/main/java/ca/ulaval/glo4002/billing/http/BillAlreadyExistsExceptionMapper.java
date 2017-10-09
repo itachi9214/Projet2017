@@ -7,7 +7,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ErrorDto;
-import ca.ulaval.glo4002.billing.infrastructure.BillAlreadyExistsException;
+import ca.ulaval.glo4002.billing.infrastructure.bill.BillAlreadyExistsException;
 
 @Provider
 public class BillAlreadyExistsExceptionMapper implements ExceptionMapper<BillAlreadyExistsException> {

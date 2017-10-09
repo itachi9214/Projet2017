@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.billing.http;
 
-import ca.ulaval.glo4002.billing.domain.Submission.BillingException;
+import ca.ulaval.glo4002.billing.domain.bill.BillingException;
 
 public class ClientNotFoundException extends BillingException {
 

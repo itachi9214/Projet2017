@@ -22,7 +22,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
-import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
+import ca.ulaval.glo4002.billing.domain.DueTerm;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CrmHttpClientTest {
@@ -33,6 +33,7 @@ public class CrmHttpClientTest {
   private static final Long EXISTING_CLIENT_NUMBER = 1L;
   private static final Integer NON_EXISTING_PRODUCT_ID = -6;
   private static final Integer EXISTING_PRODUCT_ID = 3;
+
   private CrmHttpClient crmHttpClient;
   private ClientDto clientDto;
   private ProductDto productDto;

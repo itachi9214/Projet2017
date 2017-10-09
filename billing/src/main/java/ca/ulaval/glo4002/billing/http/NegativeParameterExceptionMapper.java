@@ -7,7 +7,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ErrorDto;
-import ca.ulaval.glo4002.billing.domain.Submission.NegativeParameterException;
+import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 
 @Provider
 public class NegativeParameterExceptionMapper

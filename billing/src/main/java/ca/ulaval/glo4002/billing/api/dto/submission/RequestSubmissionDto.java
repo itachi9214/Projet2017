@@ -6,8 +6,8 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
-import ca.ulaval.glo4002.billing.domain.Submission.OrderedProduct;
+import ca.ulaval.glo4002.billing.domain.DueTerm;
+import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 
 public class RequestSubmissionDto {
 

@@ -11,6 +11,7 @@ import org.junit.Test;
 public class ClientNotFoundExceptionMapperTest {
 
   private static final long ID_CLIENT = 1L;
+
   private ClientNotFoundException clientNotFoundException;
   private ClientNotFoundExceptionMapper clientNotFoundExceptionMapper;
 

@@ -2,6 +2,6 @@ package ca.ulaval.glo4002.billing.domain.bill;
 
 public interface BillRepository {
 
-  void createBill(Bill bill);
+  public void createBill(Bill bill);
 
 }

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.http;
+package ca.ulaval.glo4002.billing.api.ressource.exceptionmapper;
 
 import static org.junit.Assert.assertEquals;
 

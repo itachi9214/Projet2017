@@ -55,9 +55,9 @@ public class SubmissionAssemblerTest {
 
     ResponseSubmissionDto dto = submissionAssembler.createResponseSubmissionDto(submission);
 
-    assertTrue(dto.getId() == SUBMISSION_NUMBER);
-    assertTrue(dto.getDueTerm() == IMMEDIATE);
-    assertTrue(dto.getTotal() == SUBMISSION_TOTAL);
+    assertTrue(dto.getId().equals(SUBMISSION_NUMBER));
+    assertTrue(dto.getDueTerm().equals(IMMEDIATE));
+    assertTrue(dto.getTotal().equals(SUBMISSION_TOTAL));
   }
 
   @Test

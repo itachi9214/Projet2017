@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willReturn;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,7 +17,6 @@ import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.id.Id;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
-import ca.ulaval.glo4002.billing.service.bill.BillAssembler;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BillAssemblerTest {
@@ -31,7 +30,7 @@ public class BillAssemblerTest {
   private DateTimeFormatter formatter;
 
   @Mock
-  Submission submission;
+  private Submission submission;
   @Mock
   private Id id;
   @Mock
@@ -40,17 +39,17 @@ public class BillAssemblerTest {
   @Before
   public void setUp() {
     formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:MM:ss.SSS'Z'");
-    given(id.getNumber()).willReturn(SUBMISSION_NUMBER);
+    willReturn(SUBMISSION_NUMBER).given(id).getNumber();
     date = LocalDateTime.now();
     billAssembler = new BillAssembler();
   }
 
   @Test
   public void whenAssembleBillThenDtoShouldBeTheSame() {
-    given(bill.getBillNumber()).willReturn(id);
-    given(bill.getDueTerm()).willReturn(IMMEDIATE);
-    given(bill.getEffectiveDate()).willReturn(date);
-    given(bill.getExpectedPaiement()).willReturn(date);
+    willReturn(id).given(bill).getBillNumber();
+    willReturn(IMMEDIATE).given(bill).getDueTerm();
+    willReturn(date).given(bill).getEffectiveDate();
+    willReturn(date).given(bill).getExpectedPaiement();
 
     BillDto dto = billAssembler.assembleBill(bill);
 

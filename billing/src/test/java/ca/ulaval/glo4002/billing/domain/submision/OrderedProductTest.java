@@ -24,7 +24,9 @@ public class OrderedProductTest {
 
   @Test
   public void whenCalculateProductThenReturnCorrectResult() {
-    assertEquals(new BigDecimal(200), orderedProduct.calculateTotalPrice());
+    BigDecimal totalPrice = orderedProduct.calculateTotalPrice();
+
+    assertEquals(new BigDecimal(PRODUCT_PRICE * ORDERED_PRODUCT_QUANTITY), totalPrice);
   }
 
 }

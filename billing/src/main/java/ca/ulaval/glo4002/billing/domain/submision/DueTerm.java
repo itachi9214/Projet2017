@@ -2,6 +2,16 @@ package ca.ulaval.glo4002.billing.domain.submision;
 
 public enum DueTerm {
 
-  IMMEDIATE, DAYS30, DAYS90
+  IMMEDIATE(0), DAYS30(1), DAYS90(3);
+
+  private int monthsQuantity;
+
+  DueTerm(int monthsQuantity) {
+    this.monthsQuantity = monthsQuantity;
+  }
+
+  public int getMonthsQuantity() {
+    return monthsQuantity;
+  }
 
 }

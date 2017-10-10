@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.billing.infrastructure.bill;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.willReturn;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,13 +25,13 @@ public class BillInMemoryTest {
   private Map<Id, Bill> bills;
 
   @Mock
-  Bill bill;
+  private Bill bill;
 
   @Before
   public void setUp() {
     bills = new HashMap<>();
     billInMemory = new BillInMemory(bills);
-    when(bill.getBillNumber()).thenReturn(EXISTING_BILL_NUMBER);
+    willReturn(EXISTING_BILL_NUMBER).given(bill).getBillNumber();
   }
 
   @Test

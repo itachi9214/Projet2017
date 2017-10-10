@@ -2,28 +2,28 @@ package ca.ulaval.glo4002.billing.api.dto.submission;
 
 import java.math.BigDecimal;
 
-import ca.ulaval.glo4002.billing.domain.DueTerm;
+import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 
 public class ResponseSubmissionDto {
 
-  private Long billNumber;
+  private Long id;
   private BigDecimal total;
   private DueTerm dueTerm;
   private String url;
 
-  public ResponseSubmissionDto(Long billNumber, BigDecimal total, DueTerm dueTerm, String url) {
-    this.billNumber = billNumber;
+  public ResponseSubmissionDto(Long id, BigDecimal total, DueTerm dueTerm, String url) {
+    this.id = id;
     this.total = total;
     this.dueTerm = dueTerm;
     this.url = url;
   }
 
-  public Long getBillNumber() {
-    return billNumber;
+  public Long getId() {
+    return id;
   }
 
-  public void setBillNumber(Long billNumber) {
-    this.billNumber = billNumber;
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public BigDecimal getTotal() {

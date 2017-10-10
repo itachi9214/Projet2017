@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.billing.api.dto.bill;
 
-import ca.ulaval.glo4002.billing.domain.DueTerm;
+import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 
 public class BillDto {
 

@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import ca.ulaval.glo4002.billing.domain.DueTerm;
+import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 
 public class RequestSubmissionDto {
@@ -21,7 +21,6 @@ public class RequestSubmissionDto {
       @JsonProperty(value = "creationDate", required = true) Date creationDate,
       @JsonProperty(value = "dueTerm", required = false) DueTerm dueTerm,
       @JsonProperty(value = "items", required = true) List<OrderedProduct> items) {
-    super();
     this.clientId = clientId;
     this.creationDate = creationDate;
     this.dueTerm = dueTerm;

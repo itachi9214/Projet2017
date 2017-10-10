@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.http;
+package ca.ulaval.glo4002.billing.api.ressource.exceptionmapper;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,9 @@ import javax.ws.rs.core.Response.Status;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ca.ulaval.glo4002.billing.api.ressource.exceptionmapper.ProductNotFoundExceptionMapper;
+import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 
 public class ProductNotFoundExceptionMapperTest {
 

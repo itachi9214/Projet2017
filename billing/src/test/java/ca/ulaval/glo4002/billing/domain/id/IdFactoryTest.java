@@ -9,6 +9,7 @@ import org.junit.Test;
 public class IdFactoryTest {
 
   private static final Long A_NUMBER = 13L;
+
   private IdFactory idFactory;
 
   @Before

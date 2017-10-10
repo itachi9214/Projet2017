@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.billing.service.submission;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
@@ -35,15 +35,15 @@ public class SubmissionServiceTest {
   private SubmissionService submissionService;
 
   @Mock
-  Submission submission;
+  private Submission submission;
   @Mock
-  SubmissionRepository submissionRepository;
+  private SubmissionRepository submissionRepository;
   @Mock
-  SubmissionAssembler submissionAssembler;
+  private SubmissionAssembler submissionAssembler;
   @Mock
-  CrmHttpClient httpClient;
+  private CrmHttpClient httpClient;
   @Mock
-  OrderedProduct item;
+  private OrderedProduct item;
 
   @Before
   public void setUp() {
@@ -58,7 +58,7 @@ public class SubmissionServiceTest {
   @Test
   public void givenSubmissionServiceWhenCreateSubmissionThenVerifyThatAllMethodsHaveBeenCalled()
       throws NegativeParameterException {
-    given(submissionAssembler.createSubmission(requestSubmissionDto)).willReturn(submission);
+    willReturn(submission).given(submissionAssembler).createSubmission(requestSubmissionDto);
 
     submissionService.createSubmission(requestSubmissionDto);
 
@@ -82,7 +82,7 @@ public class SubmissionServiceTest {
 
   @Test(expected = NegativeParameterException.class)
   public void givenProductWithNegativeQuantityWhenCreateSubmissionThenThrowException() {
-    given(item.getQuantity()).willReturn(NEGATIVE_ITEM_QUANTITY);
+    willReturn(NEGATIVE_ITEM_QUANTITY).given(item).getQuantity();
 
     submissionService.createSubmission(requestSubmissionDto);
   }

@@ -13,6 +13,7 @@ import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 public class NegativeParameterExceptionMapperTest {
 
   private static final String A_PARAMETER = "sample parameter";
+
   private NegativeParameterException negativeParameterException;
   private NegativeParameterExceptionMapper negativeParameterExceptionMapper;
 

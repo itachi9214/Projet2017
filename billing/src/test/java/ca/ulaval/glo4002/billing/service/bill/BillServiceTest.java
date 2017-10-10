@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
-import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
@@ -20,24 +20,24 @@ import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 @RunWith(MockitoJUnitRunner.class)
 public class BillServiceTest {
 
-  private static final long BILL_NUMBER = 10l;
+  private static final long BILL_NUMBER = 10L;
   private static final DueTerm IMMEDIATE = DueTerm.IMMEDIATE;
 
   private BillService billService;
   private Id id;
 
   @Mock
-  Submission submission;
+  private Submission submission;
   @Mock
-  BillRepository billRepository;
+  private BillRepository billRepository;
   @Mock
-  Bill bill;
+  private Bill bill;
   @Mock
-  IdFactory idFactory;
+  private IdFactory idFactory;
   @Mock
-  BillAssembler billAssembler;
+  private BillAssembler billAssembler;
   @Mock
-  SubmissionRepository submissionRepository;
+  private SubmissionRepository submissionRepository;
 
   @Before
   public void setUp() {
@@ -46,11 +46,11 @@ public class BillServiceTest {
   }
 
   @Test
-  public void WhenCreateBillthenVerifyTheAllMethodsIsCall() {
-    given(submissionRepository.findSubmissionById(id)).willReturn(submission);
-    given(idFactory.createIdFromNumber(BILL_NUMBER)).willReturn(id);
-    given(submission.getDueTerm()).willReturn(IMMEDIATE);
-    given(billAssembler.createTheBillFromTheSubmissionData(submission)).willReturn(bill);
+  public void whenCreateBillthenVerifyTheAllMethodsIsCall() {
+    willReturn(submission).given(submissionRepository).findSubmissionById(id);
+    willReturn(id).given(idFactory).createIdFromNumber(BILL_NUMBER);
+    willReturn(IMMEDIATE).given(submission).getDueTerm();
+    willReturn(bill).given(billAssembler).createTheBillFromTheSubmissionData(submission);
 
     billService.createBill(BILL_NUMBER);
 

@@ -19,6 +19,7 @@ public class SubmissionTest {
   private static final float PRICE_FIRTS_PRODUCT = 10;
   private static final float PRICE_SECOND_PRODUCT = 20;
   private static final float NEGATIVE_PRICE_SECOND_PRODUCT = -20;
+
   private Submission submission;
 
   @Mock

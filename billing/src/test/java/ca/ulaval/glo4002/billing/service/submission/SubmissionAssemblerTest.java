@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.billing.service.submission;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willReturn;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -42,16 +42,16 @@ public class SubmissionAssemblerTest {
 
   @Before
   public void setUp() {
-    given(id.getNumber()).willReturn(SUBMISSION_NUMBER);
+    willReturn(SUBMISSION_NUMBER).given(id).getNumber();
 
     submissionAssembler = new SubmissionAssembler();
   }
 
   @Test
   public void givenSubmissionAssemblerWhenCreateResponseSubmissionDtoThenShouldBeTheSame() {
-    given(submission.getBillNumber()).willReturn(id);
-    given(submission.getDueTerm()).willReturn(IMMEDIATE);
-    given(submission.getTotalPrice()).willReturn(SUBMISSION_TOTAL);
+    willReturn(id).given(submission).getBillNumber();
+    willReturn(IMMEDIATE).given(submission).getDueTerm();
+    willReturn(SUBMISSION_TOTAL).given(submission).getTotalPrice();
 
     ResponseSubmissionDto dto = submissionAssembler.createResponseSubmissionDto(submission);
 

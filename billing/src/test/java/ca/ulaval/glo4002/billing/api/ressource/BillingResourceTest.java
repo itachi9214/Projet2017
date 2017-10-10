@@ -52,7 +52,6 @@ public class BillingResourceTest extends JerseyTest {
 
   @Mock
   private SubmissionService submissionService;
-
   @Mock
   private BillService billService;
 

@@ -12,18 +12,18 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.domain.id.Id;
+import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionInMemoryTest {
 
-  private static final Id EXISTING_SUBMISSION_NUMBER = new Id(100L);
-  private static final Id NOT_EXISTING_SUBMISSION_NUMBER = new Id(200L);
+  private static final Identity EXISTING_SUBMISSION_NUMBER = new Identity(100L);
+  private static final Identity NOT_EXISTING_SUBMISSION_NUMBER = new Identity(200L);
 
   private SubmissionRepository submissionInMemory;
-  private Map<Id, Submission> submissions;
+  private Map<Identity, Submission> submissions;
 
   @Mock
   private Submission submission;

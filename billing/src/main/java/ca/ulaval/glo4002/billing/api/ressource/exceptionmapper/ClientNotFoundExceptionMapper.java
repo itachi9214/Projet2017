@@ -7,12 +7,12 @@ import javax.ws.rs.ext.Provider;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 
 @Provider
-public class ClientNotFoundExceptionMapper extends BadRequestExceptionMapper
+public class ClientNotFoundExceptionMapper extends ExceptionMapperResponse
     implements ExceptionMapper<ClientNotFoundException> {
 
   @Override
   public Response toResponse(ClientNotFoundException clientNotFoundException) {
-    return CreateBadRequestExceptionMapper("not found",
+    return createBadRequestExceptionMapper("not found",
         "client " + clientNotFoundException.getClientId() + " not found", "client");
   }
 

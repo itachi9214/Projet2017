@@ -14,7 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
-import ca.ulaval.glo4002.billing.domain.id.Id;
+import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
@@ -32,7 +32,7 @@ public class SubmissionAssemblerTest {
   private SubmissionAssembler submissionAssembler;
 
   @Mock
-  private Id id;
+  private Identity identity;
   @Mock
   private Submission submission;
   @Mock
@@ -42,14 +42,14 @@ public class SubmissionAssemblerTest {
 
   @Before
   public void setUp() {
-    willReturn(SUBMISSION_NUMBER).given(id).getNumber();
+    willReturn(SUBMISSION_NUMBER).given(identity).getNumber();
 
     submissionAssembler = new SubmissionAssembler();
   }
 
   @Test
   public void givenSubmissionAssemblerWhenCreateResponseSubmissionDtoThenShouldBeTheSame() {
-    willReturn(id).given(submission).getBillNumber();
+    willReturn(identity).given(submission).getBillNumber();
     willReturn(IMMEDIATE).given(submission).getDueTerm();
     willReturn(SUBMISSION_TOTAL).given(submission).getTotalPrice();
 

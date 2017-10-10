@@ -16,7 +16,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -26,7 +25,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
-import ca.ulaval.glo4002.billing.api.ressource.BillingResource;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
@@ -108,25 +106,6 @@ public class BillingResourceTest extends JerseyTest {
         new Date(), DueTerm.DAYS30, items);
     Entity<RequestSubmissionDto> requestEntity = Entity.entity(requestSubmissionDto,
         MediaType.APPLICATION_JSON);
-
-    Response response = target("/bills").request(MediaType.APPLICATION_JSON).post(requestEntity,
-        Response.class);
-
-    assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
-  }
-
-  @Ignore
-  @Test
-  public void givenProductWithNegativeQuantityWhenCreateSubmissionThenResponseStatusIsBadRequest()
-      throws NegativeParameterException {
-    List<OrderedProduct> items = new ArrayList<>();
-    items.add(new OrderedProduct(EXISTING_PRODUCT, A_PRICE, A_NOTE, A_NEGATIVE_QUANTITY));
-    RequestSubmissionDto requestSubmissionDto = new RequestSubmissionDto(EXISTING_CLIENT,
-        new Date(), DueTerm.DAYS30, items);
-    Entity<RequestSubmissionDto> requestEntity = Entity.entity(requestSubmissionDto,
-        MediaType.APPLICATION_JSON);
-    willThrow(new NegativeParameterException("Product quantity")).given(submissionService)
-        .createSubmission(requestSubmissionDto);
 
     Response response = target("/bills").request(MediaType.APPLICATION_JSON).post(requestEntity,
         Response.class);

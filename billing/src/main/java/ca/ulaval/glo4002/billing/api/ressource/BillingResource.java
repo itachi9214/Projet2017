@@ -55,7 +55,6 @@ public class BillingResource {
       for (OrderedProduct item : requestSubmissionDto.getItems()) {
         submissionService.getProductByIdInCrm(item.getProductId());
       }
-
       submissionService.setDueTermToDefaultIfNeeded(requestSubmissionDto,
           clientDto.getDefaultDueTerm());
 

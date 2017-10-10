@@ -10,8 +10,4 @@ public class BillAlreadyExistsException extends BillingException {
     super();
   }
 
-  public BillAlreadyExistsException(String message) {
-    super(message);
-  }
-
 }

@@ -10,8 +10,4 @@ public class SubmissionNotFoundException extends BillingException {
     super();
   }
 
-  public SubmissionNotFoundException(String message) {
-    super(message);
-  }
-
 }

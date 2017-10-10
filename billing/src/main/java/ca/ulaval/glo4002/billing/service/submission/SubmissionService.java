@@ -11,20 +11,14 @@ import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 import ca.ulaval.glo4002.billing.http.CrmHttpClient;
 import ca.ulaval.glo4002.billing.http.HttpClient;
-import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionInMemory;
 
 public class SubmissionService {
 
   private static final int MINIMUM_PRODUCT_QUANTITY = 0;
+
   private SubmissionAssembler submissionAssembler;
   private SubmissionRepository submissionRepository;
   private HttpClient httpClient;
-
-  public SubmissionService() {
-    submissionAssembler = new SubmissionAssembler();
-    submissionRepository = new SubmissionInMemory();
-    httpClient = new CrmHttpClient();
-  }
 
   public SubmissionService(SubmissionAssembler submissionAssembler,
       SubmissionRepository submissionRepository) {
@@ -72,4 +66,5 @@ public class SubmissionService {
       requestSubmissionDto.setDueTerm(defaultDueTerm);
     }
   }
+
 }

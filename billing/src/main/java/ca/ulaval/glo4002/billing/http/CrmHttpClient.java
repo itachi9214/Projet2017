@@ -38,7 +38,6 @@ public class CrmHttpClient extends HttpClient {
     if (Status.fromStatusCode(response.getStatus()).equals(Status.NOT_FOUND)) {
       throw new ClientNotFoundException(clientNumber);
     }
-
     ClientDto clientDto = null;
     try {
       clientDto = mapper.readValue(response.readEntity(String.class), ClientDto.class);
@@ -60,7 +59,6 @@ public class CrmHttpClient extends HttpClient {
     if (Status.fromStatusCode(response.getStatus()).equals(Status.NOT_FOUND)) {
       throw new ProductNotFoundException(productId);
     }
-
     ProductDto productDto = null;
     try {
       productDto = mapper.readValue(response.readEntity(String.class), ProductDto.class);

@@ -12,8 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
-import ca.ulaval.glo4002.billing.domain.id.Id;
-import ca.ulaval.glo4002.billing.domain.id.IdFactory;
+import ca.ulaval.glo4002.billing.domain.identity.Identity;
+import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
@@ -25,7 +25,7 @@ public class BillServiceTest {
   private static final DueTerm IMMEDIATE = DueTerm.IMMEDIATE;
 
   private BillService billService;
-  private Id id;
+  private Identity identity;
 
   @Mock
   private Submission submission;
@@ -34,7 +34,7 @@ public class BillServiceTest {
   @Mock
   private Bill bill;
   @Mock
-  private IdFactory idFactory;
+  private IdentityFactory identityFactory;
   @Mock
   private BillAssembler billAssembler;
   @Mock
@@ -46,19 +46,20 @@ public class BillServiceTest {
     ServiceLocator.register(billAssembler);
     ServiceLocator.register(submissionRepository);
     billService = new BillService();
-    id = new Id(BILL_NUMBER);
+    identity = new Identity(BILL_NUMBER);
   }
 
   @Test
   public void whenCreateBillthenVerifyTheAllMethodsIsCall() {
-    willReturn(submission).given(submissionRepository).findSubmissionById(id);
-    willReturn(id).given(idFactory).createIdFromNumber(BILL_NUMBER);
+    willReturn(submission).given(submissionRepository).findSubmissionById(identity);
+    willReturn(identity).given(identityFactory).createIdFromNumber(BILL_NUMBER);
     willReturn(IMMEDIATE).given(submission).getDueTerm();
     willReturn(bill).given(billAssembler).createTheBillFromTheSubmissionData(submission);
 
     billService.createBill(BILL_NUMBER);
 
-    verify(submissionRepository).findSubmissionById(idFactory.createIdFromNumber(BILL_NUMBER));
+    verify(submissionRepository)
+        .findSubmissionById(identityFactory.createIdFromNumber(BILL_NUMBER));
     verify(billAssembler).createTheBillFromTheSubmissionData(submission);
     verify(billRepository).createBill(bill);
     verify(billAssembler).assembleBill(bill);

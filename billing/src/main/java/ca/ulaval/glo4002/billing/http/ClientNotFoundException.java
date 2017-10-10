@@ -11,11 +11,6 @@ public class ClientNotFoundException extends BillingException {
     this.clientId = clientId;
   }
 
-  public ClientNotFoundException(String message, Long clientId) {
-    super(message);
-    this.clientId = clientId;
-  }
-
   public Long getClientId() {
     return clientId;
   }

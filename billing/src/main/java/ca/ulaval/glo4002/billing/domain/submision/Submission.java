@@ -3,25 +3,18 @@ package ca.ulaval.glo4002.billing.domain.submision;
 import java.math.BigDecimal;
 import java.util.List;
 
-import ca.ulaval.glo4002.billing.domain.id.Id;
+import ca.ulaval.glo4002.billing.domain.identity.Identity;
 
 public class Submission {
 
   private static final int MINIMUM_TOTAL_PRICE = 0;
-  protected Id billNumber;
+  protected Identity billNumber;
   protected DueTerm dueTerm;
   protected Long clientId;
   protected List<OrderedProduct> items;
   protected BigDecimal totalPrice;
 
-  public Submission() {
-  }
-
-  public Submission(Id billNumber) {
-    this.billNumber = billNumber;
-  }
-
-  public Submission(Id billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
+  public Submission(Identity billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
       throws NegativeParameterException {
     super();
     this.billNumber = billNumber;
@@ -71,11 +64,11 @@ public class Submission {
     this.totalPrice = totalPrice;
   }
 
-  public Id getBillNumber() {
+  public Identity getBillNumber() {
     return billNumber;
   }
 
-  public void setBillNumber(Id billNumber) {
+  public void setBillNumber(Identity billNumber) {
     this.billNumber = billNumber;
   }
 
@@ -84,9 +77,7 @@ public class Submission {
     for (OrderedProduct product : items) {
       totalPrice = totalPrice.add(product.calculateTotalPrice());
     }
-
     verifyTotalPriceIsNotNegative();
-
     return totalPrice;
   }
 

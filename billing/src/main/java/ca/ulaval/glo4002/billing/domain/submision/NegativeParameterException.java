@@ -8,12 +8,6 @@ public class NegativeParameterException extends BillingException {
   private String parameter;
 
   public NegativeParameterException(String parameter) {
-    super();
-    this.parameter = parameter;
-  }
-
-  public NegativeParameterException(String message, String parameter) {
-    super(message);
     this.parameter = parameter;
   }
 

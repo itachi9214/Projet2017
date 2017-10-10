@@ -11,11 +11,6 @@ public class ProductNotFoundException extends BillingException {
     this.productId = productId;
   }
 
-  public ProductNotFoundException(String message, int productId) {
-    super(message);
-    this.productId = productId;
-  }
-
   public int getProductId() {
     return productId;
   }

@@ -14,15 +14,15 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
-import ca.ulaval.glo4002.billing.domain.id.Id;
+import ca.ulaval.glo4002.billing.domain.identity.Identity;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BillInMemoryTest {
 
-  private static final Id EXISTING_BILL_NUMBER = new Id(200L);
+  private static final Identity EXISTING_BILL_NUMBER = new Identity(200L);
 
   private BillRepository billInMemory;
-  private Map<Id, Bill> bills;
+  private Map<Identity, Bill> bills;
 
   @Mock
   private Bill bill;

@@ -44,14 +44,7 @@ public class Bill extends Submission {
   }
 
   public LocalDateTime calculateExpectedPaiementDate() {
-    expectedPaiement = effectiveDate;
-    if (dueTerm.equals(DueTerm.IMMEDIATE)) {
-      expectedPaiement = effectiveDate;
-    } else if (dueTerm.equals(DueTerm.DAYS30)) {
-      expectedPaiement = effectiveDate.plusMonths(1);
-    } else if (dueTerm.equals(DueTerm.DAYS90)) {
-      expectedPaiement = effectiveDate.plusMonths(3);
-    }
+    this.expectedPaiement = effectiveDate.plusMonths(dueTerm.getMonthsQuantity());
     return expectedPaiement;
   }
 

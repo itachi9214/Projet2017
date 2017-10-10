@@ -20,7 +20,7 @@ import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
-import ca.ulaval.glo4002.billing.http.HttpClient;
+import ca.ulaval.glo4002.billing.http.CrmHttpClient;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionServiceTest {
@@ -28,8 +28,8 @@ public class SubmissionServiceTest {
   private static final DueTerm MONTH_AWAY_DUE_TERM = DueTerm.DAYS30;
   private static final DueTerm IMMEDIATE_DUE_TERM = DueTerm.IMMEDIATE;
   private static final int NEGATIVE_ITEM_QUANTITY = -6;
-  private static final Long CLIENT_ID = 10L;
-  private static final Integer PRODUCT_ID = 20;
+  private static final Long CLIENT_ID = 1L;
+  private static final Integer PRODUCT_ID = 2;
 
   private RequestSubmissionDto requestSubmissionDto;
   private SubmissionService submissionService;
@@ -41,7 +41,7 @@ public class SubmissionServiceTest {
   @Mock
   SubmissionAssembler submissionAssembler;
   @Mock
-  HttpClient httpClient;
+  CrmHttpClient httpClient;
   @Mock
   OrderedProduct item;
 
@@ -51,7 +51,8 @@ public class SubmissionServiceTest {
     items.add(item);
     requestSubmissionDto = new RequestSubmissionDto(CLIENT_ID, new Date(), DueTerm.DAYS30, items);
 
-    submissionService = new SubmissionService(submissionAssembler, submissionRepository);
+    submissionService = new SubmissionService(submissionAssembler, submissionRepository,
+        httpClient);
   }
 
   @Test
@@ -67,14 +68,14 @@ public class SubmissionServiceTest {
 
   @Test
   public void givenSubmissionServiceWhenGetClientByIdCrmThenReturnClientDto() {
-    httpClient.getClientDto(CLIENT_ID);
+    submissionService.getClientByIdInCrm(CLIENT_ID);
 
     verify(httpClient).getClientDto(CLIENT_ID);
   }
 
   @Test
   public void givenSubmissionServiceWhenGetProductByIdCrmThenReturnProductDto() {
-    httpClient.getProductDto(PRODUCT_ID);
+    submissionService.getProductByIdInCrm(PRODUCT_ID);
 
     verify(httpClient).getProductDto(PRODUCT_ID);
   }

@@ -13,7 +13,6 @@ public class OrderedProductTest {
   private static final float PRODUCT_PRICE = 100.00f;
   private static final String PRODUCT_NOTE = "product's description";
   private static final int ORDERED_PRODUCT_QUANTITY = 2;
-
   private OrderedProduct orderedProduct;
 
   @Before
@@ -24,7 +23,9 @@ public class OrderedProductTest {
 
   @Test
   public void whenCalculateProductThenReturnCorrectResult() {
-    assertEquals(new BigDecimal(200), orderedProduct.calculateTotalPrice());
+    BigDecimal totalPrice = orderedProduct.calculateTotalPrice();
+
+    assertEquals(new BigDecimal(PRODUCT_PRICE * ORDERED_PRODUCT_QUANTITY), totalPrice);
   }
 
 }

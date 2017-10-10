@@ -14,8 +14,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
-import ca.ulaval.glo4002.billing.domain.DueTerm;
 import ca.ulaval.glo4002.billing.domain.id.Id;
+import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
@@ -55,7 +55,7 @@ public class SubmissionAssemblerTest {
 
     ResponseSubmissionDto dto = submissionAssembler.createResponseSubmissionDto(submission);
 
-    assertTrue(dto.getBillNumber() == SUBMISSION_NUMBER);
+    assertTrue(dto.getId() == SUBMISSION_NUMBER);
     assertTrue(dto.getDueTerm() == IMMEDIATE);
     assertTrue(dto.getTotal() == SUBMISSION_TOTAL);
   }

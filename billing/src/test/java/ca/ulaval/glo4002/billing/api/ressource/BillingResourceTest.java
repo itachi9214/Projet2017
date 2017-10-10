@@ -27,7 +27,7 @@ import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.api.ressource.BillingResource;
-import ca.ulaval.glo4002.billing.domain.DueTerm;
+import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;

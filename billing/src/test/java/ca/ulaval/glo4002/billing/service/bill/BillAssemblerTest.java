@@ -13,9 +13,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
-import ca.ulaval.glo4002.billing.domain.DueTerm;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.id.Id;
+import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.service.bill.BillAssembler;
 

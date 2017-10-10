@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import ca.ulaval.glo4002.billing.domain.DueTerm;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
+import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 
 public class BillTest {
 

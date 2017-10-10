@@ -1,13 +1,13 @@
-package ca.ulaval.glo4002.billing.domain.id;
+package ca.ulaval.glo4002.billing.domain.identity;
 
-public class IdFactory {
+public class IdentityFactory {
 
-  public Id createAndGenerateId() {
-    return new Id();
+  public Identity createAndGenerateId() {
+    return new Identity();
   }
 
-  public Id createIdFromNumber(Long number) {
-    return new Id(number);
+  public Identity createIdFromNumber(Long number) {
+    return new Identity(number);
   }
 
 }

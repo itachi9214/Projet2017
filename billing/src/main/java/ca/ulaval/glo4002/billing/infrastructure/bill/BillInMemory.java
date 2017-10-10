@@ -5,16 +5,16 @@ import java.util.Map;
 
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
-import ca.ulaval.glo4002.billing.domain.id.Id;
+import ca.ulaval.glo4002.billing.domain.identity.Identity;
 
 public class BillInMemory implements BillRepository {
 
-  private Map<Id, Bill> bills = new HashMap<>();
+  private Map<Identity, Bill> bills = new HashMap<>();
 
   public BillInMemory() {
   }
 
-  public BillInMemory(Map<Id, Bill> bills) {
+  public BillInMemory(Map<Identity, Bill> bills) {
     this.bills = bills;
   }
 
@@ -26,7 +26,7 @@ public class BillInMemory implements BillRepository {
     bills.put(bill.getBillNumber(), bill);
   }
 
-  private boolean billAlreadyExists(Id billId) {
+  private boolean billAlreadyExists(Identity billId) {
     return bills.containsKey(billId);
   }
 

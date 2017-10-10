@@ -1,20 +1,20 @@
-package ca.ulaval.glo4002.billing.domain.id;
+package ca.ulaval.glo4002.billing.domain.identity;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import ca.ulaval.glo4002.billing.domain.id.Id;
+import ca.ulaval.glo4002.billing.domain.identity.Identity;
 
-public class IdTest {
+public class IdentityTest {
 
-  private Id id;
+  private Identity identity;
 
   @Test
   public void whenNewIdToGenerateThenNumberShouldBeSet() {
-    id = new Id();
+    identity = new Identity();
 
-    assertNotNull(id.getNumber());
+    assertNotNull(identity.getNumber());
   }
 
 }

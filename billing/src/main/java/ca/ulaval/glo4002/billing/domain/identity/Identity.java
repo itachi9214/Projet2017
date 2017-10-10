@@ -1,16 +1,16 @@
-package ca.ulaval.glo4002.billing.domain.id;
+package ca.ulaval.glo4002.billing.domain.identity;
 
 import java.util.UUID;
 
-public class Id {
+public class Identity {
 
   private Long number;
 
-  public Id() {
+  public Identity() {
     generateAndSetUniqueNumber();
   }
 
-  public Id(Long number) {
+  public Identity(Long number) {
     this.number = number;
   }
 
@@ -29,11 +29,10 @@ public class Id {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj instanceof Id) {
-      return ((Id) obj).getNumber().equals(this.number);
-    } else {
-      return false;
+    if (obj instanceof Identity) {
+      return ((Identity) obj).getNumber().equals(this.number);
     }
+    return false;
   }
 
   @Override

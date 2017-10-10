@@ -7,12 +7,12 @@ import javax.ws.rs.ext.Provider;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 
 @Provider
-public class ProductNotFoundExceptionMapper extends BadRequestExceptionMapper
+public class ProductNotFoundExceptionMapper extends ExceptionMapperResponse
     implements ExceptionMapper<ProductNotFoundException> {
 
   @Override
   public Response toResponse(ProductNotFoundException productNotFoundException) {
-    return CreateBadRequestExceptionMapper("not found",
+    return createBadRequestExceptionMapper("not found",
         "product " + productNotFoundException.getProductId() + " not found", "product");
   }
 

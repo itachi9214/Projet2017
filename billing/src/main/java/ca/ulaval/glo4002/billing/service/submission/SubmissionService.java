@@ -16,6 +16,7 @@ import ca.ulaval.glo4002.billing.http.HttpClient;
 public class SubmissionService {
 
   private static final int MINIMUM_PRODUCT_QUANTITY = 0;
+
   private SubmissionAssembler submissionAssembler;
   private SubmissionRepository submissionRepository;
   private HttpClient httpClient;
@@ -60,4 +61,5 @@ public class SubmissionService {
       requestSubmissionDto.setDueTerm(defaultDueTerm);
     }
   }
+
 }

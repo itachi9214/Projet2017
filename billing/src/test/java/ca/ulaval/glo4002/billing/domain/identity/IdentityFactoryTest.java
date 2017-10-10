@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.domain.id;
+package ca.ulaval.glo4002.billing.domain.identity;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -6,29 +6,32 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-public class IdFactoryTest {
+import ca.ulaval.glo4002.billing.domain.identity.Identity;
+import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
+
+public class IdentityFactoryTest {
 
   private static final Long A_NUMBER = 13L;
 
-  private IdFactory idFactory;
+  private IdentityFactory identityFactory;
 
   @Before
   public void setUp() {
-    idFactory = new IdFactory();
+    identityFactory = new IdentityFactory();
   }
 
   @Test
   public void whenCreateAndGenerateIdThenIdShouldNotBeNull() {
-    Id id = idFactory.createAndGenerateId();
+    Identity identity = identityFactory.createAndGenerateId();
 
-    assertNotNull(id);
+    assertNotNull(identity);
   }
 
   @Test
   public void whenCreateIdFromNumberThenNumberIsSetCorrectly() {
-    Id id = idFactory.createIdFromNumber(A_NUMBER);
+    Identity identity = identityFactory.createIdFromNumber(A_NUMBER);
 
-    assertEquals(A_NUMBER, id.getNumber());
+    assertEquals(A_NUMBER, identity.getNumber());
   }
 
 }

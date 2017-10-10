@@ -9,16 +9,15 @@ public class OrderedProduct {
   private String note;
   private int quantity;
 
-  public OrderedProduct() {
-    super();
-  }
-
   public OrderedProduct(int productId, float price, String note, int quantity)
       throws NegativeParameterException {
     this.productId = productId;
     this.price = price;
     this.note = note;
     this.quantity = quantity;
+  }
+
+  public OrderedProduct() {
   }
 
   public int getProductId() {

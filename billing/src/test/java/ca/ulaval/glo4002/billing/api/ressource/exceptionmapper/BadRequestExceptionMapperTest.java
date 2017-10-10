@@ -10,10 +10,11 @@ import org.junit.Test;
 
 public class BadRequestExceptionMapperTest {
 
-  private BadRequestExceptionMapper badRequestExceptionMapper;
   private static final String ERROR = "error";
   private static final String DESCRIPTION = "Not found";
   private static final String ENTITY = "Entity";
+
+  private BadRequestExceptionMapper badRequestExceptionMapper;
 
   @Before
   public void setUp() {
@@ -21,7 +22,7 @@ public class BadRequestExceptionMapperTest {
   }
 
   @Test
-  public void givenBadRequestDetectedWhenToReponseThenStatuscodeIsBadRequest() {
+  public void givenBadRequestDetectedWhenCreateBadRequestExceptionMapperThenStatusCodeIsBadRequest() {
     Response codeError = badRequestExceptionMapper.CreateBadRequestExceptionMapper(ERROR,
         DESCRIPTION, ENTITY);
 

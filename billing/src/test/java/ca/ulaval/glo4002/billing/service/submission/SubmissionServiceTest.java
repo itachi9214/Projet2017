@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
@@ -51,8 +52,11 @@ public class SubmissionServiceTest {
     items.add(item);
     requestSubmissionDto = new RequestSubmissionDto(CLIENT_ID, new Date(), DueTerm.DAYS30, items);
 
-    submissionService = new SubmissionService(submissionAssembler, submissionRepository,
-        httpClient);
+    ServiceLocator.register(submissionAssembler);
+    ServiceLocator.register(submissionRepository);
+    ServiceLocator.register(httpClient);
+
+    submissionService = new SubmissionService();
   }
 
   @Test

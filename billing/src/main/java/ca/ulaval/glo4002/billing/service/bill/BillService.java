@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
+import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
@@ -14,11 +15,10 @@ public class BillService {
   private SubmissionRepository submissionRepository;
   private IdFactory idFactory;
 
-  public BillService(BillRepository billRepository, BillAssembler billAssembler,
-      SubmissionRepository submissionRepository) {
-    this.billRepository = billRepository;
-    this.billAssembler = billAssembler;
-    this.submissionRepository = submissionRepository;
+  public BillService() {
+    this.billRepository = ServiceLocator.getService(BillRepository.class);
+    this.billAssembler = ServiceLocator.getService(BillAssembler.class);
+    this.submissionRepository = ServiceLocator.getService(SubmissionRepository.class);
     this.idFactory = new IdFactory();
   }
 

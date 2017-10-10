@@ -11,7 +11,7 @@ import org.junit.Test;
 public class BadRequestExceptionMapperTest {
 
   private BadRequestExceptionMapper badRequestExceptionMapper;
-  private static final String ERROR = "errors";
+  private static final String ERROR = "error";
   private static final String DESCRIPTION = "Not found";
   private static final String ENTITY = "Entity";
 

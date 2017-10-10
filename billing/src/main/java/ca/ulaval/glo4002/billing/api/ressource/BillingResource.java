@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.api.ressource.exceptionmapper.BillAlreadyExistsExceptionMapper;
@@ -35,9 +36,9 @@ public class BillingResource {
   private BillAlreadyExistsExceptionMapper billAlreadyExistsExceptionMapper;
   private SubmissionNotFoundExceptionMapper submissionNotFoundExceptionMapper;
 
-  public BillingResource(SubmissionService submissionService, BillService billService) {
-    this.submissionService = submissionService;
-    this.billService = billService;
+  public BillingResource() {
+    this.submissionService = ServiceLocator.getService(SubmissionService.class);
+    this.billService = ServiceLocator.getService(BillService.class);
     clientNotFoundExceptionMapper = new ClientNotFoundExceptionMapper();
     productNotFoundExceptionMapper = new ProductNotFoundExceptionMapper();
     negativeParameterExceptionMapper = new NegativeParameterExceptionMapper();

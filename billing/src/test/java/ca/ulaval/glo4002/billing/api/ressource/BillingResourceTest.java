@@ -23,10 +23,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
-import ca.ulaval.glo4002.billing.api.ressource.BillingResource;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
@@ -68,7 +68,10 @@ public class BillingResourceTest extends JerseyTest {
         .getProductByIdInCrm(NON_EXISTING_PRODUCT);
     willReturn(productDto).given(submissionService).getProductByIdInCrm(EXISTING_PRODUCT);
 
-    return new ResourceConfig().register(new BillingResource(submissionService, billService));
+    ServiceLocator.register(billService);
+    ServiceLocator.register(submissionService);
+
+    return new ResourceConfig().register(new BillingResource());
   }
 
   @Test

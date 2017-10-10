@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.billing.service.submission;
 
+import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
@@ -11,7 +12,6 @@ import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 import ca.ulaval.glo4002.billing.http.CrmHttpClient;
 import ca.ulaval.glo4002.billing.http.HttpClient;
-import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionInMemory;
 
 public class SubmissionService {
 
@@ -21,21 +21,9 @@ public class SubmissionService {
   private HttpClient httpClient;
 
   public SubmissionService() {
-    submissionAssembler = new SubmissionAssembler();
-    submissionRepository = new SubmissionInMemory();
-    httpClient = new CrmHttpClient();
-  }
-
-  public SubmissionService(SubmissionAssembler submissionAssembler,
-      SubmissionRepository submissionRepository) {
-    this(submissionAssembler, submissionRepository, new CrmHttpClient());
-  }
-
-  public SubmissionService(SubmissionAssembler submissionAssembler,
-      SubmissionRepository submissionRepository, CrmHttpClient crmHttpClient) {
-    this.submissionAssembler = submissionAssembler;
-    this.submissionRepository = submissionRepository;
-    this.httpClient = crmHttpClient;
+    this.submissionAssembler = ServiceLocator.getService(SubmissionAssembler.class);
+    this.submissionRepository = ServiceLocator.getService(SubmissionRepository.class);
+    this.httpClient = ServiceLocator.getService(CrmHttpClient.class);
   }
 
   public ResponseSubmissionDto createSubmission(RequestSubmissionDto requestSubmissionDto)

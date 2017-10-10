@@ -11,6 +11,15 @@ public class ProductDto {
   private String name;
   private BigDecimal unitPrice;
 
+  public ProductDto() {
+  }
+
+  public ProductDto(Integer id, String name, BigDecimal unitPrice) {
+    this.id = id;
+    this.name = name;
+    this.unitPrice = unitPrice;
+  }
+
   public Integer getId() {
     return id;
   }

@@ -1,16 +1,18 @@
 package ca.ulaval.glo4002.billing.http;
 
-import ca.ulaval.glo4002.billing.domain.Submission.BillingException;
+import ca.ulaval.glo4002.billing.domain.bill.BillingException;
 
 public class ClientNotFoundException extends BillingException {
 
   private static final long serialVersionUID = 1L;
+  private Long clientId;
 
-  public ClientNotFoundException() {
+  public ClientNotFoundException(Long clientId) {
+    this.clientId = clientId;
   }
 
-  public ClientNotFoundException(String message) {
-    super(message);
+  public Long getClientId() {
+    return clientId;
   }
 
 }

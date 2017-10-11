@@ -2,8 +2,13 @@ package ca.ulaval.glo4002.billing.domain.submision;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class OrderedProduct {
 
+  @Id
   private int productId;
   private float price;
   private String note;

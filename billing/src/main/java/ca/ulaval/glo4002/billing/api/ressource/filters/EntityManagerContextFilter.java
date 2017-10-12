@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.api.filters;
+package ca.ulaval.glo4002.billing.api.ressource.filters;
 
 import java.io.IOException;
 

@@ -7,12 +7,19 @@ import javax.ws.rs.ext.Provider;
 import ca.ulaval.glo4002.billing.infrastructure.bill.BillAlreadyExistsException;
 
 @Provider
-public class BillAlreadyExistsExceptionMapper extends ExceptionMapperResponse
+public class BillAlreadyExistsExceptionMapper
     implements ExceptionMapper<BillAlreadyExistsException> {
+
+  private ExceptionMapperResponse exceptionMapperResponse;
+
+  public BillAlreadyExistsExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
+    this.exceptionMapperResponse = exceptionMapperResponse;
+  }
 
   @Override
   public Response toResponse(BillAlreadyExistsException billAlreadyExistsException) {
-    return createBadRequestExceptionMapper("wrong status", "Invoice already accepted", "invoice");
+    return exceptionMapperResponse.createBadRequestExceptionMapper("wrong status",
+        "Invoice already accepted", "invoice");
   }
 
 }

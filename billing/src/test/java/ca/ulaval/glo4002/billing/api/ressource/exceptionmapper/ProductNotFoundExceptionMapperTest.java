@@ -1,16 +1,17 @@
 package ca.ulaval.glo4002.billing.api.ressource.exceptionmapper;
 
-import static org.junit.Assert.assertEquals;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.api.ressource.exceptionmapper.ProductNotFoundExceptionMapper;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ProductNotFoundExceptionMapperTest {
 
   private static final int ID_PRODUCT = 1;
@@ -18,17 +19,21 @@ public class ProductNotFoundExceptionMapperTest {
   private ProductNotFoundExceptionMapper productNotFoundExceptionMapper;
   private ProductNotFoundException productNotFoundException;
 
+  @Mock
+  private ExceptionMapperResponse exceptionMapperResponse;
+
   @Before
   public void setUp() {
-    productNotFoundExceptionMapper = new ProductNotFoundExceptionMapper();
+    productNotFoundExceptionMapper = new ProductNotFoundExceptionMapper(exceptionMapperResponse);
     productNotFoundException = new ProductNotFoundException(ID_PRODUCT);
   }
 
   @Test
   public void givenProductNotFoundExceptionWhenToResponseThenStatusCodeIsBadRequest() {
-    Response codeError = productNotFoundExceptionMapper.toResponse(productNotFoundException);
+    productNotFoundExceptionMapper.toResponse(productNotFoundException);
 
-    assertEquals(codeError.getStatus(), Status.BAD_REQUEST.getStatusCode());
+    verify(exceptionMapperResponse).createBadRequestExceptionMapper(anyString(), anyString(),
+        anyString());
   }
 
 }

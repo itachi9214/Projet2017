@@ -7,12 +7,18 @@ import javax.ws.rs.ext.Provider;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 
 @Provider
-public class NegativeParameterExceptionMapper extends ExceptionMapperResponse
+public class NegativeParameterExceptionMapper
     implements ExceptionMapper<NegativeParameterException> {
+
+  private ExceptionMapperResponse exceptionMapperResponse;
+
+  public NegativeParameterExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
+    this.exceptionMapperResponse = exceptionMapperResponse;
+  }
 
   @Override
   public Response toResponse(NegativeParameterException negativeParameterException) {
-    return createBadRequestExceptionMapper("bad parameter",
+    return exceptionMapperResponse.createBadRequestExceptionMapper("bad parameter",
         negativeParameterException.getParameter() + " cannot be negative",
         negativeParameterException.getParameter());
   }

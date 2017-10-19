@@ -4,7 +4,7 @@ import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import ca.ulaval.glo4002.billing.domain.Submission.DueTerm;
+import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClientDto {
@@ -13,6 +13,17 @@ public class ClientDto {
   private Instant creationDate;
   private DueTerm defaultDueTerm;
   private String fullName;
+
+  public ClientDto() {
+  }
+
+  public ClientDto(Long clientNumber, Instant creationDate, DueTerm defaultDueTerm,
+      String fullName) {
+    this.clientNumber = clientNumber;
+    this.creationDate = creationDate;
+    this.defaultDueTerm = defaultDueTerm;
+    this.fullName = fullName;
+  }
 
   public Long getId() {
     return clientNumber;

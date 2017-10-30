@@ -8,6 +8,8 @@ import ca.ulaval.glo4002.billing.domain.submision.Submission;
 
 public class BillAssembler {
 
+  private static final String BASE_URL = "/bills/";
+
   public BillAssembler() {
   }
 
@@ -15,7 +17,7 @@ public class BillAssembler {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:MM:ss.SSS'Z'");
     BillDto billDto = new BillDto(bill.getBillNumber().getNumber(),
         bill.getEffectiveDate().format(formatter), bill.getExpectedPaiement().format(formatter),
-        bill.getDueTerm(), "/bills/" + bill.getBillNumber().getNumber());
+        bill.getDueTerm(), BASE_URL + bill.getBillNumber().getNumber());
     return billDto;
   }
 

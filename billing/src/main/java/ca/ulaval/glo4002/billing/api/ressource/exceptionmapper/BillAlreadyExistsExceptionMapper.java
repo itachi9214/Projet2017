@@ -10,6 +10,10 @@ import ca.ulaval.glo4002.billing.infrastructure.bill.BillAlreadyExistsException;
 public class BillAlreadyExistsExceptionMapper
     implements ExceptionMapper<BillAlreadyExistsException> {
 
+  private static final String ENTITY = "invoice";
+  private static final String DESCRIPTION = "Invoice already accepted";
+  private static final String ERROR = "wrong status";
+
   private ExceptionMapperResponse exceptionMapperResponse;
 
   public BillAlreadyExistsExceptionMapper() {
@@ -22,8 +26,7 @@ public class BillAlreadyExistsExceptionMapper
 
   @Override
   public Response toResponse(BillAlreadyExistsException billAlreadyExistsException) {
-    return exceptionMapperResponse.createBadRequestExceptionMapper("wrong status",
-        "Invoice already accepted", "invoice");
+    return exceptionMapperResponse.createBadRequestExceptionMapper(ERROR, DESCRIPTION, ENTITY);
   }
 
 }

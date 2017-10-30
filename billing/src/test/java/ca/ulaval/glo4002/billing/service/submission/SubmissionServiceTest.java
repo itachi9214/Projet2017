@@ -2,6 +2,8 @@ package ca.ulaval.glo4002.billing.service.submission;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.ServiceLocator;
+import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
@@ -30,10 +33,10 @@ public class SubmissionServiceTest {
   private static final DueTerm IMMEDIATE_DUE_TERM = DueTerm.IMMEDIATE;
   private static final int NEGATIVE_ITEM_QUANTITY = -6;
   private static final Long CLIENT_ID = 1L;
-  private static final Integer PRODUCT_ID = 2;
 
   private RequestSubmissionDto requestSubmissionDto;
   private SubmissionService submissionService;
+  private ClientDto clientDto;
 
   @Mock
   private Submission submission;
@@ -57,12 +60,14 @@ public class SubmissionServiceTest {
     ServiceLocator.register(httpClient);
 
     submissionService = new SubmissionService();
+    clientDto = new ClientDto();
   }
 
   @Test
-  public void givenSubmissionServiceWhenCreateSubmissionThenVerifyThatAllMethodsHaveBeenCalled()
+  public void whenCreateSubmissionThenVerifyThatAllMethodsHaveBeenCalled()
       throws NegativeParameterException {
     willReturn(submission).given(submissionAssembler).createSubmission(requestSubmissionDto);
+    willReturn(clientDto).given(httpClient).getClientDto(anyLong());
 
     submissionService.createSubmission(requestSubmissionDto);
 
@@ -71,17 +76,19 @@ public class SubmissionServiceTest {
   }
 
   @Test
-  public void givenSubmissionServiceWhenGetClientByIdCrmThenReturnClientDto() {
-    submissionService.getClientByIdInCrm(CLIENT_ID);
+  public void whenGetAndVerifyClientExistsThenVerifyClientIsFound() {
+    submissionService.getAndVerifyClientExists(CLIENT_ID);
 
     verify(httpClient).getClientDto(CLIENT_ID);
   }
 
   @Test
-  public void givenSubmissionServiceWhenGetProductByIdCrmThenReturnProductDto() {
-    submissionService.getProductByIdInCrm(PRODUCT_ID);
+  public void whenVerifyProductsExistThenVerifyProductIsFound() {
+    List<OrderedProduct> items = new ArrayList<>();
+    items.add(item);
+    submissionService.verifyProductsExist(items);
 
-    verify(httpClient).getProductDto(PRODUCT_ID);
+    verify(httpClient).getProductDto(anyInt());
   }
 
   @Test(expected = NegativeParameterException.class)

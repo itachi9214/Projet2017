@@ -52,7 +52,7 @@ public class CrmHttpClient extends HttpClient {
   @Override
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public ProductDto getProductDto(Integer productId) {
+  public ProductDto getProductDto(Integer productId) throws ProductNotFoundException {
     String url = LOCALHOST + PRODUCTS + productId;
     Response response = callUrlWithGetMethod(url);
 

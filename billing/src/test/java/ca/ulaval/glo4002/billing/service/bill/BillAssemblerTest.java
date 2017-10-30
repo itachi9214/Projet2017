@@ -3,8 +3,11 @@ package ca.ulaval.glo4002.billing.service.bill;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.willReturn;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +24,9 @@ import ca.ulaval.glo4002.billing.domain.submision.Submission;
 @RunWith(MockitoJUnitRunner.class)
 public class BillAssemblerTest {
 
+  private static final BigDecimal TOTAL_PRICE = new BigDecimal(0);
+  private static final List<Object> ITEMS_LIST = Collections.emptyList();
+  private static final long CLIENT_NUMBER = 1L;
   private static final Long SUBMISSION_NUMBER = 100L;
   private static final DueTerm IMMEDIATE = DueTerm.IMMEDIATE;
   private static final String URL_FROM_SUBMISSION_NUMBER = "/bills/" + SUBMISSION_NUMBER;
@@ -58,6 +64,24 @@ public class BillAssemblerTest {
     assertTrue(dto.getEffectiveDate().equals(date.format(formatter).toString()));
     assertTrue(dto.getExpectedPayment().equals(date.format(formatter).toString()));
     assertTrue(dto.getUrl().equals(URL_FROM_SUBMISSION_NUMBER));
+  }
+
+  @Test
+  public void whenCreateTheBillFromTheSubmissionDataThenBillShouldBeTheSame() {
+    willReturn(identity).given(submission).getBillNumber();
+    willReturn(IMMEDIATE).given(submission).getDueTerm();
+    willReturn(CLIENT_NUMBER).given(submission).getClientId();
+    willReturn(ITEMS_LIST).given(submission).getItems();
+    willReturn(TOTAL_PRICE).given(submission).getTotalPrice();
+
+    Bill bill = billAssembler.createTheBillFromTheSubmissionData(submission);
+
+    assertTrue(bill.getBillNumber().equals(identity));
+    assertTrue(bill.getDueTerm().equals(IMMEDIATE));
+    assertTrue(bill.getExpectedPaiement().equals(bill.getEffectiveDate()));
+    assertTrue(bill.getItems().equals(ITEMS_LIST));
+    assertTrue(bill.getTotalPrice().equals(TOTAL_PRICE));
+    assertTrue(bill.getClientId().equals(CLIENT_NUMBER));
   }
 
 }

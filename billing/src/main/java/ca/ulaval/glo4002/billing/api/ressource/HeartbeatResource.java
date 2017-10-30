@@ -15,7 +15,8 @@ public class HeartbeatResource {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Response beat(@QueryParam("token") String token) {
-    return Response.ok(new HeartbeatDto(token)).build();
+    HeartbeatDto heartbeatDto = new HeartbeatDto(token);
+    return Response.ok(heartbeatDto).build();
   }
 
 }

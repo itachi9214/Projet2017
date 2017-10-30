@@ -7,7 +7,6 @@ public class BadRequestDto {
   private String entity;
 
   public BadRequestDto(String error, String description, String entity) {
-    super();
     this.error = error;
     this.description = description;
     this.entity = entity;

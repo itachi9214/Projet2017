@@ -23,7 +23,6 @@ public class CrmHttpClient extends HttpClient {
   private ObjectMapper mapper;
 
   public CrmHttpClient() {
-    super();
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
   }

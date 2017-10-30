@@ -23,7 +23,7 @@ public class SubmissionAssembler {
 
   public Submission createSubmission(RequestSubmissionDto requestSubmissionDto)
       throws NegativeParameterException {
-    Submission submission = new Submission(identityFactory.createAndGenerateId(),
+    Submission submission = new Submission(identityFactory.createId(),
         requestSubmissionDto.getDueTerm(), requestSubmissionDto.getClientId(),
         requestSubmissionDto.getItems());
     return submission;

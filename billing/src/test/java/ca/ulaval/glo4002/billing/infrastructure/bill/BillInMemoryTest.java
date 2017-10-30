@@ -3,9 +3,6 @@ package ca.ulaval.glo4002.billing.infrastructure.bill;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.willReturn;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,32 +16,36 @@ import ca.ulaval.glo4002.billing.domain.identity.Identity;
 @RunWith(MockitoJUnitRunner.class)
 public class BillInMemoryTest {
 
-  private static final Identity EXISTING_BILL_NUMBER = new Identity(200L);
+  private static final Identity EXISTING_BILL_NUMBER = new Identity(100L);
+  private static final Identity NOT_EXISTING_BILL_NUMBER = new Identity(200L);;
 
   private BillRepository billInMemory;
-  private Map<Identity, Bill> bills;
 
   @Mock
   private Bill bill;
 
   @Before
   public void setUp() {
-    bills = new HashMap<>();
-    billInMemory = new BillInMemory(bills);
+    billInMemory = new BillInMemory();
     willReturn(EXISTING_BILL_NUMBER).given(bill).getBillNumber();
   }
 
   @Test
-  public void givenBillWhenCreateNotExistingBillThenBillsContainsBill() {
+  public void givenBillWhenCreateBillThenFindBill() {
     billInMemory.createBill(bill);
 
-    assertEquals(bills.containsKey(EXISTING_BILL_NUMBER), true);
+    assertEquals(billInMemory.findById(EXISTING_BILL_NUMBER), bill);
   }
 
   @Test(expected = BillAlreadyExistsException.class)
   public void givenBillWhenCreateExistingBillThenThrowException() {
     billInMemory.createBill(bill);
     billInMemory.createBill(bill);
+  }
+
+  @Test(expected = BillNotFoundException.class)
+  public void givenNotExistingBillNumberWhenFindByIdThenThrowException() {
+    billInMemory.findById(NOT_EXISTING_BILL_NUMBER);
   }
 
 }

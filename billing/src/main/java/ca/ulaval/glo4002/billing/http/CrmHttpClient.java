@@ -2,9 +2,6 @@ package ca.ulaval.glo4002.billing.http;
 
 import java.io.IOException;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -23,14 +20,11 @@ public class CrmHttpClient extends HttpClient {
   private ObjectMapper mapper;
 
   public CrmHttpClient() {
-    super();
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
   }
 
   @Override
-  @Produces(MediaType.APPLICATION_JSON)
-  @Consumes(MediaType.APPLICATION_JSON)
   public ClientDto getClientDto(Long clientNumber) throws ClientNotFoundException {
     String url = LOCALHOST + CLIENTS + clientNumber;
     Response response = callUrlWithGetMethod(url);
@@ -50,9 +44,7 @@ public class CrmHttpClient extends HttpClient {
   }
 
   @Override
-  @Produces(MediaType.APPLICATION_JSON)
-  @Consumes(MediaType.APPLICATION_JSON)
-  public ProductDto getProductDto(Integer productId) {
+  public ProductDto getProductDto(Integer productId) throws ProductNotFoundException {
     String url = LOCALHOST + PRODUCTS + productId;
     Response response = callUrlWithGetMethod(url);
 

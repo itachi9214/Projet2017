@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.billing.domain.identity;
 
 public class IdentityFactory {
 
-  public Identity createAndGenerateId() {
+  public Identity createId() {
     return new Identity();
   }
 

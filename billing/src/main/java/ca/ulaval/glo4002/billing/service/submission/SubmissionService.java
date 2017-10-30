@@ -1,8 +1,9 @@
 package ca.ulaval.glo4002.billing.service.submission;
 
+import java.util.List;
+
 import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
-import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
@@ -10,8 +11,9 @@ import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
-import ca.ulaval.glo4002.billing.http.CrmHttpClient;
+import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 import ca.ulaval.glo4002.billing.http.HttpClient;
+import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 
 public class SubmissionService {
 
@@ -24,26 +26,26 @@ public class SubmissionService {
   public SubmissionService() {
     this.submissionAssembler = ServiceLocator.getService(SubmissionAssembler.class);
     this.submissionRepository = ServiceLocator.getService(SubmissionRepository.class);
-    this.httpClient = ServiceLocator.getService(CrmHttpClient.class);
+    this.httpClient = ServiceLocator.getService(HttpClient.class);
+  }
+
+  public SubmissionService(SubmissionAssembler submissionAssembler,
+      SubmissionRepository submissionRepository, HttpClient httpClient) {
+    this.submissionAssembler = submissionAssembler;
+    this.submissionRepository = submissionRepository;
+    this.httpClient = httpClient;
   }
 
   public ResponseSubmissionDto createSubmission(RequestSubmissionDto requestSubmissionDto)
-      throws NegativeParameterException {
+      throws NegativeParameterException, ClientNotFoundException, ProductNotFoundException {
     verifyItemsQuantityIsNotNegative(requestSubmissionDto);
+    ClientDto clientDto = getAndVerifyClientExists(requestSubmissionDto.getClientId());
+    verifyProductsExist(requestSubmissionDto.getItems());
+    setDueTermToDefaultIfNeeded(requestSubmissionDto, clientDto.getDefaultDueTerm());
 
     Submission submission = submissionAssembler.createSubmission(requestSubmissionDto);
     submissionRepository.createSubmission(submission);
     return submissionAssembler.createResponseSubmissionDto(submission);
-  }
-
-  public ClientDto getClientByIdInCrm(Long clientId) {
-    ClientDto clientDto = httpClient.getClientDto(clientId);
-    return clientDto;
-  }
-
-  public ProductDto getProductByIdInCrm(Integer productId) {
-    ProductDto productDto = httpClient.getProductDto(productId);
-    return productDto;
   }
 
   private void verifyItemsQuantityIsNotNegative(RequestSubmissionDto requestSubmissionDto)
@@ -52,6 +54,17 @@ public class SubmissionService {
       if (product.getQuantity() < MINIMUM_PRODUCT_QUANTITY) {
         throw new NegativeParameterException("Product quantity");
       }
+    }
+  }
+
+  public ClientDto getAndVerifyClientExists(Long clientId) throws ClientNotFoundException {
+    ClientDto clientDto = httpClient.getClientDto(clientId);
+    return clientDto;
+  }
+
+  public void verifyProductsExist(List<OrderedProduct> products) throws ProductNotFoundException {
+    for (OrderedProduct item : products) {
+      httpClient.getProductDto(item.getProductId());
     }
   }
 

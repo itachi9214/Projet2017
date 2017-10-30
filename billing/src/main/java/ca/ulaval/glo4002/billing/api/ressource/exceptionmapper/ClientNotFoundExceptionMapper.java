@@ -11,6 +11,10 @@ public class ClientNotFoundExceptionMapper implements ExceptionMapper<ClientNotF
 
   private ExceptionMapperResponse exceptionMapperResponse;
 
+  public ClientNotFoundExceptionMapper() {
+    this.exceptionMapperResponse = new ExceptionMapperResponse();
+  }
+
   public ClientNotFoundExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
     this.exceptionMapperResponse = exceptionMapperResponse;
   }

@@ -7,6 +7,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 import ca.ulaval.glo4002.billing.api.ressource.BillingResource;
+import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.http.CrmHttpClient;
 import ca.ulaval.glo4002.billing.infrastructure.bill.BillInMemory;
 import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionInMemory;
@@ -47,6 +48,7 @@ public class BillingServer implements Runnable {
   }
 
   private void registerServices(ResourceConfig packageConfig) {
+    ServiceLocator.register(new IdentityFactory());
     ServiceLocator.register(new CrmHttpClient());
     ServiceLocator.register(new SubmissionAssembler());
     ServiceLocator.register(new BillAssembler());

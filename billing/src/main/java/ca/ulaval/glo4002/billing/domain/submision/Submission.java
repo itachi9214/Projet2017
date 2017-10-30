@@ -16,7 +16,6 @@ public class Submission {
 
   public Submission(Identity billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
       throws NegativeParameterException {
-    super();
     this.billNumber = billNumber;
     this.dueTerm = dueTerm;
     this.clientId = clientId;

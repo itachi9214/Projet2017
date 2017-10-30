@@ -9,7 +9,13 @@ import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 @Provider
 public class ProductNotFoundExceptionMapper implements ExceptionMapper<ProductNotFoundException> {
 
+  private static final String ENTITY = "product ";
+  private static final String ERROR = " not found";
   private ExceptionMapperResponse exceptionMapperResponse;
+
+  public ProductNotFoundExceptionMapper() {
+    this.exceptionMapperResponse = new ExceptionMapperResponse();
+  }
 
   public ProductNotFoundExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
     this.exceptionMapperResponse = exceptionMapperResponse;
@@ -17,8 +23,8 @@ public class ProductNotFoundExceptionMapper implements ExceptionMapper<ProductNo
 
   @Override
   public Response toResponse(ProductNotFoundException productNotFoundException) {
-    return exceptionMapperResponse.createBadRequestExceptionMapper("not found",
-        "product " + productNotFoundException.getProductId() + " not found", "product");
+    return exceptionMapperResponse.createBadRequestExceptionMapper(ERROR,
+        ENTITY + productNotFoundException.getProductId() + ERROR, ENTITY);
   }
 
 }

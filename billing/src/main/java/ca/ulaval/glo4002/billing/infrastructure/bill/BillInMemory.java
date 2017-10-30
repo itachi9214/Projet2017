@@ -14,10 +14,6 @@ public class BillInMemory implements BillRepository {
   public BillInMemory() {
   }
 
-  public BillInMemory(Map<Identity, Bill> bills) {
-    this.bills = bills;
-  }
-
   @Override
   public void createBill(Bill bill) {
     if (billAlreadyExists(bill.getBillNumber())) {
@@ -28,6 +24,14 @@ public class BillInMemory implements BillRepository {
 
   private boolean billAlreadyExists(Identity billId) {
     return bills.containsKey(billId);
+  }
+
+  @Override
+  public Bill findById(Identity billNumber) {
+    if (!bills.containsKey(billNumber)) {
+      throw new BillNotFoundException();
+    }
+    return bills.get(billNumber);
   }
 
 }

@@ -23,7 +23,6 @@ public class CrmHttpClient extends HttpClient {
   private ObjectMapper mapper;
 
   public CrmHttpClient() {
-    super();
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
   }
@@ -52,7 +51,7 @@ public class CrmHttpClient extends HttpClient {
   @Override
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public ProductDto getProductDto(Integer productId) {
+  public ProductDto getProductDto(Integer productId) throws ProductNotFoundException {
     String url = LOCALHOST + PRODUCTS + productId;
     Response response = callUrlWithGetMethod(url);
 

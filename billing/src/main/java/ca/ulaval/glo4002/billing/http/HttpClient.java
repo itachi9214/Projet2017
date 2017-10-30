@@ -17,8 +17,8 @@ public abstract class HttpClient {
     return target.request(MediaType.APPLICATION_JSON_TYPE).get();
   }
 
-  public abstract ClientDto getClientDto(Long clientNumber);
+  public abstract ClientDto getClientDto(Long clientNumber) throws ClientNotFoundException;
 
-  public abstract ProductDto getProductDto(Integer productId);
+  public abstract ProductDto getProductDto(Integer productId) throws ProductNotFoundException;
 
 }

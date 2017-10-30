@@ -10,6 +10,8 @@ import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 public class NegativeParameterExceptionMapper
     implements ExceptionMapper<NegativeParameterException> {
 
+  private static final String DESCRIPTION = " cannot be negative";
+  private static final String ERROR = "bad parameter";
   private ExceptionMapperResponse exceptionMapperResponse;
 
   public NegativeParameterExceptionMapper() {
@@ -22,8 +24,8 @@ public class NegativeParameterExceptionMapper
 
   @Override
   public Response toResponse(NegativeParameterException negativeParameterException) {
-    return exceptionMapperResponse.createBadRequestExceptionMapper("bad parameter",
-        negativeParameterException.getParameter() + " cannot be negative",
+    return exceptionMapperResponse.createBadRequestExceptionMapper(ERROR,
+        negativeParameterException.getParameter() + DESCRIPTION,
         negativeParameterException.getParameter());
   }
 

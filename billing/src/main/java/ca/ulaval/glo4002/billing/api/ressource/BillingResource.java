@@ -9,9 +9,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ca.ulaval.glo4002.billing.ServiceLocator;
-import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
+import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
-import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
+import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
 import ca.ulaval.glo4002.billing.service.bill.BillService;
 import ca.ulaval.glo4002.billing.service.submission.SubmissionService;
 
@@ -30,21 +30,16 @@ public class BillingResource {
 
   @POST
   public Response createSubmission(RequestSubmissionDto requestSubmissionDto) {
-    ClientDto clientDto = submissionService.getClientByIdInCrm(requestSubmissionDto.getClientId());
-    for (OrderedProduct item : requestSubmissionDto.getItems()) {
-      submissionService.getProductByIdInCrm(item.getProductId());
-    }
-    submissionService.setDueTermToDefaultIfNeeded(requestSubmissionDto,
-        clientDto.getDefaultDueTerm());
-
-    return Response.status(Response.Status.CREATED)
-        .entity(submissionService.createSubmission(requestSubmissionDto)).build();
+    ResponseSubmissionDto responseSubmissionDto = submissionService
+        .createSubmission(requestSubmissionDto);
+    return Response.status(Response.Status.CREATED).entity(responseSubmissionDto).build();
   }
 
   @POST
   @Path("/{id}")
   public Response createBill(@PathParam("id") long id) {
-    return Response.status(Response.Status.CREATED).entity(billService.createBill(id)).build();
+    BillDto billDto = billService.createBill(id);
+    return Response.status(Response.Status.CREATED).entity(billDto).build();
   }
 
 }

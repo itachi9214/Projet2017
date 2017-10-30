@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.billing.service.submission;
 
+import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
@@ -13,7 +14,11 @@ public class SubmissionAssembler {
   private IdentityFactory identityFactory;
 
   public SubmissionAssembler() {
-    identityFactory = new IdentityFactory();
+    this.identityFactory = ServiceLocator.getService(IdentityFactory.class);
+  }
+
+  public SubmissionAssembler(IdentityFactory identityFactory) {
+    this.identityFactory = identityFactory;
   }
 
   public ResponseSubmissionDto createResponseSubmissionDto(Submission submission) {

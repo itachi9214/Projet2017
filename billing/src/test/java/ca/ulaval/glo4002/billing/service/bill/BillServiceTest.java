@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
@@ -42,11 +41,8 @@ public class BillServiceTest {
 
   @Before
   public void setUp() {
-    ServiceLocator.register(billRepository);
-    ServiceLocator.register(billAssembler);
-    ServiceLocator.register(submissionRepository);
-    ServiceLocator.register(identityFactory);
-    billService = new BillService();
+    billService = new BillService(identityFactory, billAssembler, submissionRepository,
+        billRepository);
     identity = new Identity(BILL_NUMBER);
   }
 

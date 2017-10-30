@@ -28,6 +28,11 @@ public class BillingResource {
     this.billService = ServiceLocator.getService(BillService.class);
   }
 
+  public BillingResource(SubmissionService submissionService, BillService billService) {
+    this.submissionService = submissionService;
+    this.billService = billService;
+  }
+
   @POST
   public Response createSubmission(RequestSubmissionDto requestSubmissionDto) {
     ResponseSubmissionDto responseSubmissionDto = submissionService

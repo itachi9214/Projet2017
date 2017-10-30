@@ -12,7 +12,6 @@ import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
-import ca.ulaval.glo4002.billing.http.CrmHttpClient;
 import ca.ulaval.glo4002.billing.http.HttpClient;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 
@@ -27,7 +26,14 @@ public class SubmissionService {
   public SubmissionService() {
     this.submissionAssembler = ServiceLocator.getService(SubmissionAssembler.class);
     this.submissionRepository = ServiceLocator.getService(SubmissionRepository.class);
-    this.httpClient = ServiceLocator.getService(CrmHttpClient.class);
+    this.httpClient = ServiceLocator.getService(HttpClient.class);
+  }
+
+  public SubmissionService(SubmissionAssembler submissionAssembler,
+      SubmissionRepository submissionRepository, HttpClient httpClient) {
+    this.submissionAssembler = submissionAssembler;
+    this.submissionRepository = submissionRepository;
+    this.httpClient = httpClient;
   }
 
   public ResponseSubmissionDto createSubmission(RequestSubmissionDto requestSubmissionDto)

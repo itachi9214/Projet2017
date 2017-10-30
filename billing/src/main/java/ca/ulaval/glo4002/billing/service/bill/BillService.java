@@ -22,6 +22,14 @@ public class BillService {
     this.identityFactory = ServiceLocator.getService(IdentityFactory.class);
   }
 
+  public BillService(IdentityFactory identityFactory, BillAssembler billAssembler,
+      SubmissionRepository submissionRepository, BillRepository billRepository) {
+    this.billRepository = billRepository;
+    this.billAssembler = billAssembler;
+    this.submissionRepository = submissionRepository;
+    this.identityFactory = identityFactory;
+  }
+
   public BillDto createBill(long billNumber) {
     Submission submission = submissionRepository
         .findSubmissionById(identityFactory.createIdFromNumber(billNumber));

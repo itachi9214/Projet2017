@@ -27,7 +27,10 @@ public class BillInMemory implements BillRepository {
   }
 
   @Override
-  public Bill findByIdentity(Identity billNumber) {
+  public Bill findById(Identity billNumber) {
+    if (!bills.containsKey(billNumber)) {
+      throw new BillNotFoundException();
+    }
     return bills.get(billNumber);
   }
 

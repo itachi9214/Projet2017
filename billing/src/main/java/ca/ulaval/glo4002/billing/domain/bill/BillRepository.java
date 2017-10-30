@@ -6,6 +6,6 @@ public interface BillRepository {
 
   public void createBill(Bill bill);
 
-  public Bill findByIdentity(Identity billNumber);
+  public Bill findById(Identity billNumber);
 
 }

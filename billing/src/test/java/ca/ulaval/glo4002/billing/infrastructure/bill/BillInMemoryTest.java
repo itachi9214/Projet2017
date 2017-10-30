@@ -16,7 +16,8 @@ import ca.ulaval.glo4002.billing.domain.identity.Identity;
 @RunWith(MockitoJUnitRunner.class)
 public class BillInMemoryTest {
 
-  private static final Identity EXISTING_BILL_NUMBER = new Identity(200L);
+  private static final Identity EXISTING_BILL_NUMBER = new Identity(100L);
+  private static final Identity NOT_EXISTING_BILL_NUMBER = new Identity(200L);;
 
   private BillRepository billInMemory;
 
@@ -30,16 +31,21 @@ public class BillInMemoryTest {
   }
 
   @Test
-  public void givenBillWhenCreateNotExistingBillThenBillsContainsBill() {
+  public void givenBillWhenCreateBillThenFindBill() {
     billInMemory.createBill(bill);
 
-    assertEquals(billInMemory.findByIdentity(EXISTING_BILL_NUMBER), bill);
+    assertEquals(billInMemory.findById(EXISTING_BILL_NUMBER), bill);
   }
 
   @Test(expected = BillAlreadyExistsException.class)
   public void givenBillWhenCreateExistingBillThenThrowException() {
     billInMemory.createBill(bill);
     billInMemory.createBill(bill);
+  }
+
+  @Test(expected = BillNotFoundException.class)
+  public void givenNotExistingBillNumberWhenFindByIdThenThrowException() {
+    billInMemory.findById(NOT_EXISTING_BILL_NUMBER);
   }
 
 }

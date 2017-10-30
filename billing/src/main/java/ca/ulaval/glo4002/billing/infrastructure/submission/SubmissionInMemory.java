@@ -14,10 +14,6 @@ public class SubmissionInMemory implements SubmissionRepository {
   public SubmissionInMemory() {
   }
 
-  public SubmissionInMemory(Map<Identity, Submission> submissions) {
-    this.submissions = submissions;
-  }
-
   @Override
   public void createSubmission(Submission submission) {
     submissions.put(submission.getBillNumber(), submission);

@@ -12,6 +12,10 @@ public class NegativeParameterExceptionMapper
 
   private ExceptionMapperResponse exceptionMapperResponse;
 
+  public NegativeParameterExceptionMapper() {
+    this.exceptionMapperResponse = new ExceptionMapperResponse();
+  }
+
   public NegativeParameterExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
     this.exceptionMapperResponse = exceptionMapperResponse;
   }

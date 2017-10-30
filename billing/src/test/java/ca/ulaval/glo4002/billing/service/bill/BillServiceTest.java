@@ -45,6 +45,7 @@ public class BillServiceTest {
     ServiceLocator.register(billRepository);
     ServiceLocator.register(billAssembler);
     ServiceLocator.register(submissionRepository);
+    ServiceLocator.register(identityFactory);
     billService = new BillService();
     identity = new Identity(BILL_NUMBER);
   }
@@ -58,8 +59,7 @@ public class BillServiceTest {
 
     billService.createBill(BILL_NUMBER);
 
-    verify(submissionRepository)
-        .findSubmissionById(identityFactory.createIdFromNumber(BILL_NUMBER));
+    verify(submissionRepository).findSubmissionById(identity);
     verify(billAssembler).createTheBillFromTheSubmissionData(submission);
     verify(billRepository).createBill(bill);
     verify(billAssembler).assembleBill(bill);

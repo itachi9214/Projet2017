@@ -11,6 +11,10 @@ public class ProductNotFoundExceptionMapper implements ExceptionMapper<ProductNo
 
   private ExceptionMapperResponse exceptionMapperResponse;
 
+  public ProductNotFoundExceptionMapper() {
+    this.exceptionMapperResponse = new ExceptionMapperResponse();
+  }
+
   public ProductNotFoundExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
     this.exceptionMapperResponse = exceptionMapperResponse;
   }

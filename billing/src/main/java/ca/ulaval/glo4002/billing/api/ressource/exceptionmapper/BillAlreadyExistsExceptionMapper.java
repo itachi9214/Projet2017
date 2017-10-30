@@ -12,6 +12,10 @@ public class BillAlreadyExistsExceptionMapper
 
   private ExceptionMapperResponse exceptionMapperResponse;
 
+  public BillAlreadyExistsExceptionMapper() {
+    this.exceptionMapperResponse = new ExceptionMapperResponse();
+  }
+
   public BillAlreadyExistsExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
     this.exceptionMapperResponse = exceptionMapperResponse;
   }

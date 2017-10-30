@@ -70,7 +70,7 @@ public class BillingResourceTest extends JerseyTest {
     ServiceLocator.register(billService);
     ServiceLocator.register(submissionService);
 
-    return new ResourceConfig().register(new BillingResource());
+    return new ResourceConfig().packages("ca.ulaval.glo4002.billing");
   }
 
   @Test

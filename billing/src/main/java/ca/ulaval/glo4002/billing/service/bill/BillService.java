@@ -19,7 +19,7 @@ public class BillService {
     this.billRepository = ServiceLocator.getService(BillRepository.class);
     this.billAssembler = ServiceLocator.getService(BillAssembler.class);
     this.submissionRepository = ServiceLocator.getService(SubmissionRepository.class);
-    this.identityFactory = new IdentityFactory();
+    this.identityFactory = ServiceLocator.getService(IdentityFactory.class);
   }
 
   public BillDto createBill(long billNumber) {

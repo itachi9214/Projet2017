@@ -12,6 +12,10 @@ public class SubmissionNotFoundExceptionMapper
 
   private ExceptionMapperResponse exceptionMapperResponse;
 
+  public SubmissionNotFoundExceptionMapper() {
+    this.exceptionMapperResponse = new ExceptionMapperResponse();
+  }
+
   public SubmissionNotFoundExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
     this.exceptionMapperResponse = exceptionMapperResponse;
   }

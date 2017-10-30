@@ -4,12 +4,17 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 
 @Provider
 public class ClientNotFoundExceptionMapper implements ExceptionMapper<ClientNotFoundException> {
 
   private ExceptionMapperResponse exceptionMapperResponse;
+
+  public ClientNotFoundExceptionMapper() {
+    this.exceptionMapperResponse = new ExceptionMapperResponse();
+  }
 
   public ClientNotFoundExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
     this.exceptionMapperResponse = exceptionMapperResponse;

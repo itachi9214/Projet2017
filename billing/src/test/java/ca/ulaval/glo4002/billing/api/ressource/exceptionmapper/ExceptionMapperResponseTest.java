@@ -22,9 +22,9 @@ public class ExceptionMapperResponseTest {
   }
 
   @Test
-  public void givenBadRequestDetectedWhenCreateBadRequestExceptionMapperThenStatusCodeIsBadRequest() {
-    Response codeError = exceptionMapperResponse.createBadRequestExceptionMapper(ERROR,
-        DESCRIPTION, ENTITY);
+  public void whenCreateBadRequestExceptionMapperThenStatusCodeIsBadRequest() {
+    Response codeError = exceptionMapperResponse.createBadRequestExceptionMapper(ERROR, DESCRIPTION,
+        ENTITY);
 
     assertEquals(codeError.getStatus(), Status.BAD_REQUEST.getStatusCode());
   }

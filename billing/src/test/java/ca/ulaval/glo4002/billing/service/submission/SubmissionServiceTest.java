@@ -63,19 +63,20 @@ public class SubmissionServiceTest {
     clientDto = new ClientDto();
 
     willReturn(submission).given(submissionAssembler).createSubmission(requestSubmissionDto);
+    willReturn(clientDto).given(httpClient).getClientDto(anyLong());
   }
 
   @Test
   public void whenCreateSubmissionThenVerifyCreateSubmissionBySubmissionRepository()
       throws NegativeParameterException {
     submissionService.createSubmission(requestSubmissionDto);
-    
+
     verify(submissionRepository).createSubmission(submission);
   }
-  
+
   @Test
-  public void whenCreateSubmissionThenVerifyCreateSubmissionBySubmissionAssembler() 
-    throws NegativeParameterException {
+  public void whenCreateSubmissionThenVerifyCreateSubmissionBySubmissionAssembler()
+      throws NegativeParameterException {
     submissionService.createSubmission(requestSubmissionDto);
 
     verify(submissionAssembler).createSubmission(requestSubmissionDto);
@@ -92,7 +93,7 @@ public class SubmissionServiceTest {
   public void givenListOfItemsWhenVerifyProductsExistThenVerifyProductIsFound() {
     List<OrderedProduct> items = new ArrayList<>();
     items.add(item);
-    
+
     submissionService.verifyProductsExist(items);
 
     verify(httpClient).getProductDto(anyInt());

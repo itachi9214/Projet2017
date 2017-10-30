@@ -57,28 +57,34 @@ public class SubmissionServiceTest {
     ServiceLocator.register(httpClient);
 
     submissionService = new SubmissionService();
+
+    willReturn(submission).given(submissionAssembler).createSubmission(requestSubmissionDto);
   }
 
   @Test
-  public void givenSubmissionServiceWhenCreateSubmissionThenVerifyThatAllMethodsHaveBeenCalled()
+  public void whenCreateSubmissionThenVerifyCreateSubmissionBySubmissionRepository()
       throws NegativeParameterException {
-    willReturn(submission).given(submissionAssembler).createSubmission(requestSubmissionDto);
-
     submissionService.createSubmission(requestSubmissionDto);
 
-    verify(submissionAssembler).createSubmission(requestSubmissionDto);
     verify(submissionRepository).createSubmission(submission);
   }
 
   @Test
-  public void givenSubmissionServiceWhenGetClientByIdCrmThenReturnClientDto() {
+  public void whenCreateSubmissionThenVerifyCreateSubmissionBySubmissionAssembler() {
+    submissionService.createSubmission(requestSubmissionDto);
+
+    verify(submissionAssembler).createSubmission(requestSubmissionDto);
+  }
+
+  @Test
+  public void givenSubmissionServiceWhenGetClientByIdCrmThenVerifyGetClientDto() {
     submissionService.getClientByIdInCrm(CLIENT_ID);
 
     verify(httpClient).getClientDto(CLIENT_ID);
   }
 
   @Test
-  public void givenSubmissionServiceWhenGetProductByIdCrmThenReturnProductDto() {
+  public void givenSubmissionServiceWhenGetProductByIdCrmThenVerifyGetProductDto() {
     submissionService.getProductByIdInCrm(PRODUCT_ID);
 
     verify(httpClient).getProductDto(PRODUCT_ID);

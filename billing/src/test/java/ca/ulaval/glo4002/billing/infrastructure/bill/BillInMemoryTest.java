@@ -17,7 +17,7 @@ import ca.ulaval.glo4002.billing.domain.identity.Identity;
 public class BillInMemoryTest {
 
   private static final Identity EXISTING_BILL_NUMBER = new Identity(100L);
-  private static final Identity NOT_EXISTING_BILL_NUMBER = new Identity(200L);;
+  private static final Identity NOT_EXISTING_BILL_NUMBER = new Identity(200L);
 
   private BillRepository billInMemory;
 

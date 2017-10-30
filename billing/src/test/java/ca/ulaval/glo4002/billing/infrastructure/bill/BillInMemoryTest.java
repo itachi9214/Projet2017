@@ -3,9 +3,6 @@ package ca.ulaval.glo4002.billing.infrastructure.bill;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.willReturn;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,15 +19,13 @@ public class BillInMemoryTest {
   private static final Identity EXISTING_BILL_NUMBER = new Identity(200L);
 
   private BillRepository billInMemory;
-  private Map<Identity, Bill> bills;
 
   @Mock
   private Bill bill;
 
   @Before
   public void setUp() {
-    bills = new HashMap<>();
-    billInMemory = new BillInMemory(bills);
+    billInMemory = new BillInMemory();
     willReturn(EXISTING_BILL_NUMBER).given(bill).getBillNumber();
   }
 
@@ -38,7 +33,7 @@ public class BillInMemoryTest {
   public void givenBillWhenCreateNotExistingBillThenBillsContainsBill() {
     billInMemory.createBill(bill);
 
-    assertEquals(bills.containsKey(EXISTING_BILL_NUMBER), true);
+    assertEquals(billInMemory.findByIdentity(EXISTING_BILL_NUMBER), bill);
   }
 
   @Test(expected = BillAlreadyExistsException.class)

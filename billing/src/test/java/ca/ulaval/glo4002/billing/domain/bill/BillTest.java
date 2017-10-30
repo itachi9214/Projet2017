@@ -12,23 +12,29 @@ public class BillTest {
 
   @Test
   public void givenDueTermWhenImmediateWhenCalculateExpectedPaiementDateThenIsEffectiveDate() {
-    bill = new Bill(DueTerm.IMMEDIATE);
+    DueTerm dueTerm = DueTerm.IMMEDIATE;
 
-    assertEquals(bill.calculateExpectedPaiementDate(), bill.getEffectiveDate());
+    bill = new Bill(dueTerm);
+
+    assertEquals(bill.getEffectiveDate(), bill.calculateExpectedPaiementDate());
   }
 
   @Test
   public void givenDueTermWhenOneMonthWhenCalculateExpectedPaiementDateThenIsEffectiveDatePlusOneMonth() {
-    bill = new Bill(DueTerm.DAYS30);
+    DueTerm dueTerm = DueTerm.DAYS30;
 
-    assertEquals(bill.calculateExpectedPaiementDate(), bill.getEffectiveDate().plusMonths(1));
+    bill = new Bill(dueTerm);
+
+    assertEquals(bill.getEffectiveDate().plusMonths(1), bill.calculateExpectedPaiementDate());
   }
 
   @Test
   public void givenDueTermWhenThreeMonthWhenCalculateExpectedPaiementDateThenIsEffectiveDatePlusTreeMonths() {
-    bill = new Bill(DueTerm.DAYS90);
+    DueTerm dueTerm = DueTerm.DAYS90;
 
-    assertEquals(bill.calculateExpectedPaiementDate(), bill.getEffectiveDate().plusMonths(3));
+    bill = new Bill(dueTerm);
+
+    assertEquals(bill.getEffectiveDate().plusMonths(3), bill.calculateExpectedPaiementDate());
   }
 
 }

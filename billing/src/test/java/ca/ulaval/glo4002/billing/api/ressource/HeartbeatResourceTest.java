@@ -2,28 +2,28 @@ package ca.ulaval.glo4002.billing.api.ressource;
 
 import static org.junit.Assert.assertEquals;
 
-import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.test.JerseyTest;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 
-public class HeartbeatResourceTest extends JerseyTest {
+@RunWith(MockitoJUnitRunner.class)
+public class HeartbeatResourceTest {
 
-  private static final Object A_TOKEN = "token";
+  private static final String TOKEN = "token";
 
-  @Override
-  public Application configure() {
-    return new ResourceConfig().register(new HeartbeatResource());
+  HeartbeatResource heartbeatResource;
+
+  @Before
+  public void setUp() {
+    heartbeatResource = new HeartbeatResource();
   }
 
   @Test
-  public void whenBeatThenResponseStatusIsOk() {
-    Response response = target("/heartbeat").queryParam("token", A_TOKEN).request().get();
-
-    assertEquals(Status.OK.getStatusCode(), response.getStatus());
+  public void givenTokenWhenBeatThenResponseOk() {
+    Response response = heartbeatResource.beat(TOKEN);
+    assertEquals(response.getStatus(), Response.ok().build().getStatus());
   }
-
 }

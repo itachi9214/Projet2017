@@ -9,7 +9,7 @@ public class EntityManagerFactoryProvider {
 
   public static EntityManagerFactory getFactory() {
     if (instance == null) {
-      instance = Persistence.createEntityManagerFactory("application");
+      instance = Persistence.createEntityManagerFactory("billing");
     }
     return instance;
   }

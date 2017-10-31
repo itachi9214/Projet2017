@@ -27,6 +27,9 @@ public class Submission {
   protected List<OrderedProduct> items;
   protected BigDecimal totalPrice;
 
+  public Submission() {
+  }
+
   public Submission(Identity billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
       throws NegativeParameterException {
     this.billNumber = billNumber;

@@ -17,6 +17,10 @@ public class Bill extends Submission {
   private LocalDateTime effectiveDate;
   private LocalDateTime expectedPaiement;
 
+  public Bill() {
+    super();
+  }
+
   public Bill(Identity billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
       throws NegativeParameterException {
     super(billNumber, dueTerm, clientId, items);

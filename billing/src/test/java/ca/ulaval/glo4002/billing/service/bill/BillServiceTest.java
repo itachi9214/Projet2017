@@ -47,18 +47,23 @@ public class BillServiceTest {
   }
 
   @Test
-  public void whenCreateBillthenVerifyTheAllMethodsIsCall() {
-    willReturn(submission).given(submissionRepository).findSubmissionById(identity);
+  public void whenCreateBillthenVerifySubmissionIsFound() {
     willReturn(identity).given(identityFactory).createIdFromNumber(BILL_NUMBER);
-    willReturn(IMMEDIATE).given(submission).getDueTerm();
-    willReturn(bill).given(billAssembler).createTheBillFromTheSubmissionData(submission);
 
     billService.createBill(BILL_NUMBER);
 
     verify(submissionRepository).findSubmissionById(identity);
-    verify(billAssembler).createTheBillFromTheSubmissionData(submission);
+  }
+
+  @Test
+  public void whenCreateBillthenVerifyBillIsCreatedByRepository() {
+    willReturn(identity).given(identityFactory).createIdFromNumber(BILL_NUMBER);
+    willReturn(submission).given(submissionRepository).findSubmissionById(identity);
+    willReturn(bill).given(billAssembler).createTheBillFromTheSubmissionData(submission);
+
+    billService.createBill(BILL_NUMBER);
+
     verify(billRepository).createBill(bill);
-    verify(billAssembler).assembleBill(bill);
   }
 
 }

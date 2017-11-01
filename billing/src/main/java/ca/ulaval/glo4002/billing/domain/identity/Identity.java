@@ -1,8 +1,14 @@
 package ca.ulaval.glo4002.billing.domain.identity;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Identity {
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class Identity implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   private Long number;
 

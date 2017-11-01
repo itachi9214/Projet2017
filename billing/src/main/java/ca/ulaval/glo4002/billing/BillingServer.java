@@ -1,5 +1,9 @@
 package ca.ulaval.glo4002.billing;
 
+import java.util.EnumSet;
+
+import javax.servlet.DispatcherType;
+
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -7,10 +11,12 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 import ca.ulaval.glo4002.billing.api.ressource.BillingResource;
+import ca.ulaval.glo4002.billing.api.ressource.filters.EntityManagerContextFilter;
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.http.CrmHttpClient;
-import ca.ulaval.glo4002.billing.infrastructure.bill.BillInMemory;
-import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionInMemory;
+import ca.ulaval.glo4002.billing.infrastructure.EntityManagerProvider;
+import ca.ulaval.glo4002.billing.infrastructure.bill.BillHibernateRepository;
+import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionHibernateRepository;
 import ca.ulaval.glo4002.billing.service.bill.BillAssembler;
 import ca.ulaval.glo4002.billing.service.bill.BillService;
 import ca.ulaval.glo4002.billing.service.submission.SubmissionAssembler;
@@ -36,6 +42,8 @@ public class BillingServer implements Runnable {
     ServletHolder servletHolder = new ServletHolder(container);
 
     contextHandler.addServlet(servletHolder, "/*");
+    contextHandler.addFilter(EntityManagerContextFilter.class, "/*",
+        EnumSet.of(DispatcherType.REQUEST));
 
     try {
       server.start();
@@ -49,11 +57,12 @@ public class BillingServer implements Runnable {
 
   private void registerServices(ResourceConfig packageConfig) {
     ServiceLocator.register(new IdentityFactory());
+    ServiceLocator.register(new EntityManagerProvider());
     ServiceLocator.register(new CrmHttpClient());
     ServiceLocator.register(new SubmissionAssembler());
     ServiceLocator.register(new BillAssembler());
-    ServiceLocator.register(new SubmissionInMemory());
-    ServiceLocator.register(new BillInMemory());
+    ServiceLocator.register(new SubmissionHibernateRepository());
+    ServiceLocator.register(new BillHibernateRepository());
     ServiceLocator.register(new BillService());
     ServiceLocator.register(new SubmissionService());
 

@@ -14,7 +14,7 @@ import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BillInMemoryTest {
+public class BillInMemoryRepositoryTest {
 
   private static final Identity EXISTING_BILL_NUMBER = new Identity(100L);
   private static final Identity NOT_EXISTING_BILL_NUMBER = new Identity(200L);
@@ -26,7 +26,7 @@ public class BillInMemoryTest {
 
   @Before
   public void setUp() {
-    billInMemory = new BillInMemory();
+    billInMemory = new BillInMemoryRepository();
     willReturn(EXISTING_BILL_NUMBER).given(bill).getBillNumber();
   }
 

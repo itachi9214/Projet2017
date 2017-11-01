@@ -34,6 +34,7 @@ public class BillHibernateRepositoryTest {
   private static final long CLIENT_NUMBER = 1L;
   private static final DueTerm DUE_TERM = DueTerm.DAYS30;
   private static final Identity BILL_NUMBER = new Identity(1L);
+
   private BillRepository billRepository;
   private EntityManager entityManager;
   private EntityManagerFactory entityManagerFactory;

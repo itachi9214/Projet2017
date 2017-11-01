@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.payment.api.dto;
 
 import java.math.BigDecimal;
 
-import ca.ulaval.glo4002.payment.domaine.payment.PaymentMethod;
+import ca.ulaval.glo4002.payment.domain.payment.PaymentMethod;
 
 public class RequestPaymentDto {
 

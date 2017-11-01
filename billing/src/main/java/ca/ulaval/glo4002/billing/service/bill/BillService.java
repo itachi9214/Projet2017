@@ -4,6 +4,7 @@ import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
+import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
@@ -31,9 +32,11 @@ public class BillService {
   }
 
   public BillDto createBill(long billNumber) {
-    Submission submission = submissionRepository
-        .findSubmissionById(identityFactory.createIdFromNumber(billNumber));
+    Identity identity = identityFactory.createIdFromNumber(billNumber);
+
+    Submission submission = submissionRepository.findSubmissionById(identity);
     Bill bill = billAssembler.createTheBillFromTheSubmissionData(submission);
+
     billRepository.createBill(bill);
     return billAssembler.assembleBill(bill);
   }

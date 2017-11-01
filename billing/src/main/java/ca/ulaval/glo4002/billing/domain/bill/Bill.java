@@ -3,16 +3,23 @@ package ca.ulaval.glo4002.billing.domain.bill;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 
+@Entity
 public class Bill extends Submission {
 
   private LocalDateTime effectiveDate;
   private LocalDateTime expectedPaiement;
+
+  public Bill() {
+    super();
+  }
 
   public Bill(Identity billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
       throws NegativeParameterException {

@@ -7,15 +7,15 @@ import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 
-public class BillInMemory implements BillRepository {
+public class BillInMemoryRepository implements BillRepository {
 
   private Map<Identity, Bill> bills = new HashMap<>();
 
-  public BillInMemory() {
+  public BillInMemoryRepository() {
   }
 
   @Override
-  public void createBill(Bill bill) {
+  public void createBill(Bill bill) throws BillAlreadyExistsException {
     if (billAlreadyExists(bill.getBillNumber())) {
       throw new BillAlreadyExistsException();
     }
@@ -27,8 +27,8 @@ public class BillInMemory implements BillRepository {
   }
 
   @Override
-  public Bill findById(Identity billNumber) {
-    if (!bills.containsKey(billNumber)) {
+  public Bill findById(Identity billNumber) throws BillNotFoundException {
+    if (!billAlreadyExists(billNumber)) {
       throw new BillNotFoundException();
     }
     return bills.get(billNumber);

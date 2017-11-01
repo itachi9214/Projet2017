@@ -3,16 +3,32 @@ package ca.ulaval.glo4002.billing.domain.submision;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 
+@Entity
 public class Submission {
 
   private static final int MINIMUM_TOTAL_PRICE = 0;
+
+  @EmbeddedId
   protected Identity billNumber;
+  @Enumerated
   protected DueTerm dueTerm;
   protected Long clientId;
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn
   protected List<OrderedProduct> items;
   protected BigDecimal totalPrice;
+
+  public Submission() {
+  }
 
   public Submission(Identity billNumber, DueTerm dueTerm, Long clientId, List<OrderedProduct> items)
       throws NegativeParameterException {

@@ -10,6 +10,12 @@ public class RequestPaymentDto {
   private BigDecimal amount;
   private PaymentMethod paymentMethod;
 
+  public RequestPaymentDto(Long clientId, BigDecimal amount, PaymentMethod paymentMethod) {
+    this.clientId = clientId;
+    this.amount = amount;
+    this.paymentMethod = paymentMethod;
+  }
+
   public Long getClientId() {
     return clientId;
   }

@@ -2,8 +2,6 @@ package ca.ulaval.glo4002.payment.api.resource;
 
 import static org.mockito.Mockito.verify;
 
-import java.math.BigDecimal;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +18,7 @@ public class PaymentResourceTest {
 
   private static final PaymentSource SOURCE = PaymentSource.CREDIT_CARD;
   private static final String ACCOUNT = "XXXX-XXX-XXX";
-  private static final BigDecimal AMOUNT = new BigDecimal(50);
+  private static final float AMOUNT = 50;
   private static final long CLIENT_ID = 1L;
 
   private PaymentResource paymentResource;

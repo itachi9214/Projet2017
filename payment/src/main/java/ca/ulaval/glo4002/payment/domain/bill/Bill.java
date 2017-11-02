@@ -1,7 +1,5 @@
 package ca.ulaval.glo4002.payment.domain.bill;
 
-import java.math.BigDecimal;
-
 public class Bill {
 
   private Long billNumber;
@@ -15,7 +13,7 @@ public class Bill {
     return state;
   }
 
-  public void addPaymentAndUpdateState(BigDecimal amount) {
+  public void addPaymentAndUpdateState(float amount) {
 
   }
 

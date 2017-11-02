@@ -4,7 +4,6 @@ import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class PaymentServiceTest {
   private static final PaymentSource SOURCE = PaymentSource.CREDIT_CARD;
   private static final String ACCOUNT = "XXXX-XXX-XXX";
   private static final long CLIENT_ID = 1L;
-  private static final BigDecimal AMOUNT = new BigDecimal(50);
+  private static final float AMOUNT = 50;
 
   private PaymentService paymentService;
   private RequestPaymentDto requestPaymentDto;

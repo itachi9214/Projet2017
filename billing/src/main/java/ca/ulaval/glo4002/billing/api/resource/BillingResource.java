@@ -44,7 +44,7 @@ public class BillingResource {
   @Path("/{id}")
   public Response createBill(@PathParam("id") long id) {
     BillDto billDto = billService.createBill(id);
-    return Response.status(Response.Status.ACCEPTED).entity(billDto).build();
+    return Response.status(Response.Status.OK).entity(billDto).build();
   }
 
 }

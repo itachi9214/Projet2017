@@ -47,7 +47,7 @@ public class BillServiceTest {
   }
 
   @Test
-  public void whenCreateBillthenVerifySubmissionIsFound() {
+  public void whenCreateBillThenVerifySubmissionIsFound() {
     willReturn(identity).given(identityFactory).createIdFromNumber(BILL_NUMBER);
 
     billService.createBill(BILL_NUMBER);
@@ -56,7 +56,7 @@ public class BillServiceTest {
   }
 
   @Test
-  public void whenCreateBillthenVerifyBillIsCreatedByRepository() {
+  public void whenCreateBillThenVerifyBillIsCreatedByRepository() {
     willReturn(identity).given(identityFactory).createIdFromNumber(BILL_NUMBER);
     willReturn(submission).given(submissionRepository).findSubmissionById(identity);
     willReturn(bill).given(billAssembler).createTheBillFromTheSubmissionData(submission);

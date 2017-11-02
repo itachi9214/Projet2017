@@ -10,8 +10,8 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-import ca.ulaval.glo4002.billing.api.ressource.BillingResource;
-import ca.ulaval.glo4002.billing.api.ressource.filters.EntityManagerContextFilter;
+import ca.ulaval.glo4002.billing.api.resource.BillingResource;
+import ca.ulaval.glo4002.billing.api.resource.filters.EntityManagerContextFilter;
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.http.CrmHttpClient;
 import ca.ulaval.glo4002.billing.infrastructure.EntityManagerProvider;
@@ -67,7 +67,7 @@ public class BillingServer implements Runnable {
     ServiceLocator.register(new SubmissionService());
 
     BillingResource billingResource = new BillingResource();
-    ServiceLocator.register(new BillingResource());
+    ServiceLocator.register(billingResource);
     packageConfig.register(billingResource);
   }
 }

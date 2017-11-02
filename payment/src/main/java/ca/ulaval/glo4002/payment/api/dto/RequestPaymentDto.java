@@ -1,14 +1,18 @@
 package ca.ulaval.glo4002.payment.api.dto;
 
-import java.math.BigDecimal;
-
 import ca.ulaval.glo4002.payment.domain.payment.PaymentMethod;
 
 public class RequestPaymentDto {
 
   private Long clientId;
-  private BigDecimal amount;
+  private float amount;
   private PaymentMethod paymentMethod;
+
+  public RequestPaymentDto(Long clientId, float amount, PaymentMethod paymentMethod) {
+    this.clientId = clientId;
+    this.amount = amount;
+    this.paymentMethod = paymentMethod;
+  }
 
   public Long getClientId() {
     return clientId;
@@ -18,11 +22,11 @@ public class RequestPaymentDto {
     this.clientId = clientId;
   }
 
-  public BigDecimal getAmount() {
+  public float getAmount() {
     return amount;
   }
 
-  public void setAmount(BigDecimal amount) {
+  public void setAmount(float amount) {
     this.amount = amount;
   }
 

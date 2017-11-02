@@ -1,8 +1,6 @@
-package ca.ulaval.glo4002.payment.domain.payment;
+package ca.ulaval.glo4002.payment.domain.bill;
 
 import java.util.List;
-
-import ca.ulaval.glo4002.payment.domain.bill.Bill;
 
 public interface BillRepository {
 

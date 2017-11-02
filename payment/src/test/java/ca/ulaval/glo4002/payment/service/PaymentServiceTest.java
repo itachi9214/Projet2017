@@ -17,8 +17,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.payment.api.dto.RequestPaymentDto;
 import ca.ulaval.glo4002.payment.domain.bill.Bill;
+import ca.ulaval.glo4002.payment.domain.bill.BillRepository;
 import ca.ulaval.glo4002.payment.domain.bill.BillState;
-import ca.ulaval.glo4002.payment.domain.payment.BillRepository;
 import ca.ulaval.glo4002.payment.domain.payment.Payment;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentMethod;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentRepository;

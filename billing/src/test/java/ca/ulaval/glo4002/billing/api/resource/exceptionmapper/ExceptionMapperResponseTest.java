@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.api.ressource.exceptionmapper;
+package ca.ulaval.glo4002.billing.api.resource.exceptionmapper;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,8 @@ import javax.ws.rs.core.Response.Status;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ca.ulaval.glo4002.billing.api.resource.exceptionmapper.ExceptionMapperResponse;
 
 public class ExceptionMapperResponseTest {
 

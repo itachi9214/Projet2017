@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.api.ressource;
+package ca.ulaval.glo4002.billing.api.resource;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

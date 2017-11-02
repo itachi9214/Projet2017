@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.api.ressource;
+package ca.ulaval.glo4002.billing.api.resource;
 
 import static org.junit.Assert.assertEquals;
 

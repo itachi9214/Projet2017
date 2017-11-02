@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.api.ressource.exceptionmapper;
+package ca.ulaval.glo4002.billing.api.resource.exceptionmapper;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
+import ca.ulaval.glo4002.billing.domain.bill.BillState;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;

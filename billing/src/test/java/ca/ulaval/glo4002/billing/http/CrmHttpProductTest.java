@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.infrastructure.submission;
+package ca.ulaval.glo4002.billing.http;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.willReturn;

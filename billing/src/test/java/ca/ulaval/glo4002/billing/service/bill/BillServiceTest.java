@@ -13,7 +13,6 @@ import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
-import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 
@@ -21,7 +20,6 @@ import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 public class BillServiceTest {
 
   private static final long BILL_NUMBER = 10L;
-  private static final DueTerm IMMEDIATE = DueTerm.IMMEDIATE;
 
   private BillService billService;
   private Identity identity;
@@ -59,7 +57,7 @@ public class BillServiceTest {
   public void whenCreateBillThenVerifyBillIsCreatedByRepository() {
     willReturn(identity).given(identityFactory).createIdFromNumber(BILL_NUMBER);
     willReturn(submission).given(submissionRepository).findSubmissionById(identity);
-    willReturn(bill).given(billAssembler).createTheBillFromTheSubmissionData(submission);
+    willReturn(bill).given(billAssembler).createBillFromSubmission(submission);
 
     billService.createBill(BILL_NUMBER);
 

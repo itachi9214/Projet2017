@@ -2,6 +2,7 @@ package ca.ulaval.glo4002.billing.http;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.Matchers.anyString;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -45,11 +46,7 @@ public class CrmHttpClientTest {
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
     clientDto = new ClientDto(EXISTING_CLIENT_NUMBER, Instant.now(), DueTerm.IMMEDIATE, A_STRING);
-    http = new Http() {
-      public Response callUrlWithGetMethod(String url) {
-        return response;
-      }
-    };
+    willReturn(response).given(http).callUrlWithGetMethod(anyString());
     crmHttpClient = new CrmHttpClient(http);
   }
 

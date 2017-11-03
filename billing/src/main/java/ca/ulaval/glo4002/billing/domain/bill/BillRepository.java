@@ -1,5 +1,7 @@
 package ca.ulaval.glo4002.billing.domain.bill;
 
+import java.util.List;
+
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.infrastructure.bill.BillAlreadyExistsException;
 import ca.ulaval.glo4002.billing.infrastructure.bill.BillNotFoundException;
@@ -10,5 +12,6 @@ public interface BillRepository {
 
   public Bill findById(Identity billNumber) throws BillNotFoundException;
 
-  public Bill findByClientId(Long clientId) throws BillNotFoundException;
+  public List<Bill> findAllByClientId(Long clientId) throws BillNotFoundException;
+
 }

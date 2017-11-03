@@ -55,7 +55,7 @@ public class BillAssemblerTest {
     willReturn(identity).given(bill).getBillNumber();
     willReturn(IMMEDIATE).given(bill).getDueTerm();
     willReturn(date).given(bill).getEffectiveDate();
-    willReturn(date).given(bill).getExpectedPaiement();
+    willReturn(date).given(bill).getExpectedPayment();
 
     BillDto dto = billAssembler.assembleBill(bill);
 
@@ -78,7 +78,7 @@ public class BillAssemblerTest {
 
     assertTrue(bill.getBillNumber().equals(identity));
     assertTrue(bill.getDueTerm().equals(IMMEDIATE));
-    assertTrue(bill.getExpectedPaiement().equals(bill.getEffectiveDate()));
+    assertTrue(bill.getExpectedPayment().equals(bill.getEffectiveDate()));
     assertTrue(bill.getItems().equals(ITEMS_LIST));
     assertTrue(bill.getTotalPrice().equals(TOTAL_PRICE));
     assertTrue(bill.getClientId().equals(CLIENT_NUMBER));

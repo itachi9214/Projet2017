@@ -1,7 +1,10 @@
 package ca.ulaval.glo4002.billing.infrastructure.bill;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
@@ -13,6 +16,9 @@ import ca.ulaval.glo4002.billing.infrastructure.EntityManagerProvider;
 import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionNotFoundException;
 
 public class BillHibernateRepository implements BillRepository {
+
+  private static final String STATE = "state";
+  private static final String CLIENT_ID = "clientId";
 
   private EntityManagerProvider entityManagerProvider;
   private SubmissionRepository submissionRepository;
@@ -78,15 +84,20 @@ public class BillHibernateRepository implements BillRepository {
   }
 
   @Override
-  public Bill findByClientId(Long clientId) throws BillNotFoundException {
+  public List<Bill> findAllByClientId(Long clientId) throws BillNotFoundException {
     EntityManager entityManager = entityManagerProvider.getEntityManager();
 
-    Bill bill = entityManager.find(Bill.class, clientId);
+    TypedQuery<Bill> query = entityManager.createQuery(
+        "SELECT b FROM Bill b WHERE b.clientId =:clientId AND b.billState=:state ORDER BY b.expectedPayment",
+        Bill.class);
+    query.setParameter(CLIENT_ID, clientId);
+    query.setParameter(STATE, BillState.UNPAID);
+    List<Bill> bills = query.getResultList();
 
-    if (bill == null) {
+    if (bills.isEmpty()) {
       throw new BillNotFoundException();
     }
-    return bill;
+    return bills;
   }
 
 }

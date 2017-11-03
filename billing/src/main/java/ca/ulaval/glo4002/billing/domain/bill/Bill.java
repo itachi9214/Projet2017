@@ -16,7 +16,7 @@ import ca.ulaval.glo4002.billing.domain.submision.Submission;
 public class Bill extends Submission {
 
   private LocalDateTime effectiveDate;
-  private LocalDateTime expectedPaiement;
+  private LocalDateTime expectedPayment;
   private BillState billState;
 
   public Bill() {
@@ -27,7 +27,7 @@ public class Bill extends Submission {
       throws NegativeParameterException {
     super(billNumber, dueTerm, clientId, items);
     this.effectiveDate = LocalDateTime.now();
-    this.expectedPaiement = calculateExpectedPaiementDate();
+    this.expectedPayment = calculateExpectedPaymentDate();
   }
 
   public Bill(Identity billNumber, BigDecimal totalPrice, Long clientId, BillState billState) {
@@ -48,24 +48,24 @@ public class Bill extends Submission {
   public Bill(DueTerm dueTerm) {
     super(dueTerm);
     this.effectiveDate = LocalDateTime.now();
-    this.expectedPaiement = calculateExpectedPaiementDate();
+    this.expectedPayment = calculateExpectedPaymentDate();
   }
 
   public LocalDateTime getEffectiveDate() {
     return effectiveDate;
   }
 
-  public LocalDateTime getExpectedPaiement() {
-    return expectedPaiement;
+  public LocalDateTime getExpectedPayment() {
+    return expectedPayment;
   }
 
-  public void setExpectedPaiement(LocalDateTime expectedPaiement) {
-    this.expectedPaiement = expectedPaiement;
+  public void setExpectedPayment(LocalDateTime expectedPayment) {
+    this.expectedPayment = expectedPayment;
   }
 
-  public LocalDateTime calculateExpectedPaiementDate() {
-    this.expectedPaiement = effectiveDate.plusMonths(dueTerm.getMonthsQuantity());
-    return expectedPaiement;
+  public LocalDateTime calculateExpectedPaymentDate() {
+    this.expectedPayment = effectiveDate.plusMonths(dueTerm.getMonthsQuantity());
+    return expectedPayment;
   }
 
 }

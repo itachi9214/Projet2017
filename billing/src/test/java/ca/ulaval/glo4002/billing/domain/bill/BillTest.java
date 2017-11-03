@@ -16,7 +16,7 @@ public class BillTest {
 
     bill = new Bill(dueTerm);
 
-    assertEquals(bill.getEffectiveDate(), bill.calculateExpectedPaiementDate());
+    assertEquals(bill.getEffectiveDate(), bill.calculateExpectedPaymentDate());
   }
 
   @Test
@@ -25,7 +25,7 @@ public class BillTest {
 
     bill = new Bill(dueTerm);
 
-    assertEquals(bill.getEffectiveDate().plusMonths(1), bill.calculateExpectedPaiementDate());
+    assertEquals(bill.getEffectiveDate().plusMonths(1), bill.calculateExpectedPaymentDate());
   }
 
   @Test
@@ -34,7 +34,7 @@ public class BillTest {
 
     bill = new Bill(dueTerm);
 
-    assertEquals(bill.getEffectiveDate().plusMonths(3), bill.calculateExpectedPaiementDate());
+    assertEquals(bill.getEffectiveDate().plusMonths(3), bill.calculateExpectedPaymentDate());
   }
 
 }

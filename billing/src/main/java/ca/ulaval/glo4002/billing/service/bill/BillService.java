@@ -1,5 +1,7 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
+import java.util.List;
+
 import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillStateDto;
@@ -43,8 +45,8 @@ public class BillService {
   }
 
   public BillStateDto getUnpaidBillsOrderedByOldest(Long clientId) {
-    Bill bill = billRepository.findByClientId(clientId);
-    return billAssembler.assembleBillState(bill);
+    List<Bill> bills = billRepository.findAllByClientId(clientId);
+    return billAssembler.assembleBillState(bills);
   }
 
 }

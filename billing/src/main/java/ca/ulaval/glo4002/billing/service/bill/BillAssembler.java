@@ -1,6 +1,8 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillStateDto;
@@ -17,18 +19,22 @@ public class BillAssembler {
   public BillDto assembleBill(Bill bill) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:MM:ss.SSS'Z'");
     BillDto billDto = new BillDto(bill.getBillNumber().getNumber(),
-        bill.getEffectiveDate().format(formatter), bill.getExpectedPaiement().format(formatter),
+        bill.getEffectiveDate().format(formatter), bill.getExpectedPayment().format(formatter),
         bill.getDueTerm(), BASE_URL + bill.getBillNumber().getNumber());
     return billDto;
   }
 
-  public BillStateDto assembleBillState(Bill bill) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:MM:ss.SSS'Z'");
-    BillStateDto billStateDto = new BillStateDto(bill.getBillNumber().getNumber(),
-        bill.getClientId(), bill.getEffectiveDate().format(formatter), bill.getTotalPrice(),
-        bill.getBillState());
-    return billStateDto;
+  public List<BillStateDto> assembleBillState(List<Bill> bills) {
+    List<BillStateDto> billStateDtos = new ArrayList<>();
 
+    for (Bill bill : bills) {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:MM:ss.SSS'Z'");
+      BillStateDto billStateDto = new BillStateDto(bill.getBillNumber().getNumber(),
+          bill.getClientId(), bill.getEffectiveDate().format(formatter), bill.getTotalPrice(),
+          bill.getBillState());
+      billStateDtos.add(billStateDto);
+    }
+    return billStateDtos;
   }
 
   public Bill createBillFromSubmission(Submission submission) {

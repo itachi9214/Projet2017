@@ -8,19 +8,19 @@ import javax.ws.rs.core.Response.Status;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.ulaval.glo4002.billing.api.resource.exceptionmapper.ExceptionMapperResponse;
+import ca.ulaval.glo4002.billing.api.resource.exceptionmapper.ExceptionMapperFactory;
 
-public class ExceptionMapperResponseTest {
+public class ExceptionMapperFactoryTest {
 
   private static final String ERROR = "error";
   private static final String DESCRIPTION = "Not found";
   private static final String ENTITY = "Entity";
 
-  private ExceptionMapperResponse exceptionMapperResponse;
+  private ExceptionMapperFactory exceptionMapperResponse;
 
   @Before
   public void setUp() {
-    exceptionMapperResponse = new ExceptionMapperResponse();
+    exceptionMapperResponse = new ExceptionMapperFactory();
   }
 
   @Test

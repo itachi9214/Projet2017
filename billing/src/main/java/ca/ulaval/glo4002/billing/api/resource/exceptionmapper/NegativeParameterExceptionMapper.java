@@ -12,19 +12,19 @@ public class NegativeParameterExceptionMapper
 
   private static final String DESCRIPTION = " cannot be negative";
   private static final String ERROR = "bad parameter";
-  private ExceptionMapperResponse exceptionMapperResponse;
+  private ExceptionMapperFactory exceptionMapperFactory;
 
   public NegativeParameterExceptionMapper() {
-    this.exceptionMapperResponse = new ExceptionMapperResponse();
+    this.exceptionMapperFactory = new ExceptionMapperFactory();
   }
 
-  public NegativeParameterExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
-    this.exceptionMapperResponse = exceptionMapperResponse;
+  public NegativeParameterExceptionMapper(ExceptionMapperFactory exceptionMapperFactory) {
+    this.exceptionMapperFactory = exceptionMapperFactory;
   }
 
   @Override
   public Response toResponse(NegativeParameterException negativeParameterException) {
-    return exceptionMapperResponse.createBadRequestExceptionMapper(ERROR,
+    return exceptionMapperFactory.createBadRequestExceptionMapper(ERROR,
         negativeParameterException.getParameter() + DESCRIPTION,
         negativeParameterException.getParameter());
   }

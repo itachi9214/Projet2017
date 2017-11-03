@@ -14,19 +14,19 @@ public class BillAlreadyExistsExceptionMapper
   private static final String DESCRIPTION = "Invoice already accepted";
   private static final String ERROR = "wrong status";
 
-  private ExceptionMapperResponse exceptionMapperResponse;
+  private ExceptionMapperFactory exceptionMapperFactory;
 
   public BillAlreadyExistsExceptionMapper() {
-    this.exceptionMapperResponse = new ExceptionMapperResponse();
+    this.exceptionMapperFactory = new ExceptionMapperFactory();
   }
 
-  public BillAlreadyExistsExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
-    this.exceptionMapperResponse = exceptionMapperResponse;
+  public BillAlreadyExistsExceptionMapper(ExceptionMapperFactory exceptionMapperResponse) {
+    this.exceptionMapperFactory = exceptionMapperResponse;
   }
 
   @Override
   public Response toResponse(BillAlreadyExistsException billAlreadyExistsException) {
-    return exceptionMapperResponse.createBadRequestExceptionMapper(ERROR, DESCRIPTION, ENTITY);
+    return exceptionMapperFactory.createBadRequestExceptionMapper(ERROR, DESCRIPTION, ENTITY);
   }
 
 }

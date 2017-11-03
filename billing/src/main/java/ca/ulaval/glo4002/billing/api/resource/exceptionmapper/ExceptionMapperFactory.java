@@ -11,7 +11,7 @@ import ca.ulaval.glo4002.billing.api.dto.BadRequestDto;
 import ca.ulaval.glo4002.billing.api.dto.BadRequestErrorListDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.NotFoundDto;
 
-public class ExceptionMapperResponse {
+public class ExceptionMapperFactory {
 
   public Response createBadRequestExceptionMapper(String error, String description, String entity) {
     List<BadRequestDto> errors = new ArrayList<>();

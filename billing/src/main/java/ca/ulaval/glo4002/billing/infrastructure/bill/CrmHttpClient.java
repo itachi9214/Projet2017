@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 import ca.ulaval.glo4002.billing.http.ClientRepository;
@@ -32,7 +33,7 @@ public class CrmHttpClient implements ClientRepository {
   }
 
   public CrmHttpClient() {
-
+    this(ServiceLocator.getService(Http.class));
   }
 
   @Override

@@ -27,13 +27,13 @@ public class CrmHttpProduct implements ProductRepository {
   private Http http;
 
   public CrmHttpProduct(Http http) {
-    this.http = ServiceLocator.get;
+    this.http = http;
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
   }
 
   public CrmHttpProduct() {
-
+    this(ServiceLocator.getService(Http.class));
   }
 
   @Override

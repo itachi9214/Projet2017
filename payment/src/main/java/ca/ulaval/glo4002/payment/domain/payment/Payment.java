@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.payment.domain.payment;
 
+import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
@@ -12,6 +13,7 @@ public class Payment {
   protected Identity paymentNumber;
   protected float amount;
   protected Long clientId;
+  @Embedded
   protected PaymentMethod paymentMethod;
 
   public Payment(Identity paymentNumber, float amount, Long clientId, PaymentMethod paymentMethod) {

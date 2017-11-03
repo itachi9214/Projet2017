@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
@@ -17,6 +18,7 @@ public class Bill extends Submission {
 
   private LocalDateTime effectiveDate;
   private LocalDateTime expectedPayment;
+  @Enumerated
   private BillState billState;
 
   public Bill() {
@@ -28,20 +30,13 @@ public class Bill extends Submission {
     super(billNumber, dueTerm, clientId, items);
     this.effectiveDate = LocalDateTime.now();
     this.expectedPayment = calculateExpectedPaymentDate();
+    this.billState = BillState.UNPAID;
   }
 
   public Bill(Identity billNumber, BigDecimal totalPrice, Long clientId, BillState billState) {
     this.billNumber = billNumber;
     this.totalPrice = totalPrice;
     this.clientId = clientId;
-    this.billState = billState;
-  }
-
-  public BillState getBillState() {
-    return billState;
-  }
-
-  public void setBillState(BillState billState) {
     this.billState = billState;
   }
 
@@ -61,6 +56,14 @@ public class Bill extends Submission {
 
   public void setExpectedPayment(LocalDateTime expectedPayment) {
     this.expectedPayment = expectedPayment;
+  }
+
+  public BillState getBillState() {
+    return billState;
+  }
+
+  public void setBillState(BillState billState) {
+    this.billState = billState;
   }
 
   public LocalDateTime calculateExpectedPaymentDate() {

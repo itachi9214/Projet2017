@@ -74,7 +74,7 @@ public class BillAssemblerTest {
     willReturn(ITEMS_LIST).given(submission).getItems();
     willReturn(TOTAL_PRICE).given(submission).getTotalPrice();
 
-    Bill bill = billAssembler.createTheBillFromTheSubmissionData(submission);
+    Bill bill = billAssembler.createBillFromSubmission(submission);
 
     assertTrue(bill.getBillNumber().equals(identity));
     assertTrue(bill.getDueTerm().equals(IMMEDIATE));

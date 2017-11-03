@@ -21,7 +21,7 @@ public class BillAssembler {
     return billDto;
   }
 
-  public Bill createTheBillFromTheSubmissionData(Submission submission) {
+  public Bill createBillFromSubmission(Submission submission) {
     Bill bill = new Bill(submission.getBillNumber(), submission.getDueTerm(),
         submission.getClientId(), submission.getItems());
     return bill;

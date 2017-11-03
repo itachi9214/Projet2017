@@ -18,13 +18,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
+import ca.ulaval.glo4002.billing.domain.submision.ClientRepository;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
+import ca.ulaval.glo4002.billing.domain.submision.ProductRepository;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
-import ca.ulaval.glo4002.billing.infrastructure.bill.CrmHttpClient;
-import ca.ulaval.glo4002.billing.infrastructure.bill.CrmHttpProduct;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionServiceTest {
@@ -45,9 +45,9 @@ public class SubmissionServiceTest {
   @Mock
   private SubmissionAssembler submissionAssembler;
   @Mock
-  private CrmHttpClient httpClient;
+  private ClientRepository clientRepository;
   @Mock
-  private CrmHttpProduct httpProduct;
+  private ProductRepository productRepository;
   @Mock
   private OrderedProduct item;
 
@@ -57,12 +57,12 @@ public class SubmissionServiceTest {
     items.add(item);
     requestSubmissionDto = new RequestSubmissionDto(CLIENT_ID, new Date(), DueTerm.DAYS30, items);
 
-    submissionService = new SubmissionService(submissionAssembler, submissionRepository, httpClient,
-        httpProduct);
+    submissionService = new SubmissionService(submissionAssembler, submissionRepository,
+        clientRepository, productRepository);
     clientDto = new ClientDto();
 
     willReturn(submission).given(submissionAssembler).createSubmission(requestSubmissionDto);
-    willReturn(clientDto).given(httpClient).getClientDto(anyLong());
+    willReturn(clientDto).given(clientRepository).getClientDto(anyLong());
   }
 
   @Test
@@ -85,7 +85,7 @@ public class SubmissionServiceTest {
   public void whenGetAndVerifyClientExistsThenVerifyClientIsFound() {
     submissionService.getAndVerifyClientExists(CLIENT_ID);
 
-    verify(httpClient).getClientDto(CLIENT_ID);
+    verify(clientRepository).getClientDto(CLIENT_ID);
   }
 
   @Test
@@ -95,7 +95,7 @@ public class SubmissionServiceTest {
 
     submissionService.verifyProductsExist(items);
 
-    verify(httpProduct).getProductDto(anyInt());
+    verify(productRepository).getProductDto(anyInt());
   }
 
   @Test(expected = NegativeParameterException.class)

@@ -11,19 +11,19 @@ public class ProductNotFoundExceptionMapper implements ExceptionMapper<ProductNo
 
   private static final String ENTITY = "product ";
   private static final String ERROR = " not found";
-  private ExceptionMapperResponse exceptionMapperResponse;
+  private ExceptionMapperFactory exceptionMapperFactory;
 
   public ProductNotFoundExceptionMapper() {
-    this.exceptionMapperResponse = new ExceptionMapperResponse();
+    this.exceptionMapperFactory = new ExceptionMapperFactory();
   }
 
-  public ProductNotFoundExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
-    this.exceptionMapperResponse = exceptionMapperResponse;
+  public ProductNotFoundExceptionMapper(ExceptionMapperFactory exceptionMapperFactory) {
+    this.exceptionMapperFactory = exceptionMapperFactory;
   }
 
   @Override
   public Response toResponse(ProductNotFoundException productNotFoundException) {
-    return exceptionMapperResponse.createBadRequestExceptionMapper(ERROR,
+    return exceptionMapperFactory.createBadRequestExceptionMapper(ERROR,
         ENTITY + productNotFoundException.getProductId() + ERROR, ENTITY);
   }
 

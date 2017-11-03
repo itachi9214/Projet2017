@@ -12,7 +12,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 
-public class CrmHttpClient extends HttpClient {
+public class CrmHttpClient extends Http {
 
   private static final String LOCALHOST = "http://localhost:8080";
   private static final String CLIENTS = "/clients/";

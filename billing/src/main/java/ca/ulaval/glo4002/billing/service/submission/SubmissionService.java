@@ -6,15 +6,15 @@ import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
+import ca.ulaval.glo4002.billing.domain.submision.ClientRepository;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
+import ca.ulaval.glo4002.billing.domain.submision.ProductRepository;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
-import ca.ulaval.glo4002.billing.infrastructure.bill.CrmHttpClient;
-import ca.ulaval.glo4002.billing.infrastructure.bill.CrmHttpProduct;
 
 public class SubmissionService {
 
@@ -22,23 +22,23 @@ public class SubmissionService {
 
   private SubmissionAssembler submissionAssembler;
   private SubmissionRepository submissionRepository;
-  private CrmHttpClient httpClient;
-  private CrmHttpProduct httpProduct;
+  private ClientRepository clientRepository;
+  private ProductRepository productRepository;
 
   public SubmissionService() {
     this.submissionAssembler = ServiceLocator.getService(SubmissionAssembler.class);
     this.submissionRepository = ServiceLocator.getService(SubmissionRepository.class);
-    this.httpClient = ServiceLocator.getService(CrmHttpClient.class);
-    this.httpProduct = ServiceLocator.getService(CrmHttpProduct.class);
+    this.clientRepository = ServiceLocator.getService(ClientRepository.class);
+    this.productRepository = ServiceLocator.getService(ProductRepository.class);
   }
 
   public SubmissionService(SubmissionAssembler submissionAssembler,
-      SubmissionRepository submissionRepository, CrmHttpClient httpClient,
-      CrmHttpProduct httpProduct) {
+      SubmissionRepository submissionRepository, ClientRepository clientRepository,
+      ProductRepository productRepository) {
     this.submissionAssembler = submissionAssembler;
     this.submissionRepository = submissionRepository;
-    this.httpClient = httpClient;
-    this.httpProduct = httpProduct;
+    this.clientRepository = clientRepository;
+    this.productRepository = productRepository;
   }
 
   public ResponseSubmissionDto createSubmission(RequestSubmissionDto requestSubmissionDto)
@@ -63,13 +63,13 @@ public class SubmissionService {
   }
 
   public ClientDto getAndVerifyClientExists(Long clientId) throws ClientNotFoundException {
-    ClientDto clientDto = httpClient.getClientDto(clientId);
+    ClientDto clientDto = clientRepository.getClientDto(clientId);
     return clientDto;
   }
 
   public void verifyProductsExist(List<OrderedProduct> products) throws ProductNotFoundException {
     for (OrderedProduct item : products) {
-      httpProduct.getProductDto(item.getProductId());
+      productRepository.getProductDto(item.getProductId());
     }
   }
 

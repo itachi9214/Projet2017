@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.http;
+package ca.ulaval.glo4002.billing.domain.submision;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 

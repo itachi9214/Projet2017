@@ -6,10 +6,14 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.glassfish.jersey.client.ClientProperties;
+
 public class Http {
 
   public Response callUrlWithGetMethod(String url) {
     Client client = ClientBuilder.newClient();
+    client.property(ClientProperties.CONNECT_TIMEOUT, 2000);
+    client.property(ClientProperties.READ_TIMEOUT, 2000);
     WebTarget target = client.target(url);
     return target.request(MediaType.APPLICATION_JSON_TYPE).get();
   }

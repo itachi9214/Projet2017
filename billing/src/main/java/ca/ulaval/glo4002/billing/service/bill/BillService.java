@@ -35,7 +35,7 @@ public class BillService {
     Identity identity = identityFactory.createIdFromNumber(billNumber);
 
     Submission submission = submissionRepository.findSubmissionById(identity);
-    Bill bill = billAssembler.createTheBillFromTheSubmissionData(submission);
+    Bill bill = billAssembler.createBillFromSubmission(submission);
 
     billRepository.createBill(bill);
     return billAssembler.assembleBill(bill);

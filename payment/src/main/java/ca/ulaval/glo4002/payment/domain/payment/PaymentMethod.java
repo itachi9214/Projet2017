@@ -5,6 +5,9 @@ public class PaymentMethod {
   private String account;
   private PaymentSource source;
 
+  public PaymentMethod() {
+  }
+
   public PaymentMethod(String account, PaymentSource source) {
     this.account = account;
     this.source = source;

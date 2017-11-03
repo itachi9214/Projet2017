@@ -23,7 +23,8 @@ import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
-import ca.ulaval.glo4002.billing.http.CrmHttpClient;
+import ca.ulaval.glo4002.billing.infrastructure.bill.CrmHttpClient;
+import ca.ulaval.glo4002.billing.infrastructure.bill.CrmHttpProduct;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionServiceTest {
@@ -46,6 +47,8 @@ public class SubmissionServiceTest {
   @Mock
   private CrmHttpClient httpClient;
   @Mock
+  private CrmHttpProduct httpProduct;
+  @Mock
   private OrderedProduct item;
 
   @Before
@@ -54,8 +57,8 @@ public class SubmissionServiceTest {
     items.add(item);
     requestSubmissionDto = new RequestSubmissionDto(CLIENT_ID, new Date(), DueTerm.DAYS30, items);
 
-    submissionService = new SubmissionService(submissionAssembler, submissionRepository,
-        httpClient);
+    submissionService = new SubmissionService(submissionAssembler, submissionRepository, httpClient,
+        httpProduct);
     clientDto = new ClientDto();
 
     willReturn(submission).given(submissionAssembler).createSubmission(requestSubmissionDto);
@@ -92,7 +95,7 @@ public class SubmissionServiceTest {
 
     submissionService.verifyProductsExist(items);
 
-    verify(httpClient).getProductDto(anyInt());
+    verify(httpProduct).getProductDto(anyInt());
   }
 
   @Test(expected = NegativeParameterException.class)

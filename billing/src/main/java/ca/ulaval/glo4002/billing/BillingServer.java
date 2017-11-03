@@ -13,9 +13,11 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import ca.ulaval.glo4002.billing.api.resource.BillingResource;
 import ca.ulaval.glo4002.billing.api.resource.filters.EntityManagerContextFilter;
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
-import ca.ulaval.glo4002.billing.http.CrmHttpClient;
+import ca.ulaval.glo4002.billing.http.Http;
 import ca.ulaval.glo4002.billing.infrastructure.EntityManagerProvider;
 import ca.ulaval.glo4002.billing.infrastructure.bill.BillHibernateRepository;
+import ca.ulaval.glo4002.billing.infrastructure.bill.CrmHttpClient;
+import ca.ulaval.glo4002.billing.infrastructure.bill.CrmHttpProduct;
 import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionHibernateRepository;
 import ca.ulaval.glo4002.billing.service.bill.BillAssembler;
 import ca.ulaval.glo4002.billing.service.bill.BillService;
@@ -58,7 +60,9 @@ public class BillingServer implements Runnable {
   private void registerServices(ResourceConfig packageConfig) {
     ServiceLocator.register(new IdentityFactory());
     ServiceLocator.register(new EntityManagerProvider());
+    ServiceLocator.register(new Http());
     ServiceLocator.register(new CrmHttpClient());
+    ServiceLocator.register(new CrmHttpProduct());
     ServiceLocator.register(new SubmissionAssembler());
     ServiceLocator.register(new BillAssembler());
     ServiceLocator.register(new SubmissionHibernateRepository());

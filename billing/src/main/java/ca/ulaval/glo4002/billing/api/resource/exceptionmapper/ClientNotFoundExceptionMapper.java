@@ -9,20 +9,23 @@ import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 @Provider
 public class ClientNotFoundExceptionMapper implements ExceptionMapper<ClientNotFoundException> {
 
-  private ExceptionMapperResponse exceptionMapperResponse;
+  private static final String NOT_FOUND = "not found";
+  private static final String CLIENT = "client";
+
+  private ExceptionMapperFactory exceptionMapperFactory;
 
   public ClientNotFoundExceptionMapper() {
-    this.exceptionMapperResponse = new ExceptionMapperResponse();
+    this.exceptionMapperFactory = new ExceptionMapperFactory();
   }
 
-  public ClientNotFoundExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
-    this.exceptionMapperResponse = exceptionMapperResponse;
+  public ClientNotFoundExceptionMapper(ExceptionMapperFactory exceptionMapperResponse) {
+    this.exceptionMapperFactory = exceptionMapperResponse;
   }
 
   @Override
   public Response toResponse(ClientNotFoundException clientNotFoundException) {
-    return exceptionMapperResponse.createBadRequestExceptionMapper("not found",
-        "client " + clientNotFoundException.getClientId() + " not found", "client");
+    return exceptionMapperFactory.createBadRequestExceptionMapper(NOT_FOUND,
+        CLIENT + " " + clientNotFoundException.getClientId() + " " + NOT_FOUND, CLIENT);
   }
 
 }

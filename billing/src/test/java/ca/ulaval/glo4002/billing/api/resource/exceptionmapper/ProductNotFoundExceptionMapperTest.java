@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.api.resource.exceptionmapper.ExceptionMapperResponse;
+import ca.ulaval.glo4002.billing.api.resource.exceptionmapper.ExceptionMapperFactory;
 import ca.ulaval.glo4002.billing.api.resource.exceptionmapper.ProductNotFoundExceptionMapper;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 
@@ -22,7 +22,7 @@ public class ProductNotFoundExceptionMapperTest {
   private ProductNotFoundException productNotFoundException;
 
   @Mock
-  private ExceptionMapperResponse exceptionMapperResponse;
+  private ExceptionMapperFactory exceptionMapperResponse;
 
   @Before
   public void setUp() {

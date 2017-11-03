@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.api.resource.exceptionmapper.ClientNotFoundExceptionMapper;
-import ca.ulaval.glo4002.billing.api.resource.exceptionmapper.ExceptionMapperResponse;
+import ca.ulaval.glo4002.billing.api.resource.exceptionmapper.ExceptionMapperFactory;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -21,7 +21,7 @@ public class ClientNotFoundExceptionMapperTest {
   private ClientNotFoundExceptionMapper clientNotFoundExceptionMapper;
 
   @Mock
-  private ExceptionMapperResponse exceptionMapperResponse;
+  private ExceptionMapperFactory exceptionMapperResponse;
   @Mock
   private ClientNotFoundException clientNotFoundException;
 

@@ -12,8 +12,9 @@ import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
-import ca.ulaval.glo4002.billing.http.HttpClient;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
+import ca.ulaval.glo4002.billing.infrastructure.bill.CrmHttpClient;
+import ca.ulaval.glo4002.billing.infrastructure.bill.CrmHttpProduct;
 
 public class SubmissionService {
 
@@ -21,19 +22,23 @@ public class SubmissionService {
 
   private SubmissionAssembler submissionAssembler;
   private SubmissionRepository submissionRepository;
-  private HttpClient httpClient;
+  private CrmHttpClient httpClient;
+  private CrmHttpProduct httpProduct;
 
   public SubmissionService() {
     this.submissionAssembler = ServiceLocator.getService(SubmissionAssembler.class);
     this.submissionRepository = ServiceLocator.getService(SubmissionRepository.class);
-    this.httpClient = ServiceLocator.getService(HttpClient.class);
+    this.httpClient = ServiceLocator.getService(CrmHttpClient.class);
+    this.httpProduct = ServiceLocator.getService(CrmHttpProduct.class);
   }
 
   public SubmissionService(SubmissionAssembler submissionAssembler,
-      SubmissionRepository submissionRepository, HttpClient httpClient) {
+      SubmissionRepository submissionRepository, CrmHttpClient httpClient,
+      CrmHttpProduct httpProduct) {
     this.submissionAssembler = submissionAssembler;
     this.submissionRepository = submissionRepository;
     this.httpClient = httpClient;
+    this.httpProduct = httpProduct;
   }
 
   public ResponseSubmissionDto createSubmission(RequestSubmissionDto requestSubmissionDto)
@@ -64,7 +69,7 @@ public class SubmissionService {
 
   public void verifyProductsExist(List<OrderedProduct> products) throws ProductNotFoundException {
     for (OrderedProduct item : products) {
-      httpClient.getProductDto(item.getProductId());
+      httpProduct.getProductDto(item.getProductId());
     }
   }
 

@@ -10,19 +10,19 @@ import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionNotFoundExc
 public class SubmissionNotFoundExceptionMapper
     implements ExceptionMapper<SubmissionNotFoundException> {
 
-  private ExceptionMapperResponse exceptionMapperResponse;
+  private ExceptionMapperFactory exceptionMapperFactory;
 
   public SubmissionNotFoundExceptionMapper() {
-    this.exceptionMapperResponse = new ExceptionMapperResponse();
+    this.exceptionMapperFactory = new ExceptionMapperFactory();
   }
 
-  public SubmissionNotFoundExceptionMapper(ExceptionMapperResponse exceptionMapperResponse) {
-    this.exceptionMapperResponse = exceptionMapperResponse;
+  public SubmissionNotFoundExceptionMapper(ExceptionMapperFactory exceptionMapperFactory) {
+    this.exceptionMapperFactory = exceptionMapperFactory;
   }
 
   @Override
   public Response toResponse(SubmissionNotFoundException submissionNotFoundException) {
-    return exceptionMapperResponse.createNotFoundExceptionMapper();
+    return exceptionMapperFactory.createNotFoundExceptionMapper();
   }
 
 }

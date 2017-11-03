@@ -13,15 +13,16 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
-import ca.ulaval.glo4002.billing.http.ClientRepository;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
+import ca.ulaval.glo4002.billing.http.ClientRepository;
 import ca.ulaval.glo4002.billing.http.Http;
 
 public class CrmHttpClient implements ClientRepository {
 
   private static final String LOCALHOST = "http://localhost:8080";
   private static final String CLIENTS = "/clients/";
-  Http http;
+
+  private Http http;
   private ObjectMapper mapper;
 
   public CrmHttpClient(Http http) {

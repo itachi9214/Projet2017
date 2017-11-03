@@ -14,13 +14,14 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 import ca.ulaval.glo4002.billing.http.Http;
-import ca.ulaval.glo4002.billing.http.ProductRepository;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
+import ca.ulaval.glo4002.billing.http.ProductRepository;
 
 public class CrmHttpProduct implements ProductRepository {
 
   private static final String LOCALHOST = "http://localhost:8080";
   private static final String PRODUCTS = "/products/";
+
   private ObjectMapper mapper;
   private Http http;
 

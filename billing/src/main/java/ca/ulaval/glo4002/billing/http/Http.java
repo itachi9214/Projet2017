@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 
-public abstract class HttpClient {
+public abstract class Http {
 
   protected Response callUrlWithGetMethod(String url) {
     Client client = ClientBuilder.newClient();

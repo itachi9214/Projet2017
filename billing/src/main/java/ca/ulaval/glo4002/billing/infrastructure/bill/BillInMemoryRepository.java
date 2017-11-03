@@ -34,4 +34,13 @@ public class BillInMemoryRepository implements BillRepository {
     return bills.get(billNumber);
   }
 
+  @Override
+  public Bill findByClientId(Long clientId) throws BillNotFoundException {
+    for (Bill bill : bills.values()) {
+      if (bill.getClientId().equals(clientId))
+        return bill;
+    }
+    throw new BillNotFoundException();
+  }
+
 }

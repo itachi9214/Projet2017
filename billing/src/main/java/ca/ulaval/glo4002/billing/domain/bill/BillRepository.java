@@ -10,4 +10,5 @@ public interface BillRepository {
 
   public Bill findById(Identity billNumber) throws BillNotFoundException;
 
+  public Bill findByClientId(Long clientId) throws BillNotFoundException;
 }

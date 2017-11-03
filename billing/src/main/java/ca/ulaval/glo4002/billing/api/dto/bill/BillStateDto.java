@@ -2,17 +2,18 @@ package ca.ulaval.glo4002.billing.api.dto.bill;
 
 import java.math.BigDecimal;
 
+import ca.ulaval.glo4002.billing.domain.bill.BillState;
+
 public class BillStateDto {
 
   private Long id;
   private Long clientId;
   private String effectiveDate;
   private BigDecimal total;
-  private String billState;
+  private BillState billState;
 
   public BillStateDto(Long id, Long clientId, String effectiveDate, BigDecimal total,
-      String billState) {
-    super();
+      BillState billState) {
     this.id = id;
     this.clientId = clientId;
     this.effectiveDate = effectiveDate;
@@ -36,7 +37,7 @@ public class BillStateDto {
     return total;
   }
 
-  public String getBillState() {
+  public BillState getBillState() {
     return billState;
   }
 
@@ -56,7 +57,7 @@ public class BillStateDto {
     this.total = total;
   }
 
-  public void setBillState(String billState) {
+  public void setBillState(BillState billState) {
     this.billState = billState;
   }
 

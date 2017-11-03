@@ -9,7 +9,7 @@ import ca.ulaval.glo4002.billing.domain.submision.Submission;
 
 public class SubmissionAssembler {
 
-  private static final String BILLS = "/bills/";
+  private static final String BASE_URL = "/bills/";
 
   private IdentityFactory identityFactory;
 
@@ -24,7 +24,7 @@ public class SubmissionAssembler {
   public ResponseSubmissionDto createResponseSubmissionDto(Submission submission) {
     ResponseSubmissionDto responseSubmissionDto = new ResponseSubmissionDto(
         submission.getBillNumber().getNumber(), submission.getTotalPrice(), submission.getDueTerm(),
-        BILLS + submission.getBillNumber());
+        BASE_URL + submission.getBillNumber());
     return responseSubmissionDto;
   }
 

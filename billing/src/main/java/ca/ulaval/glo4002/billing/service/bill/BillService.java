@@ -44,7 +44,7 @@ public class BillService {
     return billAssembler.assembleBill(bill);
   }
 
-  public BillStateDto getUnpaidBillsOrderedByOldest(Long clientId) {
+  public List<BillStateDto> getUnpaidBillsOrderedByOldest(Long clientId) {
     List<Bill> bills = billRepository.findAllByClientId(clientId);
     return billAssembler.assembleBillState(bills);
   }

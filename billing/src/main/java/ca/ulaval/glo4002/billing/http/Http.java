@@ -6,19 +6,12 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
-import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
+public class Http {
 
-public abstract class Http {
-
-  protected Response callUrlWithGetMethod(String url) {
+  public Response callUrlWithGetMethod(String url) {
     Client client = ClientBuilder.newClient();
     WebTarget target = client.target(url);
     return target.request(MediaType.APPLICATION_JSON_TYPE).get();
   }
-
-  public abstract ClientDto getClientDto(Long clientNumber) throws ClientNotFoundException;
-
-  public abstract ProductDto getProductDto(Integer productId) throws ProductNotFoundException;
 
 }

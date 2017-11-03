@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 import ca.ulaval.glo4002.billing.http.Http;
 import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
@@ -26,8 +27,7 @@ public class CrmHttpProduct implements ProductRepository {
   private Http http;
 
   public CrmHttpProduct(Http http) {
-
-    this.http = http;
+    this.http = ServiceLocator.get;
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
   }

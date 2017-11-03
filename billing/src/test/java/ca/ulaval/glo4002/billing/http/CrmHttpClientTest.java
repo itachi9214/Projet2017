@@ -55,7 +55,6 @@ public class CrmHttpClientTest {
 
   @Test(expected = ClientNotFoundException.class)
   public void givenClientNumberNotFoundWhenGetClientDtoThenThrowException() {
-
     willReturn(Status.NOT_FOUND.getStatusCode()).given(response).getStatus();
 
     crmHttpClient.getClientDto(NON_EXISTING_CLIENT_NUMBER);

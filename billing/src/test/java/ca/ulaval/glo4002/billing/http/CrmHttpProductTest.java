@@ -2,6 +2,7 @@ package ca.ulaval.glo4002.billing.http;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.Matchers.anyString;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -20,8 +21,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
-import ca.ulaval.glo4002.billing.http.Http;
-import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 import ca.ulaval.glo4002.billing.infrastructure.bill.CrmHttpProduct;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -45,11 +44,7 @@ public class CrmHttpProductTest {
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     productDto = new ProductDto(EXISTING_PRODUCT_ID, A_STRING, new BigDecimal(AN_INT));
-    http = new Http() {
-      public Response callUrlWithGetMethod(String url) {
-        return response;
-      }
-    };
+    willReturn(response).given(http).callUrlWithGetMethod(anyString());
     crmHttpProduct = new CrmHttpProduct(http);
   }
 

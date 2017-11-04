@@ -34,8 +34,4 @@ public class BillInMemoryRepository implements BillRepository {
     return bills.get(billNumber);
   }
 
-  @Override
-  public Bill findOldestUnpaidBillOfSameClient(Identity billNumber) {
-    return null;
-  }
 }

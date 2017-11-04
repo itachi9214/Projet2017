@@ -77,9 +77,4 @@ public class BillHibernateRepository implements BillRepository {
     return bill;
   }
 
-  @Override
-  public Bill findOldestUnpaidBillOfSameClient(Identity billNumbers) {
-    return null;
-  }
-
 }

@@ -1,7 +1,6 @@
 package ca.ulaval.glo4002.billing.http;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;

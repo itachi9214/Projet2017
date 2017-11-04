@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import ca.ulaval.glo4002.payment.ServiceLocator;
+import ca.ulaval.glo4002.payment.domain.Identity.Identity;
 import ca.ulaval.glo4002.payment.domain.payment.Payment;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentRepository;
 import ca.ulaval.glo4002.payment.infrastructure.EntityManagerProvider;
@@ -32,7 +33,7 @@ public class PaymentHibernateRepository implements PaymentRepository {
   }
 
   @Override
-  public Payment findPaymentById(long id) throws PaymentNotFoundException {
+  public Payment findPaymentById(Identity id) throws PaymentNotFoundException {
     EntityManager entityManager = entityManagerProvider.getEntityManager();
     Payment payment = entityManager.find(Payment.class, id);
 

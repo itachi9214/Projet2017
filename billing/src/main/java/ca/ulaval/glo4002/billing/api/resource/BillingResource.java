@@ -1,5 +1,7 @@
 package ca.ulaval.glo4002.billing.api.resource;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -52,7 +54,7 @@ public class BillingResource {
   @GET
   @Path("/{client_id}")
   public Response getUnpaidBillsOrderedByOldestForClient(@PathParam("client_id") Long clientId) {
-    BillStateDto billStateDto = billService.getUnpaidBillsOrderedByOldest(clientId);
+    List<BillStateDto> billStateDto = billService.getUnpaidBillsOrderedByOldest(clientId);
     return Response.status(Response.Status.OK).entity(billStateDto).build();
   }
 

@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.payment.infrastructure.payment;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,7 +16,7 @@ import ca.ulaval.glo4002.payment.infrastructure.EntityManagerProvider;
 
 public class PaymentHibernateRepositoryTest {
 
-  private static final int AMOUNT = 3;
+  private static final long AMOUNT = 3L;
   private static final long PAYMENT_ID = 1L;
 
   private PaymentHibernateRepository paymentRepository;

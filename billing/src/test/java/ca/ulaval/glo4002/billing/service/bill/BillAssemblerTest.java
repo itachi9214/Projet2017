@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
-import static org.junit.Assert.assertTrue;
-import static org.mockito.BDDMockito.willReturn;
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -74,7 +74,7 @@ public class BillAssemblerTest {
     willReturn(ITEMS_LIST).given(submission).getItems();
     willReturn(TOTAL_PRICE).given(submission).getTotalPrice();
 
-    Bill bill = billAssembler.createBillFromSubmission(submission);
+    Bill bill = billAssembler.createTheBillFromTheSubmissionData(submission);
 
     assertTrue(bill.getBillNumber().equals(identity));
     assertTrue(bill.getDueTerm().equals(IMMEDIATE));

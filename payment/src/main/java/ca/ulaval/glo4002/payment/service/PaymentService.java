@@ -13,6 +13,7 @@ import ca.ulaval.glo4002.payment.domain.payment.PaymentRepository;
 
 public class PaymentService {
 
+  private static final int OLDEST_BILL_INDEX = 0;
   private PaymentRepository paymentRepository;
   private PaymentAssembler paymentAssembler;
   private BillRepository billRepository;
@@ -48,7 +49,7 @@ public class PaymentService {
     List<Bill> unpaidBills = billRepository.getUnpaidBillsOrderedByOldestForClient(clientId);
     Bill oldestBill = null;
     if (!unpaidBills.isEmpty()) {
-      oldestBill = unpaidBills.get(0);
+      oldestBill = unpaidBills.get(OLDEST_BILL_INDEX);
     }
     return oldestBill;
   }

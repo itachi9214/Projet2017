@@ -35,7 +35,7 @@ public class BillInMemoryRepository implements BillRepository {
   }
 
   @Override
-  public void cancelBill(long billNumber) {
+  public void cancelBill(Identity billNumber) {
 
   }
 

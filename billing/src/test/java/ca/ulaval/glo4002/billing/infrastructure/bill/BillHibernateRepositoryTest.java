@@ -94,4 +94,13 @@ public class BillHibernateRepositoryTest {
     billRepository.findById(BILL_NUMBER);
   }
 
+  @Test(expected = BillNotFoundException.class)
+  public void givenBillwhenCancelBillThenThenBillIsDeleted() {
+    Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
+    billRepository.createBill(bill);
+    billRepository.cancelBill(BILL_NUMBER);
+
+    billRepository.findById(BILL_NUMBER);
+  }
+
 }

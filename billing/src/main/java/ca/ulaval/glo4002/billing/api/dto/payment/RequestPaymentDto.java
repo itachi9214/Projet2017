@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.billing.api.dto.payment;
 
 import ca.ulaval.glo4002.billing.domain.payment.PaymentMethod;
+import ca.ulaval.glo4002.billing.domain.payment.PaymentSource;
 
 public class RequestPaymentDto {
   private Long clientId;
@@ -12,6 +13,12 @@ public class RequestPaymentDto {
   }
 
   public RequestPaymentDto() {
+  }
+
+  public RequestPaymentDto(Long clientId, float amount, String account, PaymentSource source) {
+    this.clientId = clientId;
+    this.amount = amount;
+    this.paymentMethod = new PaymentMethod(account, source);
   }
 
   public void setClientId(Long clientId) {

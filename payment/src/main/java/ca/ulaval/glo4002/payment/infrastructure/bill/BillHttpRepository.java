@@ -23,8 +23,8 @@ public class BillHttpRepository implements BillRepository {
   }
 
   @Override
-  public void changeBillStateToPaid(Bill bill) {
-    billingHttp.saveBillStateToPaid(bill);
+  public void updateBillAfterPayment(Bill bill) {
+    billingHttp.updateBillAfterPayment(bill);
   }
 
 }

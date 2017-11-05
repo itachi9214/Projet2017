@@ -99,4 +99,15 @@ public class BillHibernateRepository implements BillRepository {
     return bills.get(0);
   }
 
+  @Override
+  public void updateBill(Bill bill) {
+    EntityManager entityManager = entityManagerProvider.getEntityManager();
+    EntityTransaction transaction = entityManager.getTransaction();
+    transaction.begin();
+
+    entityManager.merge(bill);
+
+    transaction.commit();
+  }
+
 }

@@ -56,4 +56,11 @@ public class BillingResource {
     return Response.status(Response.Status.OK).entity(billStateDto).build();
   }
 
+  @POST
+  @Path("/update")
+  public Response updateBillAfterPayment(BillForPaymentDto billForPaymentDto) {
+    billService.updateBillAfterPayment(billForPaymentDto);
+    return Response.status(Response.Status.OK).build();
+  }
+
 }

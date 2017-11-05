@@ -1,8 +1,6 @@
 package ca.ulaval.glo4002.payment.service;
 
 import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.Mockito.atMost;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
@@ -14,7 +12,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4002.payment.api.dto.RequestPaymentDto;
 import ca.ulaval.glo4002.payment.domain.bill.Bill;
 import ca.ulaval.glo4002.payment.domain.bill.BillRepository;
-import ca.ulaval.glo4002.payment.domain.bill.BillState;
 import ca.ulaval.glo4002.payment.domain.payment.Payment;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentMethod;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentRepository;
@@ -51,7 +48,6 @@ public class PaymentServiceTest {
     willReturn(AMOUNT).given(payment).getAmount();
     willReturn(payment).given(paymentAssembler).toDomain(requestPaymentDto);
     willReturn(bill).given(billRepository).getOldestUnpaidBillForClient(CLIENT_ID);
-    willReturn(BillState.PAID).given(bill).getBillState();
   }
 
   @Test
@@ -72,25 +68,14 @@ public class PaymentServiceTest {
   public void whenMakePaymentThenVerifyPaymentIsAddedToBill() {
     paymentService.makePayment(requestPaymentDto);
 
-    verify(bill).addPaymentAndUpdateState(payment.getAmount());
+    verify(bill).addPayment(payment.getAmount());
   }
 
   @Test
-  public void givenUnpaidBillWhenMakePaymentThenVerifyStateIsNotSaved() {
-    willReturn(BillState.UNPAID).given(bill).getBillState();
-
+  public void whenMakePaymentThenVerifyBillIsUpdated() {
     paymentService.makePayment(requestPaymentDto);
 
-    verify(billRepository, never()).changeBillStateToPaid(bill);
-  }
-
-  @Test
-  public void givenPaidBillWhenMakePaymentThenVerifyStateIsSaved() {
-    willReturn(BillState.PAID).given(bill).getBillState();
-
-    paymentService.makePayment(requestPaymentDto);
-
-    verify(billRepository, atMost(1)).changeBillStateToPaid(bill);
+    verify(billRepository).updateBillAfterPayment(bill);
   }
 
 }

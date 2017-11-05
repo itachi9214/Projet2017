@@ -6,6 +6,6 @@ public interface BillRepository {
 
   public Bill getOldestUnpaidBillForClient(Long clientId) throws BillNotFoundException;
 
-  public void changeBillStateToPaid(Bill bill);
+  public void updateBillAfterPayment(Bill bill);
 
 }

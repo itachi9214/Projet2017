@@ -16,6 +16,7 @@ public class BillingHttp {
 
   private static final String LOCALHOST = "http://localhost:8181";
   private static final String BILLS = "/bills/";
+  private static final String UPDATE = "update/";
 
   private UtilHttp utilHttp;
   private ObjectMapper mapper;
@@ -49,8 +50,8 @@ public class BillingHttp {
     return bill;
   }
 
-  public void saveBillStateToPaid(Bill bill) {
-    String url = LOCALHOST + BILLS;
+  public void updateBillAfterPayment(Bill bill) {
+    String url = LOCALHOST + BILLS + UPDATE;
     utilHttp.callUrlWithPostMethod(url, bill);
   }
 

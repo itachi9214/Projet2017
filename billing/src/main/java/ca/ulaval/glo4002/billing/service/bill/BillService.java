@@ -48,4 +48,11 @@ public class BillService {
     return billForPaymentDto;
   }
 
+  public void updateBillAfterPayment(BillForPaymentDto billForPaymentDto) {
+    Identity identity = identityFactory.createIdFromNumber(billForPaymentDto.getBillNumber());
+    Bill bill = billRepository.findById(identity);
+    bill.updateAfterPayment(billForPaymentDto.getPaidPrice());
+    billRepository.updateBill(bill);
+  }
+
 }

@@ -46,4 +46,9 @@ public class BillInMemoryRepository implements BillRepository {
     return billFound.get();
   }
 
+  @Override
+  public void updateBill(Bill bill) {
+
+  }
+
 }

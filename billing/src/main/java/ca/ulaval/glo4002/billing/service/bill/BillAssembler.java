@@ -24,7 +24,7 @@ public class BillAssembler {
 
   public BillForPaymentDto assembleBillForPayment(Bill bill) {
     BillForPaymentDto billStateDto = new BillForPaymentDto(bill.getBillNumber().getNumber(),
-        bill.getClientId(), bill.getTotalPrice(), bill.getPaidPrice(), bill.getBillState());
+        bill.getPaidPrice());
 
     return billStateDto;
   }

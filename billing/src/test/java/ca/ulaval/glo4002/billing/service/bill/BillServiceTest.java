@@ -1,8 +1,8 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.Mockito.verify;
 
 import java.math.BigDecimal;
 
@@ -15,7 +15,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillForPaymentDto;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
-import ca.ulaval.glo4002.billing.domain.bill.BillState;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
@@ -26,9 +25,7 @@ public class BillServiceTest {
 
   private static final long BILL_NUMBER = 10L;
   private static final long CLIENT_ID = 100L;
-  private static final int PRICE = 10;
-  private static final BigDecimal TOTAL_PRICE = new BigDecimal(PRICE);
-  private static final BigDecimal PAID_PRICE = new BigDecimal(PRICE);
+  private static final BigDecimal PAID_PRICE = new BigDecimal(10);
 
   private BillService billService;
   private Identity identity;
@@ -52,8 +49,7 @@ public class BillServiceTest {
     billService = new BillService(identityFactory, billAssembler, submissionRepository,
         billRepository);
     identity = new Identity(BILL_NUMBER);
-    billForPaymentDto = new BillForPaymentDto(BILL_NUMBER, CLIENT_ID, TOTAL_PRICE, PAID_PRICE,
-        BillState.UNPAID);
+    billForPaymentDto = new BillForPaymentDto(BILL_NUMBER, PAID_PRICE);
   }
 
   @Test

@@ -5,21 +5,14 @@ import java.math.BigDecimal;
 public class Bill {
 
   private Long billNumber;
-  private BigDecimal totalPrice;
   private BigDecimal paidPrice;
-  private Long clientId;
-  private BillState billState;
 
   public Bill() {
   }
 
-  public Bill(Long billNumber, BigDecimal totalPrice, BigDecimal paidPrice, Long clientId,
-      BillState billState) {
+  public Bill(Long billNumber, BigDecimal paidPrice) {
     this.billNumber = billNumber;
-    this.totalPrice = totalPrice;
     this.paidPrice = paidPrice;
-    this.clientId = clientId;
-    this.billState = billState;
   }
 
   public Long getBillNumber() {
@@ -30,14 +23,6 @@ public class Bill {
     this.billNumber = billNumber;
   }
 
-  public BigDecimal getTotalPrice() {
-    return totalPrice;
-  }
-
-  public void setTotalPrice(BigDecimal totalPrice) {
-    this.totalPrice = totalPrice;
-  }
-
   public BigDecimal getPaidPrice() {
     return paidPrice;
   }
@@ -46,28 +31,8 @@ public class Bill {
     this.paidPrice = paidPrice;
   }
 
-  public Long getClientId() {
-    return clientId;
-  }
-
-  public void setClientId(Long clientId) {
-    this.clientId = clientId;
-  }
-
-  public BillState getBillState() {
-    return billState;
-  }
-
-  public void setBillState(BillState billState) {
-    this.billState = billState;
-  }
-
-  public void addPaymentAndUpdateState(float amount) {
+  public void addPayment(float amount) {
     this.paidPrice = this.paidPrice.add(new BigDecimal(amount));
-
-    if (this.paidPrice.compareTo(this.totalPrice) >= 0) {
-      this.billState = BillState.PAID;
-    }
   }
 
 }

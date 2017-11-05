@@ -92,4 +92,12 @@ public class Bill extends Submission {
     return false;
   }
 
+  public void updateAfterPayment(BigDecimal newPaidPrice) {
+    this.paidPrice = newPaidPrice;
+
+    if (this.paidPrice.compareTo(this.totalPrice) >= 0) {
+      this.billState = BillState.PAID;
+    }
+  }
+
 }

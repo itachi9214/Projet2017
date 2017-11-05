@@ -13,7 +13,7 @@ import ca.ulaval.glo4002.payment.domain.bill.Bill;
 
 public class BillingHttp {
 
-  private static final String LOCALHOST = "utilHttp://localhost:8181";
+  private static final String LOCALHOST = "http://localhost:8181";
   private static final String BILLS = "/bills/";
 
   private UtilHttp utilHttp;

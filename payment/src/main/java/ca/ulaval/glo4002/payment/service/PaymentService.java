@@ -11,8 +11,6 @@ import ca.ulaval.glo4002.payment.domain.payment.PaymentRepository;
 
 public class PaymentService {
 
-  private static final int OLDEST_BILL_INDEX = 0;
-
   private PaymentRepository paymentRepository;
   private PaymentAssembler paymentAssembler;
   private BillRepository billRepository;

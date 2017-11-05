@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.*;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.BDDMockito.willReturn;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,7 +18,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillForPaymentDto;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
-import ca.ulaval.glo4002.billing.domain.bill.BillState;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
@@ -90,18 +89,12 @@ public class BillAssemblerTest {
   @Test
   public void whenAssembleBillForPaymentThenDtoShouldBeTheSame() {
     willReturn(identity).given(bill).getBillNumber();
-    willReturn(CLIENT_NUMBER).given(bill).getClientId();
-    willReturn(TOTAL_PRICE).given(bill).getTotalPrice();
     willReturn(PAID_PRICE).given(bill).getPaidPrice();
-    willReturn(BillState.UNPAID).given(bill).getBillState();
 
     BillForPaymentDto billForPaymentDto = billAssembler.assembleBillForPayment(bill);
 
     assertTrue(billForPaymentDto.getBillNumber().equals(identity.getNumber()));
-    assertTrue(billForPaymentDto.getClientId().equals(CLIENT_NUMBER));
-    assertTrue(billForPaymentDto.getTotalPrice().equals(TOTAL_PRICE));
     assertTrue(billForPaymentDto.getPaidPrice().equals(PAID_PRICE));
-    assertTrue(billForPaymentDto.getBillState().equals(BillState.UNPAID));
   }
 
 }

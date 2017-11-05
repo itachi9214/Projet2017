@@ -18,6 +18,7 @@ import ca.ulaval.glo4002.billing.http.CrmHttpProduct;
 import ca.ulaval.glo4002.billing.http.Http;
 import ca.ulaval.glo4002.billing.infrastructure.EntityManagerProvider;
 import ca.ulaval.glo4002.billing.infrastructure.bill.BillHibernateRepository;
+import ca.ulaval.glo4002.billing.infrastructure.bill.PaymentHttpInMemoryRepository;
 import ca.ulaval.glo4002.billing.infrastructure.submission.ClientHttpRepository;
 import ca.ulaval.glo4002.billing.infrastructure.submission.ProductHttpRepository;
 import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionHibernateRepository;
@@ -73,6 +74,7 @@ public class BillingServer implements Runnable {
     ServiceLocator.register(new BillHibernateRepository());
     ServiceLocator.register(new BillService());
     ServiceLocator.register(new SubmissionService());
+    ServiceLocator.register(new PaymentHttpInMemoryRepository());
 
     BillingResource billingResource = new BillingResource();
     ServiceLocator.register(billingResource);

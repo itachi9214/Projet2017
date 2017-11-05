@@ -14,8 +14,8 @@ import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 
 public class BillService {
 
-  private static final String ACCOUNT = null;
-  private static final PaymentSource SOURCE = null;
+  private static final String ACCOUNT = "1111-111-111";
+  private static final PaymentSource SOURCE = PaymentSource.EFT;
 
   private BillRepository billRepository;
   private BillAssembler billAssembler;

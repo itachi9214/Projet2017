@@ -51,16 +51,9 @@ public class BillService {
 
   public void cancelBill(long billNumber) {
     Identity identity = identityFactory.createIdFromNumber(billNumber);
-    System.out.println(identity);
-    System.out.println("2");
     Bill billToCancel = billRepository.findById(identity);
-    System.out.println(billToCancel.getClientId());
-    System.out.println("entre les deux");
-    System.out.println(billToCancel.getPaidAmount().floatValue());
-    System.out.println("youpi j ai passé les gardes");
     paymentRepository.savePayment(new RequestPaymentDto(billToCancel.getClientId(),
         billToCancel.getPaidAmount().floatValue(), ACCOUNT, SOURCE));
-    System.out.println("affiche moi ");
   }
 
 }

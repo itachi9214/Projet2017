@@ -34,4 +34,9 @@ public class BillInMemoryRepository implements BillRepository {
     return bills.get(billNumber);
   }
 
+  @Override
+  public void cancelBill(long billNumber) {
+
+  }
+
 }

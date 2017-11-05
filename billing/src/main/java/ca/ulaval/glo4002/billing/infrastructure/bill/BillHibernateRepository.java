@@ -77,4 +77,19 @@ public class BillHibernateRepository implements BillRepository {
     return bill;
   }
 
+  @Override
+  public void cancelBill(long billNumber) throws BillNotFoundException {
+    EntityManager entityManager = entityManagerProvider.getEntityManager();
+    EntityTransaction transaction = entityManager.getTransaction();
+    transaction.begin();
+    try {
+      Bill bill = entityManager.find(Bill.class, billNumber);
+      entityManager.remove(bill);
+      transaction.commit();
+    } catch (BillNotFoundException e) {
+
+    }
+
+  }
+
 }

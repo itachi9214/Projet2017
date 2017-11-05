@@ -9,7 +9,7 @@ import ca.ulaval.glo4002.billing.api.dto.payment.RequestPaymentDto;
 
 public class PaymentHttp {
 
-  private static final String LOCALHOST = "http://localhost:8080";
+  private static final String LOCALHOST = "http://localhost:8282";
   private static final String PAYMENTS = "/payments/";
 
   private ObjectMapper mapper;

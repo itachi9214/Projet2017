@@ -5,7 +5,7 @@ import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
 import ca.ulaval.glo4002.billing.api.dto.payment.RequestPaymentDto;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
-import ca.ulaval.glo4002.billing.domain.bill.PaymentHttpRepository;
+import ca.ulaval.glo4002.billing.domain.bill.PaymentRepository;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.domain.payment.PaymentSource;
@@ -21,14 +21,14 @@ public class BillService {
   private BillAssembler billAssembler;
   private SubmissionRepository submissionRepository;
   private IdentityFactory identityFactory;
-  private PaymentHttpRepository paymentHttpRepository;
+  private PaymentRepository paymentRepository;
 
   public BillService() {
     this.billRepository = ServiceLocator.getService(BillRepository.class);
     this.billAssembler = ServiceLocator.getService(BillAssembler.class);
     this.submissionRepository = ServiceLocator.getService(SubmissionRepository.class);
     this.identityFactory = ServiceLocator.getService(IdentityFactory.class);
-    this.paymentHttpRepository = ServiceLocator.getService(PaymentHttpRepository.class);
+    this.paymentRepository = ServiceLocator.getService(PaymentRepository.class);
   }
 
   public BillService(IdentityFactory identityFactory, BillAssembler billAssembler,
@@ -51,10 +51,16 @@ public class BillService {
 
   public void cancelBill(long billNumber) {
     Identity identity = identityFactory.createIdFromNumber(billNumber);
-
+    System.out.println(identity);
+    System.out.println("2");
     Bill billToCancel = billRepository.findById(identity);
-    paymentHttpRepository.savePayment(new RequestPaymentDto(billToCancel.getClientId(),
+    System.out.println(billToCancel.getClientId());
+    System.out.println("entre les deux");
+    System.out.println(billToCancel.getPaidAmount().floatValue());
+    System.out.println("youpi j ai passé les gardes");
+    paymentRepository.savePayment(new RequestPaymentDto(billToCancel.getClientId(),
         billToCancel.getPaidAmount().floatValue(), ACCOUNT, SOURCE));
+    System.out.println("affiche moi ");
   }
 
 }

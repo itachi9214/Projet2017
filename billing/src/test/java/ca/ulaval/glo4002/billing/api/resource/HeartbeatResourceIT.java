@@ -10,7 +10,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
 
-public class HeartbeatResourceIntegrationTest extends JerseyTest {
+public class HeartbeatResourceIT extends JerseyTest {
 
   private static final Object A_TOKEN = "token";
 

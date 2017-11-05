@@ -36,8 +36,8 @@ public class PaymentService {
 
     oldestBill.addPaymentAndUpdateState(payment.getAmount());
     paymentRepository.savePayment(payment);
-    if (oldestBill.getState().equals(BillState.PAID)) {
-      billRepository.saveBillStateToPaid(oldestBill);
+    if (oldestBill.getBillState().equals(BillState.PAID)) {
+      billRepository.changeBillStateToPaid(oldestBill);
     }
 
     ResponsePaymentDto responsePaymentDto = paymentAssembler.toDto(payment);

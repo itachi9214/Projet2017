@@ -13,7 +13,7 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import ca.ulaval.glo4002.payment.api.resource.PaymentResource;
 import ca.ulaval.glo4002.payment.api.resource.filters.EntityManagerContextFilter;
 import ca.ulaval.glo4002.payment.http.BillingHttp;
-import ca.ulaval.glo4002.payment.http.Http;
+import ca.ulaval.glo4002.payment.http.UtilHttp;
 import ca.ulaval.glo4002.payment.infrastructure.EntityManagerProvider;
 import ca.ulaval.glo4002.payment.infrastructure.bill.BillHttpRepository;
 import ca.ulaval.glo4002.payment.infrastructure.payment.PaymentHibernateRepository;
@@ -56,7 +56,7 @@ public class PaymentServer implements Runnable {
   private void registerServices(ResourceConfig packageConfig) {
     ServiceLocator.register(new EntityManagerProvider());
     // ServiceLocator.register(new IdentityFactory());
-    ServiceLocator.register(new Http());
+    ServiceLocator.register(new UtilHttp());
     ServiceLocator.register(new BillingHttp());
     ServiceLocator.register(new BillHttpRepository());
     ServiceLocator.register(new PaymentAssembler());

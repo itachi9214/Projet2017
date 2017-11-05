@@ -31,7 +31,7 @@ public class BillingHttpTest {
   private Bill bill;
 
   @Mock
-  private Http http;
+  private UtilHttp http;
   @Mock
   private Response response;
 

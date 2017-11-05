@@ -4,6 +4,6 @@ public interface BillRepository {
 
   public Bill getOldestUnpaidBillForClient(Long clientId);
 
-  public void saveBillStateToPaid(Bill bill);
+  public void changeBillStateToPaid(Bill bill);
 
 }

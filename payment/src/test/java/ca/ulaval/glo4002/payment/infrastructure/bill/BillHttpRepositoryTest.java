@@ -38,7 +38,7 @@ public class BillHttpRepositoryTest {
 
   @Test
   public void whenSaveBillStateToPaidThenVerifyBillIsSaved() {
-    billRepository.saveBillStateToPaid(bill);
+    billRepository.changeBillStateToPaid(bill);
 
     verify(billingHttp).saveBillStateToPaid(bill);
   }

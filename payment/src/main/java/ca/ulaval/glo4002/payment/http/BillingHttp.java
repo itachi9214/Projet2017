@@ -13,25 +13,25 @@ import ca.ulaval.glo4002.payment.domain.bill.Bill;
 
 public class BillingHttp {
 
-  private static final String LOCALHOST = "http://localhost:8181";
+  private static final String LOCALHOST = "utilHttp://localhost:8181";
   private static final String BILLS = "/bills/";
 
-  private Http http;
+  private UtilHttp utilHttp;
   private ObjectMapper mapper;
 
   public BillingHttp() {
-    this(ServiceLocator.getService(Http.class));
+    this(ServiceLocator.getService(UtilHttp.class));
   }
 
-  public BillingHttp(Http http) {
-    this.http = http;
+  public BillingHttp(UtilHttp http) {
+    this.utilHttp = http;
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
   }
 
   public Bill getOldestUnpaidBillForClient(Long clientNumber) {
     String url = LOCALHOST + BILLS + clientNumber;
-    Response response = http.callUrlWithGetMethod(url);
+    Response response = utilHttp.callUrlWithGetMethod(url);
 
     Bill billDto = null;
     try {
@@ -46,7 +46,7 @@ public class BillingHttp {
 
   public void saveBillStateToPaid(Bill bill) {
     String url = LOCALHOST + BILLS;
-    http.callUrlWithPostMethod(url, bill);
+    utilHttp.callUrlWithPostMethod(url, bill);
   }
 
 }

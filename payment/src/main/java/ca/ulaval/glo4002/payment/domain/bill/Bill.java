@@ -1,28 +1,25 @@
 package ca.ulaval.glo4002.payment.domain.bill;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 public class Bill {
 
   private Long billNumber;
   private BigDecimal totalPrice;
-  private BigDecimal pricePaid;
-  private LocalDateTime expectedPaiement;
+  private BigDecimal paidPrice;
   private Long clientId;
-  private BillState state;
+  private BillState billState;
 
   public Bill() {
   }
 
-  public Bill(Long billNumber, BigDecimal totalPrice, BigDecimal pricePaid,
-      LocalDateTime expectedPaiement, Long clientId, BillState state) {
+  public Bill(Long billNumber, BigDecimal totalPrice, BigDecimal paidPrice, Long clientId,
+      BillState billState) {
     this.billNumber = billNumber;
     this.totalPrice = totalPrice;
-    this.pricePaid = pricePaid;
-    this.expectedPaiement = expectedPaiement;
+    this.paidPrice = paidPrice;
     this.clientId = clientId;
-    this.state = state;
+    this.billState = billState;
   }
 
   public Long getBillNumber() {
@@ -41,20 +38,12 @@ public class Bill {
     this.totalPrice = totalPrice;
   }
 
-  public BigDecimal getPricePaid() {
-    return pricePaid;
+  public BigDecimal getPaidPrice() {
+    return paidPrice;
   }
 
-  public void setPricePaid(BigDecimal pricePaid) {
-    this.pricePaid = pricePaid;
-  }
-
-  public LocalDateTime getExpectedPaiement() {
-    return expectedPaiement;
-  }
-
-  public void setExpectedPaiement(LocalDateTime expectedPaiement) {
-    this.expectedPaiement = expectedPaiement;
+  public void setPaidPrice(BigDecimal paidPrice) {
+    this.paidPrice = paidPrice;
   }
 
   public Long getClientId() {
@@ -65,19 +54,19 @@ public class Bill {
     this.clientId = clientId;
   }
 
-  public BillState getState() {
-    return state;
+  public BillState getBillState() {
+    return billState;
   }
 
-  public void setState(BillState state) {
-    this.state = state;
+  public void setBillState(BillState billState) {
+    this.billState = billState;
   }
 
   public void addPaymentAndUpdateState(float amount) {
-    this.pricePaid = this.pricePaid.add(new BigDecimal(amount));
+    this.paidPrice = this.paidPrice.add(new BigDecimal(amount));
 
-    if (this.pricePaid.compareTo(this.totalPrice) >= 0) {
-      this.state = BillState.PAID;
+    if (this.paidPrice.compareTo(this.totalPrice) >= 0) {
+      this.billState = BillState.PAID;
     }
   }
 

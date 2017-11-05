@@ -1,27 +1,25 @@
-package ca.ulaval.glo4002.payment.api.dto.bill;
+package ca.ulaval.glo4002.payment.domain.bill;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class BillDto {
+public class Bill {
 
   private Long billNumber;
   private BigDecimal totalPrice;
+  private BigDecimal pricePaid;
   private LocalDateTime expectedPaiement;
   private Long clientId;
-  private Boolean state;
+  private BillState state;
 
-  public BillDto() {
+  public Bill() {
   }
 
-  public BillDto(Long billNumber, BigDecimal totalPrice, LocalDateTime expectedPaiement,
-      Long clientId, Boolean state) {
-
+  public Bill(Long billNumber, BigDecimal totalPrice, BigDecimal pricePaid,
+      LocalDateTime expectedPaiement, Long clientId, BillState state) {
     this.billNumber = billNumber;
     this.totalPrice = totalPrice;
+    this.pricePaid = pricePaid;
     this.expectedPaiement = expectedPaiement;
     this.clientId = clientId;
     this.state = state;
@@ -43,6 +41,14 @@ public class BillDto {
     this.totalPrice = totalPrice;
   }
 
+  public BigDecimal getPricePaid() {
+    return pricePaid;
+  }
+
+  public void setPricePaid(BigDecimal pricePaid) {
+    this.pricePaid = pricePaid;
+  }
+
   public LocalDateTime getExpectedPaiement() {
     return expectedPaiement;
   }
@@ -59,12 +65,20 @@ public class BillDto {
     this.clientId = clientId;
   }
 
-  public Boolean getStade() {
+  public BillState getState() {
     return state;
   }
 
-  public void setStade(Boolean state) {
+  public void setState(BillState state) {
     this.state = state;
+  }
+
+  public void addPaymentAndUpdateState(float amount) {
+    this.pricePaid = this.pricePaid.add(new BigDecimal(amount));
+
+    if (this.pricePaid.compareTo(this.totalPrice) >= 0) {
+      this.state = BillState.PAID;
+    }
   }
 
 }

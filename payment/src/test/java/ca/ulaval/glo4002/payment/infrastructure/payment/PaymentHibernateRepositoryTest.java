@@ -8,20 +8,25 @@ import javax.persistence.Persistence;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
+import ca.ulaval.glo4002.payment.domain.identity.Identity;
 import ca.ulaval.glo4002.payment.domain.payment.Payment;
+import ca.ulaval.glo4002.payment.domain.payment.PaymentMethod;
+import ca.ulaval.glo4002.payment.domain.payment.PaymentSource;
 import ca.ulaval.glo4002.payment.infrastructure.EntityManagerProvider;
 
 public class PaymentHibernateRepositoryTest {
 
-  private static final int AMOUNT = 3;
-  private static final long PAYMENT_ID = 1L;
+  private static final String ACCOUNT = "account";
+  private static final Identity PAYMENT_NUMBER = new Identity(1L);
+  private static final long CLIENT_ID = 3L;
+  private static final float AMOUNT = 30;
 
   private PaymentHibernateRepository paymentRepository;
   private EntityManager entityManager;
   private EntityManagerFactory entityManagerFactory;
+  private PaymentMethod paymentMethod;
 
   @Before
   public void setUp() {
@@ -41,20 +46,19 @@ public class PaymentHibernateRepositoryTest {
     entityManagerFactory.close();
   }
 
-  @Ignore
   @Test
   public void whenSavePaymentThenPaymentFoundIsTheSame() {
-    Payment payment = new Payment(PAYMENT_ID, AMOUNT);
+    paymentMethod = new PaymentMethod(ACCOUNT, PaymentSource.CHECK);
+    Payment payment = new Payment(PAYMENT_NUMBER, AMOUNT, CLIENT_ID, paymentMethod);
 
     paymentRepository.savePayment(payment);
 
-    assertEquals(payment, paymentRepository.findPaymentById(PAYMENT_ID));
+    assertEquals(payment, paymentRepository.findPaymentById(PAYMENT_NUMBER));
   }
 
-  @Ignore
   @Test(expected = PaymentNotFoundException.class)
   public void givenNotExistingPaymentNumberWhenFindPaymentThenThrowException() {
-    paymentRepository.findPaymentById(PAYMENT_ID);
+    paymentRepository.findPaymentById(PAYMENT_NUMBER);
   }
 
 }

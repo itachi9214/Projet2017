@@ -34,7 +34,7 @@ public class CrmHttpProductTest {
   private CrmHttpProduct crmHttpProduct;
 
   @Mock
-  private Http http;
+  private UtilHttp http;
   @Mock
   private Response response;
 

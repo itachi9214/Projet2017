@@ -2,14 +2,19 @@ package ca.ulaval.glo4002.payment.api.dto;
 
 public class ResponsePaymentDto {
 
-  private Long id;
+  private long id;
   private String url;
 
-  public Long getId() {
+  public ResponsePaymentDto(long id, String url) {
+    this.id = id;
+    this.url = url;
+  }
+
+  public long getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(long id) {
     this.id = id;
   }
 

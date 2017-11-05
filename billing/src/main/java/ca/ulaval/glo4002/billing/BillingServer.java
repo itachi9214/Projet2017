@@ -15,7 +15,7 @@ import ca.ulaval.glo4002.billing.api.resource.filters.EntityManagerContextFilter
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.http.CrmHttpClient;
 import ca.ulaval.glo4002.billing.http.CrmHttpProduct;
-import ca.ulaval.glo4002.billing.http.Http;
+import ca.ulaval.glo4002.billing.http.UtilHttp;
 import ca.ulaval.glo4002.billing.infrastructure.EntityManagerProvider;
 import ca.ulaval.glo4002.billing.infrastructure.bill.BillHibernateRepository;
 import ca.ulaval.glo4002.billing.infrastructure.submission.ClientHttpRepository;
@@ -62,7 +62,7 @@ public class BillingServer implements Runnable {
   private void registerServices(ResourceConfig packageConfig) {
     ServiceLocator.register(new IdentityFactory());
     ServiceLocator.register(new EntityManagerProvider());
-    ServiceLocator.register(new Http());
+    ServiceLocator.register(new UtilHttp());
     ServiceLocator.register(new CrmHttpClient());
     ServiceLocator.register(new CrmHttpProduct());
     ServiceLocator.register(new SubmissionAssembler());

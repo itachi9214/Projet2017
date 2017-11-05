@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
+import ca.ulaval.glo4002.billing.api.dto.bill.BillForPaymentDto;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
@@ -25,6 +26,7 @@ import ca.ulaval.glo4002.billing.domain.submision.Submission;
 public class BillAssemblerTest {
 
   private static final BigDecimal TOTAL_PRICE = new BigDecimal(0);
+  private static final BigDecimal PAID_PRICE = new BigDecimal(0);
   private static final List<Object> ITEMS_LIST = Collections.emptyList();
   private static final long CLIENT_NUMBER = 1L;
   private static final Long SUBMISSION_NUMBER = 100L;
@@ -55,7 +57,7 @@ public class BillAssemblerTest {
     willReturn(identity).given(bill).getBillNumber();
     willReturn(IMMEDIATE).given(bill).getDueTerm();
     willReturn(date).given(bill).getEffectiveDate();
-    willReturn(date).given(bill).getExpectedPaiement();
+    willReturn(date).given(bill).getExpectedPayment();
 
     BillDto dto = billAssembler.assembleBill(bill);
 
@@ -78,10 +80,21 @@ public class BillAssemblerTest {
 
     assertTrue(bill.getBillNumber().equals(identity));
     assertTrue(bill.getDueTerm().equals(IMMEDIATE));
-    assertTrue(bill.getExpectedPaiement().equals(bill.getEffectiveDate()));
+    assertTrue(bill.getExpectedPayment().equals(bill.getEffectiveDate()));
     assertTrue(bill.getItems().equals(ITEMS_LIST));
     assertTrue(bill.getTotalPrice().equals(TOTAL_PRICE));
     assertTrue(bill.getClientId().equals(CLIENT_NUMBER));
+  }
+
+  @Test
+  public void whenAssembleBillForPaymentThenDtoShouldBeTheSame() {
+    willReturn(identity).given(bill).getBillNumber();
+    willReturn(PAID_PRICE).given(bill).getPaidPrice();
+
+    BillForPaymentDto billForPaymentDto = billAssembler.assembleBillForPayment(bill);
+
+    assertTrue(billForPaymentDto.getBillNumber().equals(identity.getNumber()));
+    assertTrue(billForPaymentDto.getPaidPrice().equals(PAID_PRICE));
   }
 
 }

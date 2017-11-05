@@ -18,13 +18,13 @@ public class BillHttpRepository implements BillRepository {
   }
 
   @Override
-  public Bill getOldestUnpaidBillForClient(Long clientId) {
+  public Bill getOldestUnpaidBillForClient(Long clientId) throws BillNotFoundException {
     return billingHttp.getOldestUnpaidBillForClient(clientId);
   }
 
   @Override
-  public void changeBillStateToPaid(Bill bill) {
-    billingHttp.saveBillStateToPaid(bill);
+  public void updateBillAfterPayment(Bill bill) {
+    billingHttp.updateBillAfterPayment(bill);
   }
 
 }

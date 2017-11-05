@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.client.ClientProperties;
 
-public class Http {
+public class UtilHttp {
 
   public Response callUrlWithGetMethod(String url) {
     Client client = ClientBuilder.newClient();

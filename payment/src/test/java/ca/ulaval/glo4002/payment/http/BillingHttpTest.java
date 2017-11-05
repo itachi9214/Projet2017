@@ -62,7 +62,7 @@ public class BillingHttpTest {
 
   @Test
   public void whenSaveBillStateToPaidThenPostIsCalled() throws JsonProcessingException {
-    billingHttp.saveBillStateToPaid(bill);
+    billingHttp.updateBillAfterPayment(bill);
 
     verify(http).callUrlWithPostMethod(anyString(), eq(bill));
   }

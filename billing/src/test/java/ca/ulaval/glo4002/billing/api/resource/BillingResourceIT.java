@@ -35,7 +35,7 @@ import ca.ulaval.glo4002.billing.service.bill.BillService;
 import ca.ulaval.glo4002.billing.service.submission.SubmissionService;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BillingResourceIntegrationTest extends JerseyTest {
+public class BillingResourceIT extends JerseyTest {
 
   private static final Long EXISTING_CLIENT = 2L;
   private static final Long NON_EXISTING_CLIENT = -6L;

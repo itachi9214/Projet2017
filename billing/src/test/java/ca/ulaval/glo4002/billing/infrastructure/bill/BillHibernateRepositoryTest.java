@@ -1,8 +1,8 @@
 package ca.ulaval.glo4002.billing.infrastructure.bill;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
+import ca.ulaval.glo4002.billing.domain.bill.BillState;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
@@ -92,6 +93,32 @@ public class BillHibernateRepositoryTest {
   @Test(expected = BillNotFoundException.class)
   public void givenNotExistingBillNumberWhenFindByIdThenThrowException() {
     billRepository.findById(BILL_NUMBER);
+  }
+
+  @Test
+  public void givenClientIdWhenFindOldestUnpaidBillByClientIdThenReturnOldestBill() {
+    Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
+    billRepository.createBill(bill);
+
+    Bill billFound = billRepository.findOldestUnpaidBillByClientId(CLIENT_NUMBER);
+
+    assertEquals(bill, billFound);
+  }
+
+  @Test(expected = BillNotFoundException.class)
+  public void givenClientIdWhenFindOldestUnpaidBillByClientIdThenBillNotFound() {
+    billRepository.findOldestUnpaidBillByClientId(CLIENT_NUMBER);
+  }
+
+  @Test(expected = BillNotFoundException.class)
+  public void givenPaidBillStateWhenUpdateBillThenBillNotFound() {
+    Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
+    billRepository.createBill(bill);
+
+    bill.setBillState(BillState.PAID);
+    billRepository.updateBill(bill);
+
+    billRepository.findOldestUnpaidBillByClientId(CLIENT_NUMBER);
   }
 
 }

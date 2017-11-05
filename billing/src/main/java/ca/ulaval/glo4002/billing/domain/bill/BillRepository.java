@@ -10,4 +10,8 @@ public interface BillRepository {
 
   public Bill findById(Identity billNumber) throws BillNotFoundException;
 
+  public Bill findOldestUnpaidBillByClientId(Long clientId) throws BillNotFoundException;
+
+  public void updateBill(Bill bill);
+
 }

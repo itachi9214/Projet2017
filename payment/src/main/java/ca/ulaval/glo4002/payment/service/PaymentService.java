@@ -5,13 +5,10 @@ import ca.ulaval.glo4002.payment.api.dto.RequestPaymentDto;
 import ca.ulaval.glo4002.payment.api.dto.ResponsePaymentDto;
 import ca.ulaval.glo4002.payment.domain.bill.Bill;
 import ca.ulaval.glo4002.payment.domain.bill.BillRepository;
-import ca.ulaval.glo4002.payment.domain.bill.BillState;
 import ca.ulaval.glo4002.payment.domain.payment.Payment;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentRepository;
 
 public class PaymentService {
-
-  private static final int OLDEST_BILL_INDEX = 0;
 
   private PaymentRepository paymentRepository;
   private PaymentAssembler paymentAssembler;
@@ -32,15 +29,13 @@ public class PaymentService {
 
   public ResponsePaymentDto makePayment(RequestPaymentDto requestPaymentDto) {
     Bill oldestBill = billRepository.getOldestUnpaidBillForClient(requestPaymentDto.getClientId());
-    Payment payment = paymentAssembler.toDomain(requestPaymentDto);
+    Payment payment = paymentAssembler.assemblePaymentFromRequest(requestPaymentDto);
 
-    oldestBill.addPaymentAndUpdateState(payment.getAmount());
+    oldestBill.addPayment(payment.getAmount());
     paymentRepository.savePayment(payment);
-    if (oldestBill.getBillState().equals(BillState.PAID)) {
-      billRepository.changeBillStateToPaid(oldestBill);
-    }
+    billRepository.updateBillAfterPayment(oldestBill);
 
-    ResponsePaymentDto responsePaymentDto = paymentAssembler.toDto(payment);
+    ResponsePaymentDto responsePaymentDto = paymentAssembler.assembleResponseFromPayment(payment);
     return responsePaymentDto;
   }
 

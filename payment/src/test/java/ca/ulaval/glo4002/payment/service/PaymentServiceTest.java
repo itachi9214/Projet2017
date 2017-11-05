@@ -4,9 +4,6 @@ import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,10 +50,7 @@ public class PaymentServiceTest {
 
     BDDMockito.willReturn(AMOUNT).given(payment).getAmount();
     BDDMockito.willReturn(payment).given(paymentAssembler).toDomain(requestPaymentDto);
-    List<Bill> bills = new ArrayList<>();
-    bills.add(bill);
-    BDDMockito.willReturn(bills).given(billRepository)
-        .getUnpaidBillsOrderedByOldestForClient(CLIENT_ID);
+    BDDMockito.willReturn(bill).given(billRepository).getOldestUnpaidBillForClient(CLIENT_ID);
     BDDMockito.willReturn(BillState.PAID).given(bill).getState();
   }
 
@@ -71,7 +65,7 @@ public class PaymentServiceTest {
   public void whenMakePaymentThenVerifyUnpaidBillsAreFound() {
     paymentService.makePayment(requestPaymentDto);
 
-    verify(billRepository).getUnpaidBillsOrderedByOldestForClient(CLIENT_ID);
+    verify(billRepository).getOldestUnpaidBillForClient(CLIENT_ID);
   }
 
   @Test

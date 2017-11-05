@@ -87,8 +87,7 @@ public class BillHibernateRepository implements BillRepository {
   }
 
   @Override
-
-  public List<Bill> findAllByClientId(Long clientId) throws BillNotFoundException {
+  public Bill findOldestUnpaidBillByClientId(Long clientId) throws BillNotFoundException {
     EntityManager entityManager = entityManagerProvider.getEntityManager();
 
     TypedQuery<Bill> query = entityManager.createNamedQuery("listOfBillsOrderedByOldest",
@@ -101,7 +100,7 @@ public class BillHibernateRepository implements BillRepository {
     if (bills.isEmpty()) {
       throw new BillNotFoundException();
     }
-    return bills;
+    return bills.get(0);
   }
 
 }

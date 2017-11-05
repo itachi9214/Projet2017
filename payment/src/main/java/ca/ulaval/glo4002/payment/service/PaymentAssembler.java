@@ -3,7 +3,7 @@ package ca.ulaval.glo4002.payment.service;
 import ca.ulaval.glo4002.payment.ServiceLocator;
 import ca.ulaval.glo4002.payment.api.dto.RequestPaymentDto;
 import ca.ulaval.glo4002.payment.api.dto.ResponsePaymentDto;
-import ca.ulaval.glo4002.payment.domain.Identity.IdentityFactory;
+import ca.ulaval.glo4002.payment.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.payment.domain.payment.Payment;
 
 public class PaymentAssembler {

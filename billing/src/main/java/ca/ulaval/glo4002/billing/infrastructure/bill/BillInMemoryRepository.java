@@ -1,9 +1,8 @@
 package ca.ulaval.glo4002.billing.infrastructure.bill;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
@@ -37,14 +36,14 @@ public class BillInMemoryRepository implements BillRepository {
   }
 
   @Override
-  public List<Bill> findAllByClientId(Long clientId) throws BillNotFoundException {
-    List<Bill> billsFound = bills.values().stream().filter(b -> b.getClientId().equals(clientId))
-        .collect(Collectors.toList());
+  public Bill findOldestUnpaidBillByClientId(Long clientId) throws BillNotFoundException {
+    Optional<Bill> billFound = bills.values().stream().filter(b -> b.getClientId().equals(clientId))
+        .findFirst();
 
-    if (billsFound.isEmpty()) {
+    if (!billFound.isPresent()) {
       throw new BillNotFoundException();
     }
-    return billsFound;
+    return billFound.get();
   }
 
 }

@@ -18,16 +18,16 @@ public class CrmHttpProduct {
   private static final String PRODUCTS = "/products/";
 
   private ObjectMapper mapper;
-  private Http http;
+  private UtilHttp http;
 
-  public CrmHttpProduct(Http http) {
+  public CrmHttpProduct(UtilHttp http) {
     this.http = http;
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
   }
 
   public CrmHttpProduct() {
-    this(ServiceLocator.getService(Http.class));
+    this(ServiceLocator.getService(UtilHttp.class));
   }
 
   public ProductDto getProductDto(Integer productId) {

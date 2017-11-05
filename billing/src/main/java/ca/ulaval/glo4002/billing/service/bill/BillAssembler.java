@@ -1,11 +1,9 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
-import ca.ulaval.glo4002.billing.api.dto.bill.BillStateDto;
+import ca.ulaval.glo4002.billing.api.dto.bill.BillForPaymentDto;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 
@@ -24,17 +22,11 @@ public class BillAssembler {
     return billDto;
   }
 
-  public List<BillStateDto> assembleBillState(List<Bill> bills) {
-    List<BillStateDto> billStateDtos = new ArrayList<>();
+  public BillForPaymentDto assembleBillForPayment(Bill bill) {
+    BillForPaymentDto billStateDto = new BillForPaymentDto(bill.getBillNumber().getNumber(),
+        bill.getClientId(), bill.getTotalPrice(), bill.getPaidPrice(), bill.getBillState());
 
-    for (Bill bill : bills) {
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:MM:ss.SSS'Z'");
-      BillStateDto billStateDto = new BillStateDto(bill.getBillNumber().getNumber(),
-          bill.getClientId(), bill.getEffectiveDate().format(formatter), bill.getTotalPrice(),
-          bill.getBillState());
-      billStateDtos.add(billStateDto);
-    }
-    return billStateDtos;
+    return billStateDto;
   }
 
   public Bill createBillFromSubmission(Submission submission) {

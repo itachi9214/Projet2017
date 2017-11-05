@@ -20,6 +20,7 @@ public class Bill extends Submission {
   private LocalDateTime expectedPayment;
   @Enumerated
   private BillState billState;
+  private BigDecimal paidPrice;
 
   public Bill() {
     super();
@@ -30,20 +31,16 @@ public class Bill extends Submission {
     super(billNumber, dueTerm, clientId, items);
     this.effectiveDate = LocalDateTime.now();
     this.expectedPayment = calculateExpectedPaymentDate();
+    this.paidPrice = new BigDecimal(0);
     this.billState = BillState.UNPAID;
-  }
-
-  public Bill(Identity billNumber, BigDecimal totalPrice, Long clientId, BillState billState) {
-    this.billNumber = billNumber;
-    this.totalPrice = totalPrice;
-    this.clientId = clientId;
-    this.billState = billState;
   }
 
   public Bill(DueTerm dueTerm) {
     super(dueTerm);
     this.effectiveDate = LocalDateTime.now();
     this.expectedPayment = calculateExpectedPaymentDate();
+    this.paidPrice = new BigDecimal(0);
+    this.billState = BillState.UNPAID;
   }
 
   public LocalDateTime getEffectiveDate() {
@@ -64,6 +61,18 @@ public class Bill extends Submission {
 
   public void setBillState(BillState billState) {
     this.billState = billState;
+  }
+
+  public BigDecimal getPaidPrice() {
+    return paidPrice;
+  }
+
+  public void setPaidPrice(BigDecimal paidPrice) {
+    this.paidPrice = paidPrice;
+  }
+
+  public void setEffectiveDate(LocalDateTime effectiveDate) {
+    this.effectiveDate = effectiveDate;
   }
 
   public LocalDateTime calculateExpectedPaymentDate() {

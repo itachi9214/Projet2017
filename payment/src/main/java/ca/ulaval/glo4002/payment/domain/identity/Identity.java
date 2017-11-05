@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.payment.domain.Identity;
+package ca.ulaval.glo4002.payment.domain.identity;
 
 import java.io.Serializable;
 import java.util.UUID;

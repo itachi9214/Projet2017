@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ca.ulaval.glo4002.payment.domain.Identity.Identity;
+import ca.ulaval.glo4002.payment.domain.identity.Identity;
 
 public class IdentityTest {
 

@@ -4,7 +4,7 @@ import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
-import ca.ulaval.glo4002.payment.domain.Identity.Identity;
+import ca.ulaval.glo4002.payment.domain.identity.Identity;
 
 @Entity
 public class Payment {

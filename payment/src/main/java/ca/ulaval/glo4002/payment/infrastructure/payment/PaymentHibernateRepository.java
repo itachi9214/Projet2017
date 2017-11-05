@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import ca.ulaval.glo4002.payment.ServiceLocator;
-import ca.ulaval.glo4002.payment.domain.Identity.Identity;
+import ca.ulaval.glo4002.payment.domain.identity.Identity;
 import ca.ulaval.glo4002.payment.domain.payment.Payment;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentRepository;
 import ca.ulaval.glo4002.payment.infrastructure.EntityManagerProvider;

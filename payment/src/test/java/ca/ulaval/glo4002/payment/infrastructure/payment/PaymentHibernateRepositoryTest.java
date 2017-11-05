@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.payment.infrastructure.payment;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,14 +9,16 @@ import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
-import ca.ulaval.glo4002.payment.domain.Identity.Identity;
+import ca.ulaval.glo4002.payment.domain.identity.Identity;
 import ca.ulaval.glo4002.payment.domain.payment.Payment;
+import ca.ulaval.glo4002.payment.domain.payment.PaymentMethod;
+import ca.ulaval.glo4002.payment.domain.payment.PaymentSource;
 import ca.ulaval.glo4002.payment.infrastructure.EntityManagerProvider;
 
 public class PaymentHibernateRepositoryTest {
 
+  private static final String ACCOUNT = "account";
   private static final Identity PAYMENT_NUMBER = new Identity(1L);
   private static final long CLIENT_ID = 3L;
   private static final float AMOUNT = 30;
@@ -24,6 +26,7 @@ public class PaymentHibernateRepositoryTest {
   private PaymentHibernateRepository paymentRepository;
   private EntityManager entityManager;
   private EntityManagerFactory entityManagerFactory;
+  private PaymentMethod paymentMethod;
 
   @Before
   public void setUp() {
@@ -45,6 +48,7 @@ public class PaymentHibernateRepositoryTest {
 
   @Test
   public void whenSavePaymentThenPaymentFoundIsTheSame() {
+    paymentMethod = new PaymentMethod(ACCOUNT, PaymentSource.CHECK);
     Payment payment = new Payment(PAYMENT_NUMBER, AMOUNT, CLIENT_ID, paymentMethod);
 
     paymentRepository.savePayment(payment);

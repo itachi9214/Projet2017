@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.payment.domain.Identity;
+package ca.ulaval.glo4002.payment.domain.identity;
 
 public class IdentityFactory {
 

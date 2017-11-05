@@ -12,7 +12,7 @@ import org.glassfish.jersey.servlet.ServletContainer;
 
 import ca.ulaval.glo4002.payment.api.resource.PaymentResource;
 import ca.ulaval.glo4002.payment.api.resource.filters.EntityManagerContextFilter;
-import ca.ulaval.glo4002.payment.domain.Identity.IdentityFactory;
+import ca.ulaval.glo4002.payment.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.payment.http.BillingHttp;
 import ca.ulaval.glo4002.payment.http.UtilHttp;
 import ca.ulaval.glo4002.payment.infrastructure.EntityManagerProvider;

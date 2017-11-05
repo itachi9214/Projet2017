@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
-import static org.mockito.BDDMockito.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +57,7 @@ public class BillServiceTest {
   public void whenCreateBillThenVerifyBillIsCreatedByRepository() {
     willReturn(identity).given(identityFactory).createIdFromNumber(BILL_NUMBER);
     willReturn(submission).given(submissionRepository).findSubmissionById(identity);
-    willReturn(bill).given(billAssembler).createTheBillFromTheSubmissionData(submission);
+    willReturn(bill).given(billAssembler).createBillFromSubmission(submission);
 
     billService.createBill(BILL_NUMBER);
 

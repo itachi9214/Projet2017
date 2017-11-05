@@ -35,7 +35,7 @@ public class CrmHttpClientTest {
   private ObjectMapper mapper;
 
   @Mock
-  private Http http;
+  private UtilHttp http;
   @Mock
   private Response response;
 

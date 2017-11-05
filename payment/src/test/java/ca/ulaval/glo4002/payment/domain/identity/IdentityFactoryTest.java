@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.ulaval.glo4002.payment.domain.Identity.Identity;
-import ca.ulaval.glo4002.payment.domain.Identity.IdentityFactory;
+import ca.ulaval.glo4002.payment.domain.identity.Identity;
+import ca.ulaval.glo4002.payment.domain.identity.IdentityFactory;
 
 public class IdentityFactoryTest {
 

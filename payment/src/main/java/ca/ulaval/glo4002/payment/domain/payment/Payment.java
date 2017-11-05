@@ -12,11 +12,11 @@ public class Payment {
   @EmbeddedId
   protected Identity paymentNumber;
   protected float amount;
-  protected Long clientId;
+  protected long clientId;
   @Embedded
   protected PaymentMethod paymentMethod;
 
-  public Payment(Identity paymentNumber, float amount, Long clientId, PaymentMethod paymentMethod) {
+  public Payment(Identity paymentNumber, float amount, long clientId, PaymentMethod paymentMethod) {
     this.paymentNumber = paymentNumber;
     this.amount = amount;
     this.clientId = clientId;
@@ -27,7 +27,7 @@ public class Payment {
     return amount;
   }
 
-  public Long getClientId() {
+  public long getClientId() {
     return clientId;
   }
 
@@ -39,7 +39,7 @@ public class Payment {
     this.amount = amount;
   }
 
-  public void setClientId(Long clientId) {
+  public void setClientId(long clientId) {
     this.clientId = clientId;
   }
 

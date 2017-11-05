@@ -20,13 +20,13 @@ public class PaymentAssembler {
     this.identityFactory = identityFactory;
   }
 
-  public Payment toDomain(RequestPaymentDto requestPaymentDto) {
+  public Payment assemblePaymentFromRequest(RequestPaymentDto requestPaymentDto) {
     Payment payment = new Payment(identityFactory.createId(), requestPaymentDto.getAmount(),
         requestPaymentDto.getClientId(), requestPaymentDto.getPaymentMethod());
     return payment;
   }
 
-  public ResponsePaymentDto toDto(Payment payment) {
+  public ResponsePaymentDto assembleResponseFromPayment(Payment payment) {
     ResponsePaymentDto responsePaymentDto = new ResponsePaymentDto(
         payment.getPaymentNumber().getNumber(), BASE_URL + payment.getPaymentNumber().getNumber());
     return responsePaymentDto;

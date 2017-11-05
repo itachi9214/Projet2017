@@ -50,12 +50,17 @@ public class BillServiceTest {
         billRepository);
     identity = new Identity(BILL_NUMBER);
     billForPaymentDto = new BillForPaymentDto(BILL_NUMBER, PAID_PRICE);
+    willReturn(identity).given(identityFactory).createIdFromNumber(BILL_NUMBER);
+    willReturn(bill).given(billRepository).findById(identity);
+    willReturn(billForPaymentDto).given(billAssembler).assembleBillForPayment(bill);
+    willReturn(bill).given(billRepository).findOldestUnpaidBillByClientId(CLIENT_ID);
+    willReturn(billForPaymentDto).given(billAssembler).assembleBillForPayment(bill);
+    willReturn(submission).given(submissionRepository).findSubmissionById(identity);
+    willReturn(bill).given(billAssembler).createBillFromSubmission(submission);
   }
 
   @Test
   public void whenCreateBillThenVerifySubmissionIsFound() {
-    willReturn(identity).given(identityFactory).createIdFromNumber(BILL_NUMBER);
-
     billService.createBill(BILL_NUMBER);
 
     verify(submissionRepository).findSubmissionById(identity);
@@ -63,10 +68,6 @@ public class BillServiceTest {
 
   @Test
   public void whenCreateBillThenVerifyBillIsCreatedByRepository() {
-    willReturn(identity).given(identityFactory).createIdFromNumber(BILL_NUMBER);
-    willReturn(submission).given(submissionRepository).findSubmissionById(identity);
-    willReturn(bill).given(billAssembler).createBillFromSubmission(submission);
-
     billService.createBill(BILL_NUMBER);
 
     verify(billRepository).createBill(bill);
@@ -81,12 +82,23 @@ public class BillServiceTest {
 
   @Test
   public void whenGetOldestUnpaidBillForClientThenCreateBillForPaymentDto() {
-    willReturn(bill).given(billRepository).findOldestUnpaidBillByClientId(CLIENT_ID);
-    willReturn(billForPaymentDto).given(billAssembler).assembleBillForPayment(bill);
-
     BillForPaymentDto dto = billService.getOldestUnpaidBillForClient(CLIENT_ID);
 
     assertEquals(dto, billForPaymentDto);
+  }
+
+  @Test
+  public void whenUpdateBillAfterPaymentThenVerifyBillIsUpdated() {
+    billService.updateBillAfterPayment(billForPaymentDto);
+
+    verify(bill).updateAfterPayment(PAID_PRICE);
+  }
+
+  @Test
+  public void whenUpdateBillAfterPaymentThenVerifyBillUpdateIsSaved() {
+    billService.updateBillAfterPayment(billForPaymentDto);
+
+    verify(billRepository).updateBill(bill);
   }
 
 }

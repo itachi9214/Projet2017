@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.billing.api.resource;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4002.billing.api.dto.bill.BillForPaymentDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
@@ -26,6 +27,7 @@ public class BillingResourceTest {
   private static final Long EXISTING_CLIENT = 2L;
 
   private BillingResource billingResource;
+  private BillForPaymentDto billForPaymentDto;
 
   @Mock
   private SubmissionService submissionService;
@@ -37,6 +39,7 @@ public class BillingResourceTest {
   @Before
   public void setUp() {
     billingResource = new BillingResource(submissionService, billService);
+    billForPaymentDto = new BillForPaymentDto();
   }
 
   @Test
@@ -64,6 +67,13 @@ public class BillingResourceTest {
     billingResource.getUnpaidBillsOrderedByOldestForClient(EXISTING_CLIENT);
 
     verify(billService).getOldestUnpaidBillForClient(EXISTING_CLIENT);
+  }
+
+  @Test
+  public void whenUpdateBillAfterPaymentThenVerifyBillIsUpdated() {
+    billingResource.updateBillAfterPayment(billForPaymentDto);
+
+    verify(billService).updateBillAfterPayment(billForPaymentDto);
   }
 
 }

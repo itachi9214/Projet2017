@@ -29,13 +29,13 @@ public class PaymentService {
 
   public ResponsePaymentDto makePayment(RequestPaymentDto requestPaymentDto) {
     Bill oldestBill = billRepository.getOldestUnpaidBillForClient(requestPaymentDto.getClientId());
-    Payment payment = paymentAssembler.toDomain(requestPaymentDto);
+    Payment payment = paymentAssembler.assemblePaymentFromRequest(requestPaymentDto);
 
     oldestBill.addPayment(payment.getAmount());
     paymentRepository.savePayment(payment);
     billRepository.updateBillAfterPayment(oldestBill);
 
-    ResponsePaymentDto responsePaymentDto = paymentAssembler.toDto(payment);
+    ResponsePaymentDto responsePaymentDto = paymentAssembler.assembleResponseFromPayment(payment);
     return responsePaymentDto;
   }
 

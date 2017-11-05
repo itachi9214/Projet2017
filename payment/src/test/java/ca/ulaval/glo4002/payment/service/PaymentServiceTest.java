@@ -46,7 +46,7 @@ public class PaymentServiceTest {
         new PaymentMethod(ACCOUNT, SOURCE));
 
     willReturn(AMOUNT).given(payment).getAmount();
-    willReturn(payment).given(paymentAssembler).toDomain(requestPaymentDto);
+    willReturn(payment).given(paymentAssembler).assemblePaymentFromRequest(requestPaymentDto);
     willReturn(bill).given(billRepository).getOldestUnpaidBillForClient(CLIENT_ID);
   }
 

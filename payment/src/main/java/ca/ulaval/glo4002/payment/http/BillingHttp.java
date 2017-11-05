@@ -10,10 +10,11 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import ca.ulaval.glo4002.payment.ServiceLocator;
 import ca.ulaval.glo4002.payment.domain.bill.Bill;
+import ca.ulaval.glo4002.payment.infrastructure.bill.BillNotFoundException;
 
 public class BillingHttp {
 
-  private static final String LOCALHOST = "utilHttp://localhost:8181";
+  private static final String LOCALHOST = "http://localhost:8181";
   private static final String BILLS = "/bills/";
 
   private UtilHttp utilHttp;
@@ -29,19 +30,23 @@ public class BillingHttp {
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
   }
 
-  public Bill getOldestUnpaidBillForClient(Long clientNumber) {
+  public Bill getOldestUnpaidBillForClient(Long clientNumber) throws BillNotFoundException {
     String url = LOCALHOST + BILLS + clientNumber;
     Response response = utilHttp.callUrlWithGetMethod(url);
 
-    Bill billDto = null;
+    Bill bill = null;
     try {
-      billDto = mapper.readValue(response.readEntity(String.class), Bill.class);
+      bill = mapper.readValue(response.readEntity(String.class), Bill.class);
     } catch (IOException exception) {
       exception.printStackTrace();
     } finally {
       response.close();
     }
-    return billDto;
+
+    if (bill == null) {
+      throw new BillNotFoundException();
+    }
+    return bill;
   }
 
   public void saveBillStateToPaid(Bill bill) {

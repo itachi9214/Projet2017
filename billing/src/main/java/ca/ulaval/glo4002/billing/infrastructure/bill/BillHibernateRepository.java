@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.NamedQuery;
 import javax.persistence.TypedQuery;
 
 import ca.ulaval.glo4002.billing.ServiceLocator;
@@ -17,7 +16,6 @@ import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
 import ca.ulaval.glo4002.billing.infrastructure.EntityManagerProvider;
 import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionNotFoundException;
 
-@NamedQuery(name = "listOfBillsOrderedByOldest", query = "SELECT b FROM Bill b WHERE b.clientId =:clientId AND b.billState=:state ORDER BY b.expectedPayment")
 public class BillHibernateRepository implements BillRepository {
 
   private static final String STATE = "state";
@@ -49,7 +47,7 @@ public class BillHibernateRepository implements BillRepository {
     EntityTransaction transaction = entityManager.getTransaction();
     transaction.begin();
 
-    entityManager.persist(bill);
+    entityManager.merge(bill);
 
     transaction.commit();
   }
@@ -90,9 +88,7 @@ public class BillHibernateRepository implements BillRepository {
   public Bill findOldestUnpaidBillByClientId(Long clientId) throws BillNotFoundException {
     EntityManager entityManager = entityManagerProvider.getEntityManager();
 
-    TypedQuery<Bill> query = entityManager.createNamedQuery("listOfBillsOrderedByOldest",
-        Bill.class);
-
+    TypedQuery<Bill> query = entityManager.createNamedQuery("oldestUnpaidBill", Bill.class);
     query.setParameter(CLIENT_ID, clientId);
     query.setParameter(STATE, BillState.UNPAID);
     List<Bill> bills = query.getResultList();

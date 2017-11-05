@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
@@ -14,6 +16,8 @@ import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "oldestUnpaidBill", query = "SELECT b FROM Bill b WHERE b.clientId =:clientId AND b.billState=:state ORDER BY b.expectedPayment") })
 public class Bill extends Submission {
 
   private LocalDateTime effectiveDate;
@@ -78,6 +82,14 @@ public class Bill extends Submission {
   public LocalDateTime calculateExpectedPaymentDate() {
     this.expectedPayment = effectiveDate.plusMonths(dueTerm.getMonthsQuantity());
     return expectedPayment;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Bill) {
+      return ((Bill) obj).getBillNumber().equals(billNumber);
+    }
+    return false;
   }
 
 }

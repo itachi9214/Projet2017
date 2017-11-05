@@ -40,7 +40,7 @@ public class BillHibernateRepository implements BillRepository {
     EntityTransaction transaction = entityManager.getTransaction();
     transaction.begin();
 
-    entityManager.persist(bill);
+    entityManager.merge(bill);
 
     transaction.commit();
   }

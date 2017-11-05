@@ -3,13 +3,14 @@ package ca.ulaval.glo4002.billing.domain.submision;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class OrderedProduct {
 
   @Id
-  // @GeneratedValue
+  @GeneratedValue
   private long id;
   private int productId;
   private float price;

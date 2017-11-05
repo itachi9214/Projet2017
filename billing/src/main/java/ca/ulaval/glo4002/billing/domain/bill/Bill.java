@@ -29,6 +29,7 @@ public class Bill extends Submission {
     super(billNumber, dueTerm, clientId, items);
     this.effectiveDate = LocalDateTime.now();
     this.expectedPaiement = calculateExpectedPaiementDate();
+    this.billState = BillState.UNPAID;
   }
 
   public BigDecimal getPaidAmount() {
@@ -73,4 +74,13 @@ public class Bill extends Submission {
   public BigDecimal calculateUnpaidAmount() {
     return totalPrice.subtract(paidAmount);
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Bill) {
+      return ((Bill) obj).getBillNumber().equals(billNumber);
+    }
+    return false;
+  }
+
 }

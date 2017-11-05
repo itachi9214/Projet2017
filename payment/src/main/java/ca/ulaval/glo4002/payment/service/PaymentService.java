@@ -1,7 +1,5 @@
 package ca.ulaval.glo4002.payment.service;
 
-import java.util.List;
-
 import ca.ulaval.glo4002.payment.ServiceLocator;
 import ca.ulaval.glo4002.payment.api.dto.RequestPaymentDto;
 import ca.ulaval.glo4002.payment.api.dto.ResponsePaymentDto;
@@ -12,6 +10,8 @@ import ca.ulaval.glo4002.payment.domain.payment.Payment;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentRepository;
 
 public class PaymentService {
+
+  private static final int OLDEST_BILL_INDEX = 0;
 
   private PaymentRepository paymentRepository;
   private PaymentAssembler paymentAssembler;
@@ -31,26 +31,17 @@ public class PaymentService {
   }
 
   public ResponsePaymentDto makePayment(RequestPaymentDto requestPaymentDto) {
-    Bill oldestBill = getOldestUnpaidBillForClient(requestPaymentDto.getClientId());
+    Bill oldestBill = billRepository.getOldestUnpaidBillForClient(requestPaymentDto.getClientId());
     Payment payment = paymentAssembler.toDomain(requestPaymentDto);
 
     oldestBill.addPaymentAndUpdateState(payment.getAmount());
     paymentRepository.savePayment(payment);
-    if (oldestBill.getState().equals(BillState.PAID)) {
-      billRepository.saveBillStateToPaid(oldestBill);
+    if (oldestBill.getBillState().equals(BillState.PAID)) {
+      billRepository.changeBillStateToPaid(oldestBill);
     }
 
     ResponsePaymentDto responsePaymentDto = paymentAssembler.toDto(payment);
     return responsePaymentDto;
-  }
-
-  private Bill getOldestUnpaidBillForClient(Long clientId) {
-    List<Bill> unpaidBills = billRepository.getUnpaidBillsOrderedByOldestForClient(clientId);
-    Bill oldestBill = null;
-    if (!unpaidBills.isEmpty()) {
-      oldestBill = unpaidBills.get(0);
-    }
-    return oldestBill;
   }
 
 }

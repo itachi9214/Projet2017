@@ -12,7 +12,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import ca.ulaval.glo4002.payment.domain.payment.Payment;
-import ca.ulaval.glo4002.payment.domain.payment.PaymentRepository;
 import ca.ulaval.glo4002.payment.infrastructure.EntityManagerProvider;
 
 public class PaymentHibernateRepositoryTest {
@@ -20,7 +19,7 @@ public class PaymentHibernateRepositoryTest {
   private static final int AMOUNT = 3;
   private static final long PAYMENT_ID = 1L;
 
-  private PaymentRepository paymentRepository;
+  private PaymentHibernateRepository paymentRepository;
   private EntityManager entityManager;
   private EntityManagerFactory entityManagerFactory;
 

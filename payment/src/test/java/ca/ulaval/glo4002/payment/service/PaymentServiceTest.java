@@ -1,16 +1,13 @@
 package ca.ulaval.glo4002.payment.service;
 
+import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -51,13 +48,10 @@ public class PaymentServiceTest {
     requestPaymentDto = new RequestPaymentDto(CLIENT_ID, AMOUNT,
         new PaymentMethod(ACCOUNT, SOURCE));
 
-    BDDMockito.willReturn(AMOUNT).given(payment).getAmount();
-    BDDMockito.willReturn(payment).given(paymentAssembler).toDomain(requestPaymentDto);
-    List<Bill> bills = new ArrayList<>();
-    bills.add(bill);
-    BDDMockito.willReturn(bills).given(billRepository)
-        .getUnpaidBillsOrderedByOldestForClient(CLIENT_ID);
-    BDDMockito.willReturn(BillState.PAID).given(bill).getState();
+    willReturn(AMOUNT).given(payment).getAmount();
+    willReturn(payment).given(paymentAssembler).toDomain(requestPaymentDto);
+    willReturn(bill).given(billRepository).getOldestUnpaidBillForClient(CLIENT_ID);
+    willReturn(BillState.PAID).given(bill).getBillState();
   }
 
   @Test
@@ -71,7 +65,7 @@ public class PaymentServiceTest {
   public void whenMakePaymentThenVerifyUnpaidBillsAreFound() {
     paymentService.makePayment(requestPaymentDto);
 
-    verify(billRepository).getUnpaidBillsOrderedByOldestForClient(CLIENT_ID);
+    verify(billRepository).getOldestUnpaidBillForClient(CLIENT_ID);
   }
 
   @Test
@@ -83,20 +77,20 @@ public class PaymentServiceTest {
 
   @Test
   public void givenUnpaidBillWhenMakePaymentThenVerifyStateIsNotSaved() {
-    BDDMockito.willReturn(BillState.UNPAID).given(bill).getState();
+    willReturn(BillState.UNPAID).given(bill).getBillState();
 
     paymentService.makePayment(requestPaymentDto);
 
-    verify(billRepository, never()).saveBillStateToPaid(bill);
+    verify(billRepository, never()).changeBillStateToPaid(bill);
   }
 
   @Test
   public void givenPaidBillWhenMakePaymentThenVerifyStateIsSaved() {
-    BDDMockito.willReturn(BillState.PAID).given(bill).getState();
+    willReturn(BillState.PAID).given(bill).getBillState();
 
     paymentService.makePayment(requestPaymentDto);
 
-    verify(billRepository, atMost(1)).saveBillStateToPaid(bill);
+    verify(billRepository, atMost(1)).changeBillStateToPaid(bill);
   }
 
 }

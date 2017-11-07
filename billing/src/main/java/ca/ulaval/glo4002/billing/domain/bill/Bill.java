@@ -24,7 +24,7 @@ public class Bill extends Submission {
   private LocalDateTime expectedPayment;
   @Enumerated
   private BillState billState;
-  private BigDecimal paidPrice;
+  private BigDecimal paidAmount = new BigDecimal(0);
 
   public Bill() {
     super();
@@ -35,15 +35,31 @@ public class Bill extends Submission {
     super(billNumber, dueTerm, clientId, items);
     this.effectiveDate = LocalDateTime.now();
     this.expectedPayment = calculateExpectedPaymentDate();
-    this.paidPrice = new BigDecimal(0);
+    this.paidAmount = new BigDecimal(0);
     this.billState = BillState.UNPAID;
+  }
+
+  public BigDecimal getPaidAmount() {
+    return paidAmount;
+  }
+
+  public void setPaidAmount(BigDecimal paidAmount) {
+    this.paidAmount = paidAmount;
+  }
+
+  public BillState getBillState() {
+    return billState;
+  }
+
+  public void setBillState(BillState billState) {
+    this.billState = billState;
   }
 
   public Bill(DueTerm dueTerm) {
     super(dueTerm);
     this.effectiveDate = LocalDateTime.now();
     this.expectedPayment = calculateExpectedPaymentDate();
-    this.paidPrice = new BigDecimal(0);
+    this.paidAmount = new BigDecimal(0);
     this.billState = BillState.UNPAID;
   }
 
@@ -59,22 +75,6 @@ public class Bill extends Submission {
     this.expectedPayment = expectedPayment;
   }
 
-  public BillState getBillState() {
-    return billState;
-  }
-
-  public void setBillState(BillState billState) {
-    this.billState = billState;
-  }
-
-  public BigDecimal getPaidPrice() {
-    return paidPrice;
-  }
-
-  public void setPaidPrice(BigDecimal paidPrice) {
-    this.paidPrice = paidPrice;
-  }
-
   public void setEffectiveDate(LocalDateTime effectiveDate) {
     this.effectiveDate = effectiveDate;
   }
@@ -84,20 +84,24 @@ public class Bill extends Submission {
     return expectedPayment;
   }
 
+  public void updateAfterPayment(BigDecimal newPaidPrice) {
+    this.paidAmount = newPaidPrice;
+
+    if (this.paidAmount.compareTo(this.totalPrice) >= 0) {
+      this.billState = BillState.PAID;
+    }
+  }
+
+  public BigDecimal calculateUnpaidAmount() {
+    return totalPrice.subtract(paidAmount);
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (obj instanceof Bill) {
       return ((Bill) obj).getBillNumber().equals(billNumber);
     }
     return false;
-  }
-
-  public void updateAfterPayment(BigDecimal newPaidPrice) {
-    this.paidPrice = newPaidPrice;
-
-    if (this.paidPrice.compareTo(this.totalPrice) >= 0) {
-      this.billState = BillState.PAID;
-    }
   }
 
 }

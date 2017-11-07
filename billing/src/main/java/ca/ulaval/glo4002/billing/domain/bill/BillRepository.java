@@ -14,4 +14,6 @@ public interface BillRepository {
 
   public void updateBill(Bill bill);
 
+  public void cancelBill(Identity billNumber) throws BillNotFoundException;
+
 }

@@ -72,7 +72,7 @@ public class BillTest {
   public void whenUpdateAfterPaymentThenPriceIsAddedToPaidPrice() {
     bill.updateAfterPayment(TOTAL_AMOUNT);
 
-    assertEquals(TOTAL_AMOUNT, bill.getPaidPrice());
+    assertEquals(TOTAL_AMOUNT, bill.getPaidAmount());
   }
 
   @Test

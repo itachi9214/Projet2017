@@ -15,9 +15,11 @@ import ca.ulaval.glo4002.billing.api.resource.filters.EntityManagerContextFilter
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.http.CrmHttpClient;
 import ca.ulaval.glo4002.billing.http.CrmHttpProduct;
+import ca.ulaval.glo4002.billing.http.PaymentHttp;
 import ca.ulaval.glo4002.billing.http.UtilHttp;
 import ca.ulaval.glo4002.billing.infrastructure.EntityManagerProvider;
 import ca.ulaval.glo4002.billing.infrastructure.bill.BillHibernateRepository;
+import ca.ulaval.glo4002.billing.infrastructure.bill.PaymentHttpRepository;
 import ca.ulaval.glo4002.billing.infrastructure.submission.ClientHttpRepository;
 import ca.ulaval.glo4002.billing.infrastructure.submission.ProductHttpRepository;
 import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionHibernateRepository;
@@ -65,11 +67,13 @@ public class BillingServer implements Runnable {
     ServiceLocator.register(new UtilHttp());
     ServiceLocator.register(new CrmHttpClient());
     ServiceLocator.register(new CrmHttpProduct());
+    ServiceLocator.register(new PaymentHttp());
     ServiceLocator.register(new SubmissionAssembler());
     ServiceLocator.register(new BillAssembler());
     ServiceLocator.register(new SubmissionHibernateRepository());
     ServiceLocator.register(new ClientHttpRepository());
     ServiceLocator.register(new ProductHttpRepository());
+    ServiceLocator.register(new PaymentHttpRepository());
     ServiceLocator.register(new BillHibernateRepository());
     ServiceLocator.register(new BillService());
     ServiceLocator.register(new SubmissionService());

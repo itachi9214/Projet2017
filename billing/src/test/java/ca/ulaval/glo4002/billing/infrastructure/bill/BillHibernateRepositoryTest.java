@@ -1,8 +1,8 @@
 package ca.ulaval.glo4002.billing.infrastructure.bill;
 
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.Mockito.verify;
 
 import java.util.Collections;
 import java.util.List;
@@ -119,6 +119,15 @@ public class BillHibernateRepositoryTest {
     billRepository.updateBill(bill);
 
     billRepository.findOldestUnpaidBillByClientId(CLIENT_NUMBER);
+  }
+
+  @Test(expected = BillNotFoundException.class)
+  public void givenBillwhenCancelBillThenThenBillIsDeleted() {
+    Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
+    billRepository.createBill(bill);
+    billRepository.cancelBill(BILL_NUMBER);
+
+    billRepository.findById(BILL_NUMBER);
   }
 
 }

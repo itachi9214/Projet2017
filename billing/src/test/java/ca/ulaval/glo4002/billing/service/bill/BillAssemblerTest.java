@@ -89,7 +89,7 @@ public class BillAssemblerTest {
   @Test
   public void whenAssembleBillForPaymentThenDtoShouldBeTheSame() {
     willReturn(identity).given(bill).getBillNumber();
-    willReturn(PAID_PRICE).given(bill).getPaidPrice();
+    willReturn(PAID_PRICE).given(bill).getPaidAmount();
 
     BillForPaymentDto billForPaymentDto = billAssembler.assembleBillForPayment(bill);
 

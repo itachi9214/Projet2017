@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.billing.api.resource;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -61,6 +62,13 @@ public class BillingResource {
   public Response updateBillAfterPayment(BillForPaymentDto billForPaymentDto) {
     billService.updateBillAfterPayment(billForPaymentDto);
     return Response.status(Response.Status.OK).build();
+  }
+
+  @DELETE
+  @Path("/{id}")
+  public Response cancelBill(@PathParam("id") long id) {
+    billService.cancelBill(id);
+    return Response.status(Response.Status.ACCEPTED).build();
   }
 
 }

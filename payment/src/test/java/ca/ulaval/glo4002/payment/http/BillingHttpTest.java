@@ -6,6 +6,8 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
+import java.math.BigDecimal;
+
 import javax.ws.rs.core.Response;
 
 import org.junit.Before;
@@ -20,20 +22,24 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import ca.ulaval.glo4002.payment.domain.bill.Bill;
+import ca.ulaval.glo4002.payment.infrastructure.bill.BillNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BillingHttpTest {
 
+  private static final BigDecimal PAID_PRICE = new BigDecimal(1);
+  private static final long BILL_NUMBER = 1L;
   private static final long CLIENT_ID = 1L;
 
   private BillingHttp billingHttp;
   private ObjectMapper mapper;
-  private Bill bill;
 
   @Mock
   private UtilHttp http;
   @Mock
   private Response response;
+  @Mock
+  private Bill bill;
 
   @Before
   public void setUp() throws JsonProcessingException {
@@ -41,7 +47,7 @@ public class BillingHttpTest {
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
     billingHttp = new BillingHttp(http);
-    bill = new Bill();
+    bill = new Bill(BILL_NUMBER, PAID_PRICE);
     willReturn(response).given(http).callUrlWithGetMethod(anyString());
     willReturn(mapper.writeValueAsString(bill)).given(response).readEntity(String.class);
   }
@@ -51,6 +57,15 @@ public class BillingHttpTest {
     Object result = billingHttp.getOldestUnpaidBillForClient(CLIENT_ID);
 
     assertTrue(result instanceof Bill);
+  }
+
+  @Test(expected = BillNotFoundException.class)
+  public void givenNoBillWhenGetOldestUnpaidBillForClientThenThrowsException()
+      throws JsonProcessingException {
+    bill = new Bill();
+    willReturn(mapper.writeValueAsString(bill)).given(response).readEntity(String.class);
+
+    billingHttp.getOldestUnpaidBillForClient(CLIENT_ID);
   }
 
   @Test

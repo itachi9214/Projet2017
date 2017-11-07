@@ -44,7 +44,7 @@ public class BillingHttp {
       response.close();
     }
 
-    if (bill == null) {
+    if (bill.getBillNumber() == null) {
       throw new BillNotFoundException();
     }
     return bill;

@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.payment.service;
 
 import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.BDDMockito.willThrow;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
@@ -12,10 +13,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4002.payment.api.dto.RequestPaymentDto;
 import ca.ulaval.glo4002.payment.domain.bill.Bill;
 import ca.ulaval.glo4002.payment.domain.bill.BillRepository;
+import ca.ulaval.glo4002.payment.domain.payment.ClientRepository;
 import ca.ulaval.glo4002.payment.domain.payment.Payment;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentMethod;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentRepository;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentSource;
+import ca.ulaval.glo4002.payment.http.ClientNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentServiceTest {
@@ -35,13 +38,16 @@ public class PaymentServiceTest {
   @Mock
   private BillRepository billRepository;
   @Mock
+  private ClientRepository clientRepository;
+  @Mock
   private Payment payment;
   @Mock
   private Bill bill;
 
   @Before
   public void setUp() {
-    paymentService = new PaymentService(paymentAssembler, paymentRepository, billRepository);
+    paymentService = new PaymentService(paymentAssembler, paymentRepository, billRepository,
+        clientRepository);
     requestPaymentDto = new RequestPaymentDto(CLIENT_ID, AMOUNT,
         new PaymentMethod(ACCOUNT, SOURCE));
 
@@ -76,6 +82,20 @@ public class PaymentServiceTest {
     paymentService.makePayment(requestPaymentDto);
 
     verify(billRepository).updateBillAfterPayment(bill);
+  }
+
+  @Test
+  public void whenMakePaymentThenVerifyClientExists() {
+    paymentService.makePayment(requestPaymentDto);
+
+    verify(clientRepository).verifyClientExists(CLIENT_ID);
+  }
+
+  @Test(expected = ClientNotFoundException.class)
+  public void givenUnexistingClientWhenMakePaymentThenThrowsException() {
+    willThrow(ClientNotFoundException.class).given(clientRepository).verifyClientExists(CLIENT_ID);
+
+    paymentService.makePayment(requestPaymentDto);
   }
 
 }

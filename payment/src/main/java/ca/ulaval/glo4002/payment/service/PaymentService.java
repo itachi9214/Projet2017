@@ -41,20 +41,28 @@ public class PaymentService {
     paymentRepository.savePayment(payment);
 
     try {
-      float amountLeftAfterPayment = payment.getAmount();
-      while (amountLeftAfterPayment > 0) {
-        Bill oldestBill = billRepository
-            .getOldestUnpaidBillForClient(requestPaymentDto.getClientId());
-        float amountToPayForBill = oldestBill.getPriceThatCanBePaid(amountLeftAfterPayment);
-        oldestBill.substractPaidAmount(amountToPayForBill);
-        amountLeftAfterPayment -= amountToPayForBill;
-        billRepository.updateBillAfterPayment(oldestBill);
-      }
+      payBillsForClientWithPayment(requestPaymentDto.getClientId(), payment);
     } catch (BillNotFoundException exception) {
     }
 
     ResponsePaymentDto responsePaymentDto = paymentAssembler.assembleResponseFromPayment(payment);
     return responsePaymentDto;
+  }
+
+  private void payBillsForClientWithPayment(Long clientId, Payment payment) {
+    float amountLeftAfterPayment = payment.getAmount();
+
+    while (amountLeftAfterPayment > 0) {
+      Bill oldestBill = billRepository.getOldestUnpaidBillForClient(clientId);
+      float amountToPayForBill = oldestBill.getPriceThatCanBePaid(amountLeftAfterPayment);
+      payBillWithAmount(oldestBill, amountToPayForBill);
+      amountLeftAfterPayment -= amountToPayForBill;
+    }
+  }
+
+  private void payBillWithAmount(Bill oldestBill, float amountToPayForBill) {
+    oldestBill.substractPaidAmount(amountToPayForBill);
+    billRepository.updateBillAfterPayment(oldestBill);
   }
 
 }

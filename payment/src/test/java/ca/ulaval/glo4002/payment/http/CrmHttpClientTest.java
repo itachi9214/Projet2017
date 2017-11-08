@@ -2,6 +2,7 @@ package ca.ulaval.glo4002.payment.http;
 
 import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.verify;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -12,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -19,9 +21,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 @RunWith(MockitoJUnitRunner.class)
 public class CrmHttpClientTest {
 
-  private static final String A_STRING = "name";
-  private static final Long NON_EXISTING_CLIENT_NUMBER = -3L;
-  private static final Long EXISTING_CLIENT_NUMBER = 1L;
+  private static final Long CLIENT_NUMBER = 1L;
 
   private CrmHttpClient crmHttpClient;
   private ObjectMapper mapper;
@@ -37,6 +37,7 @@ public class CrmHttpClientTest {
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
     willReturn(response).given(http).callUrlWithGetMethod(anyString());
+    willReturn(Status.OK.getStatusCode()).given(response).getStatus();
     crmHttpClient = new CrmHttpClient(http);
   }
 
@@ -44,7 +45,14 @@ public class CrmHttpClientTest {
   public void givenClientNumberNotFoundWhenVerifyClientExistsThenThrowException() {
     willReturn(Status.NOT_FOUND.getStatusCode()).given(response).getStatus();
 
-    crmHttpClient.verifyClientExists(NON_EXISTING_CLIENT_NUMBER);
+    crmHttpClient.verifyClientExists(CLIENT_NUMBER);
+  }
+
+  @Test
+  public void whenVerifyClientExistsThenGetIsCalled() throws JsonProcessingException {
+    crmHttpClient.verifyClientExists(CLIENT_NUMBER);
+
+    verify(http).callUrlWithGetMethod(anyString());
   }
 
 }

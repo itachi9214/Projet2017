@@ -62,7 +62,7 @@ public class BillingHttpTest {
   @Test(expected = BillNotFoundException.class)
   public void givenNoBillWhenGetOldestUnpaidBillForClientThenThrowsException()
       throws JsonProcessingException {
-    bill = new Bill();
+    bill = null;
     willReturn(mapper.writeValueAsString(bill)).given(response).readEntity(String.class);
 
     billingHttp.getOldestUnpaidBillForClient(CLIENT_ID);
@@ -76,7 +76,7 @@ public class BillingHttpTest {
   }
 
   @Test
-  public void whenSaveBillStateToPaidThenPostIsCalled() throws JsonProcessingException {
+  public void whenUpdateBillAfterPaymentThenPostIsCalled() throws JsonProcessingException {
     billingHttp.updateBillAfterPayment(bill);
 
     verify(http).callUrlWithPostMethod(anyString(), eq(bill));

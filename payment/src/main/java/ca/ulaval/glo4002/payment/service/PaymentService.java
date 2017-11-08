@@ -57,8 +57,4 @@ public class PaymentService {
     return responsePaymentDto;
   }
 
-  public void makeMultiplePayment(RequestPaymentDto requestPaymentDto) {
-
-  }
-
 }

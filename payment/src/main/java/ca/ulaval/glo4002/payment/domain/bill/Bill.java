@@ -15,20 +15,20 @@ public class Bill {
     this.remainingAmount = remainingAmount;
   }
 
+  public BigDecimal getRemainingAmount() {
+    return remainingAmount;
+  }
+
+  public void setRemainingAmount(BigDecimal remainingAmount) {
+    this.remainingAmount = remainingAmount;
+  }
+
   public Long getBillNumber() {
     return billNumber;
   }
 
   public void setBillNumber(Long billNumber) {
     this.billNumber = billNumber;
-  }
-
-  public BigDecimal getPaidPrice() {
-    return remainingAmount;
-  }
-
-  public void setPaidPrice(BigDecimal remainingAmount) {
-    this.remainingAmount = remainingAmount;
   }
 
   public void substractPaidAmount(float amount) {

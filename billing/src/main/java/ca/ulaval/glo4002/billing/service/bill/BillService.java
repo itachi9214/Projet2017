@@ -66,6 +66,7 @@ public class BillService {
   public void cancelBill(long billNumber) {
     Identity identity = identityFactory.createIdFromNumber(billNumber);
     Bill billToCancel = billRepository.findById(identity);
+    billRepository.cancelBill(identity);
     paymentRepository.savePayment(new RequestPaymentDto(billToCancel.getClientId(),
         billToCancel.getPaidAmount().floatValue(), ACCOUNT, SOURCE));
   }

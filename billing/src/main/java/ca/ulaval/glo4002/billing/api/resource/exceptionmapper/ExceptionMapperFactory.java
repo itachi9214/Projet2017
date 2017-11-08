@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response.Status;
 
 import ca.ulaval.glo4002.billing.api.dto.BadRequestDto;
 import ca.ulaval.glo4002.billing.api.dto.BadRequestErrorListDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.NotFoundDto;
+import ca.ulaval.glo4002.billing.api.dto.EmptyDto;
 
 public class ExceptionMapperFactory {
 
@@ -24,7 +24,7 @@ public class ExceptionMapperFactory {
   }
 
   public Response createNotFoundExceptionMapper() {
-    NotFoundDto notFoundDto = new NotFoundDto();
+    EmptyDto notFoundDto = new EmptyDto();
     return Response.status(Status.NOT_FOUND).entity(notFoundDto).type(MediaType.APPLICATION_JSON)
         .build();
   }

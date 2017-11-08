@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ca.ulaval.glo4002.billing.ServiceLocator;
+import ca.ulaval.glo4002.billing.api.dto.EmptyDto;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillForPaymentDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
@@ -68,7 +69,7 @@ public class BillingResource {
   @Path("/{id}")
   public Response cancelBill(@PathParam("id") long id) {
     billService.cancelBill(id);
-    return Response.status(Response.Status.ACCEPTED).build();
+    return Response.status(Response.Status.ACCEPTED).entity(new EmptyDto()).build();
   }
 
 }

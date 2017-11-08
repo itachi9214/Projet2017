@@ -84,8 +84,8 @@ public class Bill extends Submission {
     return expectedPayment;
   }
 
-  public void updateAfterPayment(BigDecimal newPaidPrice) {
-    this.paidAmount = newPaidPrice;
+  public void updateAfterPayment(BigDecimal newRemainingAmount) {
+    this.paidAmount = totalPrice.subtract(newRemainingAmount);
 
     if (this.paidAmount.compareTo(this.totalPrice) >= 0) {
       this.billState = BillState.PAID;
@@ -102,6 +102,10 @@ public class Bill extends Submission {
       return ((Bill) obj).getBillNumber().equals(billNumber);
     }
     return false;
+  }
+
+  public BigDecimal getRemainingAmount() {
+    return totalPrice.subtract(paidAmount);
   }
 
 }

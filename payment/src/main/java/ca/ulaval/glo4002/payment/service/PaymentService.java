@@ -41,15 +41,24 @@ public class PaymentService {
     paymentRepository.savePayment(payment);
 
     try {
-      Bill oldestBill = billRepository
-          .getOldestUnpaidBillForClient(requestPaymentDto.getClientId());
-      oldestBill.addPayment(payment.getAmount());
-      billRepository.updateBillAfterPayment(oldestBill);
+      float amountLeftAfterPayment = payment.getAmount();
+      while (amountLeftAfterPayment > 0) {
+        Bill oldestBill = billRepository
+            .getOldestUnpaidBillForClient(requestPaymentDto.getClientId());
+        float amountToPayForBill = oldestBill.getPriceThatCanBePaid(amountLeftAfterPayment);
+        oldestBill.substractPaidAmount(amountToPayForBill);
+        amountLeftAfterPayment -= amountToPayForBill;
+        billRepository.updateBillAfterPayment(oldestBill);
+      }
     } catch (BillNotFoundException exception) {
     }
 
     ResponsePaymentDto responsePaymentDto = paymentAssembler.assembleResponseFromPayment(payment);
     return responsePaymentDto;
+  }
+
+  public void makeMultiplePayment(RequestPaymentDto requestPaymentDto) {
+
   }
 
 }

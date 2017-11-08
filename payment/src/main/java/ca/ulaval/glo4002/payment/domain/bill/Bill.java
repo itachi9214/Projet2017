@@ -5,14 +5,14 @@ import java.math.BigDecimal;
 public class Bill {
 
   private Long billNumber;
-  private BigDecimal paidPrice;
+  private BigDecimal remainingAmount;
 
   public Bill() {
   }
 
-  public Bill(Long billNumber, BigDecimal paidPrice) {
+  public Bill(Long billNumber, BigDecimal remainingAmount) {
     this.billNumber = billNumber;
-    this.paidPrice = paidPrice;
+    this.remainingAmount = remainingAmount;
   }
 
   public Long getBillNumber() {
@@ -24,15 +24,29 @@ public class Bill {
   }
 
   public BigDecimal getPaidPrice() {
-    return paidPrice;
+    return remainingAmount;
   }
 
-  public void setPaidPrice(BigDecimal paidPrice) {
-    this.paidPrice = paidPrice;
+  public void setPaidPrice(BigDecimal remainingAmount) {
+    this.remainingAmount = remainingAmount;
   }
 
-  public void addPayment(float amount) {
-    this.paidPrice = this.paidPrice.add(new BigDecimal(amount));
+  public void substractPaidAmount(float amount) {
+    this.remainingAmount = this.remainingAmount.subtract(new BigDecimal(amount));
+  }
+
+  public float getPriceThatCanBePaid(float paymentAmount) {
+    float priceThatCanBePaid;
+    if (isRemainingAmountLowerThan(paymentAmount)) {
+      priceThatCanBePaid = remainingAmount.floatValue();
+    } else {
+      priceThatCanBePaid = paymentAmount;
+    }
+    return priceThatCanBePaid;
+  }
+
+  private boolean isRemainingAmountLowerThan(float paymentAmount) {
+    return remainingAmount.floatValue() - paymentAmount < 0;
   }
 
 }

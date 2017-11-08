@@ -5,26 +5,26 @@ import java.math.BigDecimal;
 public class BillForPaymentDto {
 
   private Long billNumber;
-  private BigDecimal paidPrice;
+  private BigDecimal remainingAmount;
 
   public BillForPaymentDto() {
   }
 
-  public BillForPaymentDto(Long billNumber, BigDecimal paidPrice) {
+  public BillForPaymentDto(Long billNumber, BigDecimal remainingAmount) {
     this.billNumber = billNumber;
-    this.paidPrice = paidPrice;
+    this.remainingAmount = remainingAmount;
   }
 
   public Long getBillNumber() {
     return billNumber;
   }
 
-  public BigDecimal getPaidPrice() {
-    return paidPrice;
+  public BigDecimal getRemainingAmount() {
+    return remainingAmount;
   }
 
-  public void setPaidPrice(BigDecimal paidPrice) {
-    this.paidPrice = paidPrice;
+  public void setRemainingAmount(BigDecimal remainingAmount) {
+    this.remainingAmount = remainingAmount;
   }
 
   public void setBillNumber(Long billNumber) {

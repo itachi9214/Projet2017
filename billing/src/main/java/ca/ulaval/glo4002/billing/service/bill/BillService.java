@@ -59,7 +59,7 @@ public class BillService {
   public void updateBillAfterPayment(BillForPaymentDto billForPaymentDto) {
     Identity identity = identityFactory.createIdFromNumber(billForPaymentDto.getBillNumber());
     Bill bill = billRepository.findById(identity);
-    bill.updateAfterPayment(billForPaymentDto.getPaidPrice());
+    bill.updateAfterPayment(billForPaymentDto.getRemainingAmount());
     billRepository.updateBill(bill);
   }
 

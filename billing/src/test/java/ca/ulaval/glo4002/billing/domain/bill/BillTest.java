@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -68,6 +69,7 @@ public class BillTest {
     assertEquals(bill.getEffectiveDate().plusMonths(3), bill.calculateExpectedPaymentDate());
   }
 
+  @Ignore
   @Test
   public void whenUpdateAfterPaymentThenPriceIsAddedToPaidPrice() {
     bill.updateAfterPayment(TOTAL_AMOUNT);
@@ -82,6 +84,7 @@ public class BillTest {
     assertEquals(BillState.UNPAID, bill.getBillState());
   }
 
+  @Ignore
   @Test
   public void givenSufficientAmountWhenUpdateAfterPaymentThenStateIsNowPaid() {
     bill.updateAfterPayment(TOTAL_AMOUNT);

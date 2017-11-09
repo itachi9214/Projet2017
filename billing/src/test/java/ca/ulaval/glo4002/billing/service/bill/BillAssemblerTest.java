@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
-import static org.junit.Assert.assertTrue;
-import static org.mockito.BDDMockito.willReturn;
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -27,7 +26,7 @@ import ca.ulaval.glo4002.billing.domain.submision.Submission;
 public class BillAssemblerTest {
 
   private static final BigDecimal TOTAL_PRICE = new BigDecimal(0);
-  private static final BigDecimal PAID_PRICE = new BigDecimal(0);
+  private static final BigDecimal REMANING_AMOUNT = new BigDecimal(0);
   private static final List<Object> ITEMS_LIST = Collections.emptyList();
   private static final long CLIENT_NUMBER = 1L;
   private static final Long SUBMISSION_NUMBER = 100L;
@@ -87,16 +86,15 @@ public class BillAssemblerTest {
     assertTrue(bill.getClientId().equals(CLIENT_NUMBER));
   }
 
-  @Ignore
   @Test
   public void whenAssembleBillForPaymentThenDtoShouldBeTheSame() {
     willReturn(identity).given(bill).getBillNumber();
-    willReturn(PAID_PRICE).given(bill).getPaidAmount();
+    willReturn(REMANING_AMOUNT).given(bill).getRemainingAmount();
 
     BillForPaymentDto billForPaymentDto = billAssembler.assembleBillForPayment(bill);
 
     assertTrue(billForPaymentDto.getBillNumber().equals(identity.getNumber()));
-    assertTrue(billForPaymentDto.getRemainingAmount().equals(PAID_PRICE));
+    assertTrue(billForPaymentDto.getRemainingAmount().equals(REMANING_AMOUNT));
   }
 
 }

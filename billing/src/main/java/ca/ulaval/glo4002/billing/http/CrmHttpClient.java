@@ -17,11 +17,11 @@ public class CrmHttpClient {
   private static final String LOCALHOST = "http://localhost:8080";
   private static final String CLIENTS = "/clients/";
 
-  private UtilHttp http;
+  private UtilHttp utilHttp;
   private ObjectMapper mapper;
 
-  public CrmHttpClient(UtilHttp http) {
-    this.http = http;
+  public CrmHttpClient(UtilHttp utilHttp) {
+    this.utilHttp = utilHttp;
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
   }
@@ -32,7 +32,7 @@ public class CrmHttpClient {
 
   public ClientDto getClientDto(Long clientNumber) throws ClientNotFoundException {
     String url = LOCALHOST + CLIENTS + clientNumber;
-    Response response = http.callUrlWithGetMethod(url);
+    Response response = utilHttp.callUrlWithGetMethod(url);
 
     if (Status.fromStatusCode(response.getStatus()).equals(Status.NOT_FOUND)) {
       throw new ClientNotFoundException(clientNumber);

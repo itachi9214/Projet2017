@@ -1,14 +1,13 @@
 package ca.ulaval.glo4002.billing.domain.bill;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.BDDMockito.willReturn;
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -22,7 +21,8 @@ import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 public class BillTest {
 
   private static final BigDecimal UNSUFFICIENT_AMOUNT = new BigDecimal(5);
-  private static final BigDecimal TOTAL_AMOUNT = new BigDecimal(10);
+  private static final BigDecimal REMANING_AMOUNT = new BigDecimal(0);
+  private static final BigDecimal TOTAL_AMOUNT = new BigDecimal(30);
   private static final long CLIENT_ID = 1L;
 
   private Bill bill;
@@ -69,12 +69,11 @@ public class BillTest {
     assertEquals(bill.getEffectiveDate().plusMonths(3), bill.calculateExpectedPaymentDate());
   }
 
-  @Ignore
   @Test
   public void whenUpdateAfterPaymentThenPriceIsAddedToPaidPrice() {
-    bill.updateAfterPayment(TOTAL_AMOUNT);
+    bill.updateAfterPayment(REMANING_AMOUNT);
 
-    assertEquals(TOTAL_AMOUNT, bill.getPaidAmount());
+    assertEquals(REMANING_AMOUNT, bill.getRemainingAmount());
   }
 
   @Test
@@ -84,12 +83,18 @@ public class BillTest {
     assertEquals(BillState.UNPAID, bill.getBillState());
   }
 
-  @Ignore
   @Test
   public void givenSufficientAmountWhenUpdateAfterPaymentThenStateIsNowPaid() {
-    bill.updateAfterPayment(TOTAL_AMOUNT);
+    bill.updateAfterPayment(REMANING_AMOUNT);
 
     assertEquals(BillState.PAID, bill.getBillState());
+  }
+
+  @Test
+  public void givenPaidAmountWhenCalculateUnpaidAmountThenReturnUnpaidAmount() {
+    BigDecimal unpaidAmount = bill.calculateUnpaidAmount();
+
+    assertEquals(TOTAL_AMOUNT, unpaidAmount);
   }
 
 }

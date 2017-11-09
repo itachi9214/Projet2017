@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.billing.api.resource;
 
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -74,6 +74,13 @@ public class BillingResourceTest {
     billingResource.updateBillAfterPayment(billForPaymentDto);
 
     verify(billService).updateBillAfterPayment(billForPaymentDto);
+  }
+
+  @Test
+  public void whenCancelBillThenVerifyBillIsCanceled() {
+    billingResource.cancelBill(BILL_NUMBER);
+
+    verify(billService).cancelBill(BILL_NUMBER);
   }
 
 }

@@ -3,7 +3,9 @@
 #### Avancement des stories :
 * Story 1 terminée
 * Story 2 terminée
-* Story 3 en conception papier
+* Story 3 terminée
+* Story 4 terminée
+* Story 5 terminée
 
 #### Permissions spéciales :
 * Aucune

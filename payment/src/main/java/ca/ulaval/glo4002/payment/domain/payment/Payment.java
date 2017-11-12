@@ -27,20 +27,20 @@ public class Payment {
     return amount;
   }
 
-  public long getClientId() {
-    return clientId;
-  }
-
-  public PaymentMethod getPaymentMethod() {
-    return paymentMethod;
-  }
-
   public void setAmount(float amount) {
     this.amount = amount;
   }
 
+  public long getClientId() {
+    return clientId;
+  }
+
   public void setClientId(long clientId) {
     this.clientId = clientId;
+  }
+
+  public PaymentMethod getPaymentMethod() {
+    return paymentMethod;
   }
 
   public void setPaymentMethod(PaymentMethod paymentMethod) {

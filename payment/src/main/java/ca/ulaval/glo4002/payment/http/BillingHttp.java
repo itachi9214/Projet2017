@@ -35,6 +35,11 @@ public class BillingHttp {
     String url = LOCALHOST + BILLS + clientNumber;
     Response response = utilHttp.callUrlWithGetMethod(url);
 
+    Bill bill = extractBillFromResponse(response);
+    return bill;
+  }
+
+  private Bill extractBillFromResponse(Response response) throws BillNotFoundException {
     Bill bill = null;
     try {
       bill = mapper.readValue(response.readEntity(String.class), Bill.class);

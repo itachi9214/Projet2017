@@ -19,6 +19,7 @@ import ca.ulaval.glo4002.payment.domain.payment.PaymentMethod;
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentAssemblerTest {
 
+  private static final double FLOAT_PRECISION = 0.001;
   private static final String PAYMENTS = "/payments/";
   private static final long PAYMENT_NUMBER = 1L;
   private static final int AMOUNT = 3;
@@ -50,7 +51,7 @@ public class PaymentAssemblerTest {
     Payment payment = paymentAssembler.assemblePaymentFromRequest(requestPaymentDto);
 
     assertEquals(CLIENT_ID, payment.getClientId());
-    assertEquals(AMOUNT, payment.getAmount(), 0.001);
+    assertEquals(AMOUNT, payment.getAmount(), FLOAT_PRECISION);
     assertEquals(paymentMethod, payment.getPaymentMethod());
   }
 

@@ -46,7 +46,7 @@ public class Bill {
   }
 
   private boolean isRemainingAmountLowerThan(float paymentAmount) {
-    return remainingAmount.floatValue() - paymentAmount < 0;
+    return remainingAmount.floatValue() < paymentAmount;
   }
 
 }

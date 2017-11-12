@@ -30,6 +30,7 @@ public class BillingHttpTest {
   private static final BigDecimal PAID_PRICE = new BigDecimal(1);
   private static final long BILL_NUMBER = 1L;
   private static final long CLIENT_ID = 1L;
+  private static final String URL = "http://localhost:8181/bills/1";
 
   private BillingHttp billingHttp;
   private ObjectMapper mapper;
@@ -72,7 +73,7 @@ public class BillingHttpTest {
   public void whenGetOldestUnpaidBillForClientThenGetIsCalled() throws JsonProcessingException {
     billingHttp.getOldestUnpaidBillForClient(CLIENT_ID);
 
-    verify(http).callUrlWithGetMethod(anyString());
+    verify(http).callUrlWithGetMethod(URL);
   }
 
   @Test

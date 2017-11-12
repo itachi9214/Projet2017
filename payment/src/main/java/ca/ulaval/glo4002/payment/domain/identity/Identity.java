@@ -12,20 +12,16 @@ public class Identity implements Serializable {
 
   private Long number;
 
-  public Identity() {
-    generateAndSetUniqueNumber();
-  }
-
   public Identity(Long number) {
     this.number = number;
   }
 
-  public Long getNumber() {
-    return number;
+  public Identity() {
+    this.number = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
   }
 
-  private void generateAndSetUniqueNumber() {
-    this.number = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+  public Long getNumber() {
+    return number;
   }
 
   @Override

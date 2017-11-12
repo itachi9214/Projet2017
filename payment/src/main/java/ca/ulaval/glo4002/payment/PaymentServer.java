@@ -25,6 +25,7 @@ import ca.ulaval.glo4002.payment.service.PaymentService;
 
 public class PaymentServer implements Runnable {
 
+  private static final String PACKAGES = "ca.ulaval.glo4002.payment";
   private static final int PORT = 8282;
 
   public static void main(String[] args) {
@@ -35,7 +36,7 @@ public class PaymentServer implements Runnable {
   public void run() {
     Server server = new Server(PORT);
     ServletContextHandler contextHandler = new ServletContextHandler(server, "/");
-    ResourceConfig packageConfig = new ResourceConfig().packages("ca.ulaval.glo4002.payment");
+    ResourceConfig packageConfig = new ResourceConfig().packages(PACKAGES);
 
     registerServices(packageConfig);
 

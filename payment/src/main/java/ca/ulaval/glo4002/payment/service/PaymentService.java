@@ -13,6 +13,7 @@ import ca.ulaval.glo4002.payment.infrastructure.bill.BillNotFoundException;
 
 public class PaymentService {
 
+  private static final int AMOUNT_LEFT_NULL = 0;
   private PaymentRepository paymentRepository;
   private PaymentAssembler paymentAssembler;
   private BillRepository billRepository;
@@ -52,7 +53,7 @@ public class PaymentService {
   private void payBillsForClientWithPayment(Long clientId, Payment payment) {
     float amountLeftAfterPayment = payment.getAmount();
 
-    while (amountLeftAfterPayment > 0) {
+    while (amountLeftAfterPayment > AMOUNT_LEFT_NULL) {
       Bill oldestBill = billRepository.getOldestUnpaidBillForClient(clientId);
       float amountToPayForBill = oldestBill.getPriceThatCanBePaid(amountLeftAfterPayment);
       payBillWithAmount(oldestBill, amountToPayForBill);

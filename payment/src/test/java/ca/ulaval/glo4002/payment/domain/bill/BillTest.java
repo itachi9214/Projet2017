@@ -31,16 +31,16 @@ public class BillTest {
 
   @Test
   public void givenRemainingAmountLowerThanAmountWhenGetPriceThatCanBePaidThenReturnsRemainingAmount() {
-    float res = bill.getPriceThatCanBePaid(BIGGER_AMOUNT);
+    float result = bill.getPriceThatCanBePaid(BIGGER_AMOUNT);
 
-    assertEquals(REMAINING_AMOUNT.floatValue(), res, FLOAT_DIFFERENCE);
+    assertEquals(REMAINING_AMOUNT.floatValue(), result, FLOAT_DIFFERENCE);
   }
 
   @Test
   public void givenRemainingAmountLowerBiggerThanAmountWhenGetPriceThatCanBePaidThenReturnsAmount() {
-    float res = bill.getPriceThatCanBePaid(LOWER_AMOUNT);
+    float result = bill.getPriceThatCanBePaid(LOWER_AMOUNT);
 
-    assertEquals(LOWER_AMOUNT, res, FLOAT_DIFFERENCE);
+    assertEquals(LOWER_AMOUNT, result, FLOAT_DIFFERENCE);
   }
 
 }

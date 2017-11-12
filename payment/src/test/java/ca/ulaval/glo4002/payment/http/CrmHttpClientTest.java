@@ -1,7 +1,6 @@
 package ca.ulaval.glo4002.payment.http;
 
 import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 
 import javax.ws.rs.core.Response;
@@ -21,6 +20,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 @RunWith(MockitoJUnitRunner.class)
 public class CrmHttpClientTest {
 
+  private static final String LOCALHOST = "http://localhost:8080";
+  private static final String CLIENTS = "/clients/";
+  private static final String URL = LOCALHOST + CLIENTS + "1";
   private static final Long CLIENT_NUMBER = 1L;
 
   private CrmHttpClient crmHttpClient;
@@ -36,7 +38,7 @@ public class CrmHttpClientTest {
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-    willReturn(response).given(http).callUrlWithGetMethod(anyString());
+    willReturn(response).given(http).callUrlWithGetMethod(URL);
     willReturn(Status.OK.getStatusCode()).given(response).getStatus();
     crmHttpClient = new CrmHttpClient(http);
   }
@@ -52,7 +54,7 @@ public class CrmHttpClientTest {
   public void whenVerifyClientExistsThenGetIsCalled() throws JsonProcessingException {
     crmHttpClient.verifyClientExists(CLIENT_NUMBER);
 
-    verify(http).callUrlWithGetMethod(anyString());
+    verify(http).callUrlWithGetMethod(URL);
   }
 
 }

@@ -1,7 +1,9 @@
 package ca.ulaval.glo4002.payment.service;
 
-import static org.mockito.BDDMockito.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.BDDMockito.willThrow;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.math.BigDecimal;
 
@@ -26,6 +28,7 @@ import ca.ulaval.glo4002.payment.infrastructure.bill.BillNotFoundException;
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentServiceTest {
 
+  private static final int ZERO = 0;
   private static final PaymentSource SOURCE = PaymentSource.CREDIT_CARD;
   private static final String ACCOUNT = "XXXX-XXX-XXX";
   private static final long CLIENT_ID = 1L;
@@ -34,11 +37,11 @@ public class PaymentServiceTest {
   private static final String URL = BASE_URL + BILL_ID;
   private static final float AMOUNT = 50;
   private static final int EXACT_REMAINING_AMOUNT = 50;
-  private static final int REMAINING_AMOUNT = 80;
 
   private PaymentService paymentService;
   private RequestPaymentDto requestPaymentDto;
   private ResponsePaymentDto responsePaymentDto;
+  private Bill bill;
 
   @Mock
   private PaymentAssembler paymentAssembler;
@@ -52,8 +55,6 @@ public class PaymentServiceTest {
   private Payment payment;
   @Mock
   private Bill oldestBill;
-
-  private Bill bill;
 
   @Before
   public void setUp() {
@@ -91,7 +92,7 @@ public class PaymentServiceTest {
 
     paymentService.makePayment(requestPaymentDto);
 
-    verify(billRepository, times(0)).updateBillAfterPayment(bill);
+    verify(billRepository, times(ZERO)).updateBillAfterPayment(bill);
   }
 
 }

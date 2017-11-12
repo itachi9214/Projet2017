@@ -36,7 +36,7 @@ public class BillingHttpTest {
   private ObjectMapper mapper;
 
   @Mock
-  private UtilHttp http;
+  private UtilHttp utilHttp;
   @Mock
   private Response response;
   @Mock
@@ -47,9 +47,9 @@ public class BillingHttpTest {
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-    billingHttp = new BillingHttp(http);
+    billingHttp = new BillingHttp(utilHttp);
     bill = new Bill(BILL_NUMBER, PAID_PRICE);
-    willReturn(response).given(http).callUrlWithGetMethod(anyString());
+    willReturn(response).given(utilHttp).callUrlWithGetMethod(URL);
     willReturn(mapper.writeValueAsString(bill)).given(response).readEntity(String.class);
   }
 
@@ -73,14 +73,14 @@ public class BillingHttpTest {
   public void whenGetOldestUnpaidBillForClientThenGetIsCalled() throws JsonProcessingException {
     billingHttp.getOldestUnpaidBillForClient(CLIENT_ID);
 
-    verify(http).callUrlWithGetMethod(URL);
+    verify(utilHttp).callUrlWithGetMethod(URL);
   }
 
   @Test
   public void whenUpdateBillAfterPaymentThenPostIsCalled() throws JsonProcessingException {
     billingHttp.updateBillAfterPayment(bill);
 
-    verify(http).callUrlWithPostMethod(anyString(), eq(bill));
+    verify(utilHttp).callUrlWithPostMethod(anyString(), eq(bill));
   }
 
 }

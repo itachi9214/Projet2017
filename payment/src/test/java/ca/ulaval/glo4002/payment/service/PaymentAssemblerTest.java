@@ -47,7 +47,7 @@ public class PaymentAssemblerTest {
   }
 
   @Test
-  public void whenAssemblePaymentFromRequestThenShouldBeTheSame() {
+  public void whenAssemblePaymentFromRequestThenPaymentShouldBeTheSame() {
     Payment payment = paymentAssembler.assemblePaymentFromRequest(requestPaymentDto);
 
     assertEquals(CLIENT_ID, payment.getClientId());
@@ -56,7 +56,7 @@ public class PaymentAssemblerTest {
   }
 
   @Test
-  public void whenAssembleResponseFromPaymentThenShouldBeTheSame() {
+  public void whenAssembleResponseFromPaymentThenResponseShouldBeTheSame() {
     ResponsePaymentDto responsePaymentDto = paymentAssembler.assembleResponseFromPayment(payment);
 
     assertEquals(PAYMENT_NUMBER, responsePaymentDto.getId());

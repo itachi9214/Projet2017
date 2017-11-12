@@ -8,6 +8,8 @@ import org.junit.Test;
 
 public class IdentityTest {
 
+  private static final long A_NUMBER = 3L;
+
   private Identity identity;
 
   @Test
@@ -28,7 +30,7 @@ public class IdentityTest {
   @Test
   public void givenEqualsIdentityWhenEqualsThenReturnsTrue() {
     identity = new Identity(3L);
-    Identity equalsIdentity = new Identity(3L);
+    Identity equalsIdentity = new Identity(A_NUMBER);
 
     assertTrue(equalsIdentity.equals(identity));
   }

@@ -20,7 +20,7 @@ public class IdentityTest {
   }
 
   @Test
-  public void givenDifferentIdentityWhenEqualsThenReturnsFalse() {
+  public void givenDifferentIdentitiesWhenEqualsThenReturnsFalse() {
     identity = new Identity(A_NUMBER);
     Identity differentIdentity = new Identity();
 
@@ -28,7 +28,7 @@ public class IdentityTest {
   }
 
   @Test
-  public void givenEqualsIdentityWhenEqualsThenReturnsTrue() {
+  public void givenEqualIdentitiesWhenEqualsThenReturnsTrue() {
     identity = new Identity(A_NUMBER);
     Identity equalsIdentity = new Identity(A_NUMBER);
 

@@ -29,7 +29,7 @@ public class CrmHttpClientTest {
   private ObjectMapper mapper;
 
   @Mock
-  private UtilHttp http;
+  private UtilHttp utilHttp;
   @Mock
   private Response response;
 
@@ -38,9 +38,9 @@ public class CrmHttpClientTest {
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-    willReturn(response).given(http).callUrlWithGetMethod(URL);
+    willReturn(response).given(utilHttp).callUrlWithGetMethod(URL);
     willReturn(Status.OK.getStatusCode()).given(response).getStatus();
-    crmHttpClient = new CrmHttpClient(http);
+    crmHttpClient = new CrmHttpClient(utilHttp);
   }
 
   @Test(expected = ClientNotFoundException.class)
@@ -54,7 +54,7 @@ public class CrmHttpClientTest {
   public void whenVerifyClientExistsThenGetIsCalled() throws JsonProcessingException {
     crmHttpClient.verifyClientExists(CLIENT_NUMBER);
 
-    verify(http).callUrlWithGetMethod(URL);
+    verify(utilHttp).callUrlWithGetMethod(URL);
   }
 
 }

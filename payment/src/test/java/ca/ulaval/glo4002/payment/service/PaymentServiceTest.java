@@ -29,8 +29,8 @@ public class PaymentServiceTest {
   private static final String ACCOUNT = "XXXX-XXX-XXX";
   private static final long CLIENT_ID = 1L;
   private static final long BILL_ID = 10L;
-  private static String URL;
   private static final String BASE_URL = "/payments/";
+  private static final String URL = BASE_URL + BILL_ID;
   private static final float AMOUNT = 50;
   private static final int EXACT_REMAINING_AMOUNT = 50;
   private static final int REMAINING_AMOUNT = 80;
@@ -57,8 +57,7 @@ public class PaymentServiceTest {
     paymentService = new PaymentService(paymentAssembler, paymentRepository, billRepository,
         clientRepository);
     requestPaymentDto = new RequestPaymentDto(CLIENT_ID, AMOUNT,
-        new PaymentMethod(ACCOUNT, SOURCE));
-    URL = BASE_URL + BILL_ID;
+        new PaymentMethod(ACCOUNT, SOURCE)); 
     responsePaymentDto = new ResponsePaymentDto(BILL_ID, URL);
     bill = new Bill(BILL_ID, new BigDecimal(EXACT_REMAINING_AMOUNT));
 

@@ -7,8 +7,6 @@ public interface PaymentRepository {
 
   public void savePayment(Payment payment);
 
-  /* public Payment findPaymentById(long id); */
-
   public Payment findPaymentById(Identity id) throws PaymentNotFoundException;
 
 }

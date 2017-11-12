@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.billing.api.resource.exceptionmapper;
+package ca.ulaval.glo4002.payment.api.resource.exceptionmappers;
 
 import static org.mockito.Mockito.verify;
 
@@ -8,15 +8,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
+import ca.ulaval.glo4002.payment.http.ClientNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClientNotFoundExceptionMapperTest {
 
-  private static final long ID_CLIENT = 1L;
+  private static final long ID_CLIENT = 2L;
   private static final String NOT_FOUND = "not found";
   private static final String CLIENT = "client";
-  private static final String DESCRIPTION = "client 1 not found";
+  private static final String DESCRIPTION = "client 2 not found";
 
   private ClientNotFoundExceptionMapper clientNotFoundExceptionMapper;
   private ClientNotFoundException clientNotFoundException;

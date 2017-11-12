@@ -18,7 +18,7 @@ public class IdentityFactoryTest {
   }
 
   @Test
-  public void whenCreateAndGenerateIdThenIdShouldNotBeNull() {
+  public void whenCreateIdThenIdShouldNotBeNull() {
     Identity identity = identityFactory.createId();
 
     assertNotNull(identity);

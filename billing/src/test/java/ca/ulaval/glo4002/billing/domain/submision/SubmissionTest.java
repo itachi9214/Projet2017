@@ -37,11 +37,14 @@ public class SubmissionTest {
   }
 
   @Test
-  public void whenCalculatePriceThenPriceIsCorrect() throws NegativeParameterException {
+  public void givenProductsWhenCalculatePriceThenPriceIsCorrect()
+      throws NegativeParameterException {
     willReturn(new BigDecimal(PRICE_FIRST_PRODUCT)).given(firstProduct).calculateTotalPrice();
     willReturn(new BigDecimal(PRICE_SECOND_PRODUCT)).given(secondProduct).calculateTotalPrice();
 
-    assertEquals(new BigDecimal(TOTAL_PRICE), submission.calculatePrice());
+    BigDecimal result = submission.calculatePrice();
+
+    assertEquals(new BigDecimal(TOTAL_PRICE), result);
   }
 
   @Test(expected = NegativeParameterException.class)

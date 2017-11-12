@@ -31,4 +31,11 @@ public class ExceptionMapperFactoryTest {
     assertEquals(codeError.getStatus(), Status.BAD_REQUEST.getStatusCode());
   }
 
+  @Test
+  public void whenCreateNotFoundExceptionMapperThenStatusCodeIsNotFound() {
+    Response codeError = exceptionMapperResponse.createNotFoundExceptionMapper();
+
+    assertEquals(codeError.getStatus(), Status.NOT_FOUND.getStatusCode());
+  }
+
 }

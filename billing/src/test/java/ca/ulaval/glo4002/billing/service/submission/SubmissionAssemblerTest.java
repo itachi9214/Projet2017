@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.billing.service.submission;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.willReturn;
 
@@ -51,20 +52,20 @@ public class SubmissionAssemblerTest {
   }
 
   @Test
-  public void givenSubmissionAssemblerWhenCreateResponseSubmissionDtoThenShouldBeTheSame() {
+  public void whenCreateResponseSubmissionDtoThenDtoShouldBeTheSame() {
     willReturn(identity).given(submission).getBillNumber();
     willReturn(IMMEDIATE).given(submission).getDueTerm();
     willReturn(SUBMISSION_TOTAL).given(submission).getTotalPrice();
 
     ResponseSubmissionDto dto = submissionAssembler.createResponseSubmissionDto(submission);
 
-    assertTrue(dto.getId().equals(SUBMISSION_NUMBER));
-    assertTrue(dto.getDueTerm().equals(IMMEDIATE));
-    assertTrue(dto.getTotal().equals(SUBMISSION_TOTAL));
+    assertEquals(SUBMISSION_NUMBER, dto.getId());
+    assertEquals(IMMEDIATE, dto.getDueTerm());
+    assertEquals(SUBMISSION_TOTAL, dto.getTotal());
   }
 
   @Test
-  public void givenSubmissionAssemblerWhenCreateSubmissionThenShouldBeTheSame()
+  public void whenCreateSubmissionThenSubmissionShouldBeTheSame()
       throws NegativeParameterException {
     requestSubmissionDto.setClientId(CLIENT_ID);
     requestSubmissionDto.setDueTerm(IMMEDIATE);

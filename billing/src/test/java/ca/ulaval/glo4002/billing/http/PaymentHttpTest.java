@@ -1,8 +1,6 @@
 package ca.ulaval.glo4002.billing.http;
 
-import static org.mockito.BDDMockito.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 
@@ -14,15 +12,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
 import ca.ulaval.glo4002.billing.api.dto.payment.RequestPaymentDto;
 import ca.ulaval.glo4002.billing.domain.payment.PaymentSource;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentHttpTest {
+
   private static final float AMOUNT = 40;
   private static final String LOCALHOST = "http://localhost:8282";
   private static final String PAYMENTS = "/payments/";
@@ -31,7 +26,6 @@ public class PaymentHttpTest {
 
   private PaymentHttp paymentHttp;
   private RequestPaymentDto requestPaymentDto;
-  private ObjectMapper mapper;
 
   @Mock
   private UtilHttp utilHttp;
@@ -40,17 +34,13 @@ public class PaymentHttpTest {
 
   @Before
   public void setUp() {
-    mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-
     requestPaymentDto = new RequestPaymentDto(EXISTING_CLIENT_NUMBER, AMOUNT, ACCOUNT,
         PaymentSource.EFT);
-    willReturn(response).given(utilHttp).callUrlWithGetMethod(anyString());
     paymentHttp = new PaymentHttp(utilHttp);
   }
 
   @Test
-  public void givenClientNumberFoundWhenGetClientDtoThenReturnDto() throws IOException {
+  public void whenMakePaymentThenVerifyPostMethodIsCalled() throws IOException {
     String url = LOCALHOST + PAYMENTS;
 
     paymentHttp.makePayment(requestPaymentDto);

@@ -8,8 +8,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.api.resource.exceptionmapper.ExceptionMapperFactory;
-import ca.ulaval.glo4002.billing.api.resource.exceptionmapper.SubmissionNotFoundExceptionMapper;
 import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,7 +27,7 @@ public class SubmissionNotFoundExceptionMapperTest {
   }
 
   @Test
-  public void givenNegativeParameterExceptioWhenToResponseThenStatusCodeIsBadRequest() {
+  public void whenToResponseThenVerifyCreateNotFoundExceptionMapperIsCalled() {
     submissionNotFoundExceptionMapper.toResponse(submissionNotFoundException);
 
     verify(exceptionMapperResponse).createNotFoundExceptionMapper();

@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.billing.api.resource.exceptionmapper;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +26,7 @@ public class BillNotFoundExceptionMapperTest {
   }
 
   @Test
-  public void whenToResponseThenVerifyStatusCodeIsBadRequest() {
+  public void whenToResponseThenVerifyCreateNotFoundExceptionMapperIsCalled() {
     billNotFoundExceptionMapper.toResponse(billNotFoundException);
 
     verify(exceptionMapperResponse).createNotFoundExceptionMapper();

@@ -35,6 +35,8 @@ public class BillHibernateRepositoryTest {
   private static final long CLIENT_NUMBER = 1L;
   private static final DueTerm DUE_TERM = DueTerm.DAYS30;
   private static final Identity BILL_NUMBER = new Identity(1L);
+  private static final Identity OTHER_BILL_NUMBER = new Identity(2L);
+  private static final DueTerm OLDER_DUE_TERM = DueTerm.IMMEDIATE;
 
   private BillRepository billRepository;
   private EntityManager entityManager;
@@ -64,7 +66,7 @@ public class BillHibernateRepositoryTest {
   }
 
   @Test
-  public void givenBillWhenCreateBillThenFindBill() {
+  public void givenBillWhenCreateBillThenBillIsFound() {
     Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
 
     billRepository.createBill(bill);
@@ -73,7 +75,7 @@ public class BillHibernateRepositoryTest {
   }
 
   @Test
-  public void givenBillWhenCreateBillThenVerifySubmissionIsDeleted() {
+  public void givenSubmissionAndBillWhenCreateBillThenVerifySubmissionIsDeleted() {
     willReturn(submission).given(submissionRepository).findSubmissionById(BILL_NUMBER);
     Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
 
@@ -91,30 +93,41 @@ public class BillHibernateRepositoryTest {
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenNotExistingBillNumberWhenFindByIdThenThrowException() {
+  public void givenNoBillWhenFindByIdThenThrowException() {
     billRepository.findById(BILL_NUMBER);
   }
 
   @Test
-  public void givenClientIdWhenFindOldestUnpaidBillByClientIdThenReturnOldestBill() {
+  public void whenFindOldestUnpaidBillByClientIdThenClientIsTheSame() {
     Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
     billRepository.createBill(bill);
 
     Bill billFound = billRepository.findOldestUnpaidBillByClientId(CLIENT_NUMBER);
 
-    assertEquals(bill, billFound);
+    assertEquals(CLIENT_NUMBER, billFound.getClientId().longValue());
+  }
+
+  @Test
+  public void givenTwoBillsWhenFindOldestUnpaidBillByClientIdThenOldestIsReturned() {
+    Bill olderBill = new Bill(OTHER_BILL_NUMBER, OLDER_DUE_TERM, CLIENT_NUMBER, ITEMS);
+    Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
+    billRepository.createBill(olderBill);
+    billRepository.createBill(bill);
+
+    Bill billFound = billRepository.findOldestUnpaidBillByClientId(CLIENT_NUMBER);
+
+    assertEquals(olderBill, billFound);
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenClientIdWhenFindOldestUnpaidBillByClientIdThenBillNotFound() {
+  public void givenNoBillWhenFindOldestUnpaidBillByClientIdThenThrowException() {
     billRepository.findOldestUnpaidBillByClientId(CLIENT_NUMBER);
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenPaidBillStateWhenUpdateBillThenBillNotFound() {
+  public void givenPaidBillWhenFindOldestUnpaidBillByClientIdThenThrowException() {
     Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
     billRepository.createBill(bill);
-
     bill.setBillState(BillState.PAID);
     billRepository.updateBill(bill);
 
@@ -122,7 +135,12 @@ public class BillHibernateRepositoryTest {
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenBillwhenCancelBillThenThenBillIsDeleted() {
+  public void givenUnexistingBillWhenCancelBillThenThrowsException() {
+    billRepository.cancelBill(BILL_NUMBER);
+  }
+
+  @Test(expected = BillNotFoundException.class)
+  public void givenBillwhenCancelBillThenThrowExceptionOnFind() {
     Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
     billRepository.createBill(bill);
     billRepository.cancelBill(BILL_NUMBER);

@@ -30,14 +30,15 @@ public class SubmissionInMemoryRepositoryTest {
   }
 
   @Test
-  public void givenSubmissionWhenCreateSubmissionThenFindSubmission() {
+  public void givenSubmissionWhenCreateSubmissionThenFindTheSameSubmission() {
     submissionInMemory.createSubmission(submission);
 
-    assertEquals(submissionInMemory.findSubmissionById(SUBMISSION_NUMBER), submission);
+    Submission submissionFound = submissionInMemory.findSubmissionById(SUBMISSION_NUMBER);
+    assertEquals(submission, submissionFound);
   }
 
   @Test(expected = SubmissionNotFoundException.class)
-  public void givenNotExistingSubmissionNumberWhenFindSubmissionThenThrowException() {
+  public void givenNoSubmissionWhenFindSubmissionThenThrowException() {
     submissionInMemory.findSubmissionById(SUBMISSION_NUMBER);
   }
 

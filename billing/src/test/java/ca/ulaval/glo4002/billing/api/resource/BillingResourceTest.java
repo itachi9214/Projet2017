@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.billing.api.resource;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,7 +63,7 @@ public class BillingResourceTest {
   }
 
   @Test
-  public void whenGetUnpaidBillsThenVerifyGetOldestUnpaidBills() {
+  public void whenGetUnpaidBillsThenVerifyOldestUnpaidBillIsFound() {
     billingResource.getUnpaidBillsOrderedByOldestForClient(EXISTING_CLIENT);
 
     verify(billService).getOldestUnpaidBillForClient(EXISTING_CLIENT);

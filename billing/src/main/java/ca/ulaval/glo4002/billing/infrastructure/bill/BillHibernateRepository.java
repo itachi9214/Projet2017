@@ -114,12 +114,11 @@ public class BillHibernateRepository implements BillRepository {
     EntityManager entityManager = entityManagerProvider.getEntityManager();
     EntityTransaction transaction = entityManager.getTransaction();
     transaction.begin();
-    try {
-      Bill bill = entityManager.find(Bill.class, billNumber);
-      entityManager.remove(bill);
-      transaction.commit();
-    } catch (BillNotFoundException e) {
-    }
+
+    Bill bill = findById(billNumber);
+    entityManager.remove(bill);
+
+    transaction.commit();
   }
 
 }

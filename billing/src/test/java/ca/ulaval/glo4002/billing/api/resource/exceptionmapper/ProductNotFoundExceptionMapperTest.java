@@ -30,7 +30,7 @@ public class ProductNotFoundExceptionMapperTest {
   }
 
   @Test
-  public void givenProductNotFoundExceptionWhenToResponseThenStatusCodeIsBadRequest() {
+  public void whenToResponseThenVerifyCreateBadResquestExceptionMapperIsCalled() {
     productNotFoundExceptionMapper.toResponse(productNotFoundException);
 
     verify(exceptionMapperResponse).createBadRequestExceptionMapper(ERROR,

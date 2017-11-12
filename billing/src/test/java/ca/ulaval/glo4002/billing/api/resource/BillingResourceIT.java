@@ -37,7 +37,6 @@ public class BillingResourceIT extends JerseyTest {
 
   private static final Long EXISTING_CLIENT = 2L;
   private static final Long NON_EXISTING_CLIENT = -6L;
-  private static final int NON_EXISTING_PRODUCT = -4;
   private static final int EXISTING_PRODUCT = 1;
   private static final float A_PRICE = 15;
   private static final String A_NOTE = "note";

@@ -35,7 +35,7 @@ public class CrmHttpClientTest {
   private ObjectMapper mapper;
 
   @Mock
-  private UtilHttp http;
+  private UtilHttp utilHttp;
   @Mock
   private Response response;
 
@@ -45,8 +45,8 @@ public class CrmHttpClientTest {
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
     clientDto = new ClientDto(EXISTING_CLIENT_NUMBER, Instant.now(), DueTerm.IMMEDIATE, A_STRING);
-    willReturn(response).given(http).callUrlWithGetMethod(anyString());
-    crmHttpClient = new CrmHttpClient(http);
+    willReturn(response).given(utilHttp).callUrlWithGetMethod(anyString());
+    crmHttpClient = new CrmHttpClient(utilHttp);
   }
 
   @Test(expected = ClientNotFoundException.class)
@@ -57,7 +57,7 @@ public class CrmHttpClientTest {
   }
 
   @Test
-  public void givenClientNumberFoundWhenGetClientDtoThenReturnDto() throws IOException {
+  public void whenGetClientDtoThenReturnClientDto() throws IOException {
     willReturn(Status.OK.getStatusCode()).given(response).getStatus();
     willReturn(mapper.writeValueAsString(clientDto)).given(response).readEntity(String.class);
 

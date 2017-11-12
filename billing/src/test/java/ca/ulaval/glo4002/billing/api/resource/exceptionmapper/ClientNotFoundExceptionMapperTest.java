@@ -22,7 +22,7 @@ public class ClientNotFoundExceptionMapperTest {
   private ClientNotFoundException clientNotFoundException;
 
   @Mock
-  ExceptionMapperFactory exceptionMapperFactory;
+  private ExceptionMapperFactory exceptionMapperFactory;
 
   @Before
   public void setUp() {
@@ -31,7 +31,7 @@ public class ClientNotFoundExceptionMapperTest {
   }
 
   @Test
-  public void givenClientNotFoundExceptionWhenToResponseThenStatusCodeIsBadRequest() {
+  public void whenToResponseThenVerifyCreateBadResquestExceptionMapperIsCalled() {
     clientNotFoundExceptionMapper.toResponse(clientNotFoundException);
 
     verify(exceptionMapperFactory).createBadRequestExceptionMapper(NOT_FOUND, DESCRIPTION, CLIENT);

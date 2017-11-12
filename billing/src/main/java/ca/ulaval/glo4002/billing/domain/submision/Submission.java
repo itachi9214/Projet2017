@@ -16,6 +16,7 @@ import ca.ulaval.glo4002.billing.domain.identity.Identity;
 public class Submission {
 
   private static final int MINIMUM_TOTAL_PRICE = 0;
+  private static final String ERROR_MESSAGE = "Submission total price";
 
   @EmbeddedId
   protected Identity billNumber;
@@ -98,7 +99,7 @@ public class Submission {
 
   private void verifyTotalPriceIsNotNegative() throws NegativeParameterException {
     if (totalPrice.floatValue() < MINIMUM_TOTAL_PRICE) {
-      throw new NegativeParameterException("Submission total price");
+      throw new NegativeParameterException(ERROR_MESSAGE);
     }
   }
 

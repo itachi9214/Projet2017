@@ -24,6 +24,7 @@ import ca.ulaval.glo4002.billing.api.dto.product.ProductDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CrmHttpProductTest {
+
   private static final String A_STRING = "name";
   private static final int AN_INT = 13;
   private static final Integer NON_EXISTING_PRODUCT_ID = -6;
@@ -34,7 +35,7 @@ public class CrmHttpProductTest {
   private CrmHttpProduct crmHttpProduct;
 
   @Mock
-  private UtilHttp http;
+  private UtilHttp utilHttp;
   @Mock
   private Response response;
 
@@ -43,8 +44,8 @@ public class CrmHttpProductTest {
     mapper = new ObjectMapper().registerModule(new JavaTimeModule());
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     productDto = new ProductDto(EXISTING_PRODUCT_ID, A_STRING, new BigDecimal(AN_INT));
-    willReturn(response).given(http).callUrlWithGetMethod(anyString());
-    crmHttpProduct = new CrmHttpProduct(http);
+    willReturn(response).given(utilHttp).callUrlWithGetMethod(anyString());
+    crmHttpProduct = new CrmHttpProduct(utilHttp);
   }
 
   @Test(expected = ProductNotFoundException.class)
@@ -55,7 +56,7 @@ public class CrmHttpProductTest {
   }
 
   @Test
-  public void givenProductIdFoundWhenGetProductDtoThenReturnDto() throws IOException {
+  public void whenGetProductDtoThenReturnProductDto() throws IOException {
     willReturn(Status.OK.getStatusCode()).given(response).getStatus();
     willReturn(mapper.writeValueAsString(productDto)).given(response).readEntity(String.class);
 
@@ -63,4 +64,5 @@ public class CrmHttpProductTest {
 
     assertTrue(result instanceof ProductDto);
   }
+
 }

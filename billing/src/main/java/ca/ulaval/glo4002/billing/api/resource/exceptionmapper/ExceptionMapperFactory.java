@@ -24,8 +24,8 @@ public class ExceptionMapperFactory {
   }
 
   public Response createNotFoundExceptionMapper() {
-    EmptyDto notFoundDto = new EmptyDto();
-    return Response.status(Status.NOT_FOUND).entity(notFoundDto).type(MediaType.APPLICATION_JSON)
+    EmptyDto emptyDto = new EmptyDto();
+    return Response.status(Status.NOT_FOUND).entity(emptyDto).type(MediaType.APPLICATION_JSON)
         .build();
   }
 

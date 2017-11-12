@@ -4,6 +4,7 @@ import ca.ulaval.glo4002.billing.domain.payment.PaymentMethod;
 import ca.ulaval.glo4002.billing.domain.payment.PaymentSource;
 
 public class RequestPaymentDto {
+
   private Long clientId;
   private float amount;
   private PaymentMethod paymentMethod;

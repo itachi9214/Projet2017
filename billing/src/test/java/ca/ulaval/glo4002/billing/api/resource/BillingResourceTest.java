@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.billing.api.resource;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.Date;

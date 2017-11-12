@@ -33,7 +33,8 @@ public class SubmissionInMemoryRepositoryTest {
   public void givenSubmissionWhenCreateSubmissionThenFindSubmission() {
     submissionInMemory.createSubmission(submission);
 
-    assertEquals(submissionInMemory.findSubmissionById(SUBMISSION_NUMBER), submission);
+    Submission submissionFound = submissionInMemory.findSubmissionById(SUBMISSION_NUMBER);
+    assertEquals(submission, submissionFound);
   }
 
   @Test(expected = SubmissionNotFoundException.class)

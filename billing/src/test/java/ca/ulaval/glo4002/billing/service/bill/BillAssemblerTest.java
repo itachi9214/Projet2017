@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.billing.service.bill;
 
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.willReturn;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -61,11 +61,11 @@ public class BillAssemblerTest {
 
     BillDto dto = billAssembler.assembleBill(bill);
 
-    assertTrue(dto.getId().equals(SUBMISSION_NUMBER));
-    assertTrue(dto.getDueTerm().equals(IMMEDIATE));
-    assertTrue(dto.getEffectiveDate().equals(date.format(formatter).toString()));
-    assertTrue(dto.getExpectedPayment().equals(date.format(formatter).toString()));
-    assertTrue(dto.getUrl().equals(URL_FROM_SUBMISSION_NUMBER));
+    assertEquals(SUBMISSION_NUMBER, dto.getId());
+    assertEquals(IMMEDIATE, dto.getDueTerm());
+    assertEquals(date.format(formatter).toString(), dto.getEffectiveDate());
+    assertEquals(date.format(formatter).toString(), dto.getExpectedPayment());
+    assertEquals(URL_FROM_SUBMISSION_NUMBER, dto.getUrl());
   }
 
   @Test
@@ -78,12 +78,12 @@ public class BillAssemblerTest {
 
     Bill bill = billAssembler.createBillFromSubmission(submission);
 
-    assertTrue(bill.getBillNumber().equals(identity));
-    assertTrue(bill.getDueTerm().equals(IMMEDIATE));
-    assertTrue(bill.getExpectedPayment().equals(bill.getEffectiveDate()));
-    assertTrue(bill.getItems().equals(ITEMS_LIST));
-    assertTrue(bill.getTotalPrice().equals(TOTAL_PRICE));
-    assertTrue(bill.getClientId().equals(CLIENT_NUMBER));
+    assertEquals(identity, bill.getBillNumber());
+    assertEquals(IMMEDIATE, bill.getDueTerm());
+    assertEquals(bill.getEffectiveDate(), bill.getExpectedPayment());
+    assertEquals(ITEMS_LIST, bill.getItems());
+    assertEquals(TOTAL_PRICE, bill.getTotalPrice());
+    assertEquals(CLIENT_NUMBER, bill.getClientId().longValue());
   }
 
   @Test
@@ -93,8 +93,8 @@ public class BillAssemblerTest {
 
     BillForPaymentDto billForPaymentDto = billAssembler.assembleBillForPayment(bill);
 
-    assertTrue(billForPaymentDto.getBillNumber().equals(identity.getNumber()));
-    assertTrue(billForPaymentDto.getRemainingAmount().equals(REMANING_AMOUNT));
+    assertEquals(identity.getNumber(), billForPaymentDto.getBillNumber());
+    assertEquals(REMANING_AMOUNT, billForPaymentDto.getRemainingAmount());
   }
 
 }

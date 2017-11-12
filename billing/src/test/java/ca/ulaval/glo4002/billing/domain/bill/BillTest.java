@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.billing.domain.bill;
 
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.willReturn;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

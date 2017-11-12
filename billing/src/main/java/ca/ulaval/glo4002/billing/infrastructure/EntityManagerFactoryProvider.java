@@ -5,11 +5,12 @@ import javax.persistence.Persistence;
 
 public class EntityManagerFactoryProvider {
 
+  private static final String BILLING = "billing";
   private static EntityManagerFactory instance;
 
   public static EntityManagerFactory getFactory() {
     if (instance == null) {
-      instance = Persistence.createEntityManagerFactory("billing");
+      instance = Persistence.createEntityManagerFactory(BILLING);
     }
     return instance;
   }

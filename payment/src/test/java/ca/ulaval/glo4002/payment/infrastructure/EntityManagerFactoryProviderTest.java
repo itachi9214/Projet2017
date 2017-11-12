@@ -1,12 +1,10 @@
 package ca.ulaval.glo4002.payment.infrastructure;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import javax.persistence.EntityManagerFactory;
 
 import org.junit.Test;
-
-import ca.ulaval.glo4002.payment.infrastructure.EntityManagerFactoryProvider;
 
 public class EntityManagerFactoryProviderTest {
 
@@ -14,6 +12,14 @@ public class EntityManagerFactoryProviderTest {
 
   @Test
   public void whenGetFactoryThenInstanceCreated() {
+    instance = EntityManagerFactoryProvider.getFactory();
+
+    assertNotNull(instance);
+  }
+
+  @Test
+  public void givenInstanceNullwhenGetFactoryThenInstanceNotNull() {
+    instance = null;
     instance = EntityManagerFactoryProvider.getFactory();
 
     assertNotNull(instance);

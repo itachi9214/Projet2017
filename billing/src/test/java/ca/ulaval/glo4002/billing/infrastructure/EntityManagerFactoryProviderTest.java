@@ -18,7 +18,7 @@ public class EntityManagerFactoryProviderTest {
   }
 
   @Test
-  public void givenInstanceNullwhenGetFactoryThenInstanceNotNull() {
+  public void givenNullInstancewhenGetFactoryThenInstanceIsNotNull() {
     instance = null;
     instance = EntityManagerFactoryProvider.getFactory();
 

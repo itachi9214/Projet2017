@@ -56,7 +56,7 @@ public class CrmHttpProductTest {
   }
 
   @Test
-  public void givenProductIdFoundWhenGetProductDtoThenReturnDto() throws IOException {
+  public void whenGetProductDtoThenReturnProductDto() throws IOException {
     willReturn(Status.OK.getStatusCode()).given(response).getStatus();
     willReturn(mapper.writeValueAsString(productDto)).given(response).readEntity(String.class);
 

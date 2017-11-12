@@ -67,24 +67,24 @@ public class BillServiceTest {
   }
 
   @Test
-  public void whenCreateBillThenVerifyBillIsCreatedByRepository() {
+  public void whenCreateBillThenVerifyBillIsCreated() {
     billService.createBill(BILL_NUMBER);
 
     verify(billRepository).createBill(bill);
   }
 
   @Test
-  public void whenGetOldestUnpaidBillForClientThenVerifyFindOldestUnpaidBillByClient() {
+  public void whenGetOldestUnpaidBillForClientThenVerifyOldestUnpaidBillIsFoundForClient() {
     billService.getOldestUnpaidBillForClient(CLIENT_ID);
 
     verify(billRepository).findOldestUnpaidBillByClientId(CLIENT_ID);
   }
 
   @Test
-  public void whenGetOldestUnpaidBillForClientThenCreateBillForPaymentDto() {
+  public void whenGetOldestUnpaidBillForClientThenBillForPaymentDtoIsCorrect() {
     BillForPaymentDto dto = billService.getOldestUnpaidBillForClient(CLIENT_ID);
 
-    assertEquals(dto, billForPaymentDto);
+    assertEquals(billForPaymentDto, dto);
   }
 
   @Test

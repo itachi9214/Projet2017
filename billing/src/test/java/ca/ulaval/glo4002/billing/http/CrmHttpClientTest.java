@@ -57,7 +57,7 @@ public class CrmHttpClientTest {
   }
 
   @Test
-  public void givenClientNumberFoundWhenGetClientDtoThenReturnDto() throws IOException {
+  public void whenGetClientDtoThenReturnClientDto() throws IOException {
     willReturn(Status.OK.getStatusCode()).given(response).getStatus();
     willReturn(mapper.writeValueAsString(clientDto)).given(response).readEntity(String.class);
 

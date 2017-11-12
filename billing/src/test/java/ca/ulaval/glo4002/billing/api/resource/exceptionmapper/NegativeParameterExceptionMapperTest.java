@@ -31,7 +31,7 @@ public class NegativeParameterExceptionMapperTest {
   }
 
   @Test
-  public void givenNegativeParameterExceptioWhenToResponseThenStatusCodeIsBadRequest() {
+  public void whenToResponseThenVerifyCreateBadResquestExceptionMapperIsCalled() {
     negativeParameterExceptionMapper.toResponse(negativeParameterException);
 
     verify(exceptionMapperResponse).createBadRequestExceptionMapper(ERROR,

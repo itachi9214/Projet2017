@@ -33,7 +33,7 @@ public class PaymentHttpRepositoryTest {
   }
 
   @Test
-  public void givenRequestPaymentDtoWhenSavePaymentThenMakePayment() {
+  public void givenRequestPaymentDtoWhenSavePaymentThenVerifyPaymentIsMade() {
     paymentHttpRepository.savePayment(requestPaymentDto);
 
     verify(paymentHttp).makePayment(requestPaymentDto);

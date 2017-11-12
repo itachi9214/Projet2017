@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.willReturn;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class BillTest {
   private OrderedProduct orderedProduct;
 
   @Before
-  public void stUp() {
+  public void setUp() {
     items = new ArrayList<>();
     items.add(orderedProduct);
     willReturn(TOTAL_AMOUNT).given(orderedProduct).calculateTotalPrice();
@@ -45,32 +46,35 @@ public class BillTest {
   @Test
   public void givenImmediateDueTermWhenCalculateExpectedPaiementDateThenIsEffectiveDate() {
     DueTerm dueTerm = DueTerm.IMMEDIATE;
-
     bill = new Bill(dueTerm);
 
-    assertEquals(bill.getEffectiveDate(), bill.calculateExpectedPaymentDate());
+    LocalDateTime date = bill.calculateExpectedPaymentDate();
+
+    assertEquals(bill.getEffectiveDate(), date);
   }
 
   @Test
   public void givenOneMonthDueTermWhenCalculateExpectedPaiementDateThenIsEffectiveDatePlusOneMonth() {
     DueTerm dueTerm = DueTerm.DAYS30;
-
     bill = new Bill(dueTerm);
 
-    assertEquals(bill.getEffectiveDate().plusMonths(1), bill.calculateExpectedPaymentDate());
+    LocalDateTime date = bill.calculateExpectedPaymentDate();
+
+    assertEquals(bill.getEffectiveDate().plusMonths(1), date);
   }
 
   @Test
   public void givenThreeMonthDueTermWhenCalculateExpectedPaiementDateThenIsEffectiveDatePlusTreeMonths() {
     DueTerm dueTerm = DueTerm.DAYS90;
-
     bill = new Bill(dueTerm);
 
-    assertEquals(bill.getEffectiveDate().plusMonths(3), bill.calculateExpectedPaymentDate());
+    LocalDateTime date = bill.calculateExpectedPaymentDate();
+
+    assertEquals(bill.getEffectiveDate().plusMonths(3), date);
   }
 
   @Test
-  public void whenUpdateAfterPaymentThenPriceIsAddedToPaidPrice() {
+  public void whenUpdateAfterPaymentThenRemainingAmountIsSetCorrectly() {
     bill.updateAfterPayment(REMANING_AMOUNT);
 
     assertEquals(REMANING_AMOUNT, bill.getRemainingAmount());
@@ -91,7 +95,7 @@ public class BillTest {
   }
 
   @Test
-  public void givenPaidAmountWhenCalculateUnpaidAmountThenReturnUnpaidAmount() {
+  public void whenCalculateUnpaidAmountThenReturnUnpaidAmount() {
     BigDecimal unpaidAmount = bill.calculateUnpaidAmount();
 
     assertEquals(TOTAL_AMOUNT, unpaidAmount);

@@ -19,7 +19,7 @@ public class HeartbeatResourceTest {
   }
 
   @Test
-  public void givenTokenWhenBeatThenResponseOk() {
+  public void givenTokenWhenBeatThenResponseIsOk() {
     Response response = heartbeatResource.beat(TOKEN);
 
     assertEquals(response.getStatus(), Response.ok().build().getStatus());

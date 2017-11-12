@@ -63,7 +63,7 @@ public class BillingResourceTest {
   }
 
   @Test
-  public void whenGetUnpaidBillsThenVerifyGetOldestUnpaidBills() {
+  public void whenGetUnpaidBillsThenVerifyOldestUnpaidBillIsFound() {
     billingResource.getUnpaidBillsOrderedByOldestForClient(EXISTING_CLIENT);
 
     verify(billService).getOldestUnpaidBillForClient(EXISTING_CLIENT);

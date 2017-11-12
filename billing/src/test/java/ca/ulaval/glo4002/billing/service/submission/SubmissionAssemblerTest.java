@@ -52,7 +52,7 @@ public class SubmissionAssemblerTest {
   }
 
   @Test
-  public void givenSubmissionAssemblerWhenCreateResponseSubmissionDtoThenShouldBeTheSame() {
+  public void whenCreateResponseSubmissionDtoThenDtoShouldBeTheSame() {
     willReturn(identity).given(submission).getBillNumber();
     willReturn(IMMEDIATE).given(submission).getDueTerm();
     willReturn(SUBMISSION_TOTAL).given(submission).getTotalPrice();
@@ -65,7 +65,7 @@ public class SubmissionAssemblerTest {
   }
 
   @Test
-  public void givenSubmissionAssemblerWhenCreateSubmissionThenShouldBeTheSame()
+  public void whenCreateSubmissionThenSubmissionShouldBeTheSame()
       throws NegativeParameterException {
     requestSubmissionDto.setClientId(CLIENT_ID);
     requestSubmissionDto.setDueTerm(IMMEDIATE);

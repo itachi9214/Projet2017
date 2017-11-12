@@ -69,7 +69,7 @@ public class BillAssemblerTest {
   }
 
   @Test
-  public void whenCreateTheBillFromTheSubmissionDataThenBillShouldBeTheSame() {
+  public void whenCreateBillFromSubmissionThenBillShouldBeTheSame() {
     willReturn(identity).given(submission).getBillNumber();
     willReturn(IMMEDIATE).given(submission).getDueTerm();
     willReturn(CLIENT_NUMBER).given(submission).getClientId();

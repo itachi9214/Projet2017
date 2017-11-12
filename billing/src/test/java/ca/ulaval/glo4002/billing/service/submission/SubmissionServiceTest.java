@@ -66,7 +66,7 @@ public class SubmissionServiceTest {
   }
 
   @Test
-  public void whenCreateSubmissionThenVerifyCreateSubmissionBySubmissionRepository()
+  public void whenCreateSubmissionThenVerifySubmissionIsCreatedBySubmissionRepository()
       throws NegativeParameterException {
     submissionService.createSubmission(requestSubmissionDto);
 
@@ -74,7 +74,7 @@ public class SubmissionServiceTest {
   }
 
   @Test
-  public void whenCreateSubmissionThenVerifyCreateSubmissionBySubmissionAssembler()
+  public void whenCreateSubmissionThenVerifySubmissionIsCreatedBySubmissionAssembler()
       throws NegativeParameterException {
     submissionService.createSubmission(requestSubmissionDto);
 
@@ -115,7 +115,7 @@ public class SubmissionServiceTest {
   }
 
   @Test
-  public void givenRequestWithDueTermWhenSetToDefaultIfNeededThenIsNotModified() {
+  public void givenRequestWithDueTermWhenSetToDefaultIfNeededThenDueTermIsNotModified() {
     requestSubmissionDto.setDueTerm(MONTH_AWAY_DUE_TERM);
 
     submissionService.setDueTermToDefaultIfNeeded(requestSubmissionDto, IMMEDIATE_DUE_TERM);

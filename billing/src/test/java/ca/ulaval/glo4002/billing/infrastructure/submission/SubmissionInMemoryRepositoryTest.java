@@ -30,7 +30,7 @@ public class SubmissionInMemoryRepositoryTest {
   }
 
   @Test
-  public void givenSubmissionWhenCreateSubmissionThenFindSubmission() {
+  public void givenSubmissionWhenCreateSubmissionThenFindTheSameSubmission() {
     submissionInMemory.createSubmission(submission);
 
     Submission submissionFound = submissionInMemory.findSubmissionById(SUBMISSION_NUMBER);
@@ -38,7 +38,7 @@ public class SubmissionInMemoryRepositoryTest {
   }
 
   @Test(expected = SubmissionNotFoundException.class)
-  public void givenNotExistingSubmissionNumberWhenFindSubmissionThenThrowException() {
+  public void givenNoSubmissionWhenFindSubmissionThenThrowException() {
     submissionInMemory.findSubmissionById(SUBMISSION_NUMBER);
   }
 

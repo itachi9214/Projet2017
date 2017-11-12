@@ -40,7 +40,7 @@ public class PaymentHttpTest {
   }
 
   @Test
-  public void givenClientNumberFoundWhenGetClientDtoThenReturnDto() throws IOException {
+  public void whenMakePaymentThenVerifyPostMethodIsCalled() throws IOException {
     String url = LOCALHOST + PAYMENTS;
 
     paymentHttp.makePayment(requestPaymentDto);

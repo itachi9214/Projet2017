@@ -60,7 +60,7 @@ public class SubmissionHibernateRepositoryTest {
   }
 
   @Test(expected = SubmissionNotFoundException.class)
-  public void givenNotExistingSubmissionNumberWhenFindSubmissionThenThrowException() {
+  public void givenNoSubmissionWhenFindSubmissionThenThrowException() {
     submissionRepository.findSubmissionById(BILL_NUMBER);
   }
 

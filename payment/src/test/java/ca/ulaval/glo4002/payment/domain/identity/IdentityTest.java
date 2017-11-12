@@ -21,7 +21,7 @@ public class IdentityTest {
 
   @Test
   public void givenDifferentIdentityWhenEqualsThenReturnsFalse() {
-    identity = new Identity(3L);
+    identity = new Identity(A_NUMBER);
     Identity differentIdentity = new Identity();
 
     assertFalse(differentIdentity.equals(identity));
@@ -29,7 +29,7 @@ public class IdentityTest {
 
   @Test
   public void givenEqualsIdentityWhenEqualsThenReturnsTrue() {
-    identity = new Identity(3L);
+    identity = new Identity(A_NUMBER);
     Identity equalsIdentity = new Identity(A_NUMBER);
 
     assertTrue(equalsIdentity.equals(identity));

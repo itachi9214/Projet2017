@@ -111,7 +111,7 @@ public class SubmissionServiceTest {
 
     submissionService.setDueTermToDefaultIfNeeded(requestSubmissionDto, IMMEDIATE_DUE_TERM);
 
-    assertEquals(requestSubmissionDto.getDueTerm(), IMMEDIATE_DUE_TERM);
+    assertEquals(IMMEDIATE_DUE_TERM, requestSubmissionDto.getDueTerm());
   }
 
   @Test
@@ -120,7 +120,7 @@ public class SubmissionServiceTest {
 
     submissionService.setDueTermToDefaultIfNeeded(requestSubmissionDto, IMMEDIATE_DUE_TERM);
 
-    assertEquals(requestSubmissionDto.getDueTerm(), MONTH_AWAY_DUE_TERM);
+    assertEquals(MONTH_AWAY_DUE_TERM, requestSubmissionDto.getDueTerm());
   }
 
 }

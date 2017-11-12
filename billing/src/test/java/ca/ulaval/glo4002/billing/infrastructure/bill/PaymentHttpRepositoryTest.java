@@ -19,6 +19,7 @@ public class PaymentHttpRepositoryTest {
   private static final float AMOUNT = 20.0f;
   private static final String ACCOUNT = "XXXX-XXX-XXX";
   private static final PaymentSource SOURCE = PaymentSource.CHECK;
+
   private PaymentHttpRepository paymentHttpRepository;
   private RequestPaymentDto requestPaymentDto;
 

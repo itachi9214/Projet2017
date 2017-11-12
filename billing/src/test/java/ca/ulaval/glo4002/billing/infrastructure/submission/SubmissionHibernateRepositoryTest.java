@@ -55,7 +55,8 @@ public class SubmissionHibernateRepositoryTest {
 
     submissionRepository.createSubmission(submission);
 
-    assertEquals(submission, submissionRepository.findSubmissionById(BILL_NUMBER));
+    Submission submissionFound = submissionRepository.findSubmissionById(BILL_NUMBER);
+    assertEquals(submission, submissionFound);
   }
 
   @Test(expected = SubmissionNotFoundException.class)

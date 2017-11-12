@@ -40,7 +40,8 @@ public class BillInMemoryRepositoryTest {
   public void givenBillWhenCreateBillThenBillIsFound() {
     billInMemory.createBill(bill);
 
-    assertEquals(bill, billInMemory.findById(EXISTING_BILL_NUMBER));
+    Bill billFound = billInMemory.findById(EXISTING_BILL_NUMBER);
+    assertEquals(bill, billFound);
   }
 
   @Test(expected = BillAlreadyExistsException.class)

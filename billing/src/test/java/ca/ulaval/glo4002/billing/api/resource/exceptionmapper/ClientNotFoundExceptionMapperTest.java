@@ -22,7 +22,7 @@ public class ClientNotFoundExceptionMapperTest {
   private ClientNotFoundException clientNotFoundException;
 
   @Mock
-  ExceptionMapperFactory exceptionMapperFactory;
+  private ExceptionMapperFactory exceptionMapperFactory;
 
   @Before
   public void setUp() {

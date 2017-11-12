@@ -47,17 +47,18 @@ public class PaymentHibernateRepositoryTest {
   }
 
   @Test
-  public void whenSavePaymentThenPaymentFoundIsTheSame() {
+  public void givenPaymentWhenSavePaymentThenPaymentFoundIsTheSame() {
     paymentMethod = new PaymentMethod(ACCOUNT, PaymentSource.CHECK);
     Payment payment = new Payment(PAYMENT_NUMBER, AMOUNT, CLIENT_ID, paymentMethod);
 
     paymentRepository.savePayment(payment);
 
-    assertEquals(payment, paymentRepository.findPaymentById(PAYMENT_NUMBER));
+    Payment paymentFound = paymentRepository.findPaymentById(PAYMENT_NUMBER);
+    assertEquals(payment, paymentFound);
   }
 
   @Test(expected = PaymentNotFoundException.class)
-  public void givenNotExistingPaymentNumberWhenFindPaymentThenThrowException() {
+  public void givenNoPaymentWhenFindPaymentThenThrowException() {
     paymentRepository.findPaymentById(PAYMENT_NUMBER);
   }
 

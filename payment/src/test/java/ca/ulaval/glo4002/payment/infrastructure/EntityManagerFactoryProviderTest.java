@@ -11,14 +11,14 @@ public class EntityManagerFactoryProviderTest {
   private static EntityManagerFactory instance;
 
   @Test
-  public void whenGetFactoryThenInstanceCreated() {
+  public void whenGetFactoryThenInstanceIsCreated() {
     instance = EntityManagerFactoryProvider.getFactory();
 
     assertNotNull(instance);
   }
 
   @Test
-  public void givenInstanceNullwhenGetFactoryThenInstanceNotNull() {
+  public void givenNullInstanceWhenGetFactoryThenInstanceIsNotNull() {
     instance = null;
     instance = EntityManagerFactoryProvider.getFactory();
 

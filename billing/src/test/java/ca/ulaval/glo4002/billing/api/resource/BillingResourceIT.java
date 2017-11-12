@@ -16,7 +16,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -30,7 +29,6 @@ import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 import ca.ulaval.glo4002.billing.http.ClientNotFoundException;
-import ca.ulaval.glo4002.billing.http.ProductNotFoundException;
 import ca.ulaval.glo4002.billing.service.bill.BillService;
 import ca.ulaval.glo4002.billing.service.submission.SubmissionService;
 
@@ -80,41 +78,6 @@ public class BillingResourceIT extends JerseyTest {
     Response response = target("/bills").request().post(requestEntity);
 
     assertEquals(Status.CREATED.getStatusCode(), response.getStatus());
-  }
-
-  @Ignore
-  @Test
-  public void givenNonExistingClientWhenCreateSubmissionThenResponseStatusIsBadRequest() {
-    RequestSubmissionDto requestSubmissionDto = new RequestSubmissionDto(NON_EXISTING_CLIENT,
-        new Date(), DueTerm.DAYS30, new ArrayList<>());
-    Entity<RequestSubmissionDto> requestEntity = Entity.entity(requestSubmissionDto,
-        MediaType.APPLICATION_JSON);
-
-    Response response = target("/bills").request(MediaType.APPLICATION_JSON).post(requestEntity,
-        Response.class);
-
-    assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
-  }
-
-  @Ignore
-  @Test
-  public void givenNonExistingProductWhenCreateSubmissionThenResponseStatusIsBadRequest()
-      throws NegativeParameterException {
-    List<OrderedProduct> items = new ArrayList<>();
-    willThrow(new ProductNotFoundException(NON_EXISTING_PRODUCT)).given(submissionService)
-        .verifyProductsExist(items);
-
-    RequestSubmissionDto requestSubmissionDto = new RequestSubmissionDto(EXISTING_CLIENT,
-        new Date(), DueTerm.DAYS30, items);
-    Entity<RequestSubmissionDto> requestEntity = Entity.entity(requestSubmissionDto,
-        MediaType.APPLICATION_JSON);
-    willThrow(new ProductNotFoundException(NON_EXISTING_PRODUCT)).given(submissionService)
-        .createSubmission(requestSubmissionDto);
-
-    Response response = target("/bills").request(MediaType.APPLICATION_JSON).post(requestEntity,
-        Response.class);
-
-    assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
   }
 
 }

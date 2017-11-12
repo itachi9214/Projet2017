@@ -11,6 +11,7 @@ public class ProductNotFoundExceptionMapper implements ExceptionMapper<ProductNo
 
   private static final String ENTITY = "product ";
   private static final String ERROR = " not found";
+
   private ExceptionMapperFactory exceptionMapperFactory;
 
   public ProductNotFoundExceptionMapper() {

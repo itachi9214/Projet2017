@@ -21,6 +21,7 @@ import ca.ulaval.glo4002.payment.domain.payment.PaymentMethod;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentRepository;
 import ca.ulaval.glo4002.payment.domain.payment.PaymentSource;
 import ca.ulaval.glo4002.payment.http.ClientNotFoundException;
+import ca.ulaval.glo4002.payment.infrastructure.bill.BillNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentServiceTest {
@@ -49,6 +50,8 @@ public class PaymentServiceTest {
   private ClientRepository clientRepository;
   @Mock
   private Payment payment;
+  @Mock
+  private Bill oldestBill;
 
   private Bill bill;
 
@@ -57,7 +60,7 @@ public class PaymentServiceTest {
     paymentService = new PaymentService(paymentAssembler, paymentRepository, billRepository,
         clientRepository);
     requestPaymentDto = new RequestPaymentDto(CLIENT_ID, AMOUNT,
-        new PaymentMethod(ACCOUNT, SOURCE)); 
+        new PaymentMethod(ACCOUNT, SOURCE));
     responsePaymentDto = new ResponsePaymentDto(BILL_ID, URL);
     bill = new Bill(BILL_ID, new BigDecimal(EXACT_REMAINING_AMOUNT));
 
@@ -79,6 +82,16 @@ public class PaymentServiceTest {
     paymentService.makePayment(requestPaymentDto);
 
     verify(paymentRepository).savePayment(payment);
+  }
+
+  @Test
+  public void givenUnexistantBillWhenMakePaymentThenVerifyUpdateBillAfterPaymentIsNotCalled() {
+    willThrow(BillNotFoundException.class).given(billRepository)
+        .getOldestUnpaidBillForClient(CLIENT_ID);
+
+    paymentService.makePayment(requestPaymentDto);
+
+    verify(billRepository, times(0)).updateBillAfterPayment(bill);
   }
 
 }

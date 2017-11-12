@@ -1,6 +1,10 @@
 package ca.ulaval.glo4002.billing.infrastructure.bill;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,7 +41,9 @@ public class BillInMemoryRepository implements BillRepository {
 
   @Override
   public Bill findOldestUnpaidBillByClientId(Long clientId) throws BillNotFoundException {
-    Optional<Bill> billFound = bills.values().stream().filter(b -> b.getClientId().equals(clientId))
+    List<Bill> billList = new ArrayList<>(bills.values());
+    sortByOldest(billList);
+    Optional<Bill> billFound = billList.stream().filter(b -> b.getClientId().equals(clientId))
         .findFirst();
 
     if (!billFound.isPresent()) {
@@ -46,11 +52,23 @@ public class BillInMemoryRepository implements BillRepository {
     return billFound.get();
   }
 
-  @Override
-  public void updateBill(Bill bill) {
+  private void sortByOldest(List<Bill> billList) {
+    Collections.sort(billList, new Comparator<Bill>() {
+      public int compare(Bill o1, Bill o2) {
+        return o1.getExpectedPayment().compareTo(o2.getExpectedPayment());
+      }
+    });
   }
 
-  public void cancelBill(Identity billNumber) {
+  @Override
+  public void updateBill(Bill bill) {
+    bills.put(bill.getBillNumber(), bill);
+  }
+
+  @Override
+  public void cancelBill(Identity billNumber) throws BillNotFoundException {
+    findById(billNumber);
+    bills.remove(billNumber);
   }
 
 }

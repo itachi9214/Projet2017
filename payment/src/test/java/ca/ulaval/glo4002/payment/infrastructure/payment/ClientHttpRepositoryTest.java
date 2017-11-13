@@ -26,7 +26,7 @@ public class ClientHttpRepositoryTest {
   }
 
   @Test
-  public void whenVerifyClientExistsThenVerifyItsExistence() {
+  public void givenClientNumberWhenVerifyClientExistsThenVerifyCrmHttpClientIsCalled() {
     clientHttpRepository.verifyClientExists(CLIENT_NUMBER);
 
     verify(crmHttpClient).verifyClientExists(CLIENT_NUMBER);

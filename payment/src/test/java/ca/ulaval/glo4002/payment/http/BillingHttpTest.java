@@ -55,14 +55,15 @@ public class BillingHttpTest {
   }
 
   @Test
-  public void whenGetOldestUnpaidBillForClientThenReturnBill() throws JsonProcessingException {
+  public void givenClientIdWhenGetOldestUnpaidBillForClientThenReturnBill()
+      throws JsonProcessingException {
     Object result = billingHttp.getOldestUnpaidBillForClient(CLIENT_ID);
 
     assertTrue(result instanceof Bill);
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenNoBillWhenGetOldestUnpaidBillForClientThenThrowsException()
+  public void givenNoBillWhenGetOldestUnpaidBillForClientThenThrowsBillNotFoundException()
       throws JsonProcessingException {
     willReturn(Status.NOT_FOUND.getStatusCode()).given(response).getStatus();
 
@@ -70,7 +71,8 @@ public class BillingHttpTest {
   }
 
   @Test
-  public void whenGetOldestUnpaidBillForClientThenGetIsCalled() throws JsonProcessingException {
+  public void givenClientIdWhenGetOldestUnpaidBillForClientThenGetIsCalled()
+      throws JsonProcessingException {
     billingHttp.getOldestUnpaidBillForClient(CLIENT_ID);
 
     verify(utilHttp).callUrlWithGetMethod(URL);

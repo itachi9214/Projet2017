@@ -1,4 +1,3 @@
-
 package ca.ulaval.glo4002.payment.http;
 
 import javax.ws.rs.client.Client;

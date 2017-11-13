@@ -32,7 +32,7 @@ public class PaymentResourceTest {
   }
 
   @Test
-  public void whenMakePaymentThenVerifyPaymentIsMade() {
+  public void givenRequestPaymentDtoWhenMakePaymentThenVerifyPaymentIsMade() {
     RequestPaymentDto requestPaymentDto = new RequestPaymentDto(CLIENT_ID, AMOUNT,
         new PaymentMethod(ACCOUNT, SOURCE));
 

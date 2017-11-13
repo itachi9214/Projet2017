@@ -58,7 +58,7 @@ public class PaymentHibernateRepositoryTest {
   }
 
   @Test(expected = PaymentNotFoundException.class)
-  public void givenNoPaymentWhenFindPaymentThenThrowException() {
+  public void givenNoPaymentWhenFindPaymentThenThrowPaymentNotFoundException() {
     paymentRepository.findPaymentById(PAYMENT_NUMBER);
   }
 

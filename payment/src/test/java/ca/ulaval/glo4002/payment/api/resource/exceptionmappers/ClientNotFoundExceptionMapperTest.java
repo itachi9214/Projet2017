@@ -31,7 +31,7 @@ public class ClientNotFoundExceptionMapperTest {
   }
 
   @Test
-  public void whenToResponseThenVerifyCreateBadResquestExceptionMapperIsCalled() {
+  public void givenclientNotFoundExceptionWhenToResponseThenVerifyCreateBadResquestExceptionMapperIsCalled() {
     clientNotFoundExceptionMapper.toResponse(clientNotFoundException);
 
     verify(exceptionMapperFactory).createBadRequestExceptionMapper(NOT_FOUND, DESCRIPTION,

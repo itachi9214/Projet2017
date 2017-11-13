@@ -23,7 +23,7 @@ public class BillTest {
   }
 
   @Test
-  public void whenSubtractPaidAmountThenPaymentIsSubtracted() {
+  public void givenAmountWhenSubtractPaidAmountThenPaymentIsSubtracted() {
     bill.substractPaidAmount(LOWER_AMOUNT);
 
     assertEquals(new BigDecimal(LOWER_AMOUNT), bill.getRemainingAmount());
@@ -37,7 +37,7 @@ public class BillTest {
   }
 
   @Test
-  public void givenRemainingAmountLowerBiggerThanAmountWhenGetPriceThatCanBePaidThenReturnsAmount() {
+  public void givenRemainingAmountBiggerThanAmountWhenGetPriceThatCanBePaidThenReturnsAmount() {
     float result = bill.getPriceThatCanBePaid(LOWER_AMOUNT);
 
     assertEquals(LOWER_AMOUNT, result, FLOAT_DIFFERENCE);

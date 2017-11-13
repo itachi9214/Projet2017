@@ -72,7 +72,7 @@ public class PaymentServiceTest {
   }
 
   @Test(expected = ClientNotFoundException.class)
-  public void givenClientNotFoundWhenMakePaymentThenThrowsException() {
+  public void givenNonExistingClientWhenMakePaymentThenThrowsClientNotFoundException() {
     willThrow(ClientNotFoundException.class).given(clientRepository).verifyClientExists(CLIENT_ID);
 
     paymentService.makePayment(requestPaymentDto);
@@ -86,7 +86,7 @@ public class PaymentServiceTest {
   }
 
   @Test
-  public void givenNoBillFoundWhenMakePaymentThenVerifyUpdateBillAfterPaymentIsNotCalled() {
+  public void givenNonExistingBillWhenMakePaymentThenVerifyUpdateBillAfterPaymentIsNotCalled() {
     willThrow(BillNotFoundException.class).given(billRepository)
         .getOldestUnpaidBillForClient(CLIENT_ID);
 

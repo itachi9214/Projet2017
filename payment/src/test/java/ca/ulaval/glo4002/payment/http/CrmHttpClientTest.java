@@ -44,14 +44,15 @@ public class CrmHttpClientTest {
   }
 
   @Test(expected = ClientNotFoundException.class)
-  public void givenClientNumberNotFoundWhenVerifyClientExistsThenThrowException() {
+  public void givenClientNumberNotFoundWhenVerifyClientExistsThenThrowClientNotFoundException() {
     willReturn(Status.NOT_FOUND.getStatusCode()).given(response).getStatus();
 
     crmHttpClient.verifyClientExists(CLIENT_NUMBER);
   }
 
   @Test
-  public void whenVerifyClientExistsThenGetIsCalled() throws JsonProcessingException {
+  public void givenClientNumberWhenVerifyClientExistsThenGetIsCalled()
+      throws JsonProcessingException {
     crmHttpClient.verifyClientExists(CLIENT_NUMBER);
 
     verify(utilHttp).callUrlWithGetMethod(URL);

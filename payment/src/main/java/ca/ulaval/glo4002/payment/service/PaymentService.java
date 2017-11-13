@@ -40,7 +40,6 @@ public class PaymentService {
 
     Payment payment = paymentAssembler.assemblePaymentFromRequest(requestPaymentDto);
     paymentRepository.savePayment(payment);
-
     payBills(requestPaymentDto, payment);
 
     ResponsePaymentDto responsePaymentDto = paymentAssembler.assembleResponseFromPayment(payment);
@@ -50,7 +49,7 @@ public class PaymentService {
   private void payBills(RequestPaymentDto requestPaymentDto, Payment payment) {
     try {
       payBillsForClientWithPayment(requestPaymentDto.getClientId(), payment);
-    } catch (BillNotFoundException exception) {
+    } catch (BillNotFoundException billNotFoundException) {
     }
   }
 

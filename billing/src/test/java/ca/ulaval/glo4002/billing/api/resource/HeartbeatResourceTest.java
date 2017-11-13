@@ -24,4 +24,5 @@ public class HeartbeatResourceTest {
 
     assertEquals(response.getStatus(), Response.ok().build().getStatus());
   }
+
 }

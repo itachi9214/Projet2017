@@ -49,14 +49,14 @@ public class CrmHttpProductTest {
   }
 
   @Test(expected = ProductNotFoundException.class)
-  public void givenProductIdNotFoundWhenGetProductDtoThenThrowException() {
+  public void givenNonExistingProductIdWhenGetProductDtoThenThrowException() {
     willReturn(Status.NOT_FOUND.getStatusCode()).given(response).getStatus();
 
     crmHttpProduct.getProductDto(NON_EXISTING_PRODUCT_ID);
   }
 
   @Test
-  public void whenGetProductDtoThenReturnProductDto() throws IOException {
+  public void givenExistingProductIdWhenGetProductDtoThenReturnProductDto() throws IOException {
     willReturn(Status.OK.getStatusCode()).given(response).getStatus();
     willReturn(mapper.writeValueAsString(productDto)).given(response).readEntity(String.class);
 

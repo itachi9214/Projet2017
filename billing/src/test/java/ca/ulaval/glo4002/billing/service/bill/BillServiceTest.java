@@ -60,42 +60,42 @@ public class BillServiceTest {
   }
 
   @Test
-  public void whenCreateBillThenVerifySubmissionIsFound() {
+  public void givenBillNumberWhenCreateBillThenVerifySubmissionIsFoundByIdentity() {
     billService.createBill(BILL_NUMBER);
 
     verify(submissionRepository).findSubmissionById(identity);
   }
 
   @Test
-  public void whenCreateBillThenVerifyBillIsCreated() {
+  public void givenBillNumberWhenCreateBillThenVerifyBillIsCreated() {
     billService.createBill(BILL_NUMBER);
 
     verify(billRepository).createBill(bill);
   }
 
   @Test
-  public void whenGetOldestUnpaidBillForClientThenVerifyOldestUnpaidBillIsFoundForClient() {
+  public void givenCliendIdWhenGetOldestUnpaidBillForClientThenVerifyOldestUnpaidBillIsFoundByClientId() {
     billService.getOldestUnpaidBillForClient(CLIENT_ID);
 
     verify(billRepository).findOldestUnpaidBillByClientId(CLIENT_ID);
   }
 
   @Test
-  public void whenGetOldestUnpaidBillForClientThenBillForPaymentDtoIsCorrect() {
+  public void givenClientIdWhenGetOldestUnpaidBillForClientThenBillForPaymentDtoIsCorrect() {
     BillForPaymentDto dto = billService.getOldestUnpaidBillForClient(CLIENT_ID);
 
     assertEquals(billForPaymentDto, dto);
   }
 
   @Test
-  public void whenUpdateBillAfterPaymentThenVerifyBillIsUpdated() {
+  public void givenBillForPaymentDtoWhenUpdateBillAfterPaymentThenVerifyBillIsUpdated() {
     billService.updateBillAfterPayment(billForPaymentDto);
 
     verify(bill).updateAfterPayment(PAID_PRICE);
   }
 
   @Test
-  public void whenUpdateBillAfterPaymentThenVerifyBillUpdateIsSaved() {
+  public void givenBillForPaymentDtoWhenUpdateBillAfterPaymentThenVerifyBillUpdateIsSaved() {
     billService.updateBillAfterPayment(billForPaymentDto);
 
     verify(billRepository).updateBill(bill);

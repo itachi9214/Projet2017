@@ -85,7 +85,7 @@ public class BillHibernateRepositoryTest {
   }
 
   @Test(expected = BillAlreadyExistsException.class)
-  public void givenExistingBillWhenCreateBillThenThrowException() {
+  public void givenExistingBillWhenCreateBillThenThrowBillAlreadyExistsException() {
     Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
     billRepository.createBill(bill);
 
@@ -93,12 +93,12 @@ public class BillHibernateRepositoryTest {
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenNoBillWhenFindByIdThenThrowException() {
+  public void givenNoBillWhenFindByIdThenThrowBillNotFoundException() {
     billRepository.findById(BILL_NUMBER);
   }
 
   @Test
-  public void whenFindOldestUnpaidBillByClientIdThenClientIsTheSame() {
+  public void givenClientIdWhenFindOldestUnpaidBillByClientIdThenClientIdIsTheSame() {
     Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
     billRepository.createBill(bill);
 
@@ -108,7 +108,7 @@ public class BillHibernateRepositoryTest {
   }
 
   @Test
-  public void givenTwoBillsWhenFindOldestUnpaidBillByClientIdThenOldestIsReturned() {
+  public void givenTwoUnpaidBillsWithSameClientIdWhenFindOldestUnpaidBillByClientIdThenOldestIsReturned() {
     Bill olderBill = new Bill(OTHER_BILL_NUMBER, OLDER_DUE_TERM, CLIENT_NUMBER, ITEMS);
     Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
     billRepository.createBill(olderBill);
@@ -120,12 +120,12 @@ public class BillHibernateRepositoryTest {
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenNoBillWhenFindOldestUnpaidBillByClientIdThenThrowException() {
+  public void givenNoBillWhenFindOldestUnpaidBillByClientIdThenThrowBillNotFoundException() {
     billRepository.findOldestUnpaidBillByClientId(CLIENT_NUMBER);
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenPaidBillWhenFindOldestUnpaidBillByClientIdThenThrowException() {
+  public void givenPaidBillWhenFindOldestUnpaidBillByClientIdThenThrowBillNotFoundException() {
     Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
     billRepository.createBill(bill);
     bill.setBillState(BillState.PAID);
@@ -135,12 +135,12 @@ public class BillHibernateRepositoryTest {
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenUnexistingBillWhenCancelBillThenThrowsException() {
+  public void givenUnexistingBillWhenCancelBillThenThrowBillNotFoundException() {
     billRepository.cancelBill(BILL_NUMBER);
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenBillwhenCancelBillThenThrowExceptionOnFind() {
+  public void givenCanceledBillWhenFindBillThenThrowBillNotFoundException() {
     Bill bill = new Bill(BILL_NUMBER, DUE_TERM, CLIENT_NUMBER, ITEMS);
     billRepository.createBill(bill);
     billRepository.cancelBill(BILL_NUMBER);

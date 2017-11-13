@@ -42,16 +42,18 @@ public class BillService {
 
   public BillDto createBill(long billNumber) {
     Identity identity = identityFactory.createIdFromNumber(billNumber);
-
     Submission submission = submissionRepository.findSubmissionById(identity);
-    Bill bill = billAssembler.createBillFromSubmission(submission);
 
+    Bill bill = billAssembler.createBillFromSubmission(submission);
     billRepository.createBill(bill);
-    return billAssembler.assembleBill(bill);
+
+    BillDto billDto = billAssembler.assembleBill(bill);
+    return billDto;
   }
 
   public BillForPaymentDto getOldestUnpaidBillForClient(Long clientId) {
     Bill bill = billRepository.findOldestUnpaidBillByClientId(clientId);
+
     BillForPaymentDto billForPaymentDto = billAssembler.assembleBillForPayment(bill);
     return billForPaymentDto;
   }
@@ -59,6 +61,7 @@ public class BillService {
   public void updateBillAfterPayment(BillForPaymentDto billForPaymentDto) {
     Identity identity = identityFactory.createIdFromNumber(billForPaymentDto.getBillNumber());
     Bill bill = billRepository.findById(identity);
+
     bill.updateAfterPayment(billForPaymentDto.getRemainingAmount());
     billRepository.updateBill(bill);
   }
@@ -66,6 +69,7 @@ public class BillService {
   public void cancelBill(long billNumber) {
     Identity identity = identityFactory.createIdFromNumber(billNumber);
     Bill billToCancel = billRepository.findById(identity);
+
     billRepository.cancelBill(identity);
     paymentRepository.savePayment(new RequestPaymentDto(billToCancel.getClientId(),
         billToCancel.getPaidAmount().floatValue(), ACCOUNT, SOURCE));

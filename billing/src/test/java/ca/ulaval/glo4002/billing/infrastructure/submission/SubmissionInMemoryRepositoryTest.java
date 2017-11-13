@@ -38,12 +38,12 @@ public class SubmissionInMemoryRepositoryTest {
   }
 
   @Test(expected = SubmissionNotFoundException.class)
-  public void givenNoSubmissionWhenFindSubmissionThenThrowException() {
+  public void givenNoSubmissionWhenFindSubmissionThenThrowSubmissionNotFoundException() {
     submissionInMemory.findSubmissionById(SUBMISSION_NUMBER);
   }
 
   @Test(expected = SubmissionNotFoundException.class)
-  public void givenExistingSubmissionWhenDeleteSubmissionThenSubmissionCannotBeFound() {
+  public void givenExistingSubmissionWhenDeleteSubmissionThenThrowSubmissionNotFoundException() {
     submissionInMemory.createSubmission(submission);
 
     submissionInMemory.deleteSubmission(submission);

@@ -50,7 +50,10 @@ public class SubmissionService {
 
     Submission submission = submissionAssembler.createSubmission(requestSubmissionDto);
     submissionRepository.createSubmission(submission);
-    return submissionAssembler.createResponseSubmissionDto(submission);
+
+    ResponseSubmissionDto responseSubmissionDto = submissionAssembler
+        .createResponseSubmissionDto(submission);
+    return responseSubmissionDto;
   }
 
   private void verifyItemsQuantityIsNotNegative(RequestSubmissionDto requestSubmissionDto)

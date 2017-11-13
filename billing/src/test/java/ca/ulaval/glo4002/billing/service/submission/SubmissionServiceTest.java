@@ -66,7 +66,7 @@ public class SubmissionServiceTest {
   }
 
   @Test
-  public void whenCreateSubmissionThenVerifySubmissionIsCreatedBySubmissionRepository()
+  public void givenRequestSubmissionDtoWhenCreateSubmissionThenVerifySubmissionIsCreatedBysubmissionRepository()
       throws NegativeParameterException {
     submissionService.createSubmission(requestSubmissionDto);
 
@@ -74,7 +74,7 @@ public class SubmissionServiceTest {
   }
 
   @Test
-  public void whenCreateSubmissionThenVerifySubmissionIsCreatedBySubmissionAssembler()
+  public void givenRequestSubmissionDtoWhenCreateSubmissionThenVerifySubmissionIsCreatedBySubmissionAssembler()
       throws NegativeParameterException {
     submissionService.createSubmission(requestSubmissionDto);
 
@@ -99,7 +99,7 @@ public class SubmissionServiceTest {
   }
 
   @Test(expected = NegativeParameterException.class)
-  public void givenProductWithNegativeQuantityWhenCreateSubmissionThenThrowException() {
+  public void givenProductWithNegativeQuantityWhenCreateSubmissionThenThrowNegativeParameterException() {
     willReturn(NEGATIVE_ITEM_QUANTITY).given(item).getQuantity();
 
     submissionService.createSubmission(requestSubmissionDto);

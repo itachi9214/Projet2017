@@ -50,14 +50,14 @@ public class CrmHttpClientTest {
   }
 
   @Test(expected = ClientNotFoundException.class)
-  public void givenClientNumberNotFoundWhenGetClientDtoThenThrowException() {
+  public void givenNonExistingClientNumberWhenGetClientDtoThenThrowException() {
     willReturn(Status.NOT_FOUND.getStatusCode()).given(response).getStatus();
 
     crmHttpClient.getClientDto(NON_EXISTING_CLIENT_NUMBER);
   }
 
   @Test
-  public void whenGetClientDtoThenReturnClientDto() throws IOException {
+  public void givenExistingClientNumberWhenGetClientDtoThenReturnClientDto() throws IOException {
     willReturn(Status.OK.getStatusCode()).given(response).getStatus();
     willReturn(mapper.writeValueAsString(clientDto)).given(response).readEntity(String.class);
 

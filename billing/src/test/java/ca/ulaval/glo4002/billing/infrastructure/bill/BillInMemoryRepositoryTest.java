@@ -56,7 +56,7 @@ public class BillInMemoryRepositoryTest {
   }
 
   @Test
-  public void whenUpdateBillThenBillIsFound() {
+  public void givenExistingBillWhenUpdateBillThenBillIsFound() {
     billInMemory.createBill(bill);
     billInMemory.updateBill(bill);
 
@@ -73,7 +73,7 @@ public class BillInMemoryRepositoryTest {
   }
 
   @Test
-  public void givenTwoBillsWhenFindOldestUnpaidBillByClientIdThenOldestIsReturned() {
+  public void givenTwoUnpaidBillsWithSameClientIdWhenFindOldestUnpaidBillByClientIdThenOldestIsReturned() {
     willReturn(CLIENT_ID).given(bill).getClientId();
     willReturn(CLIENT_ID).given(olderBill).getClientId();
     willReturn(EXISTING_BILL_NUMBER).given(bill).getBillNumber();
@@ -89,17 +89,17 @@ public class BillInMemoryRepositoryTest {
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenUnexistingBillWhenFindOldestUnpaidBillByClientIdThenThrowsException() {
+  public void givenUnexistingBillWhenFindOldestUnpaidBillByClientIdThenThrowsBillNotFoundException() {
     billInMemory.findOldestUnpaidBillByClientId(CLIENT_ID);
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void givenUnexistingBillWhenCancelBillThenThrowsException() {
+  public void givenUnexistingBillWhenCancelBillThenThrowsBillNotFoundException() {
     billInMemory.cancelBill(NOT_EXISTING_BILL_NUMBER);
   }
 
   @Test(expected = BillNotFoundException.class)
-  public void whenCancelBillThenThrowsExceptionOnFind() {
+  public void givenCanceledBillWhenFindBillThenThrowBillNotFoundException() {
     billInMemory.createBill(bill);
     billInMemory.cancelBill(EXISTING_BILL_NUMBER);
 

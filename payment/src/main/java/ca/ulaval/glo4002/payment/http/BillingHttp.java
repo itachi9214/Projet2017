@@ -3,6 +3,7 @@ package ca.ulaval.glo4002.payment.http;
 import java.io.IOException;
 
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -49,9 +50,13 @@ public class BillingHttp {
       response.close();
     }
 
-    if (bill == null) {
-      throw new BillNotFoundException();
+    if (Status.NOT_FOUND.getStatusCode() == response.getStatus()) {
+      bill = null;
     }
+    //
+    // if (bill == null) {
+    // throw new BillNotFoundException();
+    // }
     return bill;
   }
 

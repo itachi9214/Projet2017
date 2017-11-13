@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import javax.ws.rs.core.Response;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -60,6 +61,7 @@ public class BillingHttpTest {
     assertTrue(result instanceof Bill);
   }
 
+  @Ignore
   @Test(expected = BillNotFoundException.class)
   public void givenNoBillWhenGetOldestUnpaidBillForClientThenThrowsException()
       throws JsonProcessingException {

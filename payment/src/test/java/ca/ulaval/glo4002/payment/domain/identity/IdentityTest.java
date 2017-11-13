@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class IdentityTest {
 
-  private static final long A_NUMBER = 3L;
+  private static final long ANY_NUMBER = 3L;
 
   private Identity identity;
 
@@ -21,7 +21,7 @@ public class IdentityTest {
 
   @Test
   public void givenDifferentIdentitiesWhenEqualsThenReturnsFalse() {
-    identity = new Identity(A_NUMBER);
+    identity = new Identity(ANY_NUMBER);
     Identity differentIdentity = new Identity();
 
     assertFalse(differentIdentity.equals(identity));
@@ -29,8 +29,8 @@ public class IdentityTest {
 
   @Test
   public void givenEqualIdentitiesWhenEqualsThenReturnsTrue() {
-    identity = new Identity(A_NUMBER);
-    Identity equalsIdentity = new Identity(A_NUMBER);
+    identity = new Identity(ANY_NUMBER);
+    Identity equalsIdentity = new Identity(ANY_NUMBER);
 
     assertTrue(equalsIdentity.equals(identity));
   }

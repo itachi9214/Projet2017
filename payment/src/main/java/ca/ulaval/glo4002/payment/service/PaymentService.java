@@ -52,12 +52,13 @@ public class PaymentService {
 
   private void payBillsForClientWithPayment(Long clientId, Payment payment) {
     float amountLeftAfterPayment = payment.getAmount();
+    Bill oldestBill = billRepository.getOldestUnpaidBillForClient(clientId);
 
-    while (amountLeftAfterPayment > AMOUNT_LEFT_NULL) {
-      Bill oldestBill = billRepository.getOldestUnpaidBillForClient(clientId);
+    while (amountLeftAfterPayment > AMOUNT_LEFT_NULL && oldestBill != null) {
       float amountToPayForBill = oldestBill.getPriceThatCanBePaid(amountLeftAfterPayment);
       payBillWithAmount(oldestBill, amountToPayForBill);
       amountLeftAfterPayment -= amountToPayForBill;
+      oldestBill = billRepository.getOldestUnpaidBillForClient(clientId);
     }
   }
 

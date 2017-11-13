@@ -50,15 +50,15 @@ public class PaymentService {
     return responsePaymentDto;
   }
 
-  private void payBillsForClientWithPayment(Long clientId, Payment payment) {
+  private void payBillsForClientWithPayment(Long clientId, Payment payment)
+      throws BillNotFoundException {
     float amountLeftAfterPayment = payment.getAmount();
-    Bill oldestBill = billRepository.getOldestUnpaidBillForClient(clientId);
 
-    while (amountLeftAfterPayment > AMOUNT_LEFT_NULL && oldestBill != null) {
+    while (amountLeftAfterPayment > AMOUNT_LEFT_NULL) {
+      Bill oldestBill = billRepository.getOldestUnpaidBillForClient(clientId);
       float amountToPayForBill = oldestBill.getPriceThatCanBePaid(amountLeftAfterPayment);
       payBillWithAmount(oldestBill, amountToPayForBill);
       amountLeftAfterPayment -= amountToPayForBill;
-      oldestBill = billRepository.getOldestUnpaidBillForClient(clientId);
     }
   }
 

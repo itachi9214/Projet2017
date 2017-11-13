@@ -51,12 +51,8 @@ public class BillingHttp {
     }
 
     if (Status.NOT_FOUND.getStatusCode() == response.getStatus()) {
-      bill = null;
+      throw new BillNotFoundException();
     }
-    //
-    // if (bill == null) {
-    // throw new BillNotFoundException();
-    // }
     return bill;
   }
 

@@ -9,9 +9,9 @@ import static org.mockito.Mockito.verify;
 import java.math.BigDecimal;
 
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -61,12 +61,10 @@ public class BillingHttpTest {
     assertTrue(result instanceof Bill);
   }
 
-  @Ignore
   @Test(expected = BillNotFoundException.class)
   public void givenNoBillWhenGetOldestUnpaidBillForClientThenThrowsException()
       throws JsonProcessingException {
-    bill = null;
-    willReturn(mapper.writeValueAsString(bill)).given(response).readEntity(String.class);
+    willReturn(Status.NOT_FOUND.getStatusCode()).given(response).getStatus();
 
     billingHttp.getOldestUnpaidBillForClient(CLIENT_ID);
   }

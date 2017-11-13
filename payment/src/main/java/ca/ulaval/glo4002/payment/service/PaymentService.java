@@ -41,13 +41,17 @@ public class PaymentService {
     Payment payment = paymentAssembler.assemblePaymentFromRequest(requestPaymentDto);
     paymentRepository.savePayment(payment);
 
+    payBills(requestPaymentDto, payment);
+
+    ResponsePaymentDto responsePaymentDto = paymentAssembler.assembleResponseFromPayment(payment);
+    return responsePaymentDto;
+  }
+
+  private void payBills(RequestPaymentDto requestPaymentDto, Payment payment) {
     try {
       payBillsForClientWithPayment(requestPaymentDto.getClientId(), payment);
     } catch (BillNotFoundException exception) {
     }
-
-    ResponsePaymentDto responsePaymentDto = paymentAssembler.assembleResponseFromPayment(payment);
-    return responsePaymentDto;
   }
 
   private void payBillsForClientWithPayment(Long clientId, Payment payment)

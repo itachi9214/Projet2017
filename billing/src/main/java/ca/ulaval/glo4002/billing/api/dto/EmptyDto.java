@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 public class EmptyDto {
 
   public EmptyDto() {
-    super();
   }
 
 }

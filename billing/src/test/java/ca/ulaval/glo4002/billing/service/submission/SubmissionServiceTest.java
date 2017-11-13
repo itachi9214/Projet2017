@@ -2,6 +2,8 @@ package ca.ulaval.glo4002.billing.service.submission;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
@@ -14,14 +16,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.ServiceLocator;
+import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
+import ca.ulaval.glo4002.billing.domain.submision.ClientRepository;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
+import ca.ulaval.glo4002.billing.domain.submision.ProductRepository;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
 import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
-import ca.ulaval.glo4002.billing.http.CrmHttpClient;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionServiceTest {
@@ -30,10 +33,10 @@ public class SubmissionServiceTest {
   private static final DueTerm IMMEDIATE_DUE_TERM = DueTerm.IMMEDIATE;
   private static final int NEGATIVE_ITEM_QUANTITY = -6;
   private static final Long CLIENT_ID = 1L;
-  private static final Integer PRODUCT_ID = 2;
 
   private RequestSubmissionDto requestSubmissionDto;
   private SubmissionService submissionService;
+  private ClientDto clientDto;
 
   @Mock
   private Submission submission;
@@ -42,7 +45,9 @@ public class SubmissionServiceTest {
   @Mock
   private SubmissionAssembler submissionAssembler;
   @Mock
-  private CrmHttpClient httpClient;
+  private ClientRepository clientRepository;
+  @Mock
+  private ProductRepository productRepository;
   @Mock
   private OrderedProduct item;
 
@@ -52,40 +57,49 @@ public class SubmissionServiceTest {
     items.add(item);
     requestSubmissionDto = new RequestSubmissionDto(CLIENT_ID, new Date(), DueTerm.DAYS30, items);
 
-    ServiceLocator.register(submissionAssembler);
-    ServiceLocator.register(submissionRepository);
-    ServiceLocator.register(httpClient);
+    submissionService = new SubmissionService(submissionAssembler, submissionRepository,
+        clientRepository, productRepository);
+    clientDto = new ClientDto();
 
-    submissionService = new SubmissionService();
+    willReturn(submission).given(submissionAssembler).createSubmission(requestSubmissionDto);
+    willReturn(clientDto).given(clientRepository).getClientDto(anyLong());
   }
 
   @Test
-  public void givenSubmissionServiceWhenCreateSubmissionThenVerifyThatAllMethodsHaveBeenCalled()
+  public void givenRequestSubmissionDtoWhenCreateSubmissionThenVerifySubmissionIsCreatedBysubmissionRepository()
       throws NegativeParameterException {
-    willReturn(submission).given(submissionAssembler).createSubmission(requestSubmissionDto);
-
     submissionService.createSubmission(requestSubmissionDto);
 
-    verify(submissionAssembler).createSubmission(requestSubmissionDto);
     verify(submissionRepository).createSubmission(submission);
   }
 
   @Test
-  public void givenSubmissionServiceWhenGetClientByIdCrmThenReturnClientDto() {
-    submissionService.getClientByIdInCrm(CLIENT_ID);
+  public void givenRequestSubmissionDtoWhenCreateSubmissionThenVerifySubmissionIsCreatedBySubmissionAssembler()
+      throws NegativeParameterException {
+    submissionService.createSubmission(requestSubmissionDto);
 
-    verify(httpClient).getClientDto(CLIENT_ID);
+    verify(submissionAssembler).createSubmission(requestSubmissionDto);
   }
 
   @Test
-  public void givenSubmissionServiceWhenGetProductByIdCrmThenReturnProductDto() {
-    submissionService.getProductByIdInCrm(PRODUCT_ID);
+  public void whenGetAndVerifyClientExistsThenVerifyClientIsFound() {
+    submissionService.getAndVerifyClientExists(CLIENT_ID);
 
-    verify(httpClient).getProductDto(PRODUCT_ID);
+    verify(clientRepository).getClientDto(CLIENT_ID);
+  }
+
+  @Test
+  public void givenListOfItemsWhenVerifyProductsExistThenVerifyProductIsFound() {
+    List<OrderedProduct> items = new ArrayList<>();
+    items.add(item);
+
+    submissionService.verifyProductsExist(items);
+
+    verify(productRepository).getProductDto(anyInt());
   }
 
   @Test(expected = NegativeParameterException.class)
-  public void givenProductWithNegativeQuantityWhenCreateSubmissionThenThrowException() {
+  public void givenProductWithNegativeQuantityWhenCreateSubmissionThenThrowNegativeParameterException() {
     willReturn(NEGATIVE_ITEM_QUANTITY).given(item).getQuantity();
 
     submissionService.createSubmission(requestSubmissionDto);
@@ -97,16 +111,16 @@ public class SubmissionServiceTest {
 
     submissionService.setDueTermToDefaultIfNeeded(requestSubmissionDto, IMMEDIATE_DUE_TERM);
 
-    assertEquals(requestSubmissionDto.getDueTerm(), IMMEDIATE_DUE_TERM);
+    assertEquals(IMMEDIATE_DUE_TERM, requestSubmissionDto.getDueTerm());
   }
 
   @Test
-  public void givenRequestWithDueTermWhenSetToDefaultIfNeededThenIsNotModified() {
+  public void givenRequestWithDueTermWhenSetToDefaultIfNeededThenDueTermIsNotModified() {
     requestSubmissionDto.setDueTerm(MONTH_AWAY_DUE_TERM);
 
     submissionService.setDueTermToDefaultIfNeeded(requestSubmissionDto, IMMEDIATE_DUE_TERM);
 
-    assertEquals(requestSubmissionDto.getDueTerm(), MONTH_AWAY_DUE_TERM);
+    assertEquals(MONTH_AWAY_DUE_TERM, requestSubmissionDto.getDueTerm());
   }
 
 }

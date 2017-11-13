@@ -2,15 +2,22 @@ package ca.ulaval.glo4002.billing.domain.submision;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class OrderedProduct {
 
+  @Id
+  @GeneratedValue
+  private long id;
   private int productId;
   private float price;
   private String note;
   private int quantity;
 
-  public OrderedProduct(int productId, float price, String note, int quantity)
-      throws NegativeParameterException {
+  public OrderedProduct(int productId, float price, String note, int quantity) {
     this.productId = productId;
     this.price = price;
     this.note = note;
@@ -18,6 +25,14 @@ public class OrderedProduct {
   }
 
   public OrderedProduct() {
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
   }
 
   public int getProductId() {
@@ -48,7 +63,7 @@ public class OrderedProduct {
     return quantity;
   }
 
-  public void setQuantity(int quantity) throws NegativeParameterException {
+  public void setQuantity(int quantity) {
     this.quantity = quantity;
   }
 

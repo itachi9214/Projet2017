@@ -16,9 +16,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class SubmissionTest {
 
-  private static final float PRICE_FIRTS_PRODUCT = 10;
+  private static final float PRICE_FIRST_PRODUCT = 10;
   private static final float PRICE_SECOND_PRODUCT = 20;
   private static final float NEGATIVE_PRICE_SECOND_PRODUCT = -20;
+  private static final float TOTAL_PRICE = 30;
 
   private Submission submission;
 
@@ -36,17 +37,20 @@ public class SubmissionTest {
   }
 
   @Test
-  public void whenCalculatePriceThenPriceIsCorrect() throws NegativeParameterException {
-    willReturn(new BigDecimal(PRICE_FIRTS_PRODUCT)).given(firstProduct).calculateTotalPrice();
+  public void givenProductsWhenCalculatePriceThenPriceIsCorrect()
+      throws NegativeParameterException {
+    willReturn(new BigDecimal(PRICE_FIRST_PRODUCT)).given(firstProduct).calculateTotalPrice();
     willReturn(new BigDecimal(PRICE_SECOND_PRODUCT)).given(secondProduct).calculateTotalPrice();
 
-    assertEquals(submission.calculatePrice(), new BigDecimal(30));
+    BigDecimal result = submission.calculatePrice();
+
+    assertEquals(new BigDecimal(TOTAL_PRICE), result);
   }
 
   @Test(expected = NegativeParameterException.class)
   public void givenNegativeTotalWhenCalculatePriceThenThrowException()
       throws NegativeParameterException {
-    willReturn(new BigDecimal(PRICE_FIRTS_PRODUCT)).given(firstProduct).calculateTotalPrice();
+    willReturn(new BigDecimal(PRICE_FIRST_PRODUCT)).given(firstProduct).calculateTotalPrice();
     willReturn(new BigDecimal(NEGATIVE_PRICE_SECOND_PRODUCT)).given(secondProduct)
         .calculateTotalPrice();
 

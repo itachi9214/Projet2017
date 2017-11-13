@@ -41,17 +41,17 @@ public class BillingHttp {
   }
 
   private Bill extractBillFromResponse(Response response) throws BillNotFoundException {
-    Bill bill = null;
+    if (Status.NOT_FOUND.getStatusCode() == response.getStatus()) {
+      throw new BillNotFoundException();
+    }
+
+    Bill bill = new Bill();
     try {
       bill = mapper.readValue(response.readEntity(String.class), Bill.class);
     } catch (IOException exception) {
       exception.printStackTrace();
     } finally {
       response.close();
-    }
-
-    if (Status.NOT_FOUND.getStatusCode() == response.getStatus()) {
-      throw new BillNotFoundException();
     }
     return bill;
   }

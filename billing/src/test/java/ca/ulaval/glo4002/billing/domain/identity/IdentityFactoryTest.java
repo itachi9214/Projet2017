@@ -6,9 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.ulaval.glo4002.billing.domain.identity.Identity;
-import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
-
 public class IdentityFactoryTest {
 
   private static final Long A_NUMBER = 13L;
@@ -21,8 +18,8 @@ public class IdentityFactoryTest {
   }
 
   @Test
-  public void whenCreateAndGenerateIdThenIdShouldNotBeNull() {
-    Identity identity = identityFactory.createAndGenerateId();
+  public void whenCreateIdThenIdShouldNotBeNull() {
+    Identity identity = identityFactory.createId();
 
     assertNotNull(identity);
   }

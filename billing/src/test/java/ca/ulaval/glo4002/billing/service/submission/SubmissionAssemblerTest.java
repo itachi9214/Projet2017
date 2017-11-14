@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.billing.service.submission;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.willReturn;
 
@@ -15,6 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
 import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
+import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
@@ -39,29 +41,31 @@ public class SubmissionAssemblerTest {
   private RequestSubmissionDto requestSubmissionDto;
   @Mock
   private OrderedProduct orderedProduct;
+  @Mock
+  private IdentityFactory identityFactory;
 
   @Before
   public void setUp() {
     willReturn(SUBMISSION_NUMBER).given(identity).getNumber();
 
-    submissionAssembler = new SubmissionAssembler();
+    submissionAssembler = new SubmissionAssembler(identityFactory);
   }
 
   @Test
-  public void givenSubmissionAssemblerWhenCreateResponseSubmissionDtoThenShouldBeTheSame() {
+  public void whenCreateResponseSubmissionDtoThenDtoShouldBeTheSame() {
     willReturn(identity).given(submission).getBillNumber();
     willReturn(IMMEDIATE).given(submission).getDueTerm();
     willReturn(SUBMISSION_TOTAL).given(submission).getTotalPrice();
 
     ResponseSubmissionDto dto = submissionAssembler.createResponseSubmissionDto(submission);
 
-    assertTrue(dto.getId().equals(SUBMISSION_NUMBER));
-    assertTrue(dto.getDueTerm().equals(IMMEDIATE));
-    assertTrue(dto.getTotal().equals(SUBMISSION_TOTAL));
+    assertEquals(SUBMISSION_NUMBER, dto.getId());
+    assertEquals(IMMEDIATE, dto.getDueTerm());
+    assertEquals(SUBMISSION_TOTAL, dto.getTotal());
   }
 
   @Test
-  public void givenSubmissionAssemblerWhenCreateSubmissionThenShouldBeTheSame()
+  public void whenCreateSubmissionThenSubmissionShouldBeTheSame()
       throws NegativeParameterException {
     requestSubmissionDto.setClientId(CLIENT_ID);
     requestSubmissionDto.setDueTerm(IMMEDIATE);

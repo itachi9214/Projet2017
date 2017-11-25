@@ -18,7 +18,7 @@ import ca.ulaval.glo4002.billing.domain.submitting.OrderedProduct;
 import ca.ulaval.glo4002.billing.domain.submitting.Submission;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SubmissionTest {
+public class submittingTest {
 
   private static final float PRICE_FIRST_PRODUCT = 10;
   private static final float PRICE_SECOND_PRODUCT = 20;

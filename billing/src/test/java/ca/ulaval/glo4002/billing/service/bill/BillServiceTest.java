@@ -17,8 +17,8 @@ import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
-import ca.ulaval.glo4002.billing.domain.submision.Submission;
-import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
+import ca.ulaval.glo4002.billing.domain.submitting.Submission;
+import ca.ulaval.glo4002.billing.domain.submitting.SubmissionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BillServiceTest {

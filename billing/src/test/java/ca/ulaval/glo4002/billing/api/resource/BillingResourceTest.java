@@ -13,12 +13,12 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.api.dto.bill.BillForPaymentDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmittingDto;
-import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
-import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
-import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
+import ca.ulaval.glo4002.billing.api.dto.submitting.RequestSubmittingDto;
+import ca.ulaval.glo4002.billing.domain.submitting.DueTerm;
+import ca.ulaval.glo4002.billing.domain.submitting.NegativeParameterException;
+import ca.ulaval.glo4002.billing.domain.submitting.OrderedProduct;
 import ca.ulaval.glo4002.billing.service.bill.BillService;
-import ca.ulaval.glo4002.billing.service.submission.SubmissionService;
+import ca.ulaval.glo4002.billing.service.submitting.SubmittingService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BillingResourceTest {
@@ -30,7 +30,7 @@ public class BillingResourceTest {
   private BillForPaymentDto billForPaymentDto;
 
   @Mock
-  private SubmissionService submissionService;
+  private SubmittingService submissionService;
   @Mock
   private BillService billService;
   @Mock

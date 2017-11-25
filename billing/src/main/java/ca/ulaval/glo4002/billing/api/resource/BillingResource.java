@@ -14,25 +14,25 @@ import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.EmptyDto;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillForPaymentDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmittingDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmittingDto;
+import ca.ulaval.glo4002.billing.api.dto.submitting.RequestSubmittingDto;
+import ca.ulaval.glo4002.billing.api.dto.submitting.ResponseSubmittingDto;
 import ca.ulaval.glo4002.billing.service.bill.BillService;
-import ca.ulaval.glo4002.billing.service.submission.SubmissionService;
+import ca.ulaval.glo4002.billing.service.submitting.SubmittingService;
 
 @Path("/bills")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class BillingResource {
 
-  private SubmissionService submissionService;
+  private SubmittingService submissionService;
   private BillService billService;
 
   public BillingResource() {
-    this.submissionService = ServiceLocator.getService(SubmissionService.class);
+    this.submissionService = ServiceLocator.getService(SubmittingService.class);
     this.billService = ServiceLocator.getService(BillService.class);
   }
 
-  public BillingResource(SubmissionService submissionService, BillService billService) {
+  public BillingResource(SubmittingService submissionService, BillService billService) {
     this.submissionService = submissionService;
     this.billService = billService;
   }

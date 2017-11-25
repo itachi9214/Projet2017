@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
-import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
+import ca.ulaval.glo4002.billing.domain.submitting.DueTerm;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CrmHttpClientTest {

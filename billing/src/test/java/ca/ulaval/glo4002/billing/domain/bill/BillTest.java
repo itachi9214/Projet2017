@@ -15,8 +15,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
-import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
-import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
+import ca.ulaval.glo4002.billing.domain.submitting.DueTerm;
+import ca.ulaval.glo4002.billing.domain.submitting.OrderedProduct;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BillTest {

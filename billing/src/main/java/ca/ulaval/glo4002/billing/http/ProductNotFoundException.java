@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.billing.http;
 
-import ca.ulaval.glo4002.billing.domain.submision.BillingException;
+import ca.ulaval.glo4002.billing.domain.submitting.BillingException;
 
 public class ProductNotFoundException extends BillingException {
 

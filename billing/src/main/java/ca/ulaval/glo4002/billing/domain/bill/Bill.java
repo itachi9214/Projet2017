@@ -10,10 +10,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
-import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
-import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
-import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
-import ca.ulaval.glo4002.billing.domain.submision.Submission;
+import ca.ulaval.glo4002.billing.domain.submitting.DueTerm;
+import ca.ulaval.glo4002.billing.domain.submitting.NegativeParameterException;
+import ca.ulaval.glo4002.billing.domain.submitting.OrderedProduct;
+import ca.ulaval.glo4002.billing.domain.submitting.Submission;
 
 @Entity
 @NamedQueries({

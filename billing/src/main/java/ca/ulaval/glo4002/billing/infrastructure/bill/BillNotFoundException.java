@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.billing.infrastructure.bill;
 
-import ca.ulaval.glo4002.billing.domain.submision.BillingException;
+import ca.ulaval.glo4002.billing.domain.submitting.BillingException;
 
 public class BillNotFoundException extends BillingException {
 

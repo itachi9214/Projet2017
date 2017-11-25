@@ -8,12 +8,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionNotFoundException;
+import ca.ulaval.glo4002.billing.infrastructure.submitting.SubmittingNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmittingNotFoundExceptionMapperTest {
 
-  private SubmissionNotFoundException submissionNotFoundException;
+  private SubmittingNotFoundException submissionNotFoundException;
   private SubmittingNotFoundExceptionMapper submissionNotFoundExceptionMapper;
 
   @Mock
@@ -23,7 +23,7 @@ public class SubmittingNotFoundExceptionMapperTest {
   public void setUp() {
     submissionNotFoundExceptionMapper = new SubmittingNotFoundExceptionMapper(
         exceptionMapperResponse);
-    submissionNotFoundException = new SubmissionNotFoundException();
+    submissionNotFoundException = new SubmittingNotFoundException();
   }
 
   @Test

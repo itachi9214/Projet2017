@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
+import ca.ulaval.glo4002.billing.domain.submitting.NegativeParameterException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NegativeParameterExceptionMapperTest {

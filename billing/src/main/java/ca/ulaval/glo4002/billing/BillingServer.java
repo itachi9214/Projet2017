@@ -20,13 +20,13 @@ import ca.ulaval.glo4002.billing.http.UtilHttp;
 import ca.ulaval.glo4002.billing.infrastructure.EntityManagerProvider;
 import ca.ulaval.glo4002.billing.infrastructure.bill.BillHibernateRepository;
 import ca.ulaval.glo4002.billing.infrastructure.bill.PaymentHttpRepository;
-import ca.ulaval.glo4002.billing.infrastructure.submission.ClientHttpRepository;
-import ca.ulaval.glo4002.billing.infrastructure.submission.ProductHttpRepository;
-import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionHibernateRepository;
+import ca.ulaval.glo4002.billing.infrastructure.submitting.ClientHttpRepository;
+import ca.ulaval.glo4002.billing.infrastructure.submitting.ProductHttpRepository;
+import ca.ulaval.glo4002.billing.infrastructure.submitting.SubmittingHibernateRepository;
 import ca.ulaval.glo4002.billing.service.bill.BillAssembler;
 import ca.ulaval.glo4002.billing.service.bill.BillService;
-import ca.ulaval.glo4002.billing.service.submission.SubmissionAssembler;
-import ca.ulaval.glo4002.billing.service.submission.SubmissionService;
+import ca.ulaval.glo4002.billing.service.submitting.SubmittingAssembler;
+import ca.ulaval.glo4002.billing.service.submitting.SubmittingService;
 
 public class BillingServer implements Runnable {
 
@@ -68,15 +68,15 @@ public class BillingServer implements Runnable {
     ServiceLocator.register(new CrmHttpClient());
     ServiceLocator.register(new CrmHttpProduct());
     ServiceLocator.register(new PaymentHttp());
-    ServiceLocator.register(new SubmissionAssembler());
+    ServiceLocator.register(new SubmittingAssembler());
     ServiceLocator.register(new BillAssembler());
-    ServiceLocator.register(new SubmissionHibernateRepository());
+    ServiceLocator.register(new SubmittingHibernateRepository());
     ServiceLocator.register(new ClientHttpRepository());
     ServiceLocator.register(new ProductHttpRepository());
     ServiceLocator.register(new PaymentHttpRepository());
     ServiceLocator.register(new BillHibernateRepository());
     ServiceLocator.register(new BillService());
-    ServiceLocator.register(new SubmissionService());
+    ServiceLocator.register(new SubmittingService());
 
     BillingResource billingResource = new BillingResource();
     ServiceLocator.register(billingResource);

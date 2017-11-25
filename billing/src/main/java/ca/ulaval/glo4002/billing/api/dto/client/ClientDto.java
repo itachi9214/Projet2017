@@ -4,7 +4,7 @@ import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
+import ca.ulaval.glo4002.billing.domain.submitting.DueTerm;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClientDto {

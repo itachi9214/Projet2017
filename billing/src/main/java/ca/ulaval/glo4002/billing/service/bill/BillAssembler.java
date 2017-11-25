@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillForPaymentDto;
 import ca.ulaval.glo4002.billing.domain.bill.Bill;
-import ca.ulaval.glo4002.billing.domain.submision.Submission;
+import ca.ulaval.glo4002.billing.domain.submitting.Submission;
 
 public class BillAssembler {
 

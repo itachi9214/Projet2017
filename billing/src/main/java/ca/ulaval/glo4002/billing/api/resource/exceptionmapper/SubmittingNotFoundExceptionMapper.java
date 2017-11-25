@@ -4,11 +4,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionNotFoundException;
+import ca.ulaval.glo4002.billing.infrastructure.submitting.SubmittingNotFoundException;
 
 @Provider
 public class SubmittingNotFoundExceptionMapper
-    implements ExceptionMapper<SubmissionNotFoundException> {
+    implements ExceptionMapper<SubmittingNotFoundException> {
 
   private ExceptionMapperFactory exceptionMapperFactory;
 
@@ -21,7 +21,7 @@ public class SubmittingNotFoundExceptionMapper
   }
 
   @Override
-  public Response toResponse(SubmissionNotFoundException submissionNotFoundException) {
+  public Response toResponse(SubmittingNotFoundException submissionNotFoundException) {
     return exceptionMapperFactory.createNotFoundExceptionMapper();
   }
 

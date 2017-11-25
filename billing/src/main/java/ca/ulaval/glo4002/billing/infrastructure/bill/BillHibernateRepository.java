@@ -11,10 +11,10 @@ import ca.ulaval.glo4002.billing.domain.bill.Bill;
 import ca.ulaval.glo4002.billing.domain.bill.BillRepository;
 import ca.ulaval.glo4002.billing.domain.bill.BillState;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
-import ca.ulaval.glo4002.billing.domain.submision.Submission;
-import ca.ulaval.glo4002.billing.domain.submision.SubmissionRepository;
+import ca.ulaval.glo4002.billing.domain.submitting.Submission;
+import ca.ulaval.glo4002.billing.domain.submitting.SubmissionRepository;
 import ca.ulaval.glo4002.billing.infrastructure.EntityManagerProvider;
-import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionNotFoundException;
+import ca.ulaval.glo4002.billing.infrastructure.submitting.SubmittingNotFoundException;
 
 public class BillHibernateRepository implements BillRepository {
 
@@ -57,7 +57,7 @@ public class BillHibernateRepository implements BillRepository {
       Submission submissionNotYetAccepted = submissionRepository
           .findSubmissionById(bill.getBillNumber());
       submissionRepository.deleteSubmission(submissionNotYetAccepted);
-    } catch (SubmissionNotFoundException exception) {
+    } catch (SubmittingNotFoundException exception) {
     }
   }
 

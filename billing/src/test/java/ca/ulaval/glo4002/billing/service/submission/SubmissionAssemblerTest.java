@@ -13,8 +13,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
+import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmittingDto;
+import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmittingDto;
 import ca.ulaval.glo4002.billing.domain.identity.Identity;
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
@@ -38,7 +38,7 @@ public class SubmissionAssemblerTest {
   @Mock
   private Submission submission;
   @Mock
-  private RequestSubmissionDto requestSubmissionDto;
+  private RequestSubmittingDto requestSubmissionDto;
   @Mock
   private OrderedProduct orderedProduct;
   @Mock
@@ -57,7 +57,7 @@ public class SubmissionAssemblerTest {
     willReturn(IMMEDIATE).given(submission).getDueTerm();
     willReturn(SUBMISSION_TOTAL).given(submission).getTotalPrice();
 
-    ResponseSubmissionDto dto = submissionAssembler.createResponseSubmissionDto(submission);
+    ResponseSubmittingDto dto = submissionAssembler.createResponseSubmissionDto(submission);
 
     assertEquals(SUBMISSION_NUMBER, dto.getId());
     assertEquals(IMMEDIATE, dto.getDueTerm());

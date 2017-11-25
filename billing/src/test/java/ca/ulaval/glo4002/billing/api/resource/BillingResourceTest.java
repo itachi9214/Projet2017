@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.api.dto.bill.BillForPaymentDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
+import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmittingDto;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
@@ -47,7 +47,7 @@ public class BillingResourceTest {
       throws NegativeParameterException {
     List<OrderedProduct> items = new ArrayList<>();
     items.add(product);
-    RequestSubmissionDto requestSubmissionDto = new RequestSubmissionDto(EXISTING_CLIENT,
+    RequestSubmittingDto requestSubmissionDto = new RequestSubmittingDto(EXISTING_CLIENT,
         new Date(), DueTerm.DAYS30, items);
 
     billingResource.createSubmission(requestSubmissionDto);

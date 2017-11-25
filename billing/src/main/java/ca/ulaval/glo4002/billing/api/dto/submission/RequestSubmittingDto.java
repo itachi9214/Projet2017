@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
 
-public class RequestSubmissionDto {
+public class RequestSubmittingDto {
 
   private Long clientId;
   private Date creationDate;
@@ -17,7 +17,7 @@ public class RequestSubmissionDto {
   private List<OrderedProduct> items;
 
   @JsonCreator
-  public RequestSubmissionDto(@JsonProperty(value = "clientId", required = true) Long clientId,
+  public RequestSubmittingDto(@JsonProperty(value = "clientId", required = true) Long clientId,
       @JsonProperty(value = "creationDate", required = true) Date creationDate,
       @JsonProperty(value = "dueTerm", required = false) DueTerm dueTerm,
       @JsonProperty(value = "items", required = true) List<OrderedProduct> items) {

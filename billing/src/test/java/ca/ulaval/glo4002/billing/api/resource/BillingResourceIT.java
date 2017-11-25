@@ -24,7 +24,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
+import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmittingDto;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.OrderedProduct;
@@ -69,9 +69,9 @@ public class BillingResourceIT extends JerseyTest {
       throws NegativeParameterException {
     List<OrderedProduct> items = new ArrayList<>();
     items.add(new OrderedProduct(EXISTING_PRODUCT, A_PRICE, A_NOTE, A_QUANTITY));
-    RequestSubmissionDto requestSubmissionDto = new RequestSubmissionDto(EXISTING_CLIENT,
+    RequestSubmittingDto requestSubmissionDto = new RequestSubmittingDto(EXISTING_CLIENT,
         new Date(), DueTerm.DAYS30, items);
-    Entity<RequestSubmissionDto> requestEntity = Entity.entity(requestSubmissionDto,
+    Entity<RequestSubmittingDto> requestEntity = Entity.entity(requestSubmissionDto,
         MediaType.APPLICATION_JSON);
 
     Response response = target("/bills").request().post(requestEntity);

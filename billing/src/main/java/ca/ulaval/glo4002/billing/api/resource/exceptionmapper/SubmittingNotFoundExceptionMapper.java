@@ -7,16 +7,16 @@ import javax.ws.rs.ext.Provider;
 import ca.ulaval.glo4002.billing.infrastructure.submission.SubmissionNotFoundException;
 
 @Provider
-public class SubmissionNotFoundExceptionMapper
+public class SubmittingNotFoundExceptionMapper
     implements ExceptionMapper<SubmissionNotFoundException> {
 
   private ExceptionMapperFactory exceptionMapperFactory;
 
-  public SubmissionNotFoundExceptionMapper() {
+  public SubmittingNotFoundExceptionMapper() {
     this.exceptionMapperFactory = new ExceptionMapperFactory();
   }
 
-  public SubmissionNotFoundExceptionMapper(ExceptionMapperFactory exceptionMapperFactory) {
+  public SubmittingNotFoundExceptionMapper(ExceptionMapperFactory exceptionMapperFactory) {
     this.exceptionMapperFactory = exceptionMapperFactory;
   }
 

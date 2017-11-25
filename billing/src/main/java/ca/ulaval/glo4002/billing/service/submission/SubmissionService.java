@@ -4,8 +4,8 @@ import java.util.List;
 
 import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
+import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmittingDto;
+import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmittingDto;
 import ca.ulaval.glo4002.billing.domain.submision.ClientRepository;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
@@ -41,7 +41,7 @@ public class SubmissionService {
     this.productRepository = productRepository;
   }
 
-  public ResponseSubmissionDto createSubmission(RequestSubmissionDto requestSubmissionDto)
+  public ResponseSubmittingDto createSubmission(RequestSubmittingDto requestSubmissionDto)
       throws NegativeParameterException, ClientNotFoundException, ProductNotFoundException {
     verifyItemsQuantityIsNotNegative(requestSubmissionDto);
     ClientDto clientDto = getAndVerifyClientExists(requestSubmissionDto.getClientId());
@@ -51,12 +51,12 @@ public class SubmissionService {
     Submission submission = submissionAssembler.createSubmission(requestSubmissionDto);
     submissionRepository.createSubmission(submission);
 
-    ResponseSubmissionDto responseSubmissionDto = submissionAssembler
+    ResponseSubmittingDto responseSubmissionDto = submissionAssembler
         .createResponseSubmissionDto(submission);
     return responseSubmissionDto;
   }
 
-  private void verifyItemsQuantityIsNotNegative(RequestSubmissionDto requestSubmissionDto)
+  private void verifyItemsQuantityIsNotNegative(RequestSubmittingDto requestSubmissionDto)
       throws NegativeParameterException {
     for (OrderedProduct product : requestSubmissionDto.getItems()) {
       if (product.getQuantity() < MINIMUM_PRODUCT_QUANTITY) {
@@ -76,7 +76,7 @@ public class SubmissionService {
     }
   }
 
-  public void setDueTermToDefaultIfNeeded(RequestSubmissionDto requestSubmissionDto,
+  public void setDueTermToDefaultIfNeeded(RequestSubmittingDto requestSubmissionDto,
       DueTerm defaultDueTerm) {
     if (requestSubmissionDto.getDueTerm() == null) {
       requestSubmissionDto.setDueTerm(defaultDueTerm);

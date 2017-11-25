@@ -17,7 +17,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4002.billing.api.dto.client.ClientDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
+import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmittingDto;
 import ca.ulaval.glo4002.billing.domain.submision.ClientRepository;
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
@@ -34,7 +34,7 @@ public class SubmissionServiceTest {
   private static final int NEGATIVE_ITEM_QUANTITY = -6;
   private static final Long CLIENT_ID = 1L;
 
-  private RequestSubmissionDto requestSubmissionDto;
+  private RequestSubmittingDto requestSubmissionDto;
   private SubmissionService submissionService;
   private ClientDto clientDto;
 
@@ -55,7 +55,7 @@ public class SubmissionServiceTest {
   public void setUp() {
     List<OrderedProduct> items = new ArrayList<>();
     items.add(item);
-    requestSubmissionDto = new RequestSubmissionDto(CLIENT_ID, new Date(), DueTerm.DAYS30, items);
+    requestSubmissionDto = new RequestSubmittingDto(CLIENT_ID, new Date(), DueTerm.DAYS30, items);
 
     submissionService = new SubmissionService(submissionAssembler, submissionRepository,
         clientRepository, productRepository);

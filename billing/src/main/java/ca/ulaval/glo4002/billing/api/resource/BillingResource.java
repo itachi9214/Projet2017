@@ -14,8 +14,8 @@ import ca.ulaval.glo4002.billing.ServiceLocator;
 import ca.ulaval.glo4002.billing.api.dto.EmptyDto;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillDto;
 import ca.ulaval.glo4002.billing.api.dto.bill.BillForPaymentDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
+import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmittingDto;
+import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmittingDto;
 import ca.ulaval.glo4002.billing.service.bill.BillService;
 import ca.ulaval.glo4002.billing.service.submission.SubmissionService;
 
@@ -38,8 +38,8 @@ public class BillingResource {
   }
 
   @POST
-  public Response createSubmission(RequestSubmissionDto requestSubmissionDto) {
-    ResponseSubmissionDto responseSubmissionDto = submissionService
+  public Response createSubmission(RequestSubmittingDto requestSubmissionDto) {
+    ResponseSubmittingDto responseSubmissionDto = submissionService
         .createSubmission(requestSubmissionDto);
     return Response.status(Response.Status.CREATED).entity(responseSubmissionDto).build();
   }

@@ -1,8 +1,8 @@
 package ca.ulaval.glo4002.billing.service.submission;
 
 import ca.ulaval.glo4002.billing.ServiceLocator;
-import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmissionDto;
-import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmissionDto;
+import ca.ulaval.glo4002.billing.api.dto.submission.RequestSubmittingDto;
+import ca.ulaval.glo4002.billing.api.dto.submission.ResponseSubmittingDto;
 import ca.ulaval.glo4002.billing.domain.identity.IdentityFactory;
 import ca.ulaval.glo4002.billing.domain.submision.NegativeParameterException;
 import ca.ulaval.glo4002.billing.domain.submision.Submission;
@@ -21,14 +21,14 @@ public class SubmissionAssembler {
     this.identityFactory = identityFactory;
   }
 
-  public ResponseSubmissionDto createResponseSubmissionDto(Submission submission) {
-    ResponseSubmissionDto responseSubmissionDto = new ResponseSubmissionDto(
+  public ResponseSubmittingDto createResponseSubmissionDto(Submission submission) {
+    ResponseSubmittingDto responseSubmissionDto = new ResponseSubmittingDto(
         submission.getBillNumber().getNumber(), submission.getTotalPrice(), submission.getDueTerm(),
         BASE_URL + submission.getBillNumber());
     return responseSubmissionDto;
   }
 
-  public Submission createSubmission(RequestSubmissionDto requestSubmissionDto)
+  public Submission createSubmission(RequestSubmittingDto requestSubmissionDto)
       throws NegativeParameterException {
     Submission submission = new Submission(identityFactory.createId(),
         requestSubmissionDto.getDueTerm(), requestSubmissionDto.getClientId(),

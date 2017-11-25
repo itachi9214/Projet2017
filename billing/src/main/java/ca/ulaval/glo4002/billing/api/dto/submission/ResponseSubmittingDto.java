@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 
 import ca.ulaval.glo4002.billing.domain.submision.DueTerm;
 
-public class ResponseSubmissionDto {
+public class ResponseSubmittingDto {
 
   private Long id;
   private BigDecimal total;
   private DueTerm dueTerm;
   private String url;
 
-  public ResponseSubmissionDto(Long id, BigDecimal total, DueTerm dueTerm, String url) {
+  public ResponseSubmittingDto(Long id, BigDecimal total, DueTerm dueTerm, String url) {
     this.id = id;
     this.total = total;
     this.dueTerm = dueTerm;
